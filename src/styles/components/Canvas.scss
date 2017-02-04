@@ -1,0 +1,22 @@
+.myo-canvas {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#template,
+#view {
+	flex-grow: 1;
+}
+
+#template {
+	background-color: yellow;
+}
+
+#view {
+	background-color: pink;
+}
+
+#pallet {
+	flex-basis: 100%;
+	background-color: beige;
+}

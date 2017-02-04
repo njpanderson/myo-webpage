@@ -11,8 +11,10 @@ App.prototype = {
 	init: function() {
 		this.load();
 
-		this._refs.ui = {
-			app: document.querySelector('.app')
+		this._refs = {
+			ui: {
+				app: document.querySelector('.app')
+			}
 		};
 
 		this.render();
