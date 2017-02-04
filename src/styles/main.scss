@@ -1,0 +1,32 @@
+/* main layout */
+body {
+	background-color: #eee;
+}
+
+main {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+header,
+section {
+	padding: 1em;
+}
+
+#template,
+#view {
+	flex-grow: 1;
+}
+
+#template {
+	background-color: yellow;
+}
+
+#view {
+	background-color: pink;
+}
+
+#pallet {
+	flex-basis: 100%;
+	background-color: beige;
+}
