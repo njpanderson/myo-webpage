@@ -14,14 +14,19 @@ if (production) {
 			}
 		}),
 	]);
+} else {
+	plugins = plugins.concat([
+		new webpack.LoaderOptionsPlugin({
+			debug: true
+		})
+	]);
 }
 
 var config = {
-	debug: !production,
 	devtool: production ? 'source-map' : 'eval',
 	cache: !production,
 	resolve: {
-		extensions: ['', '.js', '.jsx']
+		extensions: ['.js', '.jsx']
 	},
 	output: {
 		filename: 'main.min.js',

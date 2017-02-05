@@ -3,9 +3,8 @@ var gulp = require('gulp'),
 	sass = require('gulp-sass'),
 	autoprefixer = require('gulp-autoprefixer'),
 	cssnano = require('gulp-cssnano'),
-	uglify = require('gulp-uglify'),
 	rename = require('gulp-rename'),
-	webpack = require('gulp-webpack'),
+	webpack = require('webpack-stream'),
 	watch = false;
 
 const env = {
@@ -16,7 +15,7 @@ gulp.task('scripts:dev', ['clean'], () => {
 	process.env.NODE_ENV = 'development';
 
 	return gulp.src('src/js/App.jsx')
-		.pipe(webpack(require('./webpack.config.js')))
+		.pipe(webpack(require('./webpack.config.js'), require('webpack')))
 		.pipe(gulp.dest(env.path_dist + '/js'));
 });
 
