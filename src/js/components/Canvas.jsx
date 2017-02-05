@@ -1,12 +1,24 @@
-const React = require('react');
+import React, { Component } from 'react';
+import Template from './Template.jsx';
+import View from './partials/View.jsx';
 
-class Canvas extends React.Component {
+import PalletItems from './containers/PalletItems';
+
+class Canvas extends Component {
 	render() {
 		return (
 			<div className="myo-canvas">
-				<section id="template"></section>
-				<section id="view">view</section>
-				<section id="pallet">pallet</section>
+				<header>
+					<h1>Make your own webpage!</h1>
+					<p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+				</header>
+
+				<div className="main">
+					<Template/>
+					<View html="<b>Some HTML</b>"/>
+				</div>
+
+				<PalletItems/>
 			</div>
 		);
 	}

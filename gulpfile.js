@@ -32,7 +32,7 @@ gulp.task('styles', ['clean'], () => {
 	return gulp.src('src/styles/main.scss')
 		.pipe(sass({
 			outputStyle: 'expanded'
-		}))
+		}).on('error', sass.logError))
 		.pipe(autoprefixer('last 2 version'))
 		.pipe(gulp.dest(env.path_dist + '/css'))
 		.pipe(rename({
@@ -55,7 +55,7 @@ gulp.task('clean', () => {
 gulp.task('watch', () => {
 	watch = true;
 	gulp.watch('src/js/**/*.js*', ['scripts:dev']);
-	gulp.watch('src/styles/*.scss', ['styles']);
+	gulp.watch('src/styles/**/*.scss', ['styles']);
 });
 
 gulp.task('dev', ['scripts:dev', 'styles']);

@@ -19,6 +19,7 @@ if (production) {
 var config = {
 	debug: !production,
 	devtool: production ? 'source-map' : 'eval',
+	cache: !production,
 	resolve: {
 		extensions: ['', '.js', '.jsx']
 	},

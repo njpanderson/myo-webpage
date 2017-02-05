@@ -1,13 +1,15 @@
 @import 'reset';
+@import '_variables';
+
+* {
+	box-sizing: border-box;
+}
 
 /* main layout */
 body {
 	background-color: #eee;
 }
 
-header,
-section {
-	padding: 1em;
-}
-
 @import 'components/Canvas';
+@import 'components/Pallet';
+@import 'components/Droplet';
