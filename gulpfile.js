@@ -32,7 +32,7 @@ gulp.task('styles', ['clean'], () => {
 		.pipe(sass({
 			outputStyle: 'expanded'
 		}).on('error', sass.logError))
-		.pipe(autoprefixer('last 2 version'))
+		.pipe(autoprefixer(['last 2 versions', 'Firefox >= 38']))
 		.pipe(gulp.dest(env.path_dist + '/css'))
 		.pipe(rename({
 			suffix: '.min'
