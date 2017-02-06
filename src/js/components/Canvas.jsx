@@ -9,7 +9,7 @@ class Canvas extends Component {
 		return (
 			<div className="myo-canvas">
 				<header>
-					<h1>Make your own webpage!</h1>
+					<h1>Tag</h1>
 					<p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
 				</header>
 
