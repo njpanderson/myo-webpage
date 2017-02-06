@@ -17,5 +17,13 @@ module.exports = {
 			type: types.PALLET_REMOVE,
 			id
 		};
+	},
+
+	palletSetAttached: function(id, attached) {
+		return {
+			type: types.PALLET_SET_ATTACHED,
+			id,
+			attached
+		};
 	}
 };

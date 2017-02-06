@@ -1,16 +1,17 @@
 import { connect } from 'react-redux';
 import Pallet from '../Pallet.jsx';
+import { palletSetAttached } from '../../state/actions.js';
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
 	return {
 		pallet: state.pallet
 	};
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch) => {
 	return {
-		onClick: () => {
-			//dispatch(setVisibilityFilter(ownProps.filter))
+		onValidDrop: (id) => {
+			dispatch(palletSetAttached(id, true));
 		}
 	};
 };

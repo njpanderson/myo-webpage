@@ -1,18 +1,18 @@
 import default_state from '../assets/default-state.js';
 
 import { combineReducers } from 'redux';
-import { ACTIVATE, DEACTIVATE, PALLET_ADD, PALLET_REMOVE } from './actionTypes';
+import types from './actionTypes';
 
 var app, pallet;
 
 app = function(state = default_state, action) {
 	switch (action.type) {
-	case ACTIVATE:
+	case types.ACTIVATE:
 		return Object.assign({}, state, {
 			active: true
 		});
 
-	case DEACTIVATE:
+	case types.DEACTIVATE:
 		return Object.assign({}, state, {
 			active: false
 		});
@@ -24,7 +24,7 @@ app = function(state = default_state, action) {
 
 pallet = function(state = default_state.pallet, action) {
 	switch (action.type) {
-	case PALLET_ADD:
+	case types.PALLET_ADD:
 		return [
 			...state, {
 				id: action.id,
@@ -36,10 +36,20 @@ pallet = function(state = default_state.pallet, action) {
 			}
 		];
 
-	case PALLET_REMOVE:
+	case types.PALLET_REMOVE:
 		return state
 			.filter((element) => {
 				return element.id !== action.id;
+			});
+
+	case types.PALLET_SET_ATTACHED:
+		return state
+			.map((element) => {
+				if (element.id === action.id) {
+					element.attached = action.attached;
+				}
+
+				return element;
 			});
 
 	default:

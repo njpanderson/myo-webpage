@@ -4,4 +4,8 @@
 	height: $droplet-size;
 	text-align: center;
 	background-color: pink;
+
+	&.attached {
+		background-color: teal;
+	}
 }

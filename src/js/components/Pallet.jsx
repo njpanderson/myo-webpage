@@ -9,6 +9,7 @@ class Pallet extends Component {
 
 				return (
 					<Droplet {...item}
+						onValidDrop={this.props.onValidDrop}
 						key={key}/>
 				);
 			}.bind(this));
@@ -25,7 +26,8 @@ class Pallet extends Component {
 }
 
 Pallet.propTypes = {
-	pallet: PropTypes.arrayOf(PropTypes.object)
+	pallet: PropTypes.arrayOf(PropTypes.object),
+	onValidDrop: PropTypes.func
 };
 
 Pallet.defaultProps = {
