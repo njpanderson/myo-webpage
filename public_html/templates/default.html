@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title data-attachment="title">Untitled page</title>
+		<title>{{ title }}</title>
 	</head>
-
 	<body>
+
 		<header>
-			<h1></h1>
+			<h1>{{ heading }}</h1>
 		</header>
+
+		<main>
+			<section class="{{ section_class }}">
+				<h2>{{ intro }}</p>
+				<div class="buttons">
+					{{ button }}
+				</div>
+			</section>
+		</main>
 	</body>
 	<script src="music.js"></script>
 </html>

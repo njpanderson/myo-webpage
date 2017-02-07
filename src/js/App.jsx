@@ -3,6 +3,7 @@ var $ = window.jQuery;
 import './assets/polyfills';
 import appDefaults from './assets/defaults';
 
+import Templates from './Templates.js';
 import Canvas from './components/Canvas.jsx';
 import React from 'react';
 import { render } from 'react-dom';
@@ -12,8 +13,8 @@ import actions from './state/actions';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
-var App = function(settings) {
-	this.settings = Object.deepAssign(settings || {}, App.defaults);
+var App = function(settings = {}) {
+	this.settings = Object.deepAssign(settings, App.defaults);
 	console.log(this.settings);
 	this.init();
 };
@@ -27,7 +28,9 @@ App.prototype = {
 		};
 
 		this._store = createStore(require('./state/reducers'));
+		this._templates = new Templates();
 
+		// !TODO remove sample code
 		this._store.dispatch(actions.palletAdd({
 			id: 'h1',
 			name: 'Header',
@@ -40,9 +43,11 @@ App.prototype = {
 	},
 
 	load: function(url = this.settings.url) {
-		$.ajax(url)
-			.then(function(response) {
-				console.log('response',response);
+		this._templates.load(url)
+			.then(() => {
+				this._store.dispatch(actions.templateSet(
+					this._templates.create()
+				));
 			});
 	},
 

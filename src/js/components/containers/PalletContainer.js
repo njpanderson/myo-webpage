@@ -16,9 +16,9 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 
-const PalletItems = connect(
+const PalletContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(Pallet);
 
-export default PalletItems;
+export default PalletContainer;

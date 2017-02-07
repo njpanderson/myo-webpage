@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Template from './Template.jsx';
 import View from './partials/View.jsx';
 
-import PalletItems from './containers/PalletItems';
+import PalletContainer from './containers/PalletContainer';
+import TemplateContainer from './containers/TemplateContainer';
 
 class Canvas extends Component {
 	render() {
@@ -10,15 +10,15 @@ class Canvas extends Component {
 			<div className="myo-canvas">
 				<header>
 					<h1>Tag</h1>
-					<p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+					<p>Short introductory text on how to use tag...</p>
 				</header>
 
 				<div className="main">
-					<Template/>
+					<TemplateContainer/>
 					<View html="<b>Some HTML</b>"/>
 				</div>
 
-				<PalletItems/>
+				<PalletContainer/>
 			</div>
 		);
 	}

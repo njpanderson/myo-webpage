@@ -25,5 +25,12 @@ module.exports = {
 			id,
 			attached
 		};
+	},
+
+	templateSet: function(html) {
+		return {
+			type: types.TEMPLATE_SET,
+			html
+		};
 	}
 };

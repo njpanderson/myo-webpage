@@ -3,7 +3,7 @@ import default_state from '../assets/default-state.js';
 import { combineReducers } from 'redux';
 import types from './actionTypes';
 
-var app, pallet;
+var app, template, pallet;
 
 app = function(state = default_state, action) {
 	switch (action.type) {
@@ -15,6 +15,18 @@ app = function(state = default_state, action) {
 	case types.DEACTIVATE:
 		return Object.assign({}, state, {
 			active: false
+		});
+
+	default:
+		return state;
+	}
+};
+
+template = function(state = default_state.template, action) {
+	switch (action.type) {
+	case types.TEMPLATE_SET:
+		return Object.assign({}, state, {
+			html: action.html
 		});
 
 	default:
@@ -58,6 +70,7 @@ pallet = function(state = default_state.pallet, action) {
 };
 
 module.exports = combineReducers({
-	pallet,
-	app
+	app,
+	template,
+	pallet
 });

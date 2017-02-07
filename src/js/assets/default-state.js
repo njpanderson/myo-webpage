@@ -1,5 +1,7 @@
 module.exports = {
-	active: true,
+	app: {
+		active: true
+	},
 	pallet: [{
 		id: 'title',
 		name: 'Title',
@@ -9,6 +11,9 @@ module.exports = {
 		attached: false
 	}],
 	view: {
+		html: ''
+	},
+	template: {
 		html: ''
 	}
 };
