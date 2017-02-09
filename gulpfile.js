@@ -5,6 +5,7 @@ var gulp = require('gulp'),
 	cssnano = require('gulp-cssnano'),
 	rename = require('gulp-rename'),
 	webpack = require('webpack-stream'),
+	plumber = require('gulp-plumber'),
 	watch = false;
 
 const env = {
@@ -15,7 +16,11 @@ gulp.task('scripts:dev', ['clean'], () => {
 	process.env.NODE_ENV = 'development';
 
 	return gulp.src('src/js/App.jsx')
-		.pipe(webpack(require('./webpack.config.js'), require('webpack')))
+		.pipe(plumber())
+		.pipe(webpack(
+			require('./webpack.config.js'),
+			require('webpack')
+		))
 		.pipe(gulp.dest(env.path_dist + '/js'));
 });
 
@@ -23,12 +28,14 @@ gulp.task('scripts:prod', ['clean'], () => {
 	process.env.NODE_ENV = 'production';
 
 	return gulp.src('src/js/App.jsx')
+		.pipe(plumber())
 		.pipe(webpack(require('./webpack.config.js')))
 		.pipe(gulp.dest(env.path_dist + '/js'));
 });
 
 gulp.task('styles', ['clean'], () => {
 	return gulp.src('src/styles/main.scss')
+		.pipe(plumber())
 		.pipe(sass({
 			outputStyle: 'expanded'
 		}).on('error', sass.logError))

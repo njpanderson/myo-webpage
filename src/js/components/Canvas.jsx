@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import View from './partials/View.jsx';
 
-import PalletContainer from './containers/PalletContainer';
-import TemplateContainer from './containers/TemplateContainer';
+import Pallet from './Pallet.jsx';
+import Template from './Template.jsx';
 
 class Canvas extends Component {
 	render() {
@@ -14,11 +14,13 @@ class Canvas extends Component {
 				</header>
 
 				<div className="main">
-					<TemplateContainer/>
+					<Template template={this.props.template}/>
 					<View html="<b>Some HTML</b>"/>
 				</div>
 
-				<PalletContainer/>
+				<Pallet
+					pallet={this.props.pallet}
+					onPalletDrop={this.props.onPalletDrop}/>
 			</div>
 		);
 	}

@@ -10,7 +10,7 @@ class Template extends Component {
 			<section className="template">
 				<pre>
 					<code className="html"
-						dangerouslySetInnerHTML={this.rawMarkup(this.props.html)}/>
+						dangerouslySetInnerHTML={this.rawMarkup(this.props.template.html)}/>
 				</pre>
 			</section>
 		);
@@ -18,11 +18,13 @@ class Template extends Component {
 }
 
 Template.propTypes = {
-	html: PropTypes.string
+	template: PropTypes.object
 };
 
 Template.defaultProps = {
-	html: []
+	template: {
+		html: ''
+	}
 };
 
 module.exports = Template;

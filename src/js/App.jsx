@@ -1,14 +1,13 @@
-var $ = window.jQuery;
+//var $ = window.jQuery;
 
 import './assets/polyfills';
 import appDefaults from './assets/defaults';
 
 import Templates from './Templates.js';
-import Canvas from './components/Canvas.jsx';
+import CanvasContainer from './components/CanvasContainer';
 import React from 'react';
 import { render } from 'react-dom';
 import actions from './state/actions';
-// import interact from 'interact-js';
 
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
@@ -40,6 +39,7 @@ App.prototype = {
 		}));
 
 		this.render();
+		this.setInteractions();
 	},
 
 	load: function(url = this.settings.url) {
@@ -54,10 +54,13 @@ App.prototype = {
 	render: function() {
 		this._canvas = render(
 			<Provider store={this._store}>
-				<Canvas/>
+				<CanvasContainer/>
 			</Provider>,
 			this._refs.ui.app
 		);
+	},
+
+	setInteractions: function() {
 	}
 };
 

@@ -1,24 +1,25 @@
 import { connect } from 'react-redux';
-import Pallet from '../Pallet.jsx';
-import { palletSetAttached } from '../../state/actions.js';
+import Canvas from './Canvas.jsx';
+import { palletSetAttached } from '../state/actions.js';
 
 const mapStateToProps = (state) => {
 	return {
+		template: state.template,
 		pallet: state.pallet
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onValidDrop: (id) => {
+		onPalletDrop: (id) => {
 			dispatch(palletSetAttached(id, true));
 		}
 	};
 };
 
-const PalletContainer = connect(
+const CanvasContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Pallet);
+)(Canvas);
 
-export default PalletContainer;
+export default CanvasContainer;
