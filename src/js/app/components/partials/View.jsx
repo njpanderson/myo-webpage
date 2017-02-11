@@ -10,4 +10,4 @@ View.propTypes = {
 	html: PropTypes.string
 };
 
-module.exports = View;
+export default View;

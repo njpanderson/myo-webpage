@@ -29,8 +29,8 @@ var config = {
 		extensions: ['.js', '.jsx']
 	},
 	output: {
-		filename: 'main.min.js',
-		publicPath: 'dist/js'
+		filename: 'tag.min.js',
+		publicPath: 'dist/js/'
 	},
 	plugins: plugins,
 	module: {

@@ -1,8 +1,15 @@
 var config = require('./webpack.config.js');
 
-config.entry = './src/js/App.jsx';
+const webpack = require('webpack');
 
-config.debug = true;
+config.entry = './src/js/app/Index.jsx';
+
+config.plugins = (config.plugins || []).concat([
+	new webpack.LoaderOptionsPlugin({
+		debug: true
+	})
+]);
+
 
 config.output = {
 	path: __dirname,

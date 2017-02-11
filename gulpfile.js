@@ -15,7 +15,7 @@ const env = {
 gulp.task('scripts:dev', ['clean'], () => {
 	process.env.NODE_ENV = 'development';
 
-	return gulp.src('src/js/App.jsx')
+	return gulp.src('src/js/bootstrap.js')
 		.pipe(plumber())
 		.pipe(webpack(
 			require('./webpack.config.js'),
@@ -27,7 +27,7 @@ gulp.task('scripts:dev', ['clean'], () => {
 gulp.task('scripts:prod', ['clean'], () => {
 	process.env.NODE_ENV = 'production';
 
-	return gulp.src('src/js/App.jsx')
+	return gulp.src('src/js/bootstrap.js')
 		.pipe(plumber())
 		.pipe(webpack(require('./webpack.config.js')))
 		.pipe(gulp.dest(env.path_dist + '/js'));

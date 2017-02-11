@@ -4,8 +4,7 @@ import { palletSetAttached } from '../state/actions.js';
 
 const mapStateToProps = (state) => {
 	return {
-		template: state.template,
-		pallet: state.pallet
+		state: state
 	};
 };
 

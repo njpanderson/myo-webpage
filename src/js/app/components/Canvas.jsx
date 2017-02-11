@@ -19,11 +19,12 @@ class Canvas extends Component {
 				</div>
 
 				<Pallet
-					pallet={this.props.pallet}
-					onPalletDrop={this.props.onPalletDrop}/>
+					data={this.props.data}
+					onPalletDrop={this.props.onPalletDrop}
+					refCollector={this.props.refCollector}/>
 			</div>
 		);
 	}
 }
 
-module.exports = Canvas;
+export default Canvas;

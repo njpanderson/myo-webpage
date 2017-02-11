@@ -3,13 +3,16 @@ import Droplet from './partials/Droplet.jsx';
 
 class Pallet extends Component {
 	getItems() {
-		if (this.props.pallet && this.props.pallet.length) {
-			return this.props.pallet.map(function(item, index) {
+		console.log(this.props.data.pallet);
+		if (this.props.data.pallet && this.props.data.pallet.length) {
+			return this.props.data.pallet.map(function(item, index) {
+				console.log(item);
 				var key = 'droplet-' + index;
 
 				return (
 					<Droplet {...item}
 						onValidDrop={this.props.onPalletDrop}
+						refCollector={this.props.refCollector}
 						key={key}/>
 				);
 			}.bind(this));
@@ -26,12 +29,15 @@ class Pallet extends Component {
 }
 
 Pallet.propTypes = {
-	pallet: PropTypes.arrayOf(PropTypes.object),
-	onPalletDrop: PropTypes.func
+	data: PropTypes.object,
+	onPalletDrop: PropTypes.func,
+	refCollector: PropTypes.func
 };
 
 Pallet.defaultProps = {
-	pallet: []
+	data: {
+		pallet: []
+	}
 };
 
-module.exports = Pallet;
+export default Pallet;

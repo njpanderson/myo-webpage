@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import interact from 'interact.js';
+import { collectRef } from '../../lib/utils';
 
 class Droplet extends Component {
 	constructor() {
@@ -44,7 +45,7 @@ class Droplet extends Component {
 			<a href="#"
 				name={this.props.id}
 				className={classes.join(' ')}
-				ref={(e) => { this.myrefs.a = e; }}
+				ref={collectRef(this.props, ['droplet'], this.props.id)}
 				onClick={() => { this.props.onValidDrop(this.props.id); }}>
 				{this.props.name}
 			</a>
@@ -57,7 +58,8 @@ Droplet.propTypes = {
 	id: PropTypes.string,
 	title: PropTypes.string,
 	attached: PropTypes.bool,
-	onValidDrop: PropTypes.func
+	onValidDrop: PropTypes.func,
+	refCollector: PropTypes.func
 };
 
-module.exports = Droplet;
+export default Droplet;

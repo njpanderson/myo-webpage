@@ -1,0 +1,13 @@
+[{
+	"id": "title",
+	"name": "Title",
+	"value": "My webpage!",
+	"dropletType": "text",
+	"attachmentId": "title"
+}, {
+	"id": "h1",
+	"name": "Header",
+	"value": "My Heading",
+	"dropletType": "text",
+	"attachmentId": "header-1"
+}]

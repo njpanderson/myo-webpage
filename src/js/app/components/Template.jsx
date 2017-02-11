@@ -27,4 +27,4 @@ Template.defaultProps = {
 	}
 };
 
-module.exports = Template;
+export default Template;

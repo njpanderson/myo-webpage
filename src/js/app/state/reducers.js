@@ -69,7 +69,7 @@ pallet = function(state = default_state.pallet, action) {
 	}
 };
 
-module.exports = combineReducers({
+export default combineReducers({
 	app,
 	template,
 	pallet
