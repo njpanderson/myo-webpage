@@ -1,22 +1,30 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import Droplet from './partials/Droplet.jsx';
+import CommonPropTypes from '../assets/common-prop-types.js';
 
 class Pallet extends Component {
 	getItems() {
-		console.log(this.props.data.pallet);
-		if (this.props.data.pallet && this.props.data.pallet.length) {
-			return this.props.data.pallet.map(function(item, index) {
-				console.log(item);
-				var key = 'droplet-' + index;
+		var items = [], id, item, key;
 
-				return (
+		if (this.props.data.pallet) {
+			for (id in this.props.data.pallet) {
+				item = this.props.data.pallet[id];
+				console.log('Pallet#getItems item', item);
+				key = 'droplet-' + id;
+
+				items.push(
 					<Droplet {...item}
-						onValidDrop={this.props.onPalletDrop}
+						id={id}
+						state={this.props.state.pallet[id]}
+						classes={this.props.classes}
+						onMount={this.props.onMount}
 						refCollector={this.props.refCollector}
 						key={key}/>
 				);
-			}.bind(this));
+			}
 		}
+
+		return items;
 	}
 
 	render() {
@@ -28,11 +36,7 @@ class Pallet extends Component {
 	}
 }
 
-Pallet.propTypes = {
-	data: PropTypes.object,
-	onPalletDrop: PropTypes.func,
-	refCollector: PropTypes.func
-};
+Pallet.propTypes = CommonPropTypes;
 
 Pallet.defaultProps = {
 	data: {

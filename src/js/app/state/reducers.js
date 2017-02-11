@@ -35,38 +35,32 @@ template = function(state = default_state.template, action) {
 };
 
 pallet = function(state = default_state.pallet, action) {
+	var pallet = Object.assign({}, state);
+
 	switch (action.type) {
 	case types.PALLET_ADD:
-		return [
-			...state, {
-				id: action.id,
-				name: action.name,
-				value: action.value,
-				dropletType: action.dropletType,
-				attachmentId: action.attachmentId,
-				attached: action.attached
-			}
-		];
+		pallet[action.id] = {
+			attached: action.attached
+		};
+
+		break;
 
 	case types.PALLET_REMOVE:
-		return state
-			.filter((element) => {
-				return element.id !== action.id;
-			});
+		delete pallet[action.id];
+		break;
 
 	case types.PALLET_SET_ATTACHED:
-		return state
-			.map((element) => {
-				if (element.id === action.id) {
-					element.attached = action.attached;
-				}
+		if (pallet[action.id]) {
+			pallet[action.id].attached = action.attached || false;
+		}
 
-				return element;
-			});
+		break;
 
 	default:
 		return state;
 	}
+
+	return pallet;
 };
 
 export default combineReducers({

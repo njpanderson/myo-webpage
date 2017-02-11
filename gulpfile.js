@@ -29,7 +29,10 @@ gulp.task('scripts:prod', ['clean'], () => {
 
 	return gulp.src('src/js/bootstrap.js')
 		.pipe(plumber())
-		.pipe(webpack(require('./webpack.config.js')))
+		.pipe(webpack(
+			require('./webpack.config.js'),
+			require('webpack')
+		))
 		.pipe(gulp.dest(env.path_dist + '/js'));
 });
 

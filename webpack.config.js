@@ -5,8 +5,6 @@ var production = (process.env.NODE_ENV === 'production'),
 
 if (production) {
 	plugins = plugins.concat([
-		new webpack.optimize.DedupePlugin(),
-		new webpack.optimize.OccurenceOrderPlugin(),
 		new webpack.optimize.UglifyJsPlugin({
 			mangle: true,
 			compress: {
@@ -23,7 +21,7 @@ if (production) {
 }
 
 var config = {
-	devtool: production ? 'source-map' : 'eval',
+	devtool: production ? 'source-map' : 'eval-source-map',
 	cache: !production,
 	resolve: {
 		extensions: ['.js', '.jsx']

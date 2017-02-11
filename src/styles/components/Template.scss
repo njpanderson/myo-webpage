@@ -6,6 +6,14 @@
 		padding: 1px 5px;
 		background-color: blue;
 		color: white;
+
+		&.active {
+			background-color: lightblue;
+		}
+
+		&.target {
+			background-color: red;
+		}
 	}
 
 	.drop-zone:hover {

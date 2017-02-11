@@ -1,3 +1,5 @@
+import request from './ajax';
+
 var Templates = function(settings = {}) {
 	this.settings = Object.deepAssign(settings, {
 		dropZone: {
@@ -8,10 +10,13 @@ var Templates = function(settings = {}) {
 
 Templates.prototype = {
 	load: function(url) {
-		return $.ajax(url)
+		return request.get(url)
 			.then((response) => {
-				this._markup = response;
-			});
+				if (response.text) {
+					this._markup = response.text;
+				}
+			})
+			.catch(console.error);
 	},
 
 	create: function(markup = this._markup) {

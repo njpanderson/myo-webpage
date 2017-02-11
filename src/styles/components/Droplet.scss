@@ -1,11 +1,17 @@
 .droplet {
+	transition: background-color,height .15s ease-in-out;
 	display: block;
 	width: $droplet-size;
 	height: $droplet-size;
 	text-align: center;
-	background-color: pink;
+	background-color: salmon;
 
 	&.attached {
 		background-color: teal;
+	}
+
+	&.droplet-dragging {
+		height: ($droplet-size / 4);
+		background-color: red;
 	}
 }

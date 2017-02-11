@@ -13,7 +13,14 @@ export let registerGeneralEvent = function(component, id, info) {
 
 export let collectRef = function(props, collection, key) {
 	return function(ref) {
-		props.refCollector(collection, ref, key);
+		if (typeof props.refCollector === 'function') {
+			props.refCollector(collection, ref, key);
+		} else {
+			throw new Error(
+				'ref collection used but no collector has been set up for ' +
+				collection + (key ? '/' + key : '')
+			);
+		}
 	};
 };
 

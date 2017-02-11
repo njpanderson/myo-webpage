@@ -2,7 +2,7 @@ export default {
 	app: {
 		active: true
 	},
-	pallet: [],
+	pallet: {},
 	view: {
 		html: ''
 	},

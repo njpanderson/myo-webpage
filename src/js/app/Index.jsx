@@ -1,25 +1,25 @@
-//var $ = window.jQuery;
-
 import './lib/polyfills';
 import appDefaults from './assets/defaults';
 
-import Templates from './Templates.js';
-import CanvasContainer from './components/CanvasContainer';
-import React from 'react';
-import { render } from 'react-dom';
+import Templates from './lib/Templates.js';
+import UI from './UI.js';
 import actions from './state/actions';
 import reducers from './state/reducers';
+import request from './lib/ajax';
 
 import { createStore } from 'redux';
-import { Provider } from 'react-redux';
 
+/*
+ * Main application wraper.
+ * @class
+ */
 var App = function(settings = {}) {
 	this.settings = Object.deepAssign(settings, App.defaults);
-	this.init();
+	this._init();
 };
 
 App.prototype = {
-	init: function() {
+	_init: function() {
 		this._refs = {
 			ui: {
 				app: document.querySelector('.app')
@@ -28,18 +28,18 @@ App.prototype = {
 		};
 
 		// app data store (not stateful)
-		this._data = {};
-
-		// app state store
-		this._store = createStore(reducers);
+		this._data = {
+			template: '',
+			pallet: []
+		};
 
 		// templates module
 		this._templates = new Templates();
-
-		//this.render();
-		this.setInteractions();
 	},
 
+	/**
+	 * Load the template/pallet data and activate Tag.
+	 */
 	load: function(url, pallet) {
 		this._templates.load(url)
 			.then(() => {
@@ -51,20 +51,41 @@ App.prototype = {
 				return this._loadPallet(pallet);
 			})
 			.then(() => {
+				var droplet, stored_state = false;
+
+				// create state store
+				if (stored_state) {
+					// app state store - from session
+					// !TODO
+				} else {
+					// app state store - default
+					this._store = createStore(reducers);
+
+					// add pallet items to state
+					for (droplet in this._data.pallet) {
+						this._store.dispatch(actions.palletAdd(droplet));
+					}
+				}
+
 				// activate the app
 				this._store.dispatch(actions.activate());
+				this._UI = new UI(this.settings, this._refs, this._data, this._store);
 
 				// render
-				this.render();
+				this._UI.render();
 			})
-			.fail(console.error);
+			.catch(console.error);
 	},
 
+	/**
+	 * Load the pallet data
+	 * @private
+	 */
 	_loadPallet: function(url) {
-		return $.ajax(url)
+		return request.get(url)
 			.then((response) => {
-				if (Array.isArray(response) && response.length) {
-					this._data.pallet = response;
+				if (typeof response === 'object') {
+					this._data.pallet = JSON.parse(response.text);
 				} else {
 					throw new Error(
 						'Looks like the pallet at path ' + url +
@@ -72,43 +93,13 @@ App.prototype = {
 					);
 				}
 			})
-			.fail(console.error);
+			.catch(console.error);
 	},
-
-	render: function() {
-		this._canvas = render(
-			<Provider store={this._store}>
-				<CanvasContainer
-					data={this._data}
-					refCollector={this._refCollector.bind(this)}/>
-			</Provider>,
-			this._refs.ui.app
-		);
-	},
-
-	/**
-	 * Element reference collector. Collects DOM elements from React components.
-	 * Bind an element reference using the ref attribute and collectRef from utils.js
-	 * @private
-	 */
-	_refCollector: function(collection, element, key) {
-		if (element !== null) {
-			if (typeof key === 'string') {
-				if (typeof this._refs.components[collection] === 'undefined') {
-					this._refs.components[collection] = {};
-				}
-
-				this._refs.components[collection][key] = element;
-			} else {
-				this._refs.components[collection] = element;
-			}
-		}
-	},
-
-	setInteractions: function() {
-	}
 };
 
+/**
+ * Default settings.
+ */
 App.defaults = appDefaults;
 
 module.exports = App;

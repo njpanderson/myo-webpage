@@ -13,23 +13,23 @@ module.exports = {
 		};
 	},
 
-	// palletAdd: function(data) {
-	// 	data = Object.assign({}, {
-	// 		attached: false,
-	// 		dropletType: 'text'
-	// 	}, data);
+	palletAdd: function(id) {
+		var data = {
+			id: id,
+			attached: false
+		};
 
-	// 	return Object.assign({
-	// 		type: types.PALLET_ADD
-	// 	}, data);
-	// },
+		return Object.assign({
+			type: types.PALLET_ADD
+		}, data);
+	},
 
-	// palletRemove: function(id) {
-	// 	return {
-	// 		type: types.PALLET_REMOVE,
-	// 		id
-	// 	};
-	// },
+	palletRemove: function(id) {
+		return {
+			type: types.PALLET_REMOVE,
+			id
+		};
+	},
 
 	palletSetAttached: function(id, attached) {
 		return {
