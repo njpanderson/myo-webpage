@@ -69,9 +69,8 @@ UI.prototype = {
 	 * @private
 	 */
 	_mountEvent: function(collection, key) {
-		var ref;
 		// console.log('_mountEvent', collection, key);
-		if ((ref = this._getReferencedElement(collection, key))) {
+		if (this._getReferencedElement(collection, key)) {
 			// valid component mounted
 			// console.log('mounted', this._refs.components[collection][key]);
 			switch (collection) {
