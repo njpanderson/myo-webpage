@@ -1,52 +1,136 @@
 import interact from 'interact.js';
 
+var DragDrop = function(canvas, settings, callbacks = {}) {
+	this._canvas = canvas;
+	this.settings = settings;
+	this._callbacks = callbacks;
+
+	this.ui = {
+		drag: [],
+		drop: []
+	};
+};
+
+DragDrop.prototype = {
+	addDragable: function(element, settings = {}) {
+		var dragable = new Dragable(element);
+
+		settings = Object.assign({
+			restrict: {
+				restriction: this._canvas,
+				elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
+				endOnly: false
+			}
+		}, settings);
+
+		dragable.setDragable(settings)
+			.on('dragstart', () => {
+				console.log('dragstart', element);
+				this._canvas.classList.add(this.settings.classes.is_dragging);
+				element.classList.add(this.settings.classes.droplet_dragging);
+			})
+			.on('dragend', () => {
+				this._canvas.classList.remove(this.settings.classes.is_dragging);
+				element.classList.remove(this.settings.classes.droplet_dragging);
+
+				if (typeof this._callbacks.dragEnd === 'function') {
+					this._callbacks.dragEnd(element);
+				}
+			});
+
+		this.ui.drag.push(this._createInstance(element, dragable));
+	},
+
+	addDropable: function(element, settings = {}) {
+		var dropable = new Dropable(element);
+
+		dropable.setDropable(settings)
+			.on('dropactivate', (event) => {
+				// add active dropzone feedback
+				event.target.classList.add(this.settings.classes.dropzone_active);
+			})
+			.on('dragenter', (event) => {
+				// feedback the possibility of a drop
+				event.target.classList.add(this.settings.classes.dropzone_target);
+				// event.relatedTarget.classList.add('can-drop');
+				// event.relatedTarget.textContent = 'Dragged in';
+			})
+			.on('dragleave', (event) => {
+				// remove the drop feedback style
+				event.target.classList.remove(this.settings.classes.dropzone_target);
+				// event.relatedTarget.classList.remove('can-drop');
+				// event.relatedTarget.textContent = 'Dragged out';
+			})
+			.on('drop', (event) => {
+				if (typeof this._callbacks.drop === 'function') {
+					this._callbacks.drop(event.relatedTarget, event.target);
+				}
+			})
+			.on('dropdeactivate', (event) => {
+				// remove active dropzone feedback
+				event.target.classList.remove(this.settings.classes.dropzone_active);
+				event.target.classList.remove(this.settings.classes.dropzone_target);
+			});
+
+		this.ui.drop.push(this._createInstance(element, dropable));
+	},
+
+	resetDragPosition: function(element) {
+		if ((element = this.getDragInstance(element))) {
+			element.instance.resetPosition();
+		}
+	},
+
+	getDragInstance: function(element) {
+		return this.ui.drag.find((item) => {
+			return item.element === element;
+		});
+	},
+
+	_createInstance: function(element, instance) {
+		return {
+			element,
+			instance
+		};
+	}
+};
+
 /*
  * Generically handles the dragging and dropping of individual DOM nodes.
  * Uses interact.js (http://interactjs.io)
  */
-var DragDrop = function(canvas, element, settings) {
-	this.settings = settings;
-	this._canvas = canvas;
+var Dragable = function(element) {
 	this._element = element;
+
 	this._x = 0;
 	this._y = 0;
-	this._dragable = false;
 };
 
-DragDrop.prototype = {
+Dragable.prototype = {
 	/**
 	 * Set up a draggable item.
 	 */
-	setDragable: function() {
-		if (!this._dragable) {
-			interact(this._element)
-				.draggable({
-					restrict: {
-						restriction: this._canvas,
-						elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
-						endOnly: false
-					}
-				})
-				.on('dragstart', () => {
-					console.log('dragstart', event.target);
-					event.target.classList.add(this.settings.classes.droplet_dragging);
-				})
-				.on('dragmove', (event) => {
-					this._x += event.dx;
-					this._y += event.dy;
+	setDragable: function(settings) {
+		return interact(this._element)
+			.draggable(settings)
+			.on('dragmove', (event) => {
+				this._x += event.dx;
+				this._y += event.dy;
 
-					event.target.style.webkitTransform =
-					event.target.style.transform =
-						'translate(' + this._x + 'px, ' + this._y + 'px)';
-				})
-				.on('dragend', () => {
-					console.log('dragend', event.target);
-					event.target.classList.remove(this.settings.classes.droplet_dragging);
-				});
+				this._element.style.webkitTransform =
+				this._element.style.transform =
+					'translate(' + this._x + 'px, ' + this._y + 'px)';
+			});
+	},
 
-			this._dragable = true;
-		}
-	}
+	resetPosition: function() {
+		this._x = 0;
+		this._y = 0;
+
+		this._element.style.webkitTransform =
+		this._element.style.transform =
+			'translate(0, 0)';
+	},
 };
 
 
@@ -54,53 +138,18 @@ DragDrop.prototype = {
  * Generically handles drop zones in the DOM.
  * Uses interact.js (http://interactjs.io)
  */
-var DropZone = function(element, outer, settings) {
-	this.settings = settings;
+var Dropable = function(element) {
 	this._element = element;
-	this._outer = outer;
-	this._dropable = false;
 };
 
-DropZone.prototype = {
+Dropable.prototype = {
 	/**
 	 * Set up a draggable item.
 	 */
-	setDropable: function() {
-		if (!this._dragable) {
-			interact(this._element)
-				.dropzone({
-					// only accept elements matching this CSS selector
-					accept: this.settings.selectors.droplet,
-					//overlap: 0.75,
-					ondropactivate: (event) => {
-						// add active dropzone feedback
-						event.target.classList.add(this.settings.classes.dropzone_active);
-					},
-					ondragenter: (event) => {
-						// feedback the possibility of a drop
-						event.target.classList.add(this.settings.classes.dropzone_target);
-						// event.relatedTarget.classList.add('can-drop');
-						// event.relatedTarget.textContent = 'Dragged in';
-					},
-					ondragleave: (event) => {
-						// remove the drop feedback style
-						event.target.classList.remove(this.settings.classes.dropzone_target);
-						// event.relatedTarget.classList.remove('can-drop');
-						// event.relatedTarget.textContent = 'Dragged out';
-					},
-					ondrop: (event) => {
-						console.log('dropped droplet', event.relatedTarget, 'onto node', event.target);
-					},
-					ondropdeactivate: (event) => {
-						// remove active dropzone feedback
-						event.target.classList.remove(this.settings.classes.dropzone_active);
-						event.target.classList.remove(this.settings.classes.dropzone_target);
-					}
-				});
-
-			this._dragable = true;
-		}
+	setDropable: function(settings) {
+		return interact(this._element)
+			.dropzone(settings);
 	}
 };
 
-export { DragDrop, DropZone };
+export { DragDrop };

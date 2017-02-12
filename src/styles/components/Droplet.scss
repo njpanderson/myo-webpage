@@ -3,8 +3,11 @@
 	display: block;
 	width: $droplet-size;
 	height: $droplet-size;
+	padding: 5px;
 	text-align: center;
 	background-color: salmon;
+	text-decoration: none;
+	color: white;
 
 	&.attached {
 		background-color: teal;

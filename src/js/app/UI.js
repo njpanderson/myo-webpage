@@ -1,4 +1,4 @@
-import { DragDrop, DropZone } from './lib/DragDrop.js';
+import { DragDrop } from './lib/DragDrop.js';
 import CanvasContainer from './components/CanvasContainer';
 
 import React from 'react';
@@ -14,6 +14,8 @@ var UI = function(settings, refs, data, store) {
 	this._refs = refs;
 	this._data = data;
 	this._store = store;
+
+	this._data.dragdrop = {};
 
 	// other stuff
 	this._dragDropBindingsQueue = [];
@@ -78,14 +80,12 @@ UI.prototype = {
 				break;
 
 			case 'template':
-				this._setDropZones(ref);
+				// this._setDropZones(ref);
+				this._queueDragDropBinding('drop', collection, key);
 				break;
 
 			case 'droplet':
-				this._queueDragDropBinding(collection, key, function(dragdrop, queue_item) {
-					this._data.pallet[queue_item.key].dragdrop = dragdrop;
-					dragdrop.setDragable();
-				});
+				this._queueDragDropBinding('drag', collection, key);
 			}
 		} else {
 			throw new Error(
@@ -95,47 +95,52 @@ UI.prototype = {
 		}
 	},
 
-	_setDropZones: function(ref) {
-		var drop_zones = ref.querySelectorAll(this.settings.selectors.drop_zone);
-		console.log('_setDropZones', drop_zones);
-		drop_zones.forEach((zone) => {
-			var dropzone;
-			console.log(zone);
-			dropzone = new DropZone(zone, ref, this.settings);
-			dropzone.setDropable();
-		});
-	},
-
-	_queueDragDropBinding: function(collection, key, fn) {
+	_queueDragDropBinding: function(type, collection, key) {
 		if (this._refs.components.canvas) {
 			// canvas already exists - immediately bind
 			// console.log('_queueDragDropBinding - binding now');
-			this._setDragDropBindings([{ collection, key, fn }]);
+			this._setDragDropBindings([{ type, collection, key }]);
 		} else {
 			// push to queue
 			// console.log('_queueDragDropBinding - queueing up');
-			this._dragDropBindingsQueue.push({ collection, key, fn });
+			this._dragDropBindingsQueue.push({ type, collection, key });
 		}
 	},
 
 	_setDragDropBindings: function(queue = this._dragDropBindingsQueue) {
-		var dragdrop;
-
 		// bind dragDrop handlers to the elements in the queue
+		this._data.dragdrop.droplets = new DragDrop(
+			this._refs.components.canvas,
+			this.settings, {
+				drop: this._handleDropletDrop.bind(this),
+				dragEnd: (element) => {
+					this._data.dragdrop.droplets.resetDragPosition(element);
+				}
+			}
+		);
+
 		queue.forEach((item) => {
-			var ref = this._getReferencedElement(item.collection, item.key);
+			var ref = this._getReferencedElement(item.collection, item.key),
+				drop_zones;
+
 			// console.log('binding item', this._data.pallet[item.key], ref);
 			// create a DragDrop instance and assign to the pallet item data
-			if (typeof item.fn === 'function') {
-				dragdrop = new DragDrop(
-					this._refs.components.canvas,
-					ref,
-					this.settings
-				);
+			if (item.type === 'drag') {
+				this._data.dragdrop.droplets.addDragable(ref);
+			} else if (item.type === 'drop') {
+				drop_zones = ref.querySelectorAll(this.settings.selectors.drop_zone);
 
-				item.fn.apply(this, [dragdrop, item]);
+				drop_zones.forEach((zone) => {
+					this._data.dragdrop.droplets.addDropable(zone, {
+						accept: this.settings.selectors.droplet
+					});
+				});
 			}
 		});
+	},
+
+	_handleDropletDrop: function(element, zone) {
+		console.log('drop success!', element, zone);
 	},
 
 	_getReferencedElement: function(collection, key) {
