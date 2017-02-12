@@ -9,7 +9,7 @@ class Pallet extends Component {
 		if (this.props.data.pallet) {
 			for (id in this.props.data.pallet) {
 				item = this.props.data.pallet[id];
-				console.log('Pallet#getItems item', item);
+
 				key = 'droplet-' + id;
 
 				items.push(

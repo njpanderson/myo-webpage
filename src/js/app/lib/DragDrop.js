@@ -25,7 +25,6 @@ DragDrop.prototype = {
 
 		dragable.setDragable(settings)
 			.on('dragstart', () => {
-				console.log('dragstart', element);
 				this._canvas.classList.add(this.settings.classes.is_dragging);
 				element.classList.add(this.settings.classes.droplet_dragging);
 			})

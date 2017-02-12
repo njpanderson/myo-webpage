@@ -1,5 +1,6 @@
 import { DragDrop } from './lib/DragDrop.js';
 import CanvasContainer from './components/CanvasContainer';
+import actions from './state/actions';
 
 import React from 'react';
 import { render } from 'react-dom';
@@ -139,7 +140,17 @@ UI.prototype = {
 	},
 
 	_handleDropletDrop: function(element, zone) {
-		console.log('drop success!', element, zone);
+		if (this._isValidDrop(element, zone)) {
+			console.log('drop success!', element, zone);
+			this._store.dispatch(actions.palletSetAttached(element.name, true));
+		} else {
+			console.log('drop fail!', element, zone);
+			this._store.dispatch(actions.palletSetAttached(element.name, false));
+		}
+	},
+
+	_isValidDrop: function(element, zone) {
+		return (element.name === zone.dataset.attachment);
 	},
 
 	_getReferencedElement: function(collection, key) {
