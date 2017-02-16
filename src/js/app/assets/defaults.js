@@ -1,5 +1,7 @@
 export default {
 	classes: {
+		canvas: 'tag-canvas',
+		canvas_active: 'active',
 		droplet: 'droplet',
 		is_dragging: 'dragging',
 		droplet_dragging: 'droplet-dragging',
@@ -10,5 +12,8 @@ export default {
 	selectors: {
 		drop_zone: '.drop-zone',
 		droplet: '.droplet'
+	},
+	view: {
+		src: 'view.html'
 	}
 };

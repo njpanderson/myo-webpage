@@ -3,6 +3,10 @@ import { collectRef } from '../lib/utils';
 import CommonPropTypes from '../assets/common-prop-types.js';
 
 class Template extends Component {
+	constructor() {
+		super();
+	}
+
 	componentDidMount() {
 		if (typeof this.props.onMount === 'function') {
 			this.props.onMount('template');

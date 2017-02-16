@@ -1,13 +1,30 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { collectRef } from '../../lib/utils';
+import CommonPropTypes from '../../assets/common-prop-types.js';
 
-var View = function() {
-	return (
-		<section className="view">[view]</section>
-	);
-};
+class View extends Component {
+	constructor() {
+		super();
+	}
 
-View.propTypes = {
-	html: PropTypes.string
-};
+	componentDidMount() {
+		if (typeof this.props.onMount === 'function') {
+			this.props.onMount('view_frame');
+		}
+	}
+
+	render() {
+		return (
+			<section className="view">
+				<iframe ref={collectRef(this.props, 'view_frame')}
+					src={this.props.view.src}></iframe>
+			</section>
+		);
+	}
+}
+
+View.propTypes = Object.assign(CommonPropTypes, {
+	view: PropTypes.object
+});
 
 export default View;

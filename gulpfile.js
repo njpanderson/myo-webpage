@@ -6,6 +6,8 @@ var gulp = require('gulp'),
 	rename = require('gulp-rename'),
 	webpack = require('webpack-stream'),
 	plumber = require('gulp-plumber'),
+	notify = require('gulp-notify'),
+	webpack_conf = require('./webpack.config.js'),
 	watch = false;
 
 const env = {
@@ -14,26 +16,30 @@ const env = {
 
 gulp.task('scripts:dev', ['clean'], () => {
 	process.env.NODE_ENV = 'development';
+	webpack_conf.watch = watch;
 
-	return gulp.src('src/js/bootstrap.js')
+	return gulp.src('src/js/bootstrap*.js')
 		.pipe(plumber())
 		.pipe(webpack(
-			require('./webpack.config.js'),
+			webpack_conf,
 			require('webpack')
 		))
-		.pipe(gulp.dest(env.path_dist + '/js'));
+		.pipe(gulp.dest(env.path_dist + '/js'))
+		.pipe(notify('Webpack build complete'));
 });
 
 gulp.task('scripts:prod', ['clean'], () => {
 	process.env.NODE_ENV = 'production';
+	webpack_conf.watch = true;
 
-	return gulp.src('src/js/bootstrap.js')
+	return gulp.src('src/js/bootstrap*.js')
 		.pipe(plumber())
 		.pipe(webpack(
-			require('./webpack.config.js'),
+			webpack_conf,
 			require('webpack')
 		))
-		.pipe(gulp.dest(env.path_dist + '/js'));
+		.pipe(gulp.dest(env.path_dist + '/js'))
+		.pipe(notify('Webpack build complete'));
 });
 
 gulp.task('styles', ['clean'], () => {
@@ -48,7 +54,8 @@ gulp.task('styles', ['clean'], () => {
 			suffix: '.min'
 		}))
 		.pipe(cssnano())
-		.pipe(gulp.dest(env.path_dist + '/css'));
+		.pipe(gulp.dest(env.path_dist + '/css'))
+		.pipe(notify('Sass build complete'));
 });
 
 gulp.task('clean', () => {

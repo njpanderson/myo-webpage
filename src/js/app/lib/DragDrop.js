@@ -151,4 +151,4 @@ Dropable.prototype = {
 	}
 };
 
-export { DragDrop };
+export default DragDrop;

@@ -1,5 +1,5 @@
 .app,
-.myo-canvas {
+.tag-canvas {
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -7,7 +7,7 @@
 	right: 0;
 }
 
-.myo-canvas {
+.tag-canvas {
 	display: flex;
 	flex-direction: column;
 
@@ -38,5 +38,22 @@
 
 	.pallet {
 		flex-basis: $droplet-size + ($section-padding * 2);
+	}
+
+	.overlay {
+		transition: visiblity 0s .25s, opacity .25s ease-in-out;
+		position: absolute;
+		visibility: visible;
+		opacity: .8;
+		left: 0;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		background-color: $gray-med;
+	}
+
+	&.active .overlay {
+		visibility: hidden;
+		opacity: 0;
 	}
 }

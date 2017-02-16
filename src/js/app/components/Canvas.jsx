@@ -7,6 +7,10 @@ import Pallet from './Pallet.jsx';
 import Template from './Template.jsx';
 
 class Canvas extends Component {
+	constructor() {
+		super();
+	}
+
 	componentDidMount() {
 		if (typeof this.props.onMount === 'function') {
 			this.props.onMount('canvas');
@@ -14,8 +18,14 @@ class Canvas extends Component {
 	}
 
 	render() {
+		var canvas_classes = [this.props.settings.classes.canvas];
+
+		if (this.props.state.app.active) {
+			canvas_classes.push(this.props.settings.classes.canvas_active);
+		}
+
 		return (
-			<div className="myo-canvas"
+			<div className={canvas_classes.join(" ")}
 				ref={collectRef(this.props, 'canvas')}
 				>
 				<header>
@@ -27,16 +37,22 @@ class Canvas extends Component {
 					<Template {...this.props}
 						template={this.props.data.template}
 						/>
-					<View html="<b>Some HTML</b>"/>
+					<View {...this.props}
+						view={this.props.view}/>
 				</div>
 
 				<Pallet
 					{...this.props}/>
+
+				<div className="overlay"></div>
+				<div className="popup"></div>
 			</div>
 		);
 	}
 }
 
-Canvas.propTypes = CommonPropTypes;
+Canvas.propTypes = Object.assign(CommonPropTypes, {
+	view: PropTypes.object
+});
 
 export default Canvas;

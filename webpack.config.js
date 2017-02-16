@@ -21,13 +21,17 @@ if (production) {
 }
 
 var config = {
-	devtool: production ? 'source-map' : 'eval-source-map',
+	devtool: production ? 'source-map' : 'inline-source-map',
 	cache: !production,
 	resolve: {
 		extensions: ['.js', '.jsx']
 	},
+	entry: {
+		main: './src/js/bootstrap.js',
+		view: './src/js/bootstrap-view.js'
+	},
 	output: {
-		filename: 'tag.min.js',
+		filename: 'tag-[name].min.js',
 		publicPath: 'dist/js/'
 	},
 	plugins: plugins,

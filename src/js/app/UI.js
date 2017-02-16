@@ -1,5 +1,7 @@
-import { DragDrop } from './lib/DragDrop.js';
+import DragDrop from './lib/DragDrop.js';
+import Communicator from './lib/Communicator';
 import CanvasContainer from './components/CanvasContainer';
+import messageCommands from './assets/message-commands';
 import actions from './state/actions';
 
 import React from 'react';
@@ -18,6 +20,12 @@ var UI = function(settings, refs, data, store) {
 
 	this._data.dragdrop = {};
 
+	this._comms = new Communicator('app', window.location.origin, {
+		message: (message) => {
+			console.log('message to "app"!', message);
+		}
+	});
+
 	// other stuff
 	this._dragDropBindingsQueue = [];
 };
@@ -28,20 +36,18 @@ UI.prototype = {
 	 * @private
 	 */
 	render: function() {
-		const state = this._store.getState();
-
-		if (state.app.active) {
-			this._canvas = render(
-				<Provider store={this._store}>
-					<CanvasContainer
-						data={this._data}
-						classes={this.settings.classes}
-						refCollector={this._refCollector.bind(this)}
-						onMount={this._mountEvent.bind(this)}/>
-				</Provider>,
-				this._refs.ui.app
-			);
-		}
+		this._canvas = render(
+			<Provider store={this._store}>
+				<CanvasContainer
+					data={this._data}
+					settings={this.settings}
+					view={this.settings.view}
+					classes={this.settings.classes}
+					refCollector={this._refCollector.bind(this)}
+					onMount={this._mountEvent.bind(this)}/>
+			</Provider>,
+			this._refs.ui.app
+		);
 	},
 
 	/**
@@ -77,15 +83,31 @@ UI.prototype = {
 			switch (collection) {
 			case 'canvas':
 				this._setDragDropBindings();
+				this._refs.mounted.canvas = true;
 				break;
 
 			case 'template':
 				// this._setDropZones(ref);
 				this._queueDragDropBinding('drop', collection, key);
+				this._refs.mounted.template = true;
 				break;
 
 			case 'droplet':
 				this._queueDragDropBinding('drag', collection, key);
+				break;
+
+			case 'view_frame':
+				this._comms.registerGuestAddress('view', this._refs.components[collection].contentWindow);
+				this._refs.mounted.view_frame = true;
+			}
+
+			if (
+				this._refs.mounted.canvas &&
+				this._refs.mounted.template &&
+				this._refs.mounted.view_frame
+				) {
+				this._store.dispatch(actions.activate());
+				console.log('all mounted');
 			}
 		} else {
 			throw new Error(
@@ -151,6 +173,13 @@ UI.prototype = {
 
 	_isValidDrop: function(element, zone) {
 		return (element.name === zone.dataset.attachment);
+	},
+
+	_updateView: function() {
+		// !TODO
+		this._comms.send('view', {
+			cmd: messageCommands.RELOAD
+		});
 	},
 
 	_getReferencedElement: function(collection, key) {

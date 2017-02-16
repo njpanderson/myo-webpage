@@ -24,6 +24,7 @@ App.prototype = {
 			ui: {
 				app: document.querySelector('.app')
 			},
+			mounted: {},
 			components: {}
 		};
 
@@ -67,8 +68,7 @@ App.prototype = {
 					}
 				}
 
-				// activate the app
-				this._store.dispatch(actions.activate());
+				// activate the UI
 				this._UI = new UI(this.settings, this._refs, this._data, this._store);
 
 				// render
@@ -102,4 +102,4 @@ App.prototype = {
  */
 App.defaults = appDefaults;
 
-module.exports = App;
+export default App;
