@@ -3,7 +3,8 @@ import appDefaults from './assets/defaults';
 
 import Template from './lib/Template.js';
 import UI from './UI.js';
-import actions from './state/actions';
+import Droplet from './lib/Droplet.js';
+// import actions from './state/actions';
 import reducers from './state/reducers';
 import request from './lib/ajax';
 
@@ -52,7 +53,7 @@ App.prototype = {
 				return this._loadPallet(pallet);
 			})
 			.then(() => {
-				var droplet, stored_state = false;
+				var stored_state = false;
 
 				// create state store
 				if (stored_state) {
@@ -61,11 +62,6 @@ App.prototype = {
 				} else {
 					// app state store - default
 					this._store = createStore(reducers);
-
-					// add pallet items to state
-					for (droplet in this._data.pallet) {
-						this._store.dispatch(actions.palletAdd(droplet));
-					}
 				}
 
 				// activate the UI
@@ -90,9 +86,23 @@ App.prototype = {
 	_loadPallet: function(url) {
 		return request.get(url)
 			.then((response) => {
+				var pallet, droplet;
+
 				if (typeof response === 'object') {
-					this._data.pallet = JSON.parse(response.text);
-					console.log(this._data.pallet);
+					try {
+						pallet = JSON.parse(response.text);
+					} catch(e) {
+						throw new Error(
+							'Pallet data at file "' + url + '"" could not be parsed.' +
+							' is it valid JSON?'
+						);
+					}
+
+					for (droplet in pallet) {
+						this._data.pallet.push(
+							new Droplet(pallet[droplet])
+						);
+					}
 				} else {
 					throw new Error(
 						'Looks like the pallet at path ' + url +

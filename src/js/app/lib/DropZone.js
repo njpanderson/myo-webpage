@@ -2,6 +2,9 @@
 
 var DropZone, drop_zone_id = 0;
 
+/**
+ * @class
+ */
 DropZone = function(data = {}, tag) {
 	this.tag = tag;
 	this.id = 'drop_zone_' + ++drop_zone_id;

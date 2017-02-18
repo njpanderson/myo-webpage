@@ -18,9 +18,9 @@ class Droplet extends Component {
 	render() {
 		var classes = [this.props.classes.droplet];
 
-		if (this.props.state.attached) {
-			classes.push(this.props.classes.attached);
-		}
+		// if (this.props.state.attached) {
+		// 	classes.push(this.props.classes.attached);
+		// }
 
 		return (
 			<a href="#"

@@ -6,9 +6,14 @@
  * @param {boolean} save - Whether or not the editor window "save" button was pressed.
  * @param {object} data - Data from the editor form.
  */
+import PropTypes from './PropTypes';
 
 var Droplet = function(settings) {
-	this._settings = settings;
+	this._originalSettings = Object.deepAssign({}, settings);
+	this.data = {
+		name: settings.name,
+		dropletType: settings.dropletType,
+	};
 
 	this.init();
 };
@@ -19,14 +24,42 @@ Droplet.prototype = {
 	 * @private
 	 */
 	init: function() {
+		this._setExtraFields();
+	},
 
+	_setExtraFields: function() {
+		switch (this.data.dropletType) {
+		case 'text':
+			this.validateAndSet(['value']);
+			break;
+
+		case 'element':
+			this.validateAndSet(['attrs', 'tagName', 'innerHTML']);
+			break;
+
+		case 'attribute':
+			break;
+		}
+	},
+
+	validateAndSet(values) {
+		values.forEach((value) => {
+			console.log('checking value', value);
+			if (Droplet.PropTypes.hasOwnProperty(value)) {
+				if (Droplet.PropTypes[value](this._originalSettings[value], value)) {
+					this.data[value] = this._originalSettings[value];
+				}
+			} else {
+				throw new Error('Droplet property "' + value + '" does not exist.');
+			}
+		});
 	},
 
 	/**
 	 * Returns whether or not this droplet can be dropped into the specified drop zone.
-	 * @param {string} dropzone_id - ID of the drop zone.
+	 * @param {DropZone} dropzone - ID of the drop zone.
 	 */
-	canAttachTo: function(dropzone_id) {
+	canAttachTo: function(dropzone) {
 
 	},
 
@@ -37,6 +70,16 @@ Droplet.prototype = {
 	showEditor: function(callback) {
 
 	}
+};
+
+Droplet.PropTypes = {
+	value: PropTypes.string.isRequired,
+	name: PropTypes.string.isRequired,
+	dropletType: PropTypes.string.isRequired,
+	attrs: PropTypes.object,
+	tagName: PropTypes.string,
+	innerHTML: PropTypes.string,
+	editable: PropTypes.object
 };
 
 export default Droplet;

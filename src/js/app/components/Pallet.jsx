@@ -13,7 +13,7 @@ class Pallet extends Component {
 				key = 'droplet-' + id;
 
 				items.push(
-					<Droplet {...item}
+					<Droplet {...item.data}
 						id={id}
 						state={this.props.state.pallet[id]}
 						classes={this.props.classes}
