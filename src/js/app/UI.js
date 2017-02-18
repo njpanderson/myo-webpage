@@ -9,7 +9,7 @@ import { render } from 'react-dom';
 
 import { Provider } from 'react-redux';
 
-var UI = function(settings, refs, data, store) {
+var UI = function(settings, refs, data, store, template) {
 	/**
 	 * Settings as defined when instantiating. Inherits from {@link App.defaults}
 	 */
@@ -17,6 +17,7 @@ var UI = function(settings, refs, data, store) {
 	this._refs = refs;
 	this._data = data;
 	this._store = store;
+	this._template = template;
 
 	this._data.dragdrop = {};
 
@@ -172,7 +173,9 @@ UI.prototype = {
 	},
 
 	_isValidDrop: function(element, zone) {
-		return (element.name === zone.dataset.attachment);
+		// !TODO compare actual attachmentIds value
+		console.log(this._template.getDropZone(zone.dataset.id));
+		return false;//return (element.name === zone.dataset.attachment);
 	},
 
 	_updateView: function() {

@@ -1,14 +1,53 @@
-{
-	"title": {
+[
+	{
 		"name": "Title",
-		"value": "My webpage!",
 		"dropletType": "text",
-		"attachmentId": "title"
+		"value": "My Music Maker",
+		"attachmentIds": ["title"]
 	},
-	"h1": {
+	{
 		"name": "Header",
-		"value": "My Heading",
 		"dropletType": "text",
-		"attachmentId": "header-1"
+		"value": "My Music Maker",
+		"attachmentIds": ["h1"],
+		"editable": {
+			"value": {
+				"required": true
+			}
+		}
+	},
+	{
+		"name": "Section",
+		"dropletType": "text",
+		"value": "music-maker",
+		"attachmentIds": ["section_class"]
+	},
+	{
+		"name": "Letter button",
+		"dropletType": "element",
+		"innerHTML": "",
+		"tagName": "a",
+		"attrs": {
+			"href": "#",
+			"class": "button-blue"
+		},
+		"attachmentIds": ["button"],
+		"editable": {
+			"attrs": {
+				"class": {
+					"required": true,
+					"values": ["button-blue", "button-red", "button-yellow", "button-pink", "button-green"]
+				}
+			}
+		}
+	},
+	{
+		"name": "Javascript",
+		"dropletType": "element",
+		"attachmentIds": ["script-main"],
+		"attrs": {
+			"src": "music-maker.js",
+			"type": "text/javascript"
+		}
 	}
-}
+]

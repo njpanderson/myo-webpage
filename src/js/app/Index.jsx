@@ -1,7 +1,7 @@
 import './lib/polyfills';
 import appDefaults from './assets/defaults';
 
-import Templates from './lib/Templates.js';
+import Template from './lib/Template.js';
 import UI from './UI.js';
 import actions from './state/actions';
 import reducers from './state/reducers';
@@ -35,17 +35,17 @@ App.prototype = {
 		};
 
 		// templates module
-		this._templates = new Templates();
+		this._template = new Template();
 	},
 
 	/**
 	 * Load the template/pallet data and activate Tag.
 	 */
 	load: function(url, pallet) {
-		this._templates.load(url)
+		this._template.load(url)
 			.then(() => {
 				// load the HTML template and create it
-				this._data.template = this._templates.create();
+				this._data.template = this._template.create();
 			})
 			.then(() => {
 				// load the JSON based pallet data
@@ -69,7 +69,13 @@ App.prototype = {
 				}
 
 				// activate the UI
-				this._UI = new UI(this.settings, this._refs, this._data, this._store);
+				this._UI = new UI(
+					this.settings,
+					this._refs,
+					this._data,
+					this._store,
+					this._template
+				);
 
 				// render
 				this._UI.render();
@@ -86,6 +92,7 @@ App.prototype = {
 			.then((response) => {
 				if (typeof response === 'object') {
 					this._data.pallet = JSON.parse(response.text);
+					console.log(this._data.pallet);
 				} else {
 					throw new Error(
 						'Looks like the pallet at path ' + url +

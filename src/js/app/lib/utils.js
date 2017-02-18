@@ -42,3 +42,11 @@ export let validatePropKeys = function(require) {
 		}
 	};
 };
+
+/**
+ * Escapes a string for use as a match within a regex
+ * @see http://stackoverflow.com/questions/3446170/escape-string-for-use-in-javascript-regex/6969486#6969486
+ */
+export let escapeRegExp = function(str) {
+	return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\$&');
+};
