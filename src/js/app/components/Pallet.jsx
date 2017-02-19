@@ -4,24 +4,21 @@ import CommonPropTypes from '../assets/common-prop-types.js';
 
 class Pallet extends Component {
 	getItems() {
-		var items = [], id, item, key;
+		var items = [];
 
 		if (this.props.data.pallet) {
-			for (id in this.props.data.pallet) {
-				item = this.props.data.pallet[id];
-
-				key = 'droplet-' + id;
-
+			this.props.data.pallet.forEach((droplet) => {
 				items.push(
-					<Droplet {...item.data}
-						id={id}
-						state={this.props.state.pallet[id]}
+					<Droplet {...droplet.data}
+						name={droplet.name}
+						dropletType={droplet.dropletType}
+						id={droplet.id}
 						classes={this.props.classes}
 						onMount={this.props.onMount}
 						refCollector={this.props.refCollector}
-						key={key}/>
+						key={droplet.id}/>
 				);
-			}
+			});
 		}
 
 		return items;

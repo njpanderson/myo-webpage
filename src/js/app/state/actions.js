@@ -13,11 +13,13 @@ module.exports = {
 		};
 	},
 
-	palletSetAttached: function(id, attached) {
+	zoneAddAttachment: function(id, droplet_id, attached, data) {
 		return {
-			type: types.PALLET_SET_ATTACHED,
+			type: types.ZONE_ADD_ATTACHMENT,
 			id,
-			attached
+			droplet_id,
+			attached,
+			data
 		};
 	}
 };

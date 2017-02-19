@@ -44,7 +44,8 @@
 	{
 		"name": "Javascript",
 		"dropletType": "element",
-		"attachmentIds": ["script-main"],
+		"tagName": "script",
+		"attachmentIds": ["script_main"],
 		"attrs": {
 			"src": "music-maker.js",
 			"type": "text/javascript"

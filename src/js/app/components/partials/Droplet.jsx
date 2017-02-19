@@ -24,7 +24,7 @@ class Droplet extends Component {
 
 		return (
 			<a href="#"
-				name={this.props.id}
+				id={this.props.id}
 				className={classes.join(' ')}
 				ref={collectRef(this.props, ['droplet'], this.props.id)}>
 				{this.props.name}

@@ -8,12 +8,15 @@
  */
 import PropTypes from './PropTypes';
 
-var Droplet = function(settings) {
+var Droplet, droplet_id = 0;
+
+Droplet = function(settings) {
+	this.id = 'droplet_' + ++droplet_id;
 	this._originalSettings = Object.deepAssign({}, settings);
-	this.data = {
-		name: settings.name,
-		dropletType: settings.dropletType,
-	};
+	this.data = {};
+	this.name = null;
+	this.dropletType = null;
+	this.attachmentIds = [];
 
 	this.init();
 };
@@ -24,17 +27,19 @@ Droplet.prototype = {
 	 * @private
 	 */
 	init: function() {
+		this.validateAndSet(['name', 'dropletType', 'attachmentIds'], this);
+
 		this._setExtraFields();
 	},
 
 	_setExtraFields: function() {
-		switch (this.data.dropletType) {
+		switch (this.dropletType) {
 		case 'text':
-			this.validateAndSet(['value']);
+			this.validateAndSet(['value'], this.data);
 			break;
 
 		case 'element':
-			this.validateAndSet(['attrs', 'tagName', 'innerHTML']);
+			this.validateAndSet(['attrs', 'tagName', 'innerHTML'], this.data);
 			break;
 
 		case 'attribute':
@@ -42,25 +47,21 @@ Droplet.prototype = {
 		}
 	},
 
-	validateAndSet(values) {
+	validateAndSet(values, context) {
 		values.forEach((value) => {
-			console.log('checking value', value);
 			if (Droplet.PropTypes.hasOwnProperty(value)) {
-				if (Droplet.PropTypes[value](this._originalSettings[value], value)) {
-					this.data[value] = this._originalSettings[value];
+				if (Droplet.PropTypes[value](
+						this._originalSettings[value],
+						value,
+						this._originalSettings.name || null,
+						this._originalSettings.dropletType || null
+					)) {
+					context[value] = this._originalSettings[value];
 				}
 			} else {
-				throw new Error('Droplet property "' + value + '" does not exist.');
+				throw new Error('Droplet property "' + value + '" definition does not exist.');
 			}
 		});
-	},
-
-	/**
-	 * Returns whether or not this droplet can be dropped into the specified drop zone.
-	 * @param {DropZone} dropzone - ID of the drop zone.
-	 */
-	canAttachTo: function(dropzone) {
-
 	},
 
 	/**
@@ -68,16 +69,19 @@ Droplet.prototype = {
 	 * @param {dropZoneEditor} callback - Invoked once the editor has been confirmed/cancelled
 	 */
 	showEditor: function(callback) {
-
+		callback(true, Object.assign({
+			type: this.dropletType
+		}, this.data));
 	}
 };
 
 Droplet.PropTypes = {
 	value: PropTypes.string.isRequired,
 	name: PropTypes.string.isRequired,
+	attachmentIds: PropTypes.arrayOf.string.isRequired,
 	dropletType: PropTypes.string.isRequired,
 	attrs: PropTypes.object,
-	tagName: PropTypes.string,
+	tagName: PropTypes.string.isRequired,
 	innerHTML: PropTypes.string,
 	editable: PropTypes.object
 };

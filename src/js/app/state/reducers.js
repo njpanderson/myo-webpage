@@ -3,7 +3,7 @@ import default_state from '../assets/default-state.js';
 import { combineReducers } from 'redux';
 import types from './actionTypes';
 
-var app, pallet;
+var app, zones;
 
 app = function(state = default_state, action) {
 	switch (action.type) {
@@ -22,16 +22,34 @@ app = function(state = default_state, action) {
 	}
 };
 
-pallet = function(state = default_state.palletAttachments, action) {
-	var pallet = Object.assign({}, state);
+zones = function(state = default_state.zones, action) {
+	var zones = Object.assign({}, state),
+		index;
 
 	switch (action.type) {
-	case types.PALLET_SET_ATTACHED:
-		if (!pallet[action.id]) {
-			pallet[action.id] = {};
+	case types.ZONE_ADD_ATTACHMENT:
+		if (!zones[action.id]) {
+			zones[action.id] = {
+				attachments: []
+			};
 		}
 
-		pallet[action.id].attached = action.attached || false;
+		if (action.attached) {
+			// attach the droplet
+			zones[action.id].attachments.push({
+				droplet_id: action.droplet_id,
+				data: action.data
+			});
+		} else {
+			// find and detach the droplet
+			index = zones[action.id].attachments.findIndex((element) =>
+				(element.droplet_id === action.droplet_id)
+			);
+
+			if (index !== -1) {
+				zones[action.id].attachments.splice(index, 1);
+			}
+		}
 
 		break;
 
@@ -39,10 +57,10 @@ pallet = function(state = default_state.palletAttachments, action) {
 		return state;
 	}
 
-	return pallet;
+	return zones;
 };
 
 export default combineReducers({
 	app,
-	pallet
+	zones
 });

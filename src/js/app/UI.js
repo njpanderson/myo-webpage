@@ -163,19 +163,32 @@ UI.prototype = {
 	},
 
 	_handleDropletDrop: function(element, zone) {
-		if (this._isValidDrop(element, zone)) {
-			console.log('drop success!', element, zone);
-			this._store.dispatch(actions.palletSetAttached(element.name, true));
+		var drop_zone = this._template.getDropZone(zone.dataset.id),
+			droplet = this._getDropletById(element.id);
+		console.group('Droplet ' + droplet.name + ' on drop zone ' + drop_zone.attachmentId);
+		if (this._isValidDrop(droplet, drop_zone)) {
+			console.log('drop success!');
+			droplet.showEditor((ok, data) => {
+				console.log('editor finished', ok, data);
+				this._store.dispatch(actions.zoneAddAttachment(
+					drop_zone.id,
+					droplet.id,
+					true,
+					data
+				));
+				console.groupEnd();
+			});
+
+			// this._store.dispatch(actions.palletSetAttached(element.name, true));
 		} else {
-			console.log('drop fail!', element, zone);
-			this._store.dispatch(actions.palletSetAttached(element.name, false));
+			console.log('drop fail!');
+			// this._store.dispatch(actions.palletSetAttached(element.name, false));
+			console.groupEnd();
 		}
 	},
 
-	_isValidDrop: function(element, zone) {
-		// !TODO compare actual attachmentIds value
-		console.log(this._template.getDropZone(zone.dataset.id));
-		return false;//return (element.name === zone.dataset.attachment);
+	_isValidDrop: function(droplet, drop_zone) {
+		return drop_zone.willAccept(droplet, this._store);
 	},
 
 	_updateView: function() {
@@ -185,6 +198,9 @@ UI.prototype = {
 		});
 	},
 
+	/**
+	 * Obtains an element stored in the internal refs collection
+	 */
 	_getReferencedElement: function(collection, key) {
 		var ref;
 
@@ -196,6 +212,12 @@ UI.prototype = {
 		}
 
 		return false;
+	},
+
+	_getDropletById: function(id) {
+		return this._data.pallet.find((element) => {
+			return element.id === id;
+		});
 	}
 };
 

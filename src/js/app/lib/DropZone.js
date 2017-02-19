@@ -1,4 +1,4 @@
-// import { escapeRegExp } from './utils';
+import Droplet from './Droplet';
 
 var DropZone, drop_zone_id = 0;
 
@@ -10,6 +10,43 @@ DropZone = function(data = {}, tag) {
 	this.id = 'drop_zone_' + ++drop_zone_id;
 	this.attachmentId = data.attachmentId;
 	this.maxAttachments = (typeof data.maxAttachments !== 'undefined' ? data.maxAttachments : 1);
+};
+
+DropZone.prototype = {
+	/**
+	 * Test if the DropZone instance will accept a new droplet. The test looks at the
+	 * maximum number of attachments and attachment eligibility based on attachmentId
+	 */
+	willAccept: function(droplet, store) {
+		var current_attachments = 0,
+			state;
+
+		if (!(droplet instanceof Droplet)) {
+			throw new Error('A valid Droplet instance must be passed to DropZone#willAccept.');
+		}
+
+		if (store) {
+			// store exists - get state (and current number of attachments)
+			state = store.getState();
+
+			if (state.zones[this.id] && state.zones[this.id].attachments) {
+				current_attachments = state.zones[this.id].attachments.length;
+			}
+		}
+
+		// test attachment count
+		if (this.maxAttachments !== 0 && current_attachments === this.maxAttachments) {
+			return false;
+		}
+
+		// test attachmentId eligibility
+		if (this.attachmentId !== '*' &&
+			droplet.attachmentIds.indexOf(this.attachmentId) === -1) {
+			return false;
+		}
+
+		return true;
+	}
 };
 
 /**
