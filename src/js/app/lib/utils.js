@@ -1,4 +1,4 @@
-export let registerGeneralEvent = function(component, id, info) {
+export const registerGeneralEvent = function(component, id, info) {
 	var args = arguments;
 
 	return function(event) {
@@ -11,7 +11,7 @@ export let registerGeneralEvent = function(component, id, info) {
 	}.bind(this);
 };
 
-export let collectRef = function(props, collection, key) {
+export const collectRef = function(props, collection, key) {
 	return function(ref) {
 		if (typeof props.refCollector === 'function') {
 			props.refCollector(collection, ref, key);
@@ -27,9 +27,9 @@ export let collectRef = function(props, collection, key) {
 /**
  * Returns a function for validating specific keys within an object property.
  */
-export let validatePropKeys = function(require) {
+export const validatePropKeys = function(require) {
 	return function(props, key, component) {
-		let a;
+		var a;
 
 		for (a = 0; a < require.length; a += 1) {
 			if (!props[key].hasOwnProperty(require[a]) &&
@@ -47,6 +47,6 @@ export let validatePropKeys = function(require) {
  * Escapes a string for use as a match within a regex
  * @see http://stackoverflow.com/questions/3446170/escape-string-for-use-in-javascript-regex/6969486#6969486
  */
-export let escapeRegExp = function(str) {
+export const escapeRegExp = function(str) {
 	return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\$&');
 };

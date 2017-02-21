@@ -62,16 +62,6 @@ Droplet.prototype = {
 				throw new Error('Droplet property "' + value + '" definition does not exist.');
 			}
 		});
-	},
-
-	/**
-	 * Displays the editor window for this Droplet.
-	 * @param {dropZoneEditor} callback - Invoked once the editor has been confirmed/cancelled
-	 */
-	showEditor: function(callback) {
-		callback(true, Object.assign({
-			type: this.dropletType
-		}, this.data));
 	}
 };
 

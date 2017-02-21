@@ -1,33 +1,36 @@
-import default_state from '../assets/default-state.js';
+import default_state from '../assets/default-state';
+import { actionTypes } from '../assets/constants';
 
 import { combineReducers } from 'redux';
-import types from './actionTypes';
 
-var app, zones;
-
-app = function(state = default_state, action) {
+function app (state = default_state, action) {
 	switch (action.type) {
-	case types.ACTIVATE:
+	case actionTypes.ACTIVATE:
 		return Object.assign({}, state, {
 			active: true
 		});
 
-	case types.DEACTIVATE:
+	case actionTypes.DEACTIVATE:
 		return Object.assign({}, state, {
 			active: false
+		});
+
+	case actionTypes.UI_STATE:
+		return Object.assign({}, state, {
+			ui_state: action.ui_state
 		});
 
 	default:
 		return state;
 	}
-};
+}
 
-zones = function(state = default_state.zones, action) {
+function zones(state = default_state.zones, action) {
 	var zones = Object.assign({}, state),
 		index;
 
 	switch (action.type) {
-	case types.ZONE_ADD_ATTACHMENT:
+	case actionTypes.ZONE_ADD_ATTACHMENT:
 		if (!zones[action.id]) {
 			zones[action.id] = {
 				attachments: []
@@ -58,9 +61,23 @@ zones = function(state = default_state.zones, action) {
 	}
 
 	return zones;
-};
+}
+
+function dialog(state = default_state.dialog, action) {
+	switch (action.type) {
+	case actionTypes.SET_DIALOG_MODE:
+		return Object.assign({}, state, {
+			mode: action.mode,
+			state: action.state
+		});
+
+	default:
+		return state;
+	}
+}
 
 export default combineReducers({
 	app,
-	zones
+	zones,
+	dialog
 });

@@ -1,12 +1,15 @@
-import './lib/polyfills';
-import appDefaults from './assets/defaults';
-
-import Template from './lib/Template.js';
 import UI from './UI.js';
+
+import './lib/polyfills';
 import Droplet from './lib/Droplet.js';
-// import actions from './state/actions';
-import reducers from './state/reducers';
 import request from './lib/ajax';
+import Template from './lib/Template.js';
+
+import actions from './state/actions';
+import reducers from './state/reducers';
+
+import appDefaults from './assets/defaults';
+import { uiStates } from './assets/constants.js';
 
 import { createStore } from 'redux';
 
@@ -75,6 +78,8 @@ App.prototype = {
 
 				// render
 				this._UI.render();
+
+				this._store.dispatch(actions.setUIState(uiStates.BUILDING));
 			})
 			.catch(console.error);
 	},

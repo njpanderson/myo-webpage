@@ -1,8 +1,12 @@
 import DragDrop from './lib/DragDrop.js';
 import Communicator from './lib/Communicator';
+import Droplet from './lib/Droplet';
+
 import CanvasContainer from './components/CanvasContainer';
-import messageCommands from './assets/message-commands';
+
 import actions from './state/actions';
+
+import { dialogModes, uiStates, messageCommands, errorCodes } from './assets/constants.js';
 
 import React from 'react';
 import { render } from 'react-dom';
@@ -19,7 +23,14 @@ var UI = function(settings, refs, data, store, template) {
 	this._store = store;
 	this._template = template;
 
-	this._data.dragdrop = {};
+	// UI class specific data entries
+	this._data.UI = {
+		dragdrop: {},
+		dropletEdit: {
+			droplet: null,
+			callback: null
+		}
+	};
 
 	this._comms = new Communicator('app', window.location.origin, {
 		message: (message) => {
@@ -45,10 +56,46 @@ UI.prototype = {
 					view={this.settings.view}
 					classes={this.settings.classes}
 					refCollector={this._refCollector.bind(this)}
-					onMount={this._mountEvent.bind(this)}/>
+					onMount={this._mountEvent.bind(this)}
+					onDialogComplete={this._completeDialogAction.bind(this)}
+					onDropletEdit={this._completeDropletEdit}/>
 			</Provider>,
 			this._refs.ui.app
 		);
+	},
+
+	/**
+	 * Displays an editor window for a Droplet.
+	 * @param {string} mode - One of the dropletModes modes.
+	 * @param {mixed} data - Relevant data to store for the dialog to use.
+	 * @private
+	 */
+	_showDialog: function(mode, data) {
+		this._store.dispatch(actions.setUIState(uiStates.IN_DIALOG));
+		this._store.dispatch(actions.setDialogMode(mode, data));
+	},
+
+	_completeDialogAction: function(dialog_data) {
+		var state = this._store.getState(),
+			dialogMode = state.dialogMode;
+		console.log('_completeDropletEdit', state.dialogMode);
+		// reset dialog to nothing change, ui to building
+		this._store.dispatch(actions.setUIState(uiStates.BUILDING));
+		this._store.dispatch(actions.setDialogMode(dialogModes.NONE));
+
+		switch (dialogMode.mode) {
+		case dialogModes.EDIT_DROPLET:
+			// droplet being edited prior to or during attatchment
+			if (!dialogMode.state.attachment_index) {
+				// no attachment index - this is a new drop
+				this._store.dispatch(actions.zoneAddAttachment(
+					dialogMode.state.zone_id,
+					dialogMode.state.droplet_id,
+					true,
+					dialog_data
+				));
+			}
+		}
 	},
 
 	/**
@@ -132,12 +179,12 @@ UI.prototype = {
 
 	_setDragDropBindings: function(queue = this._dragDropBindingsQueue) {
 		// bind dragDrop handlers to the elements in the queue
-		this._data.dragdrop.droplets = new DragDrop(
+		this._data.UI.dragdrop.droplets = new DragDrop(
 			this._refs.components.canvas,
 			this.settings, {
 				drop: this._handleDropletDrop.bind(this),
 				dragEnd: (element) => {
-					this._data.dragdrop.droplets.resetDragPosition(element);
+					this._data.UI.dragdrop.droplets.resetDragPosition(element);
 				}
 			}
 		);
@@ -149,12 +196,12 @@ UI.prototype = {
 			// console.log('binding item', this._data.pallet[item.key], ref);
 			// create a DragDrop instance and assign to the pallet item data
 			if (item.type === 'drag') {
-				this._data.dragdrop.droplets.addDragable(ref);
+				this._data.UI.dragdrop.droplets.addDragable(ref);
 			} else if (item.type === 'drop') {
 				drop_zones = ref.querySelectorAll(this.settings.selectors.drop_zone);
 
 				drop_zones.forEach((zone) => {
-					this._data.dragdrop.droplets.addDropable(zone, {
+					this._data.UI.dragdrop.droplets.addDropable(zone, {
 						accept: this.settings.selectors.droplet
 					});
 				});
@@ -165,25 +212,13 @@ UI.prototype = {
 	_handleDropletDrop: function(element, zone) {
 		var drop_zone = this._template.getDropZone(zone.dataset.id),
 			droplet = this._getDropletById(element.id);
-		console.group('Droplet ' + droplet.name + ' on drop zone ' + drop_zone.attachmentId);
-		if (this._isValidDrop(droplet, drop_zone)) {
-			console.log('drop success!');
-			droplet.showEditor((ok, data) => {
-				console.log('editor finished', ok, data);
-				this._store.dispatch(actions.zoneAddAttachment(
-					drop_zone.id,
-					droplet.id,
-					true,
-					data
-				));
-				console.groupEnd();
-			});
 
-			// this._store.dispatch(actions.palletSetAttached(element.name, true));
-		} else {
-			console.log('drop fail!');
-			// this._store.dispatch(actions.palletSetAttached(element.name, false));
-			console.groupEnd();
+		if (this._isValidDrop(droplet, drop_zone)) {
+			this._showDialog(dialogModes.EDIT_DROPLET, {
+				droplet_id: droplet.id,
+				zone_id: zone.id,
+				attachment_index: null
+			});
 		}
 	},
 

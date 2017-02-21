@@ -1,5 +1,5 @@
 import Communicator from './lib/Communicator';
-import messageCommands from './assets/message-commands';
+import { messageCommands } from './assets/constants';
 
 var View = function() {
 	this._comms = new Communicator('view', window.location.origin, {

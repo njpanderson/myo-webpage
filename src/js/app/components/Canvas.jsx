@@ -5,6 +5,7 @@ import CommonPropTypes from '../assets/common-prop-types.js';
 import View from './partials/View.jsx';
 import Pallet from './Pallet.jsx';
 import Template from './Template.jsx';
+import Dialog from './Dialog.jsx';
 
 class Canvas extends Component {
 	constructor() {
@@ -18,14 +19,17 @@ class Canvas extends Component {
 	}
 
 	render() {
-		var canvas_classes = [this.props.settings.classes.canvas];
+		var canvas_classes = [
+			this.props.settings.classes.canvas,
+			this.props.state.app.ui_state
+		];
 
 		if (this.props.state.app.active) {
 			canvas_classes.push(this.props.settings.classes.canvas_active);
 		}
 
 		return (
-			<div className={canvas_classes.join(" ")}
+			<div className={canvas_classes.join(' ')}
 				ref={collectRef(this.props, 'canvas')}
 				>
 				<header>
@@ -41,11 +45,10 @@ class Canvas extends Component {
 						view={this.props.view}/>
 				</div>
 
-				<Pallet
-					{...this.props}/>
+				<Pallet {...this.props}/>
 
 				<div className="overlay"></div>
-				<div className="popup"></div>
+				<Dialog {...this.props}/>
 			</div>
 		);
 	}

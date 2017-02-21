@@ -1,4 +1,5 @@
 import Droplet from './Droplet';
+import { errorCodes } from '../assets/constants';
 
 var DropZone, drop_zone_id = 0;
 
@@ -22,7 +23,7 @@ DropZone.prototype = {
 			state;
 
 		if (!(droplet instanceof Droplet)) {
-			throw new Error('A valid Droplet instance must be passed to DropZone#willAccept.');
+			throw new Error(errorCodes.NOT_A_DROPLET);
 		}
 
 		if (store) {

@@ -7,7 +7,11 @@ export default {
 		droplet_dragging: 'droplet-dragging',
 		dropzone_active: 'active',
 		dropzone_target: 'target',
-		attached: 'attached'
+		attached: 'attached',
+		dialog: {
+			main: 'dialog',
+			visible: 'visible'
+		}
 	},
 	selectors: {
 		drop_zone: '.drop-zone',
