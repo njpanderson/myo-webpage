@@ -27,7 +27,13 @@ Droplet.prototype = {
 	 * @private
 	 */
 	init: function() {
-		this.validateAndSet(['name', 'dropletType', 'attachmentIds'], this);
+		// set base properties for all droplets
+		this.validateAndSet([
+			'name',
+			'dropletType',
+			'attachmentIds',
+			'editable'
+		], this);
 
 		this._setExtraFields();
 	},

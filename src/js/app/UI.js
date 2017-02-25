@@ -58,7 +58,9 @@ UI.prototype = {
 					refCollector={this._refCollector.bind(this)}
 					onMount={this._mountEvent.bind(this)}
 					onDialogComplete={this._completeDialogAction.bind(this)}
-					onDropletEdit={this._completeDropletEdit}/>
+					onDropletEdit={this._completeDropletEdit}
+					class_ui={this}
+					class_template={this._template}/>
 			</Provider>,
 			this._refs.ui.app
 		);
@@ -210,8 +212,8 @@ UI.prototype = {
 	},
 
 	_handleDropletDrop: function(element, zone) {
-		var drop_zone = this._template.getDropZone(zone.dataset.id),
-			droplet = this._getDropletById(element.id);
+		var drop_zone = this._template.getDropZoneById(zone.dataset.id),
+			droplet = this.getDropletById(element.id);
 
 		if (this._isValidDrop(droplet, drop_zone)) {
 			this._showDialog(dialogModes.EDIT_DROPLET, {
@@ -249,7 +251,7 @@ UI.prototype = {
 		return false;
 	},
 
-	_getDropletById: function(id) {
+	getDropletById: function(id) {
 		return this._data.pallet.find((element) => {
 			return element.id === id;
 		});

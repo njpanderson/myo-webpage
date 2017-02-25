@@ -65,7 +65,11 @@ string.isRequired = chain(string, isRequired);
 
 function object(value, prop, droplet_name, droplet_type) {
 	return assert(
-		typeof value === 'object', prop, 'Value must be an object.', droplet_name, droplet_type
+		(typeof value === 'undefined' || typeof value === 'object'),
+		prop,
+		'Value must be an object.',
+		droplet_name,
+		droplet_type
 	);
 }
 

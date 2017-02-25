@@ -246,7 +246,7 @@ Communicator.prototype = {
 			}
 		}
 
-		if (this._callbacks.message && message.originalMessage !== null) {
+		if (this._callbacks.message && message.originalMessage) {
 			this._callbacks.message(message.originalMessage);
 		}
 

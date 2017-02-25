@@ -64,7 +64,7 @@ Template.prototype = {
 		return markup;
 	},
 
-	getDropZone: function(id) {
+	getDropZoneById: function(id) {
 		return this._drop_zones[id] || null;
 	}
 };

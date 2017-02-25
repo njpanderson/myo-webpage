@@ -12,6 +12,7 @@
 		"attachmentIds": ["h1"],
 		"editable": {
 			"value": {
+				"label": "Header label",
 				"required": true
 			}
 		}

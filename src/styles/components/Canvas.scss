@@ -44,7 +44,7 @@
 		transition: visiblity 0s .25s, opacity .25s ease-in-out;
 		position: absolute;
 		visibility: visible;
-		opacity: .8;
+		opacity: $overlay_opacity;
 		left: 0;
 		top: 0;
 		right: 0;
@@ -55,5 +55,10 @@
 	&.active .overlay {
 		visibility: hidden;
 		opacity: 0;
+	}
+
+	&.active.in-dialog .overlay {
+		visibility: visible;
+		opacity: $overlay_opacity;
 	}
 }

@@ -3,6 +3,10 @@ import Droplet from './partials/Droplet.jsx';
 import CommonPropTypes from '../assets/common-prop-types.js';
 
 class Pallet extends Component {
+	constructor() {
+		super();
+	}
+
 	getItems() {
 		var items = [];
 
