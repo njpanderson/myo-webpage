@@ -38,21 +38,13 @@ class Form extends Component {
 					<TextField key={key}
 						onChange={this.elementChange}
 						name={name}
-						value={this.getFieldValue(name, field.value)}
+						value={this.state.formValues[name]}
 						label={field.label || name}/>
 				);
 			}
 		}
 
 		return output;
-	}
-
-	getFieldValue(name, default_value = null) {
-		if (this.state && this.state.formValues) {
-			this.state.formValues[name] || null;
-		} else {
-			return default_value;
-		}
 	}
 
 	elementChange(event) {
