@@ -2,14 +2,14 @@ import React, { Component, PropTypes } from 'react';
 import { collectRef } from '../lib/utils';
 import CommonPropTypes from '../assets/common-prop-types.js';
 
-import View from './partials/View.jsx';
-import Pallet from './Pallet.jsx';
-import Template from './Template.jsx';
-import Dialog from './Dialog.jsx';
+import View from './views/View.jsx';
+import Pallet from './views/Pallet.jsx';
+import Template from './views/Template.jsx';
+import Dialog from './views/Dialog.jsx';
 
 class Canvas extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 	}
 
 	componentDidMount() {
@@ -55,6 +55,7 @@ class Canvas extends Component {
 }
 
 Canvas.propTypes = Object.assign(CommonPropTypes, {
+	settings: PropTypes.object.isRequired,
 	view: PropTypes.object
 });
 

@@ -1,0 +1,8 @@
+[
+	{
+		"name": "Title",
+		"dropletType": "text",
+		"value": "My Music Maker"
+		"attachmentIds": ["title"]
+	}
+]

@@ -1,15 +1,15 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import CommonPropTypes from '../../assets/common-prop-types.js';
 
 import Form from '../Form.jsx';
 
 class DialogEditDroplet extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 	}
 
-	onDialogComplete() {
-		console.log('dialog complete');
+	onDialogComplete(values) {
+		console.log('dialog complete', values);
 	}
 
 	onDialogCancel() {

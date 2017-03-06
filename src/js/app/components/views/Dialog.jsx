@@ -1,26 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 
-import CommonPropTypes from '../assets/common-prop-types.js';
-import { dialogModes } from '../assets/constants.js';
+import CommonPropTypes from '../../assets/common-prop-types.js';
+import { dialogModes } from '../../assets/constants.js';
 
-import DialogEditDroplet from './dialogs/DialogEditDroplet.jsx';
-
-/**
- * Just an empty dialog for fallback purposes
- */
-class Empty extends Component {
-	constructor() {
-		super();
-	}
-
-	render() {
-		return (<div></div>);
-	}
-}
+import Empty from './partials/Empty.jsx';
+import DialogEditDroplet from '../dialogs/DialogEditDroplet.jsx';
 
 class Dialog extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 	}
 
 	componentWillReceiveProps(next_props) {

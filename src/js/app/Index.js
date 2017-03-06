@@ -1,15 +1,15 @@
-import UI from './UI.js';
+import UI from './UI.jsx';
 
 import './lib/polyfills';
-import Droplet from './lib/Droplet.js';
+import Droplet from './lib/Droplet';
 import request from './lib/ajax';
-import Template from './lib/Template.js';
+import Template from './lib/Template';
 
 import actions from './state/actions';
 import reducers from './state/reducers';
 
 import appDefaults from './assets/defaults';
-import { uiStates } from './assets/constants.js';
+import { uiStates } from './assets/constants';
 
 import { createStore } from 'redux';
 
@@ -46,7 +46,7 @@ App.prototype = {
 	 * Load the template/pallet data and activate Tag.
 	 */
 	load: function(url, pallet) {
-		this._template.load(url)
+		return this._template.load(url)
 			.then(() => {
 				// load the HTML template and create it
 				this._data.template = this._template.create();
@@ -81,7 +81,9 @@ App.prototype = {
 
 				this._store.dispatch(actions.setUIState(uiStates.BUILDING));
 			})
-			.catch(console.error);
+			.catch((error) => {
+				console.error(error);
+			});
 	},
 
 	/**
@@ -91,21 +93,21 @@ App.prototype = {
 	_loadPallet: function(url) {
 		return request.get(url)
 			.then((response) => {
-				var pallet, droplet;
+				var pallet, item;
 
-				if (typeof response === 'object') {
-					try {
-						pallet = JSON.parse(response.text);
-					} catch(e) {
-						throw new Error(
-							'Pallet data at file "' + url + '"" could not be parsed.' +
-							' is it valid JSON?'
-						);
-					}
+				try {
+					pallet = JSON.parse(response.text);
+				} catch(e) {
+					return Promise.reject(new Error(
+						'Pallet data at file "' + url + '"" could not be parsed.' +
+						' is it valid JSON?'
+					));
+				}
 
-					for (droplet in pallet) {
+				if (Array.isArray(pallet) && pallet.length) {
+					for (item in pallet) {
 						this._data.pallet.push(
-							new Droplet(pallet[droplet])
+							new Droplet(pallet[item])
 						);
 					}
 				} else {
@@ -115,7 +117,9 @@ App.prototype = {
 					);
 				}
 			})
-			.catch(console.error);
+			.catch((error) => {
+				throw error;
+			});
 	},
 };
 

@@ -1,3 +1,4 @@
- --ui tdd
- --bail
- --globals obSet,CoM,TransitionGroup
+--ui bdd
+--bail
+--compilers js:babel-register
+--check-leaks

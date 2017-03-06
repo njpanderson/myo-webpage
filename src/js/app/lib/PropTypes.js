@@ -37,8 +37,8 @@ function assert(test, propname, message, droplet_name, droplet_type) {
 		}
 
 		error =  'Error in Droplet' +
-			(prop_id ? ' ' + prop_id + ': ' : ': ') +
-			'prop ' + propname + '. ' + message;
+			(prop_id ? ' ' + prop_id + ' ' : ' ') +
+			'prop "' + propname + '". ' + message;
 		throw new Error(error);
 	} else {
 		return true;
@@ -47,7 +47,13 @@ function assert(test, propname, message, droplet_name, droplet_type) {
 
 function isRequired(value, prop, droplet_name, droplet_type) {
 	return assert(
-		(typeof value !== 'undefined' && value !== ''), prop, 'Value is required.', droplet_name, droplet_type
+		(typeof value !== 'undefined'), prop, 'Value is required.', droplet_name, droplet_type
+	);
+}
+
+function stringNotEmpty(value, prop, droplet_name, droplet_type) {
+	return assert(
+		(typeof value !== 'undefined' && value !== ''), prop, 'Value cannot be empty.', droplet_name, droplet_type
 	);
 }
 
@@ -62,6 +68,8 @@ function string(value, prop, droplet_name, droplet_type) {
 }
 
 string.isRequired = chain(string, isRequired);
+string.notEmpty = chain(string, stringNotEmpty);
+string.notEmpty.isRequired = chain(string, stringNotEmpty, isRequired);
 
 function object(value, prop, droplet_name, droplet_type) {
 	return assert(
@@ -110,9 +118,12 @@ arrayOf.string = chain(
 arrayOf.string.isRequired = chain(arrayOf.string, isRequired);
 
 export default {
+	_chain: chain,
+	_assert: assert,
 	string,
 	object,
 	array,
 	arrayOf,
-	isRequired
+	isRequired,
+	stringNotEmpty
 };

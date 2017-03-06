@@ -1,23 +1,31 @@
 import default_state from '../assets/default-state';
-import { actionTypes } from '../assets/constants';
+import { actionTypes, uiStates } from '../assets/constants';
 
 import { combineReducers } from 'redux';
 
+/**
+ * Sets application state values
+ */
 function app (state = default_state, action) {
+	var active;
+
 	switch (action.type) {
-	case actionTypes.ACTIVATE:
-		return Object.assign({}, state, {
-			active: true
-		});
-
-	case actionTypes.DEACTIVATE:
-		return Object.assign({}, state, {
-			active: false
-		});
-
+	// set ui state
 	case actionTypes.UI_STATE:
+		// set 'active' flag based on the ui_state value
+		switch (action.ui_state) {
+		case uiStates.BUILDING:
+		case uiStates.IN_DIALOG:
+			active = true;
+			break;
+
+		default:
+			active = false;
+		}
+
 		return Object.assign({}, state, {
-			ui_state: action.ui_state
+			ui_state: action.ui_state,
+			active
 		});
 
 	default:
@@ -25,6 +33,9 @@ function app (state = default_state, action) {
 	}
 }
 
+/**
+ * Sets drop zone state values
+ */
 function zones(state = default_state.zones, action) {
 	var zones = Object.assign({}, state),
 		index;

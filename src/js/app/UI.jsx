@@ -1,12 +1,11 @@
 import DragDrop from './lib/DragDrop.js';
 import Communicator from './lib/Communicator';
-import Droplet from './lib/Droplet';
 
 import CanvasContainer from './components/CanvasContainer';
 
 import actions from './state/actions';
 
-import { dialogModes, uiStates, messageCommands, errorCodes } from './assets/constants.js';
+import { dialogModes, uiStates, messageCommands } from './assets/constants.js';
 
 import React from 'react';
 import { render } from 'react-dom';
@@ -156,8 +155,7 @@ UI.prototype = {
 				this._refs.mounted.template &&
 				this._refs.mounted.view_frame
 				) {
-				this._store.dispatch(actions.activate());
-				console.log('all mounted');
+				this._store.dispatch(actions.setUIState(uiStates.BUILDING));
 			}
 		} else {
 			throw new Error(
@@ -221,6 +219,8 @@ UI.prototype = {
 				zone_id: zone.id,
 				attachment_index: null
 			});
+		} else {
+			return false;
 		}
 	},
 

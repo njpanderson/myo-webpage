@@ -36,7 +36,7 @@ var config = {
 	},
 	plugins: plugins,
 	module: {
-		loaders: [
+		rules: [
 			{
 				test: /\.jsx?$/,
 				exclude: /node_modules/,

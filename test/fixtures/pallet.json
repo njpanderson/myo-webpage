@@ -1,0 +1,15 @@
+[
+	{
+		"name": "Title",
+		"dropletType": "text",
+		"value": "My Music Maker",
+		"attachmentIds": ["title"]
+	},
+	{
+		"name": "Test Paragraph",
+		"dropletType": "element",
+		"tagName": "p",
+		"attachmentIds": ["para_test"],
+		"innerHTML": "This is a test pragraph."
+	}
+]

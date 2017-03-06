@@ -1,12 +1,24 @@
-import React, { Component } from 'react';
-import CommonPropTypes from '../assets/common-prop-types.js';
+import React, { Component, PropTypes } from 'react';
 
-import FieldText from './partials/FieldText.jsx';
+import TextField from './views/fields/TextField.jsx';
 
 class Form extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		var name, formValues = {};
 
+		super(props);
+
+		// set default state for fields based on original values
+		for (name in this.props.fields) {
+			formValues[name] = this.props.fields[name].value;
+		}
+
+		// set default form value state
+		this.state = {
+			formValues
+		};
+
+		// bind functions for events
 		this.elementChange = this.elementChange.bind(this);
 	}
 
@@ -19,14 +31,15 @@ class Form extends Component {
 			field = this.props.fields[name];
 			key = 'field-' + name;
 
-			if (!field.values) {
+			switch (field.type) {
+			case 'text':
 				// assume the field is text
 				output.push(
-					<FieldText key={key}
+					<TextField key={key}
 						onChange={this.elementChange}
 						name={name}
-						value={this.getFieldValue(name)}
-						label={field.label}/>
+						value={this.getFieldValue(name, field.value)}
+						label={field.label || name}/>
 				);
 			}
 		}
@@ -34,11 +47,11 @@ class Form extends Component {
 		return output;
 	}
 
-	getFieldValue(name) {
+	getFieldValue(name, default_value = null) {
 		if (this.state && this.state.formValues) {
 			this.state.formValues[name] || null;
 		} else {
-			return null;
+			return default_value;
 		}
 	}
 
@@ -55,16 +68,11 @@ class Form extends Component {
 
 	onSubmit(event) {
 		event.preventDefault();
-
-		if (typeof this.props.onSubmit === 'function') {
-			this.props.onSubmit();
-		}
+		this.props.onSubmit(this.state.formValues);
 	}
 
 	onCancel() {
-		if (typeof this.props.onCancel === 'function') {
-			this.props.onCancel();
-		}
+		this.props.onCancel(this.state.formValues);
 	}
 
 	render() {
@@ -84,10 +92,16 @@ class Form extends Component {
 	}
 }
 
-Form.propTypes = Object.assign({}, CommonPropTypes, {
-	// state: PropTypes.object
-});
+Form.propTypes = {
+	onCancel: PropTypes.func,
+	onSubmit: PropTypes.func,
+	fields: PropTypes.object
+};
 
-Form.defaultProps = {};
+Form.defaultProps = {
+	onCancel: () => {},
+	onSubmit: () => {},
+	fields: {}
+};
 
 export default Form;

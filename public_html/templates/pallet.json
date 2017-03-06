@@ -12,7 +12,9 @@
 		"attachmentIds": ["h1"],
 		"editable": {
 			"value": {
+				"type": "text",
 				"label": "Header label",
+				"value": "test default value",
 				"required": true
 			}
 		}
@@ -36,6 +38,7 @@
 		"editable": {
 			"attrs": {
 				"class": {
+					"type": "dropdown",
 					"required": true,
 					"values": ["button-blue", "button-red", "button-yellow", "button-pink", "button-green"]
 				}

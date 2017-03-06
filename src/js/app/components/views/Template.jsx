@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import { collectRef } from '../lib/utils';
-import CommonPropTypes from '../assets/common-prop-types.js';
+import { collectRef } from '../../lib/utils';
+import CommonPropTypes from '../../assets/common-prop-types.js';
 
 class Template extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 	}
 
 	componentDidMount() {

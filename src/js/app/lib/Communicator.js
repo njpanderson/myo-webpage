@@ -79,6 +79,11 @@ Communicator.prototype = {
 		this._post(node, pong);
 	},
 
+	/**
+	 * Registers a single guest for communication purposes.
+	 * @param {string} id - Guest ID. Used when sending messages.
+	 * @param {mixed} dest - Destination node.
+	 */
 	registerGuestAddress: function(id, dest) {
 		if (typeof dest === 'undefined') {
 			throw new Error(
@@ -110,6 +115,12 @@ Communicator.prototype = {
 		}
 	},
 
+	/**
+	 * Sets or replaces the guest data.
+	 * @param {string} id - Guest ID.
+	 * @param {object} data - Guest data.
+	 * @private
+	 */
 	_setGuestData: function(id, data) {
 		if (!this._guests[id]) {
 			this._guests[id] = {
@@ -121,6 +132,11 @@ Communicator.prototype = {
 		Object.assign(this._guests[id], data);
 	},
 
+	/**
+	 * Sends a message to the defined guest.
+	 * @param {string} to - Guest ID, as stored.
+	 * @param {mixed} message - Any JS compatible data to send as a message.
+	 */
 	send: function(to, message) {
 		var guest = this._getGuestById(to);
 
@@ -171,7 +187,7 @@ Communicator.prototype = {
 	},
 
 	/**
-	 * Get a guest by known node (i.e. that registered in `this._addresses`)
+	 * Get a guest by known node (i.e. that registered in `this._guests`)
 	 * @private
 	 */
 	_getGuestByNode: function(node) {
@@ -194,7 +210,9 @@ Communicator.prototype = {
 	},
 
 	/**
-	 * Actually posts the message to the destination
+	 * Actually posts the message to the destination.
+	 * @param {string} to - Guest ID.
+	 * @param {mixed} message - Any JS compatible data to send as a message.
 	 * @private
 	 */
 	_post: function(to, message) {
@@ -213,7 +231,6 @@ Communicator.prototype = {
 		} else {
 			node = to;
 		}
-
 
 		node.postMessage(message, this._origin);
 	},

@@ -1,5 +1,9 @@
 import interact from 'interact.js';
 
+/**
+ * Handles draggable/droppable items.
+ * @class
+ */
 var DragDrop = function(canvas, settings, callbacks = {}) {
 	this._canvas = canvas;
 	this.settings = settings;

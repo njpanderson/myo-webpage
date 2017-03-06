@@ -3,8 +3,8 @@ import { collectRef } from '../../lib/utils';
 import CommonPropTypes from '../../assets/common-prop-types.js';
 
 class Droplet extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 
 		this.myrefs = {};
 	}

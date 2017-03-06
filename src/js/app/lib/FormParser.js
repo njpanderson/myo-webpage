@@ -8,7 +8,7 @@ FormParser.prototype = {
 	 * @returns {object} All values of the form.
 	 */
 	getAllValues: function() {
-		values = {};
+		var values = {};
 
 		this.getUniqueFields().forEach((element) =>
 			(values[element.name] = this.getFieldValue(element))
@@ -82,7 +82,7 @@ FormParser.prototype = {
 	 */
 	getFieldValue: function(field) {
 		var type = this.getFieldType(field),
-			value = '', a;
+			value = '';
 
 		if (type === FormParser.fieldTypes.TEXT && field.value !== '') {
 			// basic text fields
@@ -121,11 +121,11 @@ FormParser.prototype = {
 	 * @returns {array} All sibling fields with the same name.
 	 */
 	collectSiblings: function(field) {
-		siblings = [];
+		var siblings = [], a;
 
 		for (a = 0; a < this.form.elements.length; a += 1) {
-			if (form.elements[a].name === field.name) {
-				siblings.push(form.elements[a]);
+			if (this.form.elements[a].name === field.name) {
+				siblings.push(this.form.elements[a]);
 			}
 		}
 
@@ -140,3 +140,5 @@ FormParser.fieldTypes = {
 	'RADIO': 'radio',
 	'CHECKBOX': 'checkbox'
 };
+
+export default FormParser;

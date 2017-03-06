@@ -1,5 +1,5 @@
 require.ensure([], () => {
-	const App = require('./app/Index.jsx').default;
+	const App = require('./app/Index').default;
 
 	var app = new App();
 

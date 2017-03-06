@@ -20,7 +20,9 @@ Template.prototype = {
 					this._markup = response.text;
 				}
 			})
-			.catch(console.error);
+			.catch((error) => {
+				throw new Error(error);
+			});
 	},
 
 	create: function(markup = this._markup) {
@@ -45,8 +47,7 @@ Template.prototype = {
 			counter += 1;
 
 			if (counter === this._max_zones) {
-				console.warn('Maximum number of zones in template reached (' + this._max_zones + ').');
-				break;
+				throw new Error('Maximum number of zones in template reached (' + this._max_zones + ').');
 			}
 		}
 

@@ -1,18 +1,16 @@
 // JS Polyfills - doesn't export anything, just modifies existing Object specs
-Object.deepAssign = function(target, varArgs) { // .length of function is 2
+Object.deepAssign = function(target, varArgs) {
 	'use strict';
+
+	var to;
 
 	if (target == null) { // TypeError if undefined or null
 		throw new TypeError('Cannot convert undefined or null to object');
 	}
 
-	if (varArgs.constructor === Array && arguments.length === 2) {
-		// arrays to retain their identity
-		var to = Array(target);
-	} else {
-		// otherwise use an object
-		var to = Object(target);
-	}
+	to = (varArgs.constructor === Array && arguments.length === 2) ?
+		Array(target) : // arrays to retain their identity
+		Object(target); // otherwise use an object
 
 	for (var index = 1; index < arguments.length; index++) {
 		var nextSource = arguments[index];

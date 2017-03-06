@@ -1,7 +1,5 @@
 export const actionTypes = {
 	UI_STATE: 'ui-state',
-	ACTIVATE: 'activate',
-	DEACTIVATE: 'deactivate',
 	ZONE_ADD_ATTACHMENT: 'zone-add-attachment',
 	SET_DIALOG_MODE: 'set-dialog-mode'
 };

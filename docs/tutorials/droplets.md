@@ -43,6 +43,15 @@ Attribute        | Required | Default | Description
 `tagName`        | Required | (empty) | The HTMLElement tag name to use for the placed element.
 `innerHTML`      | Optional | (empty) | If the HTMLElement defined is a tag pair (e.g. `<a></a>`), this attribute defines the HTML content to place between the opening and closing tags.
 
+### "attribute" type
+
+Equivalent to a single HTMLElement attribute, the following attributes are available:
+
+Attribute        | Required | Default | Description
+:---             | :---     | :---    | :---
+`key`            | Required | (empty) | The key (name) of the attribute.
+`value`          | Required | (empty) | The value of the attribute.
+
 ## Editable attributes
 
 When dropping a droplet into the drop zones, certain attributes can be edited through a dialog. The supported attributes for editing are:
@@ -65,6 +74,7 @@ For example, to define the attribute `value` is editable within a droplet of `dr
 			"attachmentIds": ["header-1"],
 			"editable": {
 				"value": {
+					"type": "text",
 					"required": true
 				}
 			}
@@ -90,6 +100,7 @@ To define the attribute `class` is editable within a droplet of type "element":
 			"editable": {
 				"attrs": {
 					"class": {
+						"type": "dropdown",
 						"required": true,
 						"values": ["button-blue", "button-red"]
 					}
@@ -108,10 +119,13 @@ The possible settings for each definition are:
 
 Setting        | Optional | Description
 :---           | :---     | :---
-`required`     | No       | Boolean defining that the attribute must contain a value.
-`values`       | Yes      | An array of possible values. Will show a dropdown element instead of a free text field during editing.
+`type`         | No       | One of 'text', 'longtext', 'dropdown', 'checkbox', or 'radio'.
+`required`     | Yes      | Boolean defining that the attribute must contain a value.
+`label`        | Yes      | Field label (will otherwise inherit from the attribute name).
+`value`        | Yes      | Either an array of possible values, a single string value, an object
+defining key/value pairs, or a number.
 `placeholder`  | Yes      | In the case of a text value, this will show in place of empty values.
-`default`      | Yes      | A default value.
+`selected`     | Yes      | In the case of an array value, this set the value as 'selected'.
 
 ## Drop zones
 

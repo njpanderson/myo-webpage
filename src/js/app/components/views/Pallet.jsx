@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Droplet from './partials/Droplet.jsx';
-import CommonPropTypes from '../assets/common-prop-types.js';
+import Droplet from './Droplet.jsx';
+import CommonPropTypes from '../../assets/common-prop-types.js';
 
 class Pallet extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 	}
 
 	getItems() {
