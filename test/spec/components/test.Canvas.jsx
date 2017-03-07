@@ -54,7 +54,7 @@ describe('Canvas', function() {
 				state={Object.deepAssign({}, state, {
 					app: {
 						active: true,
-						ui_state: uiStates.BUILDING
+						ui_state: uiStates.ACTIVE
 					}
 				})}
 				refCollector={refCollector}

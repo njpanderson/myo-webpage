@@ -1,57 +1,44 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 
 import CommonPropTypes from '../../assets/common-prop-types.js';
 import { dialogModes } from '../../assets/constants.js';
 
-import Empty from './partials/Empty.jsx';
 import DialogEditDroplet from '../dialogs/DialogEditDroplet.jsx';
 
-class Dialog extends Component {
-	constructor(props) {
-		super(props);
+var DialogComponents = {};
+DialogComponents[dialogModes.EDIT_DROPLET] = DialogEditDroplet;
+
+function Dialog(props) {
+	var Component,
+		classes = [props.settings.classes.dialog.main];
+
+	if (props.state.dialog.mode !== dialogModes.NONE) {
+		classes.push(props.settings.classes.dialog.visible);
 	}
 
-	componentWillReceiveProps(next_props) {
-		if (next_props.state.dialog.mode === this.props.state.dialog.mode) {
-			return;
-		}
+	Component = DialogComponents[props.state.dialog.mode];
 
-		switch (next_props.state.dialog.mode) {
-		case dialogModes.EDIT_DROPLET:
-			this.setState({
-				dialogType: DialogEditDroplet
-			});
-			break;
-
-		default:
-			this.setState({
-				dialogType: Empty
-			});
-		}
-	}
-
-	render() {
-		var classes = [this.props.settings.classes.dialog.main];
-
-		if (this.props.state.dialog.mode !== dialogModes.NONE) {
-			classes.push(this.props.settings.classes.dialog.visible);
-		}
-
-		var DialogByType = this.state && this.state.dialogType || Empty;
-
+	if (Component) {
 		return (
 			<div className={classes.join(' ')}>
-				<DialogByType
-					class_ui={this.props.class_ui}
-					class_template={this.props.class_template}
-					state={this.props.state.dialog.state}/>
+				<Component
+					class_ui={props.class_ui}
+					class_template={props.class_template}
+					state={props.state.dialog.state}
+					onDialogComplete={props.onDialogComplete}
+					onDialogCancel={props.onDialogClose}/>
 			</div>
+		);
+	} else {
+		return (
+			<div className={classes.join(' ')}></div>
 		);
 	}
 }
 
 Dialog.propTypes = Object.assign(CommonPropTypes, {
-	onDialogComplete: PropTypes.func
+	onDialogComplete: PropTypes.func,
+	onDialogCancel: PropTypes.func
 });
 
 Dialog.defaultProps = {};

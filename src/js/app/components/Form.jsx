@@ -1,6 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 
 import TextField from './views/fields/TextField.jsx';
+import DropDown from './views/fields/DropDown.jsx';
+
+const FieldComponents = {
+	'text': TextField,
+	'dropdown': DropDown
+};
 
 class Form extends Component {
 	constructor(props) {
@@ -22,24 +28,59 @@ class Form extends Component {
 		this.elementChange = this.elementChange.bind(this);
 	}
 
+	valueSet(values, node) {
+		var nodes = [], key;
+
+		if (Array.isArray(values)) {
+			values.forEach(function(value) {
+				nodes.push(
+					<node value={value}>{value}</node>
+				);
+			});
+		} else if (typeof values === 'object') {
+			for (key in values) {
+				nodes.push(
+					<node value={key}>{values[key]}</node>
+				);
+			}
+		}
+
+		return nodes;
+	}
+
 	fields() {
-		var output, name, field, key;
-
-		output = [];
-
+		var name, field, Component, value, label,
+			output = [];
+		console.log(this.props.fields);
 		for (name in this.props.fields) {
 			field = this.props.fields[name];
-			key = 'field-' + name;
+			field.key = 'field-' + name;
+
+			Component = FieldComponents[field.type];
+
+			value = this.state.formValues[name];
+			label = field.label || name;
 
 			switch (field.type) {
 			case 'text':
-				// assume the field is text
 				output.push(
-					<TextField key={key}
+					<Component key={field.key}
 						onChange={this.elementChange}
 						name={name}
-						value={this.state.formValues[name]}
-						label={field.label || name}/>
+						value={value}
+						label={label}/>
+				);
+				break;
+
+			case 'dropdown':
+				output.push(
+					<Component key={field.key}
+						onChange={this.elementChange}
+						name={name}
+						value={value}
+						label={label}>
+						{this.valueSet(field.value, 'option')}
+					</Component>
 				);
 			}
 		}

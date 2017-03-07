@@ -24,10 +24,6 @@ class Canvas extends Component {
 			this.props.state.app.ui_state
 		];
 
-		if (this.props.state.app.active) {
-			canvas_classes.push(this.props.settings.classes.canvas_active);
-		}
-
 		return (
 			<div className={canvas_classes.join(' ')}
 				ref={collectRef(this.props, 'canvas')}

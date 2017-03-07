@@ -11,8 +11,7 @@ export const dialogModes = {
 
 export const uiStates = {
 	INITIALISING: 'initialising',
-	BUILDING: 'building',
-	IN_DIALOG: 'in-dialog'
+	ACTIVE: 'active'
 };
 
 export const messageCommands = {

@@ -14,8 +14,7 @@ function app (state = default_state, action) {
 	case actionTypes.UI_STATE:
 		// set 'active' flag based on the ui_state value
 		switch (action.ui_state) {
-		case uiStates.BUILDING:
-		case uiStates.IN_DIALOG:
+		case uiStates.ACTIVE:
 			active = true;
 			break;
 

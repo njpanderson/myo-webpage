@@ -37,8 +37,10 @@ var UI = function(settings, refs, data, store, template) {
 		}
 	});
 
-	// other stuff
-	this._dragDropBindingsQueue = [];
+	// general queues
+	this.queues = {
+		dragdropBindings: []
+	};
 };
 
 UI.prototype = {
@@ -72,7 +74,6 @@ UI.prototype = {
 	 * @private
 	 */
 	_showDialog: function(mode, data) {
-		this._store.dispatch(actions.setUIState(uiStates.IN_DIALOG));
 		this._store.dispatch(actions.setDialogMode(mode, data));
 	},
 
@@ -81,7 +82,6 @@ UI.prototype = {
 			dialogMode = state.dialogMode;
 		console.log('_completeDropletEdit', state.dialogMode);
 		// reset dialog to nothing change, ui to building
-		this._store.dispatch(actions.setUIState(uiStates.BUILDING));
 		this._store.dispatch(actions.setDialogMode(dialogModes.NONE));
 
 		switch (dialogMode.mode) {
@@ -155,7 +155,8 @@ UI.prototype = {
 				this._refs.mounted.template &&
 				this._refs.mounted.view_frame
 				) {
-				this._store.dispatch(actions.setUIState(uiStates.BUILDING));
+				// all required refs mounted - set active
+				this._store.dispatch(actions.setUIState(uiStates.ACTIVE));
 			}
 		} else {
 			throw new Error(
@@ -173,11 +174,11 @@ UI.prototype = {
 		} else {
 			// push to queue
 			// console.log('_queueDragDropBinding - queueing up');
-			this._dragDropBindingsQueue.push({ type, collection, key });
+			this.queues.dragdropBindings.push({ type, collection, key });
 		}
 	},
 
-	_setDragDropBindings: function(queue = this._dragDropBindingsQueue) {
+	_setDragDropBindings: function(queue = this.queues.dragdropBindings) {
 		// bind dragDrop handlers to the elements in the queue
 		this._data.UI.dragdrop.droplets = new DragDrop(
 			this._refs.components.canvas,
