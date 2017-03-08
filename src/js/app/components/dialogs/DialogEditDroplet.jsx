@@ -39,7 +39,7 @@ class DialogEditDroplet extends Component {
 			} else {
 				fieldsets[fieldsets.length - 1].fields[set] = droplet.editable[set];
 			}
-		};
+		}
 
 		return (
 			<Form
