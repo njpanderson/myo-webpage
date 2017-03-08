@@ -1,13 +1,59 @@
+/**
+ * @typedef FormOnSubmit
+ * @param {object} formValues - the current values of the form elements, as an object.
+ */
+
+/**
+ * @typedef FormFieldSets
+ * @description
+ * An array of fieldsets — each item of which contains an object defining a
+ * single fieldset. See {@link FormFieldset}.
+ * @example
+ * var fieldsets = [
+ * 	{@link FormFieldSet}...
+ * ];
+ */
+
+/**
+ * An object defining a single fieldset.
+ * @typedef FormFieldSet
+ * @property {string} key - Unique key value.
+ * @property {string} legend - Legend label.
+ * @property {object} fields - Fields within the fieldset. The keys of which
+ * should represent the name of the field, with the values being one of
+ * {@link FormField} each.
+ * @example
+ * var fieldset = {
+ * 	'fieldname': {@link FormField}...
+ * }
+ */
+
+/**
+ * A single form field definition
+ * @typedef FormField
+ * @property {string} type
+ * @property {boolean} required
+ * @property {string} label
+ * @property {mixed} options
+ * @property {string} placeholder
+ * @property {mixed} value
+ * @example
+ * var field = {
+ * 	'type': 'dropdown',
+ * 	'label': 'Please select a value',
+ * 	'options': ['Value 1', 'Value 2', 'Value 3'],
+ * 	'value': 'Value 2'
+ * }
+ */
 import React, { Component, PropTypes } from 'react';
 
-import TextField from './views/fields/TextField.jsx';
-import DropDown from './views/fields/DropDown.jsx';
+import Fieldset from './Fieldset.jsx';
 
-const FieldComponents = {
-	'text': TextField,
-	'dropdown': DropDown
-};
-
+/**
+ * @description
+ * Takes a form specification and produces an HTML form.
+ * See {@link Form.propTypes} for more information
+ */
 class Form extends Component {
 	constructor(props) {
 		var name, formValues = {};
@@ -48,51 +94,30 @@ class Form extends Component {
 		return nodes;
 	}
 
-	fields() {
-		var name, field, Component, value, label,
-			output = [];
-		console.log(this.props.fields);
-		for (name in this.props.fields) {
-			field = this.props.fields[name];
-			field.key = 'field-' + name;
+	fieldSets() {
+		var output = [];
 
-			Component = FieldComponents[field.type];
+		console.log('this.props.fieldSets', this.props.fieldSets);
+		this.props.fieldSets.forEach((set) => {
+			const key = 'fieldset-' + set.key;
 
-			value = this.state.formValues[name];
-			label = field.label || name;
-
-			switch (field.type) {
-			case 'text':
-				output.push(
-					<Component key={field.key}
-						onChange={this.elementChange}
-						name={name}
-						value={value}
-						label={label}/>
-				);
-				break;
-
-			case 'dropdown':
-				output.push(
-					<Component key={field.key}
-						onChange={this.elementChange}
-						name={name}
-						value={value}
-						label={label}>
-						{this.valueSet(field.value, 'option')}
-					</Component>
-				);
-			}
-		}
+			output.push(
+				<Fieldset
+					key={key}
+					fields={set.fields}
+					legend={set.legend}
+					onFieldUpdate={this.elementChange}
+					/>
+			);
+		});
 
 		return output;
 	}
 
-	elementChange(event) {
-		var target = event.target;
-		console.log('Form component element change', event, event.target);
+	elementChange(name, value, fieldset_state) {
 		var state = {};
-		state[target.name] = target.value;
+		console.log('Fieldset element change', name, value, fieldset_state);
+		state[name] = value;
 
 		this.setState({
 			formValues: state
@@ -112,9 +137,7 @@ class Form extends Component {
 		return (
 			<form action="" onSubmit={this.onSubmit.bind(this)}>
 				<div className="fields">
-					<fieldset>
-						{this.fields()}
-					</fieldset>
+					{this.fieldSets()}
 				</div>
 				<fieldset className="buttons">
 					<button type="button" onClick={this.onCancel.bind(this)}>Cancel</button>
@@ -125,16 +148,21 @@ class Form extends Component {
 	}
 }
 
+/**
+ * @property {function} onCancel - invoked when the form is cancelled
+ * @property {FormOnSubmit} onSubmit - invoked when the form is submitted
+ * @property {FormFieldSets} fieldSets - fieldsets for display
+ */
 Form.propTypes = {
 	onCancel: PropTypes.func,
 	onSubmit: PropTypes.func,
-	fields: PropTypes.object
+	fieldSets: PropTypes.arrayOf(PropTypes.object)
 };
 
 Form.defaultProps = {
 	onCancel: () => {},
 	onSubmit: () => {},
-	fields: {}
+	fieldSets: {}
 };
 
 export default Form;

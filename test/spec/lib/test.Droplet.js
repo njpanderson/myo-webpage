@@ -154,27 +154,47 @@ describe('Droplet', function() {
 				.to.be.true;
 		});
 
-		it('Throws if an item’s "value" attribute isn’t either an array of strings, a string, an object, or a number', function() {
+		it('Throws if an item’s "options" attribute isn’t either an array of strings or an object', function() {
 			expect(() => Droplet._validateEditableSet({
 				innerHTML: {
 					type: 'text',
-					value: null
+					options: null
 				}
 			}, prop, droplet_name, droplet_type))
-				.to.throw(Error, 'innerHTML - "value" is of an unrecognised type');
+				.to.throw(Error, 'innerHTML - "options" is of an unrecognised type');
 		});
 
-		it('Accepts if an item’s "value" attribute is an array of strings', function() {
+		it('Accepts if an item’s "options" attribute is an array of strings', function() {
 			expect(Droplet._validateEditableSet({
 				innerHTML: {
 					type: 'checkbox',
-					value: ['one', 'two', 'three']
+					options: ['one', 'two', 'three']
 				}
 			}, prop, droplet_name, droplet_type))
 				.to.be.true;
 		});
 
-		it('Accpets if an item’s "value" attribute is a string', function() {
+		it('Accepts if an item’s "options" attribute is an object', function() {
+			expect(Droplet._validateEditableSet({
+				innerHTML: {
+					type: 'dropdown',
+					options: { 'one': 'One', 'two': 'Two', 'three': 'Three' }
+				}
+			}, prop, droplet_name, droplet_type))
+				.to.be.true;
+		});
+
+		it('Throws if an item’s "value" attribute isn’t either an array of strings, a string, or a number', function() {
+			expect(() => Droplet._validateEditableSet({
+				innerHTML: {
+					type: 'text',
+					value: { some: 'value' }
+				}
+			}, prop, droplet_name, droplet_type))
+				.to.throw(Error, 'innerHTML - "value" is of an unrecognised type');
+		});
+
+		it('Accepts if an item’s "value" attribute is a string', function() {
 			expect(Droplet._validateEditableSet({
 				innerHTML: {
 					type: 'checkbox',
@@ -184,21 +204,73 @@ describe('Droplet', function() {
 				.to.be.true;
 		});
 
-		it('Accpets if an item’s "value" attribute is an object', function() {
+		it('Accepts if an item’s "value" attribute is a number', function() {
 			expect(Droplet._validateEditableSet({
 				innerHTML: {
 					type: 'dropdown',
-					value: { 'one': 'One', 'two': 'Two', 'three': 'Three' }
+					value: 1
 				}
 			}, prop, droplet_name, droplet_type))
 				.to.be.true;
 		});
 
-		it('Accpets if an item’s "value" attribute is a number', function() {
+		it('Accepts if an item’s "value" attribute is an array', function() {
 			expect(Droplet._validateEditableSet({
 				innerHTML: {
 					type: 'dropdown',
-					value: 1
+					value: ['one', 'two', 'three']
+				}
+			}, prop, droplet_name, droplet_type))
+				.to.be.true;
+		});
+
+		it('Throws if an item’s "value" attribute doesn’t exist within the "options" array', function() {
+			expect(() => Droplet._validateEditableSet({
+				attrs: {
+					'data-test': {
+						type: 'dropdown',
+						options: ['value1', 'value2', 'value3'],
+						value: 'value7'
+					}
+				}
+			}, prop, droplet_name, droplet_type))
+				.to.throw(Error, '"value" attribute contains an option that doesn’t exist');
+		});
+
+		it('Throws if an item’s "value" attribute doesn’t exist within a "options" object', function() {
+			expect(() => Droplet._validateEditableSet({
+				attrs: {
+					'data-test': {
+						type: 'dropdown',
+						options: { 'value1': 'Value 1', 'value2': 'Value 2', 'value3': 'Value 3' },
+						value: 'value7'
+					}
+				}
+			}, prop, droplet_name, droplet_type))
+				.to.throw(Error, '"value" attribute contains an option that doesn’t exist');
+		});
+
+		it('Accepts if an item’s "value" attribute is a string and exists within a "options" array', function() {
+			expect(Droplet._validateEditableSet({
+				attrs: {
+					'data-test': {
+						type: 'dropdown',
+						options: ['value1', 'value2', 'value3'],
+						value: 'value2'
+					}
+				}
+			}, prop, droplet_name, droplet_type))
+				.to.be.true;
+		});
+
+		it('Accepts if an item’s "value" attribute is a string and exists within a "options" object', function() {
+			expect(Droplet._validateEditableSet({
+				attrs: {
+					'data-test': {
+						type: 'dropdown',
+						options: { 'value1': 'Value 1', 'value2': 'Value 2', 'value3': 'Value 3' },
+						value: 'value3'
+					}
 				}
 			}, prop, droplet_name, droplet_type))
 				.to.be.true;
@@ -212,58 +284,6 @@ describe('Droplet', function() {
 				}
 			}, prop, droplet_name, droplet_type))
 				.to.throw(Error, '"placeholder" attribute isn’t a string');
-		});
-
-		it('Throws if an item’s "selected" attribute doesn’t exist within a "value" array', function() {
-			expect(() => Droplet._validateEditableSet({
-				attrs: {
-					'data-test': {
-						type: 'dropdown',
-						value: ['value1', 'value2', 'value3'],
-						selected: true
-					}
-				}
-			}, prop, droplet_name, droplet_type))
-				.to.throw(Error, '"selected" attribute contains a value that doesn’t exist');
-		});
-
-		it('Throws if an item’s "selected" attribute doesn’t exist within a "value" object', function() {
-			expect(() => Droplet._validateEditableSet({
-				attrs: {
-					'data-test': {
-						type: 'dropdown',
-						value: { 'value1': 'Value 1', 'value2': 'Value 2', 'value3': 'Value 3' },
-						selected: true
-					}
-				}
-			}, prop, droplet_name, droplet_type))
-				.to.throw(Error, '"selected" attribute contains a value that doesn’t exist');
-		});
-
-		it('Accepts if an item’s "selected" attribute is a string and exists within a "value" array', function() {
-			expect(Droplet._validateEditableSet({
-				attrs: {
-					'data-test': {
-						type: 'dropdown',
-						value: ['value1', 'value2', 'value3'],
-						selected: 'value2'
-					}
-				}
-			}, prop, droplet_name, droplet_type))
-				.to.be.true;
-		});
-
-		it('Accepts if an item’s "selected" attribute is a string and exists within a "value" object', function() {
-			expect(Droplet._validateEditableSet({
-				attrs: {
-					'data-test': {
-						type: 'dropdown',
-						value: { 'value1': 'Value 1', 'value2': 'Value 2', 'value3': 'Value 3' },
-						selected: 'value3'
-					}
-				}
-			}, prop, droplet_name, droplet_type))
-				.to.be.true;
 		});
 
 		it('Throws if an item’s "label" attribute isn’t a string', function() {

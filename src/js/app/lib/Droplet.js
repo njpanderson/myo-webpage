@@ -172,9 +172,9 @@ Droplet._validateEditableItem = function(item, data, error_prefix) {
 		throw new Error(error_prefix + '"required" attribute isn’t a boolean true or false');
 	}
 
-	// check "value" is valid
-	if (typeof data.value !== 'undefined') {
-		Droplet._validateValueSetting(data.value, error_prefix);
+	// check "options" is valid
+	if (typeof data.options !== 'undefined') {
+		Droplet._validateOptionsSetting(data.options, error_prefix);
 	}
 
 	// check "placeholder" is valid
@@ -182,20 +182,9 @@ Droplet._validateEditableItem = function(item, data, error_prefix) {
 		throw new Error(error_prefix + '"placeholder" attribute isn’t a string');
 	}
 
-	// check "selected" is valid
-	if (typeof data.selected !== 'undefined' && typeof data.value !== 'undefined') {
-		if (
-			(Array.isArray(data.value) && data.value.indexOf(data.selected) === -1) ||
-			(
-				typeof data.value === 'object' &&
-				!Array.isArray(data.value) &&
-				!data.value[data.selected]
-			)
-		) {
-			throw new Error(
-				error_prefix + '"selected" attribute contains a value that doesn’t exist'
-			);
-		}
+	// check "value" is valid
+	if (typeof data.value !== 'undefined') {
+		Droplet._validateValueSetting(data.value, data.options, error_prefix);
 	}
 
 	// check "label" is valid
@@ -208,30 +197,53 @@ Droplet._validateEditableItem = function(item, data, error_prefix) {
 	return true;
 };
 
-Droplet._validateValueSetting = function(value, error_prefix) {
+Droplet._validateOptionsSetting = function(options, error_prefix) {
 	var key, a,
-		error = error_prefix + '"value" is of an unrecognised type';
+		error = error_prefix + '"options" is of an unrecognised type';
 
-	if (Array.isArray(value)) {
-		for (a = 0; a < value.length; a += 1) {
-			if (typeof value[a] !== 'string') {
+	if (Array.isArray(options)) {
+		for (a = 0; a < options.length; a += 1) {
+			if (typeof options[a] !== 'string') {
 				throw new Error(error);
 			}
 		}
-	} else if (typeof value === 'object' && value !== null) {
-		for (key in value) {
-			if (typeof key !== 'string' || typeof value[key] !== 'string') {
+	} else if (typeof options === 'object' && options !== null) {
+		for (key in options) {
+			if (typeof key !== 'string' || typeof options[key] !== 'string') {
 				throw new Error(error + ' - object values must be a simple key/value set');
 			}
 		}
-	} else if (
-		typeof value !== 'string' &&
-		typeof value !== 'number'
-	) {
-		throw new Error(error);
+	} else if (options === null) {
+		throw new Error(error + ' - options cannot be null');
 	}
 
 	return true;
+};
+
+Droplet._validateValueSetting = function(value, options, error_prefix) {
+	if (!Array.isArray(value) &&
+		typeof value !== 'string' &&
+		typeof value !== 'number') {
+		throw new Error(
+			error_prefix + '"value" is of an unrecognised type'
+		);
+	}
+
+	if (typeof options !== 'undefined') {
+		// validate against options
+		if (
+			(Array.isArray(options) && options.indexOf(value) === -1) ||
+			(
+				typeof options === 'object' &&
+				!Array.isArray(options) &&
+				!options[value]
+			)
+		) {
+			throw new Error(
+				error_prefix + '"value" attribute contains an option that doesn’t exist'
+			);
+		}
+	}
 };
 
 /**

@@ -21,3 +21,10 @@ export const messageCommands = {
 export const errorCodes = {
 	NOT_A_DROPLET: 'A valid Droplet instance must be passed to DropZone#willAccept.'
 };
+
+export const setLabels = {
+	value: 'Value',
+	attrs: 'Attributes',
+	tagName: 'Tag name',
+	innerHTML: 'HTML content'
+};

@@ -42,6 +42,11 @@
 					"required": true,
 					"values": ["button-blue", "button-red", "button-yellow", "button-pink", "button-green"]
 				}
+			},
+			"innerHTML": {
+				"type": "text",
+				"required": true,
+				"placeholder": "A, B, C etc..."
 			}
 		}
 	},

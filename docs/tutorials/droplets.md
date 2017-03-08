@@ -83,7 +83,7 @@ For example, to define the attribute `value` is editable within a droplet of `dr
 	]
 ```
 
-To define the attribute `class` is editable within a droplet of type "element":
+To define the `innerHTML` attribute and the Element attribute `class` is editable within a droplet of type `element`:
 
 ```
 	[
@@ -98,6 +98,9 @@ To define the attribute `class` is editable within a droplet of type "element":
 			},
 			"attachmentIds": ["button"],
 			"editable": {
+				"innerHTML": {
+					"type": "longtext"
+				},
 				"attrs": {
 					"class": {
 						"type": "dropdown",
@@ -122,10 +125,9 @@ Setting        | Optional | Description
 `type`         | No       | One of 'text', 'longtext', 'dropdown', 'checkbox', or 'radio'.
 `required`     | Yes      | Boolean defining that the attribute must contain a value.
 `label`        | Yes      | Field label (will otherwise inherit from the attribute name).
-`value`        | Yes      | Either an array of possible values, a single string value, an object
-defining key/value pairs, or a number.
+`options`      | Yes      | In the case of `dropdown` or `radio` types, either an array of possible values or an object defining key/value pairs.
 `placeholder`  | Yes      | In the case of a text value, this will show in place of empty values.
-`selected`     | Yes      | In the case of an array value, this set the value as 'selected'.
+`value`        | Yes      | In the case of array/object options, this set the value as 'selected'. If the type is `checkbox`, a boolean `true` or `false` will define its checked state.
 
 ## Drop zones
 

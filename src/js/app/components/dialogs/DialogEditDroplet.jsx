@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import CommonPropTypes from '../../assets/common-prop-types.js';
+import { setLabels } from '../../assets/constants.js';
 
 import Form from '../Form.jsx';
 
@@ -23,12 +24,26 @@ class DialogEditDroplet extends Component {
 	}
 
 	render() {
-		var droplet = this.props.class_ui.getDropletById(this.props.state.droplet_id);
-		console.log('editdroplet', droplet);
+		var droplet = this.props.class_ui.getDropletById(this.props.state.droplet_id),
+			fieldsets = [], set;
+
+		for (set in droplet.editable) {
+			fieldsets.push({
+				key: set,
+				legend: setLabels[set],
+				fields: {}
+			});
+
+			if (set === 'attrs') {
+				fieldsets[fieldsets.length - 1].fields = droplet.editable[set];
+			} else {
+				fieldsets[fieldsets.length - 1].fields[set] = droplet.editable[set];
+			}
+		};
 
 		return (
 			<Form
-				fields={droplet.editable}
+				fieldSets={fieldsets}
 				onSubmit={this.onDialogComplete}
 				onCancel={this.onDialogCancel}/>
 		);
