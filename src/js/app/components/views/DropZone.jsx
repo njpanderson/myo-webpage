@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
 import { collectRef } from '../../lib/utils';
-import Template from '../../lib/Template';
+import DropZoneAttachments from './DropZoneAttachments.jsx';
 
 class DropZone extends Component {
 	constructor(props) {
@@ -17,39 +17,9 @@ class DropZone extends Component {
 		}
 	}
 
-	renderActiveAttachments() {
-		var children = [];
-
-		this.props.activeAttachments.forEach((attachment, index) => {
-			children.push(this.renderAttachmentIntoDropzone(
-				this.props.class_ui.getDropletById(attachment.droplet_id),
-				attachment.droplet_id + '-attachment-' + index,
-				attachment.data
-			));
-		});
-
-		return children;
-	}
-
-	renderAttachmentIntoDropzone(droplet, key, edited_data) {
-		console.group('renderDropletInDropzone');
-
-		// merge edited data with droplet data
-		var data = Object.deepAssign({}, droplet.data, edited_data);
-
-		console.log('droplet', droplet);
-		console.log('edited_data', edited_data);
-		console.log('data', data);
-
-		console.groupEnd();
-		return (
-			<span
-				key={key}
-				className="dropzone-attachment">
-				{Template.renderDroplet(droplet, data)}
-			</span>
-		);
-	}
+	// shouldComponentUpdate() {
+	// 	return false;
+	// }
 
 	render() {
 		var key = this.props.id + '-zone',
@@ -61,9 +31,9 @@ class DropZone extends Component {
 				className={this.props.className}
 				data-id={this.props.id}
 				data-attachment={this.props.attachment}
-				ref={collectRef(this.props, ['dropzone'], this.props.id)}
-				>
-				{this.renderActiveAttachments()}
+				ref={collectRef(this.props, ['dropzone'], this.props.id)}>
+				<DropZoneAttachments
+					activeAttachments={this.props.activeAttachments}/>
 				<span key={target_key}
 					className="target">{this.props.zoneLabel}</span>
 			</span>

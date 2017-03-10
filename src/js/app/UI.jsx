@@ -201,6 +201,7 @@ UI.prototype = {
 				drop_zones = ref.querySelectorAll(this.settings.selectors.drop_zone);
 
 				drop_zones.forEach((zone) => {
+					console.log(zone);
 					this._data.UI.dragdrop.droplets.addDropable(zone, {
 						accept: this.settings.selectors.droplet
 					});
