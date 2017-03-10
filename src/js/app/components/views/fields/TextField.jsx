@@ -1,25 +1,23 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+
+import { field } from '../../../assets/common-prop-types';
 
 function TextField(props) {
+	var label = props.field.label || props.field.name;
+
 	return (
 		<div className="field">
-			<label>{props.label}</label>
+			<label>{label}</label>
 			<input
 				type="text"
-				name={props.name}
+				name={props.field.name}
+				placeholder={props.field.placeholder}
 				onChange={props.onChange}
 				value={props.value}/>
 		</div>
 	);
 }
 
-TextField.propTypes = {
-	label: PropTypes.string.isRequired,
-	name: PropTypes.string.isRequired,
-	value: PropTypes.string,
-	onChange: PropTypes.func
-};
-
-TextField.defaultProps = {};
+TextField.propTypes = field;
 
 export default TextField;

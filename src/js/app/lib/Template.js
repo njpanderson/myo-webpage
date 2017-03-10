@@ -39,7 +39,7 @@ Template.prototype = {
 	},
 
 	_createDropZones: function(markup) {
-		var zone, counter = 0;
+		var zone, counter = 0, state;
 
 		// loop through markup finding drop zones
 		while ((zone = DropZone.fetchZone(markup)) !== null) {
@@ -57,7 +57,9 @@ Template.prototype = {
 				'<span class="drop-zone"' +
 					' data-id="' + this._drop_zones[zone].id + '"' +
 					' data-attachment="' + this._drop_zones[zone].attachmentId + '">' +
-					this.settings.dropZone.label +
+					'<span class="target">' +
+						this.settings.dropZone.label +
+					'</span>' +
 				'</span>'
 			);
 		}

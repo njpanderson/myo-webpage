@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { collectRef } from '../../lib/utils';
-import CommonPropTypes from '../../assets/common-prop-types.js';
+import { components } from '../../assets/common-prop-types.js';
 
 class Droplet extends Component {
 	constructor(props) {
@@ -33,7 +33,7 @@ class Droplet extends Component {
 	}
 }
 
-Droplet.propTypes = Object.assign({}, CommonPropTypes, {
+Droplet.propTypes = Object.assign({}, components, {
 	name: PropTypes.string,
 	id: PropTypes.string,
 	title: PropTypes.string,

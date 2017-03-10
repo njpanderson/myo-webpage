@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
+import FormField from '../lib/FormField';
 import TextField from './views/fields/TextField.jsx';
 import DropDown from './views/fields/DropDown.jsx';
 
@@ -10,14 +11,14 @@ const FieldComponents = {
 
 class Fieldset extends Component {
 	constructor(props) {
-		var name, formValues = {};
+		var formValues = {};
 
 		super(props);
 
 		// set default state for fields based on original values
-		for (name in this.props.fields) {
-			formValues[name] = this.props.fields[name].value;
-		}
+		this.props.fields.forEach((field) =>
+			(formValues[field.name] = field.value || '')
+		);
 
 		// set default form value state
 		this.state = {
@@ -28,78 +29,49 @@ class Fieldset extends Component {
 		this.elementChange = this.elementChange.bind(this);
 	}
 
-	valueSet(values, node) {
-		var nodes = [], key;
-
-		if (Array.isArray(values)) {
-			values.forEach(function(value) {
-				nodes.push(
-					<node value={value}>{value}</node>
-				);
-			});
-		} else if (typeof values === 'object') {
-			for (key in values) {
-				nodes.push(
-					<node value={key}>{values[key]}</node>
-				);
-			}
-		}
-
-		return nodes;
-	}
-
 	fields() {
-		var name, field, Component, value, label,
+		var Component,
 			output = [];
-		console.log('Fieldset fields', this.props.fields);
-		for (name in this.props.fields) {
-			field = this.props.fields[name];
-			field.key = 'field-' + name;
+
+		this.props.fields.forEach((field) => {
+			var key = 'field-' + field.name;
 
 			Component = FieldComponents[field.type];
-
-			value = this.state.formValues[name];
-			label = field.label || name;
 
 			switch (field.type) {
 			case 'text':
 				output.push(
-					<Component key={field.key}
+					<Component key={key}
+						field={field}
 						onChange={this.elementChange}
-						name={name}
-						value={value}
-						label={label}/>
+						value={this.state.formValues[field.name]}/>
 				);
 				break;
 
 			case 'dropdown':
 				output.push(
-					<Component key={field.key}
+					<Component key={key}
+						field={field}
 						onChange={this.elementChange}
-						name={name}
-						value={value}
-						label={label}>
-						{this.valueSet(field.value, 'option')}
-					</Component>
+						value={this.state.formValues[field.name]}/>
 				);
 			}
-		}
+		});
 
 		return output;
 	}
 
 	elementChange(event) {
 		var target = event.target,
-			state = {};
+			formValues = Object.deepAssign({}, this.state.formValues);
 
-		console.log('Fieldset component change', event, event.target);
-		state[target.name] = target.value;
+		formValues[target.name] = target.value;
 
 		this.setState({
-			formValues: state
+			formValues: formValues
 		});
 
-		this.props.onFieldUpdate(target.name, target.value, this.state);
+		this.props.onFieldUpdate(this.props.set, target.name, target.value, formValues);
 	}
 
 	render() {
@@ -113,8 +85,10 @@ class Fieldset extends Component {
 }
 
 Fieldset.propTypes = {
-	onFieldUpdate: PropTypes.func,
-	fields: PropTypes.object // !TODO - ensure all fields have a value with a custom propTypes func
+	set: PropTypes.string.isRequired,
+	onFieldUpdate: PropTypes.func.isRequired,
+	legend: PropTypes.string,
+	fields: PropTypes.arrayOf(React.PropTypes.instanceOf(FormField))
 };
 
 Fieldset.defaultProps = {

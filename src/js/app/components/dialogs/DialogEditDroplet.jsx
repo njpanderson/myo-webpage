@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import CommonPropTypes from '../../assets/common-prop-types.js';
-import { setLabels } from '../../assets/constants.js';
+
+import FormField from '../../lib/FormField';
+import { components } from '../../assets/common-prop-types';
+import { setLabels } from '../../assets/constants';
 
 import Form from '../Form.jsx';
 
@@ -13,11 +15,12 @@ class DialogEditDroplet extends Component {
 	}
 
 	onDialogComplete(values) {
-		console.log('dialog complete', values);
+		if (typeof this.props.onDialogComplete === 'function') {
+			this.props.onDialogComplete(values);
+		}
 	}
 
 	onDialogCancel() {
-		console.log('dialog cancelled');
 		if (typeof this.props.onDialogCancel === 'function') {
 			this.props.onDialogCancel();
 		}
@@ -25,19 +28,29 @@ class DialogEditDroplet extends Component {
 
 	render() {
 		var droplet = this.props.class_ui.getDropletById(this.props.state.droplet_id),
-			fieldsets = [], set;
+			fieldsets = [], set, attr;
 
 		for (set in droplet.editable) {
 			fieldsets.push({
 				key: set,
 				legend: setLabels[set],
-				fields: {}
+				fields: []
 			});
 
 			if (set === 'attrs') {
-				fieldsets[fieldsets.length - 1].fields = droplet.editable[set];
+				for (attr in droplet.editable[set]) {
+					fieldsets[fieldsets.length - 1].fields.push(new FormField(
+						attr,
+						droplet.editable[set][attr].type,
+						droplet.editable[set][attr]
+					));
+				}
 			} else {
-				fieldsets[fieldsets.length - 1].fields[set] = droplet.editable[set];
+				fieldsets[fieldsets.length - 1].fields.push(new FormField(
+					set,
+					droplet.editable[set].type,
+					droplet.editable[set]
+				));
 			}
 		}
 
@@ -50,13 +63,14 @@ class DialogEditDroplet extends Component {
 	}
 }
 
-DialogEditDroplet.propTypes = Object.assign({}, CommonPropTypes, {
-	// state: PropTypes.object
-	onDialogCancel: PropTypes.func
+DialogEditDroplet.propTypes = Object.assign({}, components, {
+	onDialogCancel: PropTypes.func,
+	onDialogComplete: PropTypes.func
 });
 
 DialogEditDroplet.defaultProps = {
-	onDialogCancel: null
+	onDialogCancel: null,
+	onDialogComplete: null,
 };
 
 export default DialogEditDroplet;

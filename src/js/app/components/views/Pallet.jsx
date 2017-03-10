@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Droplet from './Droplet.jsx';
-import CommonPropTypes from '../../assets/common-prop-types.js';
+import { components } from '../../assets/common-prop-types.js';
 
 class Pallet extends Component {
 	constructor(props) {
@@ -37,7 +37,7 @@ class Pallet extends Component {
 	}
 }
 
-Pallet.propTypes = CommonPropTypes;
+Pallet.propTypes = components;
 
 Pallet.defaultProps = {
 	data: {

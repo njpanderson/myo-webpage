@@ -11,6 +11,7 @@
  */
 
 import PropTypes from './PropTypes';
+import FormField from './FormField';
 
 var Droplet, droplet_id = 0;
 
@@ -110,7 +111,7 @@ Droplet.prototype = {
  */
 Droplet._validateEditableSet = function(value, prop, droplet_name, droplet_type) {
 	var attribute, key, attrkey,
-		prop_error = 'Error in Droplet prop ' + droplet_name + ' (' + prop + '): ';
+		prop_error = 'Error in Droplet prop ' + droplet_name + ' (' + prop + '):';
 
 	// allow undefined values
 	if (typeof value === 'undefined') {
@@ -132,7 +133,7 @@ Droplet._validateEditableSet = function(value, prop, droplet_name, droplet_type)
 				typeof attribute !== 'object'
 			) {
 				throw new Error(
-					prop_error + '"' + key + '" is not an editable attribute or is of the wrong type'
+					prop_error + ' "' + key + '" is not an editable attribute or is of the wrong type'
 				);
 			}
 
@@ -151,99 +152,26 @@ Droplet._validateEditableSet = function(value, prop, droplet_name, droplet_type)
 };
 
 Droplet._validateEditableItem = function(item, data, error_prefix) {
-	error_prefix = error_prefix + item + ' - ';
+	var error = error_prefix + item + ' - ';
 
 	if (typeof data !== 'object') {
-		throw new Error(error_prefix + 'not an EditableItemDefinition object');
+		throw new Error(error + 'not an EditableItemDefinition object');
 	}
 
 	// check "type" exists
 	if (typeof data.type === 'undefined') {
-		throw new Error(error_prefix + 'doesn’t contain ‘type’ value');
+		throw new Error(error + 'doesn’t contain ‘type’ value');
 	}
 
 	// check "type" is valid
 	if (Droplet.editableFieldTypes.indexOf(data.type) === -1) {
-		throw new Error(error_prefix + 'invalid type attribute "' + data.type + '"');
+		throw new Error(error + 'invalid type attribute "' + data.type + '"');
 	}
 
-	// check "required" is a boolean, if defined
-	if (typeof data.required !== 'undefined' && typeof data.required !== 'boolean') {
-		throw new Error(error_prefix + '"required" attribute isn’t a boolean true or false');
-	}
-
-	// check "options" is valid
-	if (typeof data.options !== 'undefined') {
-		Droplet._validateOptionsSetting(data.options, error_prefix);
-	}
-
-	// check "placeholder" is valid
-	if (typeof data.placeholder !== 'undefined' && typeof data.placeholder !== 'string') {
-		throw new Error(error_prefix + '"placeholder" attribute isn’t a string');
-	}
-
-	// check "value" is valid
-	if (typeof data.value !== 'undefined') {
-		Droplet._validateValueSetting(data.value, data.options, error_prefix);
-	}
-
-	// check "label" is valid
-	if (typeof data.label !== 'undefined' && typeof data.label !== 'string') {
-		throw new Error(
-			error_prefix + '"label" attribute isn’t a string'
-		);
-	}
+	// run checks on the editable attributes that match FormField data attributes
+	FormField.validateDataAttribute(data, item, error_prefix);
 
 	return true;
-};
-
-Droplet._validateOptionsSetting = function(options, error_prefix) {
-	var key, a,
-		error = error_prefix + '"options" is of an unrecognised type';
-
-	if (Array.isArray(options)) {
-		for (a = 0; a < options.length; a += 1) {
-			if (typeof options[a] !== 'string') {
-				throw new Error(error);
-			}
-		}
-	} else if (typeof options === 'object' && options !== null) {
-		for (key in options) {
-			if (typeof key !== 'string' || typeof options[key] !== 'string') {
-				throw new Error(error + ' - object values must be a simple key/value set');
-			}
-		}
-	} else if (options === null) {
-		throw new Error(error + ' - options cannot be null');
-	}
-
-	return true;
-};
-
-Droplet._validateValueSetting = function(value, options, error_prefix) {
-	if (!Array.isArray(value) &&
-		typeof value !== 'string' &&
-		typeof value !== 'number') {
-		throw new Error(
-			error_prefix + '"value" is of an unrecognised type'
-		);
-	}
-
-	if (typeof options !== 'undefined') {
-		// validate against options
-		if (
-			(Array.isArray(options) && options.indexOf(value) === -1) ||
-			(
-				typeof options === 'object' &&
-				!Array.isArray(options) &&
-				!options[value]
-			)
-		) {
-			throw new Error(
-				error_prefix + '"value" attribute contains an option that doesn’t exist'
-			);
-		}
-	}
 };
 
 /**

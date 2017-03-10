@@ -19,5 +19,9 @@
 		& > *:not(:empty) {
 			padding: 20px;
 		}
+
+		fieldset:not(.buttons) {
+			border: 1px solid red;
+		}
 	}
 }

@@ -16,9 +16,9 @@ const mapDispatchToProps = (dispatch) => {
 			dispatch(actions.palletSetAttached(id, true));
 		},
 
-		onDialogClose: () => {
+		onDialogCancel: () => {
 			dispatch(actions.setDialogMode(dialogModes.NONE));
-		}
+		},
 	};
 };
 

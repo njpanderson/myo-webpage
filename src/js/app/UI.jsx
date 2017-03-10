@@ -78,20 +78,19 @@ UI.prototype = {
 	},
 
 	_completeDialogAction: function(dialog_data) {
-		var state = this._store.getState(),
-			dialogMode = state.dialogMode;
-		console.log('_completeDropletEdit', state.dialogMode);
-		// reset dialog to nothing change, ui to building
+		var state = this._store.getState();
+
+		// reset dialog state to nothing
 		this._store.dispatch(actions.setDialogMode(dialogModes.NONE));
 
-		switch (dialogMode.mode) {
+		switch (state.dialog.mode) {
 		case dialogModes.EDIT_DROPLET:
 			// droplet being edited prior to or during attatchment
-			if (!dialogMode.state.attachment_index) {
+			if (!state.dialog.attachment_index) {
 				// no attachment index - this is a new drop
 				this._store.dispatch(actions.zoneAddAttachment(
-					dialogMode.state.zone_id,
-					dialogMode.state.droplet_id,
+					state.dialog.state.zone_id,
+					state.dialog.state.droplet_id,
 					true,
 					dialog_data
 				));
@@ -217,7 +216,7 @@ UI.prototype = {
 		if (this._isValidDrop(droplet, drop_zone)) {
 			this._showDialog(dialogModes.EDIT_DROPLET, {
 				droplet_id: droplet.id,
-				zone_id: zone.id,
+				zone_id: drop_zone.id,
 				attachment_index: null
 			});
 		} else {

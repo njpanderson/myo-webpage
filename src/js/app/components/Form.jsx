@@ -23,27 +23,9 @@
  * should represent the name of the field, with the values being one of
  * {@link FormField} each.
  * @example
- * var fieldset = {
- * 	'fieldname': {@link FormField}...
- * }
- */
-
-/**
- * A single form field definition
- * @typedef FormField
- * @property {string} type
- * @property {boolean} required
- * @property {string} label
- * @property {mixed} options
- * @property {string} placeholder
- * @property {mixed} value
- * @example
- * var field = {
- * 	'type': 'dropdown',
- * 	'label': 'Please select a value',
- * 	'options': ['Value 1', 'Value 2', 'Value 3'],
- * 	'value': 'Value 2'
- * }
+ * var fieldset = [
+ * 	{@link FormField}...
+ * ]
  */
 import React, { Component, PropTypes } from 'react';
 
@@ -56,14 +38,18 @@ import Fieldset from './Fieldset.jsx';
  */
 class Form extends Component {
 	constructor(props) {
-		var name, formValues = {};
+		var formValues = {};
 
 		super(props);
 
 		// set default state for fields based on original values
-		for (name in this.props.fields) {
-			formValues[name] = this.props.fields[name].value;
-		}
+		this.props.fieldSets.forEach((set) => {
+			formValues[set.key] = {};
+
+			set.fields.forEach((field) =>
+				(formValues[set.key][field.name] = field.value)
+			);
+		});
 
 		// set default form value state
 		this.state = {
@@ -97,13 +83,13 @@ class Form extends Component {
 	fieldSets() {
 		var output = [];
 
-		console.log('this.props.fieldSets', this.props.fieldSets);
 		this.props.fieldSets.forEach((set) => {
 			const key = 'fieldset-' + set.key;
 
 			output.push(
 				<Fieldset
 					key={key}
+					set={set.key}
 					fields={set.fields}
 					legend={set.legend}
 					onFieldUpdate={this.elementChange}
@@ -114,13 +100,13 @@ class Form extends Component {
 		return output;
 	}
 
-	elementChange(name, value, fieldset_state) {
-		var state = {};
-		console.log('Fieldset element change', name, value, fieldset_state);
-		state[name] = value;
+	elementChange(set, name, value, values_state) {
+		var sets = Object.assign({}, this.state.formValues);
+
+		sets[set] = values_state;
 
 		this.setState({
-			formValues: state
+			formValues: sets
 		});
 	}
 
@@ -156,7 +142,11 @@ class Form extends Component {
 Form.propTypes = {
 	onCancel: PropTypes.func,
 	onSubmit: PropTypes.func,
-	fieldSets: PropTypes.arrayOf(PropTypes.object)
+	fieldSets: PropTypes.arrayOf(PropTypes.shape({
+		key: PropTypes.string,
+		legend: PropTypes.string,
+		fields: PropTypes.array
+	}))
 };
 
 Form.defaultProps = {

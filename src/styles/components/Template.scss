@@ -2,21 +2,23 @@
 	overflow: auto;
 
 	.drop-zone {
-		border-radius: 3px;
-		padding: 1px 5px;
-		background-color: blue;
-		color: white;
+		.target {
+			border-radius: 3px;
+			padding: 1px 5px;
+			background-color: blue;
+			color: white;
+		}
 
-		&.active {
+		&.is-active .target {
 			background-color: lightblue;
 		}
 
-		&.target {
+		&.is-target .target {
 			background-color: red;
 		}
 	}
 
-	.drop-zone:hover {
+	.drop-zone:hover .target {
 		background-color: skyblue;
 		cursor: pointer;
 	}

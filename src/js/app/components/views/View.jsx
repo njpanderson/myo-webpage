@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { collectRef } from '../../lib/utils';
-import CommonPropTypes from '../../assets/common-prop-types.js';
+import { components } from '../../assets/common-prop-types.js';
 
 class View extends Component {
 	constructor(props) {
@@ -23,7 +23,7 @@ class View extends Component {
 	}
 }
 
-View.propTypes = Object.assign(CommonPropTypes, {
+View.propTypes = Object.assign(components, {
 	view: PropTypes.object
 });
 

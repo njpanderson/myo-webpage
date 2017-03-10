@@ -8,7 +8,7 @@ module.exports = {
 		};
 	},
 
-	setDialogMode: function(mode, state) {
+	setDialogMode: function(mode, state = {}) {
 		return {
 			type: actionTypes.SET_DIALOG_MODE,
 			mode,

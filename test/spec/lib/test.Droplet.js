@@ -133,6 +133,12 @@ describe('Droplet', function() {
 			}, prop, droplet_name, droplet_type))
 				.to.be.true;
 		});
+	});
+
+	describe('#_validateEditableSet - FormField attributes', function() {
+		var prop = 'editable',
+			droplet_name = 'Test Droplet',
+			droplet_type = 'test';
 
 		it('Throws if an item’s "required" attribute isn’t a boolean', function() {
 			expect(() => Droplet._validateEditableSet({

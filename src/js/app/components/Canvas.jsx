@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { collectRef } from '../lib/utils';
-import CommonPropTypes from '../assets/common-prop-types.js';
+import { components } from '../assets/common-prop-types.js';
 
 import View from './views/View.jsx';
 import Pallet from './views/Pallet.jsx';
@@ -50,7 +50,7 @@ class Canvas extends Component {
 	}
 }
 
-Canvas.propTypes = Object.assign(CommonPropTypes, {
+Canvas.propTypes = Object.assign(components, {
 	settings: PropTypes.object.isRequired,
 	view: PropTypes.object
 });

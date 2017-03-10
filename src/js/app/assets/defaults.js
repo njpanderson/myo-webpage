@@ -5,9 +5,10 @@ export default {
 		droplet: 'droplet',
 		is_dragging: 'dragging',
 		droplet_dragging: 'droplet-dragging',
-		dropzone_active: 'active',
-		dropzone_target: 'target',
+		dropzone_active: 'is-active',
+		dropzone_target: 'is-target',
 		attached: 'attached',
+		text_element: 'text',
 		dialog: {
 			main: 'dialog',
 			visible: 'visible'

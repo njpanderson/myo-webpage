@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-import CommonPropTypes from '../../assets/common-prop-types.js';
+import { components } from '../../assets/common-prop-types.js';
 import { dialogModes } from '../../assets/constants.js';
 
 import DialogEditDroplet from '../dialogs/DialogEditDroplet.jsx';
@@ -26,7 +26,7 @@ function Dialog(props) {
 					class_template={props.class_template}
 					state={props.state.dialog.state}
 					onDialogComplete={props.onDialogComplete}
-					onDialogCancel={props.onDialogClose}/>
+					onDialogCancel={props.onDialogCancel}/>
 			</div>
 		);
 	} else {
@@ -36,7 +36,7 @@ function Dialog(props) {
 	}
 }
 
-Dialog.propTypes = Object.assign(CommonPropTypes, {
+Dialog.propTypes = Object.assign(components, {
 	onDialogComplete: PropTypes.func,
 	onDialogCancel: PropTypes.func
 });

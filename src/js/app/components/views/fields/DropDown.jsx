@@ -1,28 +1,25 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+
+import { field } from '../../../assets/common-prop-types';
+import { optionValueSet } from '../../component-utils.jsx';
 
 function DropDown(props) {
+	var label = props.field.label || props.field.name;
+
 	return (
 		<div className="field">
-			<label>{props.label}</label>
+			<label>{label}</label>
 			<select
 				type="text"
-				name={props.name}
+				name={props.field.name}
 				onChange={props.onChange}
 				value={props.value}>
-				{props.children}
+				{optionValueSet(props.field.options)}
 			</select>
 		</div>
 	);
 }
 
-DropDown.propTypes = {
-	label: PropTypes.string.isRequired,
-	name: PropTypes.string.isRequired,
-	value: PropTypes.string,
-	onChange: PropTypes.func,
-	children: React.PropTypes.node
-};
-
-DropDown.defaultProps = {};
+DropDown.propTypes = field;
 
 export default DropDown;

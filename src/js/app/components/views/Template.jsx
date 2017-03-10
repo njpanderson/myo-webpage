@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { collectRef } from '../../lib/utils';
-import CommonPropTypes from '../../assets/common-prop-types.js';
+import { components } from '../../assets/common-prop-types.js';
 
 class Template extends Component {
 	constructor(props) {
@@ -31,7 +31,7 @@ class Template extends Component {
 	}
 }
 
-Template.propTypes = Object.assign({}, CommonPropTypes, {
+Template.propTypes = Object.assign({}, components, {
 	template: PropTypes.string
 });
 
