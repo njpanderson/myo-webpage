@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
+
 import { collectRef } from '../../lib/utils';
-import { components } from '../../assets/common-prop-types.js';
+import { components } from '../../assets/common-prop-types';
+import DropZone from './DropZone.jsx';
 
 class Template extends Component {
 	constructor(props) {
@@ -17,58 +19,65 @@ class Template extends Component {
 		return { __html: html };
 	}
 
-	createSandbox(html) {
-		var sandbox = document.createElement('div'),
-			children = [];
-		sandbox.innerHTML = html;
+	/**
+	 * Uses state (from props.zones) to ascertain the attachments
+	 */
+	getZoneAttachments(dropzone_id) {
+		var zone,
+			attachments = [];
 
-		console.group('createSandbox');
-		console.log(sandbox);
+		if (this.props.zones && (zone = this.props.zones[dropzone_id])) {
+			attachments = zone.attachments;
+		}
 
-		sandbox.childNodes.forEach((node, index) => {
-			var component, key;
+		return attachments;
+	}
 
-			switch (node.nodeType) {
-			case Node.TEXT_NODE:
-				console.log('text', node.textContent);
+	getTemplate() {
+		var children = [];
+
+		this.props.template.forEach((node, index) => {
+			var key;
+
+			switch (node.type) {
+			case 'text':
 				key = 'fragment-' + index;
 
 				children.push(
 					<span
 						key={key}
-						className={this.props.settings.classes.component}>{node.textContent}</span>
+						className={this.props.settings.classes.component}>{node.content}</span>
 				);
 				break;
 
-			case Node.ELEMENT_NODE:
-				console.log('element', node);
+			case 'dropzone':
 				children.push(
-					<span
-						key={node.dataset.id}
-						className={node.className}
-						data-id={node.dataset.id}
-						data-attachments={node.dataset.attachment}>
-						<span className="target">...</span>
-					</span>
+					<DropZone
+						key={node.id}
+						id={node.id}
+						className={this.props.settings.classes.dropzone}
+						zoneLabel={this.props.settings.dropZone.label}
+						activeAttachments={this.getZoneAttachments(node.id)}
+						class_ui={this.props.class_ui}
+						attachment={node.attachment}
+						refCollector={this.props.refCollector}
+						onMount={this.props.onMount}/>
 				);
 				break;
 			}
 		});
 
-		console.groupEnd();
 		return children;
 	}
 
 	render() {
-		var children = this.createSandbox(this.props.template);
-
 		return (
 			<section className="template"
 				ref={collectRef(this.props, 'template')}>
 				<pre>
 					<code className="html"
 						ref={collectRef(this.props, 'template_inner')}>
-						{children}
+						{this.getTemplate()}
 					</code>
 				</pre>
 			</section>
@@ -77,7 +86,7 @@ class Template extends Component {
 }
 
 Template.propTypes = Object.assign({}, components, {
-	template: PropTypes.string
+	template: PropTypes.array
 });
 
 Template.defaultProps = {

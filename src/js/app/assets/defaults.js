@@ -5,6 +5,7 @@ export default {
 		droplet: 'droplet',
 		is_dragging: 'dragging',
 		droplet_dragging: 'droplet-dragging',
+		dropzone: 'drop-zone',
 		dropzone_active: 'is-active',
 		dropzone_target: 'is-target',
 		attached: 'attached',
@@ -20,5 +21,8 @@ export default {
 	},
 	view: {
 		src: 'view.html'
+	},
+	dropZone: {
+		label: '...'
 	}
 };

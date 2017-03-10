@@ -1,13 +1,9 @@
 import request from './ajax';
 import DropZone from './DropZone';
+import Droplet from './Droplet';
 
 var Template = function(settings = {}) {
-	this.settings = Object.deepAssign(settings, {
-		dropZone: {
-			label: '...'
-		}
-	});
-
+	this.settings = settings;
 	this._drop_zones = {};
 	this._max_zones = 100;
 };
@@ -54,22 +50,76 @@ Template.prototype = {
 		for (zone in this._drop_zones) {
 			markup = markup.replace(
 				this._drop_zones[zone].tag,
-				'<span class="drop-zone"' +
+				'<span' +
 					' data-id="' + this._drop_zones[zone].id + '"' +
 					' data-attachment="' + this._drop_zones[zone].attachmentId + '">' +
-					'<span class="target">' +
-						this.settings.dropZone.label +
-					'</span>' +
 				'</span>'
 			);
 		}
 
-		return markup;
+		return this.createDropZoneData(markup);
+	},
+
+	createDropZoneData: function(markup) {
+		var sandbox = document.createElement('div'),
+			data = [];
+		sandbox.innerHTML = markup;
+
+		sandbox.childNodes.forEach((node) => {
+			switch (node.nodeType) {
+			case Node.TEXT_NODE:
+				data.push({
+					type: 'text',
+					content: node.textContent
+				});
+				break;
+
+			case Node.ELEMENT_NODE:
+				data.push({
+					type: 'dropzone',
+					id: node.dataset.id,
+					attachment: node.dataset.attachment
+				});
+				break;
+			}
+		});
+
+		return data;
 	},
 
 	getDropZoneById: function(id) {
 		return this._drop_zones[id] || null;
 	}
+};
+
+Template.renderDroplet = function(droplet, data) {
+	var output;
+	if (!(droplet instanceof Droplet)) {
+		throw new Error('droplet argument must be a Droplet instance');
+	}
+
+	switch (droplet.dropletType) {
+	case 'element':
+		output = Template.renderElementDroplet(data);
+		break;
+	}
+
+	return output;
+};
+
+Template.renderElementDroplet = function(data) {
+	var markup;
+	console.log('renderElementDroplet', data);
+	markup = '<' + data.tagName;
+
+	if (data.innerHTML) {
+		markup += '>' + data.innerHTML +
+			'</' + data.tagName + '>';
+	} else {
+		markup += '/>';
+	}
+
+	return markup;
 };
 
 export default Template;

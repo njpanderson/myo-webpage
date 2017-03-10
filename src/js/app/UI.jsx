@@ -5,7 +5,7 @@ import CanvasContainer from './components/containers/CanvasContainer';
 
 import actions from './state/actions';
 
-import { dialogModes, uiStates, messageCommands } from './assets/constants.js';
+import { dialogModes, uiStates, messageCommands } from './assets/constants';
 
 import React from 'react';
 import { render } from 'react-dom';
@@ -124,7 +124,7 @@ UI.prototype = {
 	 * @private
 	 */
 	_mountEvent: function(collection, key) {
-		// console.log('_mountEvent', collection, key);
+		console.log('_mountEvent', collection, key);
 		if (this._getReferencedElement(collection, key)) {
 			// valid component mounted
 			// console.log('mounted', this._refs.components[collection][key]);

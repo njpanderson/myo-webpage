@@ -15,8 +15,23 @@ class DialogEditDroplet extends Component {
 	}
 
 	onDialogComplete(values) {
+		var key,
+			data = {};
+
 		if (typeof this.props.onDialogComplete === 'function') {
-			this.props.onDialogComplete(values);
+			// massage data back into format replicating Droplet.data format
+			for (key in values) {
+				if (values.hasOwnProperty(key)) {
+					if (key === 'attrs') {
+						data[key] = values[key];
+					} else {
+						data[key] = values[key][key];
+					}
+				}
+			}
+
+			// send data to callback
+			this.props.onDialogComplete(data);
 		}
 	}
 

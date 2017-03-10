@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
+
 import { collectRef } from '../../lib/utils';
-import { components } from '../../assets/common-prop-types.js';
+import { components } from '../../assets/common-prop-types';
 
 class Droplet extends Component {
 	constructor(props) {
@@ -37,7 +38,8 @@ Droplet.propTypes = Object.assign({}, components, {
 	name: PropTypes.string,
 	id: PropTypes.string,
 	title: PropTypes.string,
-	attached: PropTypes.bool
+	attached: PropTypes.bool,
+	onMount: PropTypes.func
 });
 
 export default Droplet;

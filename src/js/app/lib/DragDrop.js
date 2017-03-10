@@ -1,5 +1,7 @@
 import interact from 'interact.js';
 
+window.interact = interact;
+
 /**
  * Handles draggable/droppable items.
  * @class

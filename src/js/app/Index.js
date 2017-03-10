@@ -39,7 +39,7 @@ App.prototype = {
 		};
 
 		// templates module
-		this._template = new Template();
+		this._template = new Template(this.settings);
 	},
 
 	/**

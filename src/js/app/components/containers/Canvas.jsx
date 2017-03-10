@@ -52,7 +52,8 @@ class Canvas extends Component {
 
 Canvas.propTypes = Object.assign(components, {
 	settings: PropTypes.object.isRequired,
-	view: PropTypes.object
+	view: PropTypes.object,
+	class_ui: PropTypes.object
 });
 
 export default Canvas;
