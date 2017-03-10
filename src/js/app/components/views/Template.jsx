@@ -19,26 +19,38 @@ class Template extends Component {
 
 	createSandbox(html) {
 		var sandbox = document.createElement('div'),
-			children = [], text_element;
+			children = [];
 		sandbox.innerHTML = html;
 
 		console.group('createSandbox');
 		console.log(sandbox);
 
-		sandbox.childNodes.forEach((node) => {
+		sandbox.childNodes.forEach((node, index) => {
+			var component, key;
+
 			switch (node.nodeType) {
 			case Node.TEXT_NODE:
 				console.log('text', node.textContent);
-				text_element = document.createElement('span');
-				text_element.class = this.props.settings.classes.text_element;
-				text_element.textContent = node.textContent;
+				key = 'fragment-' + index;
 
-				children.push(text_element);
+				children.push(
+					<span
+						key={key}
+						className={this.props.settings.classes.component}>{node.textContent}</span>
+				);
 				break;
 
 			case Node.ELEMENT_NODE:
 				console.log('element', node);
-				children.push(node);
+				children.push(
+					<span
+						key={node.dataset.id}
+						className={node.className}
+						data-id={node.dataset.id}
+						data-attachments={node.dataset.attachment}>
+						<span className="target">...</span>
+					</span>
+				);
 				break;
 			}
 		});
