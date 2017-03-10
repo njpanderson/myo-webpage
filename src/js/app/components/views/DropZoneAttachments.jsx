@@ -53,7 +53,7 @@ class DropZoneAttachments extends Component {
 
 DropZoneAttachments.propTypes = {
 	activeAttachments: PropTypes.array,
-	class_ui: PropTypes.object,
+	class_ui: PropTypes.object.isRequired,
 };
 
 export default DropZoneAttachments;

@@ -2,6 +2,8 @@
 	overflow: auto;
 
 	.drop-zone {
+		display: inline-block;
+
 		.target {
 			border-radius: 3px;
 			padding: 1px 5px;

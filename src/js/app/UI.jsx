@@ -124,7 +124,7 @@ UI.prototype = {
 	 * @private
 	 */
 	_mountEvent: function(collection, key) {
-		console.log('_mountEvent', collection, key);
+		// console.log('_mountEvent', collection, key);
 		if (this._getReferencedElement(collection, key)) {
 			// valid component mounted
 			// console.log('mounted', this._refs.components[collection][key]);
@@ -201,9 +201,9 @@ UI.prototype = {
 				drop_zones = ref.querySelectorAll(this.settings.selectors.drop_zone);
 
 				drop_zones.forEach((zone) => {
-					console.log(zone);
 					this._data.UI.dragdrop.droplets.addDropable(zone, {
-						accept: this.settings.selectors.droplet
+						accept: this.settings.selectors.droplet,
+						overlap: 'pointer'
 					});
 				});
 			}

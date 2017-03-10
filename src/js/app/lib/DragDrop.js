@@ -152,6 +152,7 @@ Dropable.prototype = {
 	 * Set up a draggable item.
 	 */
 	setDropable: function(settings) {
+		console.log(settings);
 		return interact(this._element)
 			.dropzone(settings);
 	}

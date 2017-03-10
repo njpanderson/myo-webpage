@@ -33,7 +33,8 @@ class DropZone extends Component {
 				data-attachment={this.props.attachment}
 				ref={collectRef(this.props, ['dropzone'], this.props.id)}>
 				<DropZoneAttachments
-					activeAttachments={this.props.activeAttachments}/>
+					activeAttachments={this.props.activeAttachments}
+					class_ui={this.props.class_ui}/>
 				<span key={target_key}
 					className="target">{this.props.zoneLabel}</span>
 			</span>
