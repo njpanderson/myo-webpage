@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-import { collectRef } from '../lib/utils';
-import { components } from '../assets/common-prop-types.js';
+import { collectRef } from '../../lib/utils';
+import { components } from '../../assets/common-prop-types.js';
 
-import View from './views/View.jsx';
-import Pallet from './views/Pallet.jsx';
-import Template from './views/Template.jsx';
-import Dialog from './views/Dialog.jsx';
+import View from '../views/View.jsx';
+import Pallet from '../views/Pallet.jsx';
+import Template from './TemplateContainer';
+import Dialog from './DialogContainer';
 
 class Canvas extends Component {
 	constructor(props) {

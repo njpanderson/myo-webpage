@@ -1,7 +1,7 @@
 import DragDrop from './lib/DragDrop.js';
 import Communicator from './lib/Communicator';
 
-import CanvasContainer from './components/CanvasContainer';
+import CanvasContainer from './components/containers/CanvasContainer';
 
 import actions from './state/actions';
 

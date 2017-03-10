@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 
-import FormField from '../lib/FormField';
-import TextField from './views/fields/TextField.jsx';
-import DropDown from './views/fields/DropDown.jsx';
+import FormField from '../../lib/FormField';
+import TextField from './fields/TextField.jsx';
+import DropDown from './fields/DropDown.jsx';
 
 const FieldComponents = {
 	'text': TextField,

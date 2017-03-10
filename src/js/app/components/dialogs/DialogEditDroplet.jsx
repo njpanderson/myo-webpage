@@ -4,7 +4,7 @@ import FormField from '../../lib/FormField';
 import { components } from '../../assets/common-prop-types';
 import { setLabels } from '../../assets/constants';
 
-import Form from '../Form.jsx';
+import Form from '../views/Form.jsx';
 
 class DialogEditDroplet extends Component {
 	constructor(props) {

@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 
 import Canvas from './Canvas.jsx';
-import { dialogModes } from '../assets/constants.js';
-import actions from '../state/actions.js';
+import { dialogModes } from '../../assets/constants.js';
+import actions from '../../state/actions.js';
 
 const mapStateToProps = (state) => {
 	return {
@@ -14,10 +14,6 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		onPalletDrop: (id) => {
 			dispatch(actions.palletSetAttached(id, true));
-		},
-
-		onDialogCancel: () => {
-			dispatch(actions.setDialogMode(dialogModes.NONE));
 		},
 	};
 };
