@@ -12,11 +12,11 @@ function Dialog(props) {
 	var Component,
 		classes = [props.settings.classes.dialog.main];
 
-	if (props.state.dialog.mode !== dialogModes.NONE) {
+	if (props.mode !== dialogModes.NONE) {
 		classes.push(props.settings.classes.dialog.visible);
 	}
 
-	Component = DialogComponents[props.state.dialog.mode];
+	Component = DialogComponents[props.mode];
 
 	if (Component) {
 		return (
@@ -24,7 +24,7 @@ function Dialog(props) {
 				<Component
 					class_ui={props.class_ui}
 					class_template={props.class_template}
-					state={props.state.dialog.state}
+					state={props.state}
 					onDialogComplete={props.onDialogComplete}
 					onDialogCancel={props.onDialogCancel}/>
 			</div>
