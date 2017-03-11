@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 
 import { collectRef } from '../../lib/utils';
+import DropZone from '../../lib/DropZone';
 import DropZoneAttachment from './DropZoneAttachment.jsx';
 
-class DropZone extends Component {
+class DropZoneComponent extends Component {
 	constructor(props) {
 		super(props);
 
@@ -13,12 +14,14 @@ class DropZone extends Component {
 
 	componentDidMount() {
 		if (typeof this.props.onMount === 'function') {
-			this.props.onMount('dropzone', this.props.id);
+			this.props.onMount('dropzone', this.props.zone.id);
 		}
 	}
 
-	attachmentClick(droplet, attachmentIndex) {
-		console.log('attachment click', droplet, attachmentIndex);
+	attachmentClick(droplet, attachmentIndex, data) {
+		if (typeof this.props.onAttachmentClick === 'function') {
+			this.props.onAttachmentClick(droplet, this.props.zone, attachmentIndex, data);
+		}
 	}
 
 	renderActiveAttachments() {
@@ -39,37 +42,36 @@ class DropZone extends Component {
 	}
 
 	render() {
-		var key = this.props.id + '-zone',
-			target_key = this.props.id + '-target';
+		var key = this.props.zone.id + '-zone',
+			target_key = this.props.zone.id + '-target';
 
 		return (
 			<span
 				key={key}
-				className={this.props.className}
-				data-id={this.props.id}
-				data-attachment={this.props.attachment}
-				ref={collectRef(this.props, ['dropzone'], this.props.id)}>
+				className={this.props.settings.classes.dropzone}
+				data-id={this.props.zone.id}
+				data-attachment={this.props.zone.attachmentId}
+				ref={collectRef(this.props, ['dropzone'], this.props.zone.id)}>
 
 				<span
 					className="attachments">
 					{this.renderActiveAttachments()}
 				</span>
 				<span key={target_key}
-					className="target">{this.props.zoneLabel}</span>
+					className="target">{this.props.settings.dropZone.label}</span>
 			</span>
 		);
 	}
 }
 
-DropZone.propTypes = {
-	id: PropTypes.string,
-	className: PropTypes.string,
-	attachment: PropTypes.string,
-	zoneLabel: PropTypes.string,
-	activeAttachments: PropTypes.array,
-	onMount: PropTypes.func,
-	refCollector: PropTypes.func,
-	class_ui: PropTypes.object
+DropZoneComponent.propTypes = {
+	zone: PropTypes.instanceOf(DropZone).isRequired,
+	settings: PropTypes.object.isRequired,
+	activeAttachments: PropTypes.array.isRequired,
+	onMount: PropTypes.func.isRequired,
+	onAttachmentClick: PropTypes.func.isRequired,
+	refCollector: PropTypes.func.isRequired,
+	class_ui: PropTypes.object.isRequired
 };
 
-export default DropZone;
+export default DropZoneComponent;

@@ -41,10 +41,13 @@ Template.prototype = {
 			counter += 1;
 
 			if (counter === this._max_zones) {
-				throw new Error('Maximum number of zones in template reached (' + this._max_zones + ').');
+				throw new Error(
+					'Maximum number of zones in template reached (' + this._max_zones + ').'
+				);
 			}
 		}
 
+		// loop through collected drop zones and replace tags in markup
 		for (zone in this._drop_zones) {
 			markup = markup.replace(
 				this._drop_zones[zone].tag,
@@ -55,10 +58,13 @@ Template.prototype = {
 			);
 		}
 
-		return this.createDropZoneData(markup);
+		return {
+			drop_zones: this._drop_zones,
+			template: this._createTemplateArray(markup)
+		};
 	},
 
-	createDropZoneData: function(markup) {
+	_createTemplateArray: function(markup) {
 		var sandbox = document.createElement('div'),
 			data = [];
 		sandbox.innerHTML = markup;
@@ -75,23 +81,19 @@ Template.prototype = {
 			case Node.ELEMENT_NODE:
 				data.push({
 					type: 'dropzone',
-					id: node.dataset.id,
-					attachment: node.dataset.attachment
+					zone: this._drop_zones[node.dataset.id]
 				});
 				break;
 			}
 		});
 
 		return data;
-	},
-
-	getDropZoneById: function(id) {
-		return this._drop_zones[id] || null;
 	}
 };
 
 Template.renderDroplet = function(droplet, data) {
 	var output;
+
 	if (!(droplet instanceof Droplet)) {
 		throw new Error('droplet argument must be a Droplet instance');
 	}
@@ -114,6 +116,7 @@ Template.renderDroplet = function(droplet, data) {
 };
 
 Template.renderElementDroplet = function(data) {
+	// !TODO - make sure self-closing tags are correctly rendered
 	var attrs = [],
 		markup, attr;
 	console.log('renderElementDroplet', data);

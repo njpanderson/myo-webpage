@@ -38,6 +38,7 @@ class Canvas extends Component {
 						settings={this.props.settings}
 						refCollector={this.props.refCollector}
 						onMount={this.props.onMount}
+						onAttachmentClick={this.props.onAttachmentClick}
 						template={this.props.data.template}
 						class_ui={this.props.class_ui}
 						/>
@@ -72,6 +73,7 @@ Canvas.propTypes = {
 	onMount: PropTypes.func.isRequired,
 	onDialogComplete: PropTypes.func.isRequired,
 	onDialogCancel: PropTypes.func.isRequired,
+	onAttachmentClick: PropTypes.func.isRequired,
 	refCollector: PropTypes.func.isRequired,
 	settings: PropTypes.object.isRequired,
 	class_ui: PropTypes.object.isRequired,

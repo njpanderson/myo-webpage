@@ -49,7 +49,10 @@ App.prototype = {
 		return this._template.load(url)
 			.then(() => {
 				// load the HTML template and create it
-				this._data.template = this._template.create();
+				var data = this._template.create();
+
+				this._data.drop_zones = data.drop_zones;
+				this._data.template = data.template;
 			})
 			.then(() => {
 				// load the JSON based pallet data

@@ -58,6 +58,7 @@ UI.prototype = {
 					onMount={this._mountEvent.bind(this)}
 					onDialogComplete={this._completeDialogAction.bind(this)}
 					onDialogCancel={this._cancelDialogAction.bind(this)}
+					onAttachmentClick={this._handleAttachmentClick.bind(this)}
 					class_ui={this}
 					class_template={this._template}/>
 			</Provider>,
@@ -217,7 +218,7 @@ UI.prototype = {
 	 * @private
 	 */
 	_handleDropletDrop: function(element, zone) {
-		var drop_zone = this._template.getDropZoneById(zone.dataset.id),
+		var drop_zone = this.getDropZoneById(zone.dataset.id),
 			droplet = this.getDropletById(element.id);
 
 		if (this._isValidDrop(droplet, drop_zone)) {
@@ -239,6 +240,16 @@ UI.prototype = {
 		} else {
 			return false;
 		}
+	},
+
+	_handleAttachmentClick: function(droplet, zone_id, attachment_index, data) {
+		console.log('_handleAttachmentClick', droplet, zone_id, attachment_index, data);
+		// this._showDialog(dialogModes.EDIT_DROPLET, {
+		// 	droplet_id: droplet.id,
+		// 	zone_id: drop_zone.id,
+		// 	attachment_index,
+		// 	data
+		// });
 	},
 
 	_isValidDrop: function(droplet, drop_zone) {
@@ -283,6 +294,10 @@ UI.prototype = {
 		return this._data.pallet.find((element) => {
 			return element.id === id;
 		});
+	},
+
+	getDropZoneById: function(id) {
+		return this._data.drop_zones[id] || null;
 	}
 };
 

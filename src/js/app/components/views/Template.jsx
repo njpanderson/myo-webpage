@@ -50,17 +50,17 @@ class Template extends Component {
 				break;
 
 			case 'dropzone':
+				console.log('dropzone', node);
 				children.push(
 					<DropZone
-						key={node.id}
-						id={node.id}
-						className={this.props.settings.classes.dropzone}
-						zoneLabel={this.props.settings.dropZone.label}
-						activeAttachments={this.getZoneAttachments(node.id)}
-						class_ui={this.props.class_ui}
-						attachment={node.attachment}
+						key={node.zone.id}
+						zone={node.zone}
+						settings={this.props.settings}
+						activeAttachments={this.getZoneAttachments(node.zone.id)}
 						refCollector={this.props.refCollector}
-						onMount={this.props.onMount}/>
+						onMount={this.props.onMount}
+						onAttachmentClick={this.props.onAttachmentClick}
+						class_ui={this.props.class_ui}/>
 				);
 				break;
 			}
@@ -85,9 +85,11 @@ class Template extends Component {
 }
 
 Template.propTypes = {
+	zones: PropTypes.object.isRequired,
 	settings: PropTypes.object.isRequired,
 	template: PropTypes.array.isRequired,
 	onMount: PropTypes.func.isRequired,
+	onAttachmentClick: PropTypes.func.isRequired,
 	refCollector: PropTypes.func.isRequired,
 	class_ui: PropTypes.object.isRequired
 };

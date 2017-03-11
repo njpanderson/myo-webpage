@@ -14,7 +14,7 @@
 			"value": {
 				"type": "text",
 				"label": "Header label",
-				"value": "test default value",
+				"value": "My Music Maker",
 				"required": true
 			}
 		}
