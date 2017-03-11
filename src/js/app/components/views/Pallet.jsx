@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Droplet from './Droplet.jsx';
-import { components } from '../../assets/common-prop-types.js';
 
 class Pallet extends Component {
 	constructor(props) {
@@ -17,7 +16,7 @@ class Pallet extends Component {
 						name={droplet.name}
 						dropletType={droplet.dropletType}
 						id={droplet.id}
-						classes={this.props.classes}
+						settings={this.props.settings}
 						onMount={this.props.onMount}
 						refCollector={this.props.refCollector}
 						key={droplet.id}/>
@@ -37,7 +36,12 @@ class Pallet extends Component {
 	}
 }
 
-Pallet.propTypes = components;
+Pallet.propTypes = {
+	data: PropTypes.object,
+	settings: PropTypes.object,
+	onMount: PropTypes.func,
+	refCollector: PropTypes.func
+};
 
 Pallet.defaultProps = {
 	data: {

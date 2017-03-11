@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
 import { collectRef } from '../../lib/utils';
-import { components } from '../../assets/common-prop-types';
 import DropZone from './DropZone.jsx';
 
 class Template extends Component {
@@ -85,9 +84,13 @@ class Template extends Component {
 	}
 }
 
-Template.propTypes = Object.assign({}, components, {
-	template: PropTypes.array
-});
+Template.propTypes = {
+	settings: PropTypes.object.isRequired,
+	template: PropTypes.array.isRequired,
+	onMount: PropTypes.func.isRequired,
+	refCollector: PropTypes.func.isRequired,
+	class_ui: PropTypes.object.isRequired
+};
 
 Template.defaultProps = {
 	template: ''

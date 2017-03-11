@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 
-import { components } from '../../assets/common-prop-types.js';
-import { dialogModes } from '../../assets/constants.js';
+import { dialogModes } from '../../assets/constants';
 
+// import the dialogs used, then put into a global for referencing
 import DialogEditDroplet from '../dialogs/DialogEditDroplet.jsx';
 
 var DialogComponents = {};
@@ -16,6 +16,7 @@ function Dialog(props) {
 		classes.push(props.settings.classes.dialog.visible);
 	}
 
+	// get appropriate component for dialog mode
 	Component = DialogComponents[props.mode];
 
 	if (Component) {
@@ -36,10 +37,15 @@ function Dialog(props) {
 	}
 }
 
-Dialog.propTypes = Object.assign(components, {
+Dialog.propTypes = {
+	mode: PropTypes.string,
+	settings: PropTypes.object,
+	state: PropTypes.object,
 	onDialogComplete: PropTypes.func,
-	onDialogCancel: PropTypes.func
-});
+	onDialogCancel: PropTypes.func,
+	class_ui: PropTypes.object,
+	class_template: PropTypes.object
+};
 
 Dialog.defaultProps = {};
 

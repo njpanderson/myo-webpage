@@ -11,7 +11,7 @@ class DropZoneAttachment extends Component {
 	}
 
 	onClick() {
-		console.log('attachment click', this.props.droplet);
+		this.props.onClick(this.props.droplet, this.props.attachmentIndex);
 	}
 
 	render() {
@@ -36,6 +36,8 @@ class DropZoneAttachment extends Component {
 
 DropZoneAttachment.propTypes = {
 	droplet: PropTypes.instanceOf(Droplet),
+	attachmentIndex: PropTypes.number.isRequired,
+	onClick: PropTypes.func.isRequired,
 	data: PropTypes.object,
 };
 

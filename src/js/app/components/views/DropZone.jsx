@@ -8,13 +8,17 @@ class DropZone extends Component {
 		super(props);
 
 		this.myrefs = {};
+		this.attachmentClick = this.attachmentClick.bind(this);
 	}
 
 	componentDidMount() {
-		console.log('DropZone mounted!');
 		if (typeof this.props.onMount === 'function') {
 			this.props.onMount('dropzone', this.props.id);
 		}
+	}
+
+	attachmentClick(droplet, attachmentIndex) {
+		console.log('attachment click', droplet, attachmentIndex);
 	}
 
 	renderActiveAttachments() {
@@ -24,6 +28,8 @@ class DropZone extends Component {
 			children.push(
 				<DropZoneAttachment
 					key={attachment.droplet_id + '-attachment-' + index}
+					attachmentIndex={index}
+					onClick={this.attachmentClick}
 					droplet={this.props.class_ui.getDropletById(attachment.droplet_id)}
 					data={attachment.data}/>
 			);
@@ -61,9 +67,9 @@ DropZone.propTypes = {
 	attachment: PropTypes.string,
 	zoneLabel: PropTypes.string,
 	activeAttachments: PropTypes.array,
-	class_ui: PropTypes.object,
 	onMount: PropTypes.func,
-	refCollector: PropTypes.func
+	refCollector: PropTypes.func,
+	class_ui: PropTypes.object
 };
 
 export default DropZone;

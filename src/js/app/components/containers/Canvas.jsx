@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { collectRef } from '../../lib/utils';
-import { components } from '../../assets/common-prop-types.js';
 
 import View from '../views/View.jsx';
 import Pallet from '../views/Pallet.jsx';
@@ -34,26 +33,49 @@ class Canvas extends Component {
 				</header>
 
 				<div className="main">
-					<Template {...this.props}
+					<Template
+						data={this.props.data}
+						settings={this.props.settings}
+						refCollector={this.props.refCollector}
+						onMount={this.props.onMount}
 						template={this.props.data.template}
+						class_ui={this.props.class_ui}
 						/>
-					<View {...this.props}
-						view={this.props.view}/>
+					<View
+						settings={this.props.settings}
+						onMount={this.props.onMount}
+						refCollector={this.props.refCollector}/>
 				</div>
 
-				<Pallet {...this.props}/>
+				<Pallet
+					data={this.props.data}
+					settings={this.props.settings}
+					onMount={this.props.onMount}
+					refCollector={this.props.refCollector}/>
 
 				<div className="overlay"></div>
-				<Dialog {...this.props}/>
+				<Dialog
+					data={this.props.data}
+					settings={this.props.settings}
+					class_ui={this.props.class_ui}
+					class_template={this.props.class_template}
+					onDialogComplete={this.props.onDialogComplete}
+					onDialogCancel={this.props.onDialogCancel}/>
 			</div>
 		);
 	}
 }
 
-Canvas.propTypes = Object.assign(components, {
+Canvas.propTypes = {
+	data: PropTypes.object.isRequired,
+	state: PropTypes.object.isRequired,
+	onMount: PropTypes.func.isRequired,
+	onDialogComplete: PropTypes.func.isRequired,
+	onDialogCancel: PropTypes.func.isRequired,
+	refCollector: PropTypes.func.isRequired,
 	settings: PropTypes.object.isRequired,
-	view: PropTypes.object,
-	class_ui: PropTypes.object
-});
+	class_ui: PropTypes.object.isRequired,
+	class_template: PropTypes.object.isRequired,
+};
 
 export default Canvas;

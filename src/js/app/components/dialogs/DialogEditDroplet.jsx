@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
 import FormField from '../../lib/FormField';
-import { components } from '../../assets/common-prop-types';
 import { setLabels } from '../../assets/constants';
 
 import Form from '../views/Form.jsx';
@@ -78,10 +77,12 @@ class DialogEditDroplet extends Component {
 	}
 }
 
-DialogEditDroplet.propTypes = Object.assign({}, components, {
+DialogEditDroplet.propTypes = {
+	state: PropTypes.object.isRequired,
 	onDialogCancel: PropTypes.func,
-	onDialogComplete: PropTypes.func
-});
+	onDialogComplete: PropTypes.func,
+	class_ui: PropTypes.object.isRequired
+};
 
 DialogEditDroplet.defaultProps = {
 	onDialogCancel: null,

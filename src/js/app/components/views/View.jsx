@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { collectRef } from '../../lib/utils';
-import { components } from '../../assets/common-prop-types.js';
 
 class View extends Component {
 	constructor(props) {
@@ -17,14 +16,16 @@ class View extends Component {
 		return (
 			<section className="view">
 				<iframe ref={collectRef(this.props, 'view_frame')}
-					src={this.props.view.src}></iframe>
+					src={this.props.settings.view.src}></iframe>
 			</section>
 		);
 	}
 }
 
-View.propTypes = Object.assign(components, {
-	view: PropTypes.object
-});
+View.propTypes = {
+	settings: PropTypes.object,
+	onMount: PropTypes.func,
+	refCollector: PropTypes.func,
+};
 
 export default View;

@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
 import { collectRef } from '../../lib/utils';
-import { components } from '../../assets/common-prop-types';
 
 class Droplet extends Component {
 	constructor(props) {
@@ -17,11 +16,7 @@ class Droplet extends Component {
 	}
 
 	render() {
-		var classes = [this.props.classes.droplet];
-
-		// if (this.props.state.attached) {
-		// 	classes.push(this.props.classes.attached);
-		// }
+		var classes = [this.props.settings.classes.droplet];
 
 		return (
 			<a href="#"
@@ -34,12 +29,13 @@ class Droplet extends Component {
 	}
 }
 
-Droplet.propTypes = Object.assign({}, components, {
+Droplet.propTypes = {
+	settings: PropTypes.object.isRequired,
 	name: PropTypes.string,
 	id: PropTypes.string,
 	title: PropTypes.string,
 	attached: PropTypes.bool,
 	onMount: PropTypes.func
-});
+};
 
 export default Droplet;

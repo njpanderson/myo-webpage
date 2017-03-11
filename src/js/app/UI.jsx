@@ -54,12 +54,10 @@ UI.prototype = {
 				<CanvasContainer
 					data={this._data}
 					settings={this.settings}
-					view={this.settings.view}
-					classes={this.settings.classes}
 					refCollector={this._refCollector.bind(this)}
 					onMount={this._mountEvent.bind(this)}
 					onDialogComplete={this._completeDialogAction.bind(this)}
-					onDropletEdit={this._completeDropletEdit}
+					onDialogCancel={this._cancelDialogAction.bind(this)}
 					class_ui={this}
 					class_template={this._template}/>
 			</Provider>,
@@ -95,6 +93,10 @@ UI.prototype = {
 				);
 			}
 		}
+	},
+
+	_cancelDialogAction: function() {
+		// noop
 	},
 
 	/**
