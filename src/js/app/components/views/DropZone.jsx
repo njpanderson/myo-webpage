@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
 import { collectRef } from '../../lib/utils';
-import DropZoneAttachments from './DropZoneAttachments.jsx';
+import DropZoneAttachment from './DropZoneAttachment.jsx';
 
 class DropZone extends Component {
 	constructor(props) {
@@ -17,9 +17,20 @@ class DropZone extends Component {
 		}
 	}
 
-	// shouldComponentUpdate() {
-	// 	return false;
-	// }
+	renderActiveAttachments() {
+		var children = [];
+
+		this.props.activeAttachments.forEach((attachment, index) => {
+			children.push(
+				<DropZoneAttachment
+					key={attachment.droplet_id + '-attachment-' + index}
+					droplet={this.props.class_ui.getDropletById(attachment.droplet_id)}
+					data={attachment.data}/>
+			);
+		});
+
+		return children;
+	}
 
 	render() {
 		var key = this.props.id + '-zone',
@@ -32,9 +43,11 @@ class DropZone extends Component {
 				data-id={this.props.id}
 				data-attachment={this.props.attachment}
 				ref={collectRef(this.props, ['dropzone'], this.props.id)}>
-				<DropZoneAttachments
-					activeAttachments={this.props.activeAttachments}
-					class_ui={this.props.class_ui}/>
+
+				<span
+					className="attachments">
+					{this.renderActiveAttachments()}
+				</span>
 				<span key={target_key}
 					className="target">{this.props.zoneLabel}</span>
 			</span>

@@ -27,15 +27,13 @@ Template.prototype = {
 		}
 
 		// replace html with entities
-		markup = markup.replace(/[\u00A0-\u9999<>\&]/gim, function(i) {
-			return '&#' + i.charCodeAt(0) + ';';
-		});
+		markup = Template.entities(markup);
 
 		return this._createDropZones(markup);
 	},
 
 	_createDropZones: function(markup) {
-		var zone, counter = 0, state;
+		var zone, counter = 0;
 
 		// loop through markup finding drop zones
 		while ((zone = DropZone.fetchZone(markup)) !== null) {
@@ -102,15 +100,34 @@ Template.renderDroplet = function(droplet, data) {
 	case 'element':
 		output = Template.renderElementDroplet(data);
 		break;
+
+	case 'text':
+		output = Template.renderTextDroplet(data);
+		break;
+
+	case 'attribute':
+		output = Template.renderAttributeDroplet(data);
+		break;
 	}
 
 	return output;
 };
 
 Template.renderElementDroplet = function(data) {
-	var markup;
+	var attrs = [],
+		markup, attr;
 	console.log('renderElementDroplet', data);
 	markup = '<' + data.tagName;
+
+	if (data.attrs) {
+		for (attr in data.attrs) {
+			attrs.push(attr += '="' + Template.entities(data.attrs[attr]) + '"');
+		}
+
+		if (attrs.length) {
+			markup += ' ' + attrs.join(' ');
+		}
+	}
 
 	if (data.innerHTML) {
 		markup += '>' + data.innerHTML +
@@ -120,6 +137,22 @@ Template.renderElementDroplet = function(data) {
 	}
 
 	return markup;
+};
+
+Template.renderTextDroplet = function(data) {
+	console.log('renderTextDroplet', data);
+	return Template.entities(data.value);
+};
+
+Template.renderAttributeDroplet = function(data) {
+	console.log('renderAttributeDroplet', data);
+	return data.key + '="' + Template.entities(data.value) + '"';
+};
+
+Template.entities = function(str) {
+	return str.replace(/[\u00A0-\u9999<>\&]/gim, (i) =>
+		('&#' + i.charCodeAt(0) + ';')
+	);
 };
 
 export default Template;

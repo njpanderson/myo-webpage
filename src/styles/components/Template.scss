@@ -1,28 +1,9 @@
 .template {
 	overflow: auto;
 
-	.drop-zone {
-		display: inline-block;
-
-		.target {
-			border-radius: 3px;
-			padding: 1px 5px;
-			background-color: blue;
-			color: white;
-		}
-
-		&.is-active .target {
-			background-color: lightblue;
-		}
-
-		&.is-target .target {
-			background-color: red;
-		}
-	}
-
-	.drop-zone:hover .target {
-		background-color: skyblue;
-		cursor: pointer;
+	pre {
+		line-height: 130%;
+		tab-size: 3;
 	}
 
 	.hljs {

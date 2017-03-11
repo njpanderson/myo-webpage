@@ -88,12 +88,11 @@ UI.prototype = {
 			// droplet being edited prior to or during attatchment
 			if (!state.dialog.attachment_index) {
 				// no attachment index - this is a new drop
-				this._store.dispatch(actions.zoneAddAttachment(
+				this.zoneAddAttachment(
 					state.dialog.state.zone_id,
 					state.dialog.state.droplet_id,
-					true,
 					dialog_data
-				));
+				);
 			}
 		}
 	},
@@ -210,16 +209,31 @@ UI.prototype = {
 		});
 	},
 
+	/**
+	 * Handles drops of droplets into drop zones. Will attach to the zone
+	 * if the drop is valid.
+	 * @private
+	 */
 	_handleDropletDrop: function(element, zone) {
 		var drop_zone = this._template.getDropZoneById(zone.dataset.id),
 			droplet = this.getDropletById(element.id);
 
 		if (this._isValidDrop(droplet, drop_zone)) {
-			this._showDialog(dialogModes.EDIT_DROPLET, {
-				droplet_id: droplet.id,
-				zone_id: drop_zone.id,
-				attachment_index: null
-			});
+			if (droplet.editable) {
+				// show edit dialog before adding the attachment
+				this._showDialog(dialogModes.EDIT_DROPLET, {
+					droplet_id: droplet.id,
+					zone_id: drop_zone.id,
+					attachment_index: null
+				});
+			} else {
+				// add attachment without dialog
+				this.zoneAddAttachment(
+					drop_zone.id,
+					droplet.id,
+					droplet.data
+				);
+			}
 		} else {
 			return false;
 		}
@@ -227,6 +241,17 @@ UI.prototype = {
 
 	_isValidDrop: function(droplet, drop_zone) {
 		return drop_zone.willAccept(droplet, this._store);
+	},
+
+	zoneAddAttachment: function(zone_id, droplet_id, data) {
+		this._store.dispatch(actions.zoneAddAttachment(
+			zone_id,
+			droplet_id,
+			true,
+			data
+		));
+
+		this._updateView();
 	},
 
 	_updateView: function() {

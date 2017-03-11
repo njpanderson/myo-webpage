@@ -21,7 +21,8 @@
 	},
 	{
 		"name": "Section",
-		"dropletType": "text",
+		"dropletType": "attribute",
+		"key": "class",
 		"value": "music-maker",
 		"attachmentIds": ["section_class"]
 	},
