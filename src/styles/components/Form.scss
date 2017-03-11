@@ -12,6 +12,10 @@ form {
 		button {
 			float: right;
 			margin: 0 .25em;
+
+			&.pull-left {
+				float: left;
+			}
 		}
 	}
 
@@ -45,5 +49,10 @@ button {
 	&.primary {
 		color: $color-button-alt;
 		background-color: $blue;
+	}
+
+	&.danger {
+		color: $color-button-danger;
+		background-color: $red;
 	}
 }

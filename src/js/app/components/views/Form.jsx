@@ -30,6 +30,7 @@
 import React, { Component, PropTypes } from 'react';
 
 import Fieldset from './Fieldset.jsx';
+import Button from './Button.jsx';
 
 /**
  * @description
@@ -115,8 +116,22 @@ class Form extends Component {
 		this.props.onSubmit(this.state.formValues);
 	}
 
-	onCancel() {
-		this.props.onCancel(this.state.formValues);
+	getButtons() {
+		var buttons = [];
+
+		this.props.buttons.forEach((button, index) => {
+			buttons.push(
+				<Button
+					key={'button-' + index}
+					type={button.type}
+					label={button.label}
+					className={button.className}
+					onCancel={this.props.onCancel}
+					onClick={button.onClick}/>
+			);
+		});
+
+		return buttons;
 	}
 
 	render() {
@@ -126,8 +141,7 @@ class Form extends Component {
 					{this.fieldSets()}
 				</div>
 				<fieldset className="buttons">
-					<button type="submit" className="primary">Save</button>
-					<button type="button" onClick={this.onCancel.bind(this)}>Cancel</button>
+					{this.getButtons()}
 				</fieldset>
 			</form>
 		);
@@ -146,7 +160,8 @@ Form.propTypes = {
 		key: PropTypes.string,
 		legend: PropTypes.string,
 		fields: PropTypes.array
-	}))
+	})),
+	buttons: PropTypes.array
 };
 
 Form.defaultProps = {

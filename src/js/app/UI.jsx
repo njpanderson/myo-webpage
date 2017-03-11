@@ -281,7 +281,7 @@ UI.prototype = {
 			data
 		));
 
-		// this._updateView();
+		this._updateView();
 	},
 
 	/**

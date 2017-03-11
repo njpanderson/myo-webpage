@@ -54,7 +54,7 @@
 			"innerHTML": {
 				"type": "text",
 				"required": true,
-				"label": "Choose a letter",
+				"label": "Type one letter",
 				"placeholder": "A, B, C etc..."
 			}
 		}

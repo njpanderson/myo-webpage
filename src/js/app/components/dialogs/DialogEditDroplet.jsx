@@ -11,7 +11,7 @@ class DialogEditDroplet extends Component {
 		super(props);
 
 		this.onDialogComplete = this.onDialogComplete.bind(this);
-		this.onDialogCancel = this.onDialogCancel.bind(this);
+		this.deleteDroplet = this.deleteDroplet.bind(this);
 	}
 
 	onDialogComplete(values) {
@@ -35,10 +35,8 @@ class DialogEditDroplet extends Component {
 		}
 	}
 
-	onDialogCancel() {
-		if (typeof this.props.onDialogCancel === 'function') {
-			this.props.onDialogCancel();
-		}
+	deleteDroplet() {
+		console.log('delete droplet');
 	}
 
 	getFieldsets() {
@@ -104,22 +102,41 @@ class DialogEditDroplet extends Component {
 	}
 
 	render() {
-		var title, notes;
+		var title, notes, buttons;
+
+		buttons = [{
+			type: 'cancel',
+			onClick: this.props.onDialogCancel,
+			label: 'Cancel'
+		}];
 
 		if (this.props.state.attachment_index !== null) {
 			// editing
 			title = 'Edit Droplet';
 			notes = [
 				'You can edit the Droplet using the fields below. ' +
-					'Change the bits you want to customise and click “Add” when you’re done.'
+					'Change the bits you want to customise and click “Add Droplet” when you’re done.'
 			];
+			buttons = buttons.concat({
+				type: 'submit',
+				label: 'Edit Droplet'
+			}, {
+				type: 'general',
+				label: 'Delete Droplet',
+				className: 'danger pull-left',
+				onClick: this.deleteDroplet
+			});
 		} else {
 			// adding
 			title = 'Add Droplet';
 			notes = [
 				'You’ve found the right drop place to put this Droplet! ' +
-					'Edit anything you would like to change and then click “Save”.'
+					'Edit anything you would like to change and then click “Edit Droplet”.'
 			];
+			buttons = buttons.concat({
+				type: 'submit',
+				label: 'Add Droplet'
+			});
 		}
 
 		return (
@@ -131,8 +148,9 @@ class DialogEditDroplet extends Component {
 
 				<Form
 					fieldSets={this.getFieldsets()}
+					buttons={buttons}
 					onSubmit={this.onDialogComplete}
-					onCancel={this.onDialogCancel}/>
+					onCancel={this.props.onDialogCancel}/>
 			</div>
 		);
 	}
