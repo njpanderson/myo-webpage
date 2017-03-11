@@ -18,9 +18,9 @@ class DropZoneComponent extends Component {
 		}
 	}
 
-	attachmentClick(droplet, attachmentIndex, data) {
+	attachmentClick(droplet, attachmentIndex) {
 		if (typeof this.props.onAttachmentClick === 'function') {
-			this.props.onAttachmentClick(droplet, this.props.zone, attachmentIndex, data);
+			this.props.onAttachmentClick(droplet, this.props.zone, attachmentIndex);
 		}
 	}
 

@@ -1,0 +1,29 @@
+body {
+	font-family: sans-serif;
+	line-height: $line-height;
+}
+
+h1 {
+	@include font-size(24);
+}
+
+h2 {
+	@include font-size(22);
+}
+
+h3 {
+	@include font-size(20);
+}
+
+p {
+	margin: .75em 0;
+	@include font-size(16);
+}
+
+p:first-child {
+	margin-top: 0;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}

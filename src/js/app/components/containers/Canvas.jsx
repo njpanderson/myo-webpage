@@ -20,7 +20,7 @@ class Canvas extends Component {
 	render() {
 		var canvas_classes = [
 			this.props.settings.classes.canvas,
-			this.props.state.app.ui_state
+			this.props.state.ui_state
 		];
 
 		return (
@@ -68,8 +68,11 @@ class Canvas extends Component {
 }
 
 Canvas.propTypes = {
-	data: PropTypes.object.isRequired,
+	// from CanvasContainer
 	state: PropTypes.object.isRequired,
+
+	// from UI#render
+	data: PropTypes.object.isRequired,
 	onMount: PropTypes.func.isRequired,
 	onDialogComplete: PropTypes.func.isRequired,
 	onDialogCancel: PropTypes.func.isRequired,

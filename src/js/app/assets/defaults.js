@@ -12,7 +12,9 @@ export default {
 		text_element: 'text',
 		dialog: {
 			main: 'dialog',
-			visible: 'visible'
+			visible: 'visible',
+			container: 'dialog-container',
+			heading: 'dialog-heading'
 		}
 	},
 	selectors: {

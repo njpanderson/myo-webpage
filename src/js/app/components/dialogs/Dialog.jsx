@@ -23,11 +23,12 @@ function Dialog(props) {
 		return (
 			<div className={classes.join(' ')}>
 				<Component
-					class_ui={props.class_ui}
-					class_template={props.class_template}
 					state={props.state}
+					settings={props.settings}
+					class_template={props.class_template}
 					onDialogComplete={props.onDialogComplete}
-					onDialogCancel={props.onDialogCancel}/>
+					onDialogCancel={props.onDialogCancel}
+					class_ui={props.class_ui}/>
 			</div>
 		);
 	} else {
@@ -38,9 +39,12 @@ function Dialog(props) {
 }
 
 Dialog.propTypes = {
+	// from DialogContainer
 	mode: PropTypes.string,
-	settings: PropTypes.object,
 	state: PropTypes.object,
+
+	// from Canvas
+	settings: PropTypes.object,
 	onDialogComplete: PropTypes.func,
 	onDialogCancel: PropTypes.func,
 	class_ui: PropTypes.object,

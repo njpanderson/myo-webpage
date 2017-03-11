@@ -1,8 +1,20 @@
 $section-padding: 10px;
+$dialog-padding: 20px;
 
 $droplet-size: 80px;
 
-$bg-bright: #fff;
+// named colours
+$white: #fff;
 $gray-med: #ccc;
+$gray-light: #eee;
+$blue: #959eff;
+
+// ui colors
+$bg-bright: $white;
+$color-button-alt: $white;
 
 $overlay_opacity: .6;
+
+// typography
+$font-size-base: 16; // px
+$line-height: 140%;

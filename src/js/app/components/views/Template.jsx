@@ -50,7 +50,6 @@ class Template extends Component {
 				break;
 
 			case 'dropzone':
-				console.log('dropzone', node);
 				children.push(
 					<DropZone
 						key={node.zone.id}
@@ -85,7 +84,10 @@ class Template extends Component {
 }
 
 Template.propTypes = {
+	// from TemplateContainer
 	zones: PropTypes.object.isRequired,
+
+	// from Canvas
 	settings: PropTypes.object.isRequired,
 	template: PropTypes.array.isRequired,
 	onMount: PropTypes.func.isRequired,

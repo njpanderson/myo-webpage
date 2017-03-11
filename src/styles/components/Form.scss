@@ -1,0 +1,49 @@
+form {
+	fieldset:not(.buttons) {
+		padding: 0 $dialog-padding;
+		margin: ($dialog-padding / 2) 0;
+	}
+
+	fieldset.buttons {
+		@include clearfix();
+		border-top: 1px solid $gray-med;
+		padding: $dialog-padding;
+
+		button {
+			float: right;
+			margin: 0 .25em;
+		}
+	}
+
+	legend {
+		font-weight: bolder;
+	}
+
+	.field {
+		display: flex;
+		align-items: center;
+		margin: ($dialog-padding / 2) 0;
+
+		label {
+			width: 40%;
+		}
+	}
+}
+
+input,
+button,
+select {
+	@include font-size(14);
+	padding: 5px;
+}
+
+button {
+	border: 1px solid $gray-med;
+	padding: 5px 10px;
+	background-color: $gray-light;
+
+	&.primary {
+		color: $color-button-alt;
+		background-color: $blue;
+	}
+}

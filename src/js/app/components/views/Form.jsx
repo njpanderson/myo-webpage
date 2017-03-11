@@ -126,8 +126,8 @@ class Form extends Component {
 					{this.fieldSets()}
 				</div>
 				<fieldset className="buttons">
+					<button type="submit" className="primary">Save</button>
 					<button type="button" onClick={this.onCancel.bind(this)}>Cancel</button>
-					<button type="submit">Save</button>
 				</fieldset>
 			</form>
 		);

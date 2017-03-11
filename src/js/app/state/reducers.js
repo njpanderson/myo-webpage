@@ -66,6 +66,13 @@ function zones(state = default_state.zones, action) {
 
 		break;
 
+	case actionTypes.ZONE_EDIT_ATTACHMENT:
+		if (zones[action.id].attachments[action.attachment_index]) {
+			zones[action.id].attachments[action.attachment_index].data = action.data;
+		}
+
+		break;
+
 	default:
 		return state;
 	}

@@ -1,6 +1,7 @@
 export const actionTypes = {
 	UI_STATE: 'ui-state',
 	ZONE_ADD_ATTACHMENT: 'zone-add-attachment',
+	ZONE_EDIT_ATTACHMENT: 'zone-edit-attachment',
 	SET_DIALOG_MODE: 'set-dialog-mode'
 };
 

@@ -85,11 +85,17 @@ UI.prototype = {
 		switch (state.dialog.mode) {
 		case dialogModes.EDIT_DROPLET:
 			// droplet being edited prior to or during attatchment
-			if (!state.dialog.attachment_index) {
+			if (state.dialog.state.attachment_index === null) {
 				// no attachment index - this is a new drop
 				this.zoneAddAttachment(
 					state.dialog.state.zone_id,
 					state.dialog.state.droplet_id,
+					dialog_data
+				);
+			} else{
+				this.zoneEditAttachment(
+					state.dialog.state.zone_id,
+					state.dialog.state.attachment_index,
 					dialog_data
 				);
 			}
@@ -242,14 +248,13 @@ UI.prototype = {
 		}
 	},
 
-	_handleAttachmentClick: function(droplet, zone_id, attachment_index, data) {
-		console.log('_handleAttachmentClick', droplet, zone_id, attachment_index, data);
-		// this._showDialog(dialogModes.EDIT_DROPLET, {
-		// 	droplet_id: droplet.id,
-		// 	zone_id: drop_zone.id,
-		// 	attachment_index,
-		// 	data
-		// });
+	_handleAttachmentClick: function(droplet, drop_zone, attachment_index) {
+		console.log('_handleAttachmentClick', droplet, drop_zone, attachment_index);
+		this._showDialog(dialogModes.EDIT_DROPLET, {
+			droplet_id: droplet.id,
+			zone_id: drop_zone.id,
+			attachment_index
+		});
 	},
 
 	_isValidDrop: function(droplet, drop_zone) {
@@ -257,6 +262,7 @@ UI.prototype = {
 	},
 
 	zoneAddAttachment: function(zone_id, droplet_id, data) {
+		console.log('zoneAddAttachment', zone_id, droplet_id, data);
 		this._store.dispatch(actions.zoneAddAttachment(
 			zone_id,
 			droplet_id,
@@ -265,6 +271,35 @@ UI.prototype = {
 		));
 
 		this._updateView();
+	},
+
+	zoneEditAttachment: function(zone_id, attachment_index, data) {
+		console.log('zoneEditAttachment', zone_id, attachment_index, data);
+		this._store.dispatch(actions.zoneEditAttachment(
+			zone_id,
+			attachment_index,
+			data
+		));
+
+		// this._updateView();
+	},
+
+	/**
+	 * Retrieve a zone's attachment (by index)
+	 */
+	zoneGetAttachment: function(zone_id, attachment_index) {
+		var zone,
+			state = this._store.getState();
+
+		if (state.zones &&
+			(zone = state.zones[zone_id]) &&
+			zone.attachments &&
+			zone.attachments.length > attachment_index
+		) {
+			return zone.attachments[attachment_index];
+		}
+
+		return null;
 	},
 
 	_updateView: function() {

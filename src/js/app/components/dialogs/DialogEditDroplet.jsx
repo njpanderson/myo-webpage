@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import FormField from '../../lib/FormField';
 import { setLabels } from '../../assets/constants';
 
+import DialogHeading from './DialogHeading.jsx';
 import Form from '../views/Form.jsx';
 
 class DialogEditDroplet extends Component {
@@ -40,45 +41,106 @@ class DialogEditDroplet extends Component {
 		}
 	}
 
-	render() {
+	getFieldsets() {
 		var droplet = this.props.class_ui.getDropletById(this.props.state.droplet_id),
-			fieldsets = [], set, attr;
+			fieldsets = [],
+			attachment = null,
+			fieldset, field, attribute, item;
 
-		for (set in droplet.editable) {
-			fieldsets.push({
-				key: set,
-				legend: setLabels[set],
+		if (this.props.state.attachment_index !== null) {
+			attachment = this.props.class_ui.zoneGetAttachment(
+				this.props.state.zone_id,
+				this.props.state.attachment_index
+			);
+		}
+
+		for (attribute in droplet.editable) {
+			fieldset = {
+				key: attribute,
+				legend: setLabels[attribute],
 				fields: []
-			});
+			};
 
-			if (set === 'attrs') {
-				for (attr in droplet.editable[set]) {
-					fieldsets[fieldsets.length - 1].fields.push(new FormField(
-						attr,
-						droplet.editable[set][attr].type,
-						droplet.editable[set][attr]
+			// add indidual fields, depending on editable attribute type
+			if (attribute === 'attrs') {
+				// the 'attrs' attribute, which contains key/value pairs
+				for (item in droplet.editable[attribute]) {
+					field = Object.deepAssign({}, droplet.editable[attribute][item]);
+
+					// preset value from attachment
+					if (attachment !== null &&
+						attachment.data.attrs &&
+						attachment.data.attrs[item]) {
+						field.value = attachment.data.attrs[item];
+					}
+
+					fieldset.fields.push(new FormField(
+						item,
+						droplet.editable[attribute][item].type,
+						field
 					));
 				}
 			} else {
-				fieldsets[fieldsets.length - 1].fields.push(new FormField(
-					set,
-					droplet.editable[set].type,
-					droplet.editable[set]
+				// string based attributes
+				field = Object.deepAssign({}, droplet.editable[attribute]);
+
+				// preset value from attachment
+				if (attachment !== null && attachment.data[attribute]) {
+					field.value = attachment.data[attribute];
+				}
+
+				fieldset.fields.push(new FormField(
+					attribute,
+					droplet.editable[attribute].type,
+					field
 				));
 			}
+
+			// add fieldset to form
+			fieldsets.push(fieldset);
+		}
+
+		return fieldsets;
+	}
+
+	render() {
+		var title, notes;
+
+		if (this.props.state.attachment_index !== null) {
+			// editing
+			title = 'Edit Droplet';
+			notes = [
+				'You can edit the Droplet using the fields below. ' +
+					'Change the bits you want to customise and click “Add” when you’re done.'
+			];
+		} else {
+			// adding
+			title = 'Add Droplet';
+			notes = [
+				'You’ve found the right drop place to put this Droplet! ' +
+					'Edit anything you would like to change and then click “Save”.'
+			];
 		}
 
 		return (
-			<Form
-				fieldSets={fieldsets}
-				onSubmit={this.onDialogComplete}
-				onCancel={this.onDialogCancel}/>
+			<div className={this.props.settings.classes.dialog.container}>
+				<DialogHeading
+					title={title}
+					notes={notes}
+					className={this.props.settings.classes.dialog.heading}/>
+
+				<Form
+					fieldSets={this.getFieldsets()}
+					onSubmit={this.onDialogComplete}
+					onCancel={this.onDialogCancel}/>
+			</div>
 		);
 	}
 }
 
 DialogEditDroplet.propTypes = {
 	state: PropTypes.object.isRequired,
+	settings: PropTypes.object.isRequired,
 	onDialogCancel: PropTypes.func,
 	onDialogComplete: PropTypes.func,
 	class_ui: PropTypes.object.isRequired

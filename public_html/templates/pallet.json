@@ -41,6 +41,7 @@
 				"class": {
 					"type": "dropdown",
 					"required": true,
+					"label": "Choose a colour",
 					"options": ["button-blue", "button-red", "button-yellow", "button-pink", "button-green"],
 					"value": "button-blue"
 				},
@@ -53,6 +54,7 @@
 			"innerHTML": {
 				"type": "text",
 				"required": true,
+				"label": "Choose a letter",
 				"placeholder": "A, B, C etc..."
 			}
 		}

@@ -13,8 +13,7 @@ class DropZoneAttachment extends Component {
 	onClick() {
 		this.props.onClick(
 			this.props.droplet,
-			this.props.attachmentIndex,
-			this.props.data
+			this.props.attachmentIndex
 		);
 	}
 

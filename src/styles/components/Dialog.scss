@@ -13,15 +13,13 @@
 		display: flex;
 	}
 
-	form {
+	.dialog-container {
+		max-width: 500px;
 		background-color: $bg-bright;
+	}
 
-		& > *:not(:empty) {
-			padding: 20px;
-		}
-
-		fieldset:not(.buttons) {
-			border: 1px solid red;
-		}
+	.dialog-heading {
+		padding: $dialog-padding;
+		border-bottom: 1px solid $gray-med;
 	}
 }

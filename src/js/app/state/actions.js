@@ -24,5 +24,14 @@ module.exports = {
 			attached,
 			data
 		};
+	},
+
+	zoneEditAttachment: function(id, attachment_index, data) {
+		return {
+			type: actionTypes.ZONE_EDIT_ATTACHMENT,
+			id,
+			attachment_index,
+			data
+		};
 	}
 };
