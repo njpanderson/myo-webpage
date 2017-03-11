@@ -12,6 +12,11 @@ class View extends Component {
 		}
 	}
 
+	shouldComponentUpdate() {
+		// no. reloads/updates are handled by the view class
+		return false;
+	}
+
 	render() {
 		return (
 			<section className="view">

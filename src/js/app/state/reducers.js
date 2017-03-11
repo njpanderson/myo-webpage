@@ -36,8 +36,7 @@ function app (state = default_state, action) {
  * Sets drop zone state values
  */
 function zones(state = default_state.zones, action) {
-	var zones = Object.assign({}, state),
-		index;
+	var zones = Object.assign({}, state);
 
 	switch (action.type) {
 	case actionTypes.ZONE_ADD_ATTACHMENT:
@@ -47,28 +46,26 @@ function zones(state = default_state.zones, action) {
 			};
 		}
 
-		if (action.attached) {
-			// attach the droplet
-			zones[action.id].attachments.push({
-				droplet_id: action.droplet_id,
-				data: action.data
-			});
-		} else {
-			// find and detach the droplet
-			index = zones[action.id].attachments.findIndex((element) =>
-				(element.droplet_id === action.droplet_id)
-			);
-
-			if (index !== -1) {
-				zones[action.id].attachments.splice(index, 1);
-			}
-		}
+		// attach the droplet
+		zones[action.id].attachments.push({
+			droplet_id: action.droplet_id,
+			data: action.data
+		});
 
 		break;
 
 	case actionTypes.ZONE_EDIT_ATTACHMENT:
 		if (zones[action.id].attachments[action.attachment_index]) {
 			zones[action.id].attachments[action.attachment_index].data = action.data;
+		}
+
+		break;
+
+	case actionTypes.ZONE_DETACH_ATTACHMENT:
+		// detach the attachment by index
+		if (action.attachment_index !== null &&
+			action.attachment_index < zones[action.id].attachments.length) {
+			zones[action.id].attachments.splice(action.attachment_index, 1);
 		}
 
 		break;

@@ -2,7 +2,7 @@
 
 Droplets are individual components defined in a JSON format which, when dropped onto the template, form snippets of code. They are represented as buttons on the lower pallet which can be dragged into drop zones on the template.
 
-Droplets can be placed anywhere within the body or head, but cannot affect the `<body>`, `<head>` or `<html>` tags themselves. The `DOCTYPE` is also read only, and declared within the template.
+Droplets can be placed anywhere within your template, which is injected into the `view` container on the view page.
 
 ## Droplet types (dropletType)
 
@@ -134,30 +134,22 @@ Setting        | Optional | Description
 Within a template, drop zones are defined using bracket syntax, similar to Twig (but really, the similarity ends there!). Drop zones define, by their name, applicable points upon which you can place Droplets. Drop zones can also define the maximum number of Droplets which can be placed on them. An example template with some drop zones on it is as follows:
 
 ```
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>{{ title }}</title>
-	</head>
-	<body>
+<header>
+	<h1>{{ h1 }}</h1>
+</header>
 
-		<header>
-			<h1>{{ h1 }}</h1>
-		</header>
+<main>
+	<section class="{{ section_class }}">
+		<h2>{{ intro }}</p>
+		<div class="buttons">
+			{{ button|5 }}
+		</div>
+		{{ * }}
+	</section>
+</main>
 
-		<main>
-			<section class="{{ section_class }}">
-				<h2>{{ intro }}</p>
-				<div class="buttons">
-					{{ button|5 }}
-				</div>
-				{{ * }}
-			</section>
-		</main>
-	</body>
-	<script src="libs.js"></script>
-	{{ script-main }}
-</html>
+<script src="libs.js"></script>
+{{ script-main }}
 ```
 
 In the above template, there are a total of 7 drop zones. Each of them except for `button` allows a single Droplet placement. The `button` drop zone in this case allows for up to five Droplets with `attachmentIds` containing `button` to be placed upon it.

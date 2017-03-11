@@ -5,6 +5,7 @@ import Droplet from './Droplet';
 var Template = function(settings = {}) {
 	this.settings = settings;
 	this._drop_zones = {};
+	this._template = [];
 	this._max_zones = 100;
 };
 
@@ -58,9 +59,11 @@ Template.prototype = {
 			);
 		}
 
+		this._template = this._createTemplateArray(markup);
+
 		return {
 			drop_zones: this._drop_zones,
-			template: this._createTemplateArray(markup)
+			template: this._template
 		};
 	},
 
@@ -88,6 +91,31 @@ Template.prototype = {
 		});
 
 		return data;
+	},
+
+	renderAsHTML: function(zones, getDropletById) {
+		var html = '';
+
+		this._template.forEach((node) => {
+			console.log(node);
+			if (node.type === 'text') {
+				// plain text node
+				html += node.content;
+			} else if (node.type === 'dropzone' && zones[node.zone.id]) {
+				// drop zone with attachments
+				zones[node.zone.id].attachments.forEach((attachment) => {
+					var droplet = getDropletById(attachment.droplet_id),
+						data = Object.deepAssign({}, droplet.data, attachment.data);
+
+					html += Template.renderDroplet(
+						droplet,
+						data
+					);
+				});
+			}
+		});
+
+		return html;
 	}
 };
 

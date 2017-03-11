@@ -1,22 +1,14 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>{{ title }}</title>
-	</head>
-	<body>
+<header>
+	<h1>{{ h1 }}</h1>
+</header>
 
-		<header>
-			<h1>{{ h1 }}</h1>
-		</header>
+<main>
+	<section {{ section_class }}>
+		<div class="buttons">
+			{{ button|20 }}
+		</div>
+	</section>
+</main>
 
-		<main>
-			<section {{ section_class }}>
-				<div class="buttons">
-					{{ button|20 }}
-				</div>
-			</section>
-		</main>
-	</body>
-	<script src="libs.js"></script>
-	{{ script_main }}
-</html>
+<script src="libs.js"></script>
+{{ script_main }}

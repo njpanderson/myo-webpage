@@ -284,6 +284,14 @@ UI.prototype = {
 		this._updateView();
 	},
 
+	zoneDetachAttachment: function(zone_id, attachment_index) {
+		console.log('zoneDetachAttachment', zone_id, attachment_index);
+		this._store.dispatch(actions.zoneDetachAttachment(
+			zone_id,
+			attachment_index
+		));
+	},
+
 	/**
 	 * Retrieve a zone's attachment (by index)
 	 */
@@ -303,9 +311,16 @@ UI.prototype = {
 	},
 
 	_updateView: function() {
-		// !TODO
+		var state = this._store.getState();
+
 		this._comms.send('view', {
-			cmd: messageCommands.RELOAD
+			cmd: messageCommands.RELOAD,
+			data: {
+				markup: this._template.renderAsHTML(
+					state.zones,
+					this.getDropletById.bind(this)
+				)
+			}
 		});
 	},
 

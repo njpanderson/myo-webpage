@@ -11,7 +11,7 @@ class DialogEditDroplet extends Component {
 		super(props);
 
 		this.onDialogComplete = this.onDialogComplete.bind(this);
-		this.deleteDroplet = this.deleteDroplet.bind(this);
+		this.detachAttachment = this.detachAttachment.bind(this);
 	}
 
 	onDialogComplete(values) {
@@ -35,8 +35,17 @@ class DialogEditDroplet extends Component {
 		}
 	}
 
-	deleteDroplet() {
-		console.log('delete droplet');
+	detachAttachment() {
+		if (this.props.state.attachment_index !== null) {
+			this.props.class_ui.zoneDetachAttachment(
+				this.props.state.zone_id,
+				this.props.state.attachment_index
+			);
+		} else {
+			throw new Error('attachment_index is null or not defined. Cannot detach');
+		}
+
+		this.props.onDialogCancel();
 	}
 
 	getFieldsets() {
@@ -102,7 +111,8 @@ class DialogEditDroplet extends Component {
 	}
 
 	render() {
-		var title, notes, buttons;
+		var title, notes, buttons,
+			fieldsets = this.getFieldsets();
 
 		buttons = [{
 			type: 'cancel',
@@ -113,25 +123,36 @@ class DialogEditDroplet extends Component {
 		if (this.props.state.attachment_index !== null) {
 			// editing
 			title = 'Edit Droplet';
-			notes = [
-				'You can edit the Droplet using the fields below. ' +
-					'Change the bits you want to customise and click “Add Droplet” when you’re done.'
-			];
-			buttons = buttons.concat({
-				type: 'submit',
-				label: 'Edit Droplet'
-			}, {
+
+			if (fieldsets.length) {
+				notes = [
+					'You can edit the Droplet using the fields below. ' +
+						'Change the bits you want to customise and use “Add Droplet” when you’re done.'
+				];
+
+				buttons.push({
+					type: 'submit',
+					label: 'Edit Droplet'
+				});
+			} else {
+				notes = [
+					'There is nothing to edit on this Droplet, but you can remove it ' +
+						'With the “Remove Droplet” button.'
+				];
+			}
+
+			buttons.push({
 				type: 'general',
-				label: 'Delete Droplet',
+				label: 'Remove Droplet',
 				className: 'danger pull-left',
-				onClick: this.deleteDroplet
+				onClick: this.detachAttachment
 			});
 		} else {
 			// adding
 			title = 'Add Droplet';
 			notes = [
 				'You’ve found the right drop place to put this Droplet! ' +
-					'Edit anything you would like to change and then click “Edit Droplet”.'
+					'Edit anything you would like to change and then use “Edit Droplet”.'
 			];
 			buttons = buttons.concat({
 				type: 'submit',
@@ -147,7 +168,7 @@ class DialogEditDroplet extends Component {
 					className={this.props.settings.classes.dialog.heading}/>
 
 				<Form
-					fieldSets={this.getFieldsets()}
+					fieldSets={fieldsets}
 					buttons={buttons}
 					onSubmit={this.onDialogComplete}
 					onCancel={this.props.onDialogCancel}/>

@@ -33,5 +33,13 @@ module.exports = {
 			attachment_index,
 			data
 		};
-	}
+	},
+
+	zoneDetachAttachment: function(id, attachment_index) {
+		return {
+			type: actionTypes.ZONE_DETACH_ATTACHMENT,
+			id,
+			attachment_index
+		};
+	},
 };

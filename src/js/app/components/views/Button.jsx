@@ -25,7 +25,7 @@ var Button = function(props) {
 Button.propTypes = {
 	type: PropTypes.oneOf(['submit', 'cancel', 'general']).isRequired,
 	label: PropTypes.string.isRequired,
-	className: PropTypes.oneOf(['danger']),
+	className: PropTypes.string,
 	onClick: PropTypes.func,
 	onCancel: PropTypes.func
 };
