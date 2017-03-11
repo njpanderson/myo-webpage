@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import Dialog from '../views/Dialog.jsx';
+import Dialog from '../dialogs/Dialog.jsx';
 import { dialogModes } from '../../assets/constants';
 import actions from '../../state/actions';
 
