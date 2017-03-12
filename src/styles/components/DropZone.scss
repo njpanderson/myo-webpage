@@ -2,21 +2,34 @@
 	display: inline-block;
 
 	.target {
-		border-radius: 3px;
-		padding: 1px 5px;
-		background-color: blue;
+		border-radius: $border-radius-small;
+		padding: 2px 5px;
+		background-color: $blue;
 		color: white;
-	}
 
-	&.is-active .target {
-		background-color: lightblue;
-	}
+		&.is-active {
+			background-color: $blue-dark;
+		}
 
-	&.is-target .target {
-		background-color: red;
+		&.is-target {
+			box-shadow: 0 0 5px $red;
+			background-color: $red;
+		}
+
+		&.hidden {
+			display: none;
+		}
 	}
 
 	.attachments {
+		> * {
+			display: inline-block;
+			margin: 1px;
+			border-radius: $border-radius-small;
+			padding: 1px;
+			background-color: $green;
+		}
+
 		.element {
 			display: block;
 		}

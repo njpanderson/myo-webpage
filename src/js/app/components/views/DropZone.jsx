@@ -43,14 +43,17 @@ class DropZoneComponent extends Component {
 
 	render() {
 		var key = this.props.zone.id + '-zone',
-			target_key = this.props.zone.id + '-target';
+			target_key = this.props.zone.id + '-target',
+			target_class;
+
+		target_class = (this.props.activeAttachments.length < this.props.zone.maxAttachments) ?
+			this.props.settings.classes.dropzone_target :
+			this.props.settings.classes.dropzone_target + ' ' + this.props.settings.classes.hidden;
 
 		return (
 			<span
 				key={key}
 				className={this.props.settings.classes.dropzone}
-				data-id={this.props.zone.id}
-				data-attachment={this.props.zone.attachmentId}
 				ref={collectRef(this.props, ['dropzone'], this.props.zone.id)}>
 
 				<span
@@ -58,7 +61,11 @@ class DropZoneComponent extends Component {
 					{this.renderActiveAttachments()}
 				</span>
 				<span key={target_key}
-					className="target">{this.props.settings.dropZone.label}</span>
+					ref={collectRef(this.props, ['dropzone_target'], this.props.zone.id)}
+					data-id={this.props.zone.id}
+					data-attachment={this.props.zone.attachmentId}
+					className={target_class}
+					>{this.props.settings.dropZone.label}</span>
 			</span>
 		);
 	}

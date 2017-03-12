@@ -151,8 +151,8 @@ class DialogEditDroplet extends Component {
 			// adding
 			title = 'Add Droplet';
 			notes = [
-				'You’ve found the right drop place to put this Droplet! ' +
-					'Edit anything you would like to change and then use “Edit Droplet”.'
+				'You’ve found the right drop place to put this Droplet! ',
+				'Edit anything you would like to change and then use “Edit Droplet”.'
 			];
 			buttons = buttons.concat({
 				type: 'submit',

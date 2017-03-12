@@ -6,10 +6,12 @@ export default {
 		is_dragging: 'dragging',
 		droplet_dragging: 'droplet-dragging',
 		dropzone: 'drop-zone',
-		dropzone_active: 'is-active',
-		dropzone_target: 'is-target',
+		dropzone_target: 'target',
+		dropzone_is_active: 'is-active',
+		dropzone_is_target: 'is-target',
 		attached: 'attached',
 		text_element: 'text',
+		hidden: 'hidden',
 		dialog: {
 			main: 'dialog',
 			visible: 'visible',
@@ -18,7 +20,7 @@ export default {
 		}
 	},
 	selectors: {
-		drop_zone: '.drop-zone',
+		drop_zone: '.drop-zone .target',
 		droplet: '.droplet'
 	},
 	view: {

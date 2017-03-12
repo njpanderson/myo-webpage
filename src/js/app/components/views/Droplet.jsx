@@ -23,7 +23,7 @@ class Droplet extends Component {
 				id={this.props.id}
 				className={classes.join(' ')}
 				ref={collectRef(this.props, ['droplet'], this.props.id)}>
-				{this.props.name}
+				<span className="label">{this.props.name}</span>
 			</a>
 		);
 	}

@@ -7,6 +7,14 @@
 	right: 0;
 }
 
+header h1 {
+	letter-spacing: 1px;
+
+	b {
+		color: $blue-dark;
+	}
+}
+
 .tag-canvas {
 	display: flex;
 	flex-direction: column;
@@ -29,7 +37,7 @@
 	}
 
 	.template {
-		background-color: yellow;
+		background-color: $bg-code;
 	}
 
 	.view {
@@ -46,7 +54,6 @@
 	}
 
 	.pallet {
-		flex-basis: $droplet-size + ($section-padding * 2);
-		background-color: $gray-light;
+		flex-basis: ($droplet-size / 2) + ($section-padding * 2);
 	}
 }

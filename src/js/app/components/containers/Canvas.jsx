@@ -28,8 +28,7 @@ class Canvas extends Component {
 				ref={collectRef(this.props, 'canvas')}
 				>
 				<header>
-					<h1>Tag</h1>
-					<p>Short introductory text on how to use tag...</p>
+					<h1>&lt;<b>Tag</b>&gt;</h1>
 				</header>
 
 				<div className="main">

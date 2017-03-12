@@ -1,6 +1,7 @@
 body {
-	font-family: sans-serif;
+	font-family: $font-family-base;
 	line-height: $line-height;
+	color: $black;
 }
 
 h1 {
@@ -26,4 +27,8 @@ p:first-child {
 
 p:last-child {
 	margin-bottom: 0;
+}
+
+pre {
+	font-family: $font-family-mono;
 }

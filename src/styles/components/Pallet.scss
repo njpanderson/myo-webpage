@@ -1,3 +1,9 @@
 .pallet {
 	display: flex;
+	border-top: 1px solid $gray-med;
+	background-color: $gray-light;
+
+	> *:not(first-child) {
+		margin: 0 5px;
+	}
 }

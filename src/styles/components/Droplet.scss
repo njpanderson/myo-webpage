@@ -1,20 +1,31 @@
 .droplet {
-	transition: background-color,height .15s ease-in-out;
-	display: block;
-	width: $droplet-size;
-	height: $droplet-size;
-	padding: 5px;
-	text-align: center;
-	background-color: salmon;
+	border-radius: $border-radius-small;
+	width: ($droplet-size * 2);
+	height: ($droplet-size / 2);
 	text-decoration: none;
-	color: white;
 
-	&.attached {
-		background-color: green;
+	.label {
+		transition: background-color .15s $ease-in-out-quart,
+			opacity .5s $ease-in-out-quart;
+		display: flex;
+		align-items: center;
+		opacity: 1;
+		width: ($droplet-size * 2);
+		height: ($droplet-size / 2);
+		padding: 5px;
+		background-color: $blue;
+		color: $black;
 	}
 
-	&.droplet-dragging {
-		height: ($droplet-size / 4);
+	&:hover .label,
+	&:active .label {
+		color: $white;
+		background-color: $blue-dark;
+	}
+
+	&.droplet-dragging .label {
+		opacity: 0.5;
+		box-shadow: $box-shadow-shallow;
 		background-color: red;
 	}
 }

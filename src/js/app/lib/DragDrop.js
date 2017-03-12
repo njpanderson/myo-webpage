@@ -52,17 +52,17 @@ DragDrop.prototype = {
 		dropable.setDropable(settings)
 			.on('dropactivate', (event) => {
 				// add active dropzone feedback
-				event.target.classList.add(this.settings.classes.dropzone_active);
+				event.target.classList.add(this.settings.classes.dropzone_is_active);
 			})
 			.on('dragenter', (event) => {
 				// feedback the possibility of a drop
-				event.target.classList.add(this.settings.classes.dropzone_target);
+				event.target.classList.add(this.settings.classes.dropzone_is_target);
 				// event.relatedTarget.classList.add('can-drop');
 				// event.relatedTarget.textContent = 'Dragged in';
 			})
 			.on('dragleave', (event) => {
 				// remove the drop feedback style
-				event.target.classList.remove(this.settings.classes.dropzone_target);
+				event.target.classList.remove(this.settings.classes.dropzone_is_target);
 				// event.relatedTarget.classList.remove('can-drop');
 				// event.relatedTarget.textContent = 'Dragged out';
 			})
@@ -73,8 +73,8 @@ DragDrop.prototype = {
 			})
 			.on('dropdeactivate', (event) => {
 				// remove active dropzone feedback
-				event.target.classList.remove(this.settings.classes.dropzone_active);
-				event.target.classList.remove(this.settings.classes.dropzone_target);
+				event.target.classList.remove(this.settings.classes.dropzone_is_active);
+				event.target.classList.remove(this.settings.classes.dropzone_is_target);
 			});
 
 		this.ui.drop.push(this._createInstance(element, dropable));
