@@ -1,11 +1,5 @@
 [
 	{
-		"name": "Title",
-		"dropletType": "text",
-		"value": "My Music Maker",
-		"attachmentIds": ["title"]
-	},
-	{
 		"name": "Header",
 		"dropletType": "text",
 		"value": "My Music Maker",
