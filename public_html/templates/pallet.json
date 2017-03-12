@@ -65,7 +65,7 @@
 		"tagName": "script",
 		"attachmentIds": ["script_main"],
 		"attrs": {
-			"src": "music-maker.js",
+			"src": "includes/js/music-maker.js",
 			"type": "text/javascript"
 		}
 	}

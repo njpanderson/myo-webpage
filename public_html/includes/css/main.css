@@ -1,0 +1,52 @@
+body {
+	background-color: #fff;
+}
+
+h1 {
+	font-size: 24px;
+}
+
+header h1 {
+	text-align: center;
+}
+
+.buttons {
+	display: flex;
+	justify-content: center;
+}
+
+.buttons > * {
+	display: block;
+	margin: 0 5px;
+	border: 3px solid #333;
+	border-radius: 5px;
+	width: 30px;
+	padding:	10px;
+	text-align: center;
+	font-size: 32px;
+}
+
+.button-blue {
+	border-color: #4338b3;
+	background-color: #6890ff;
+}
+
+.button-red {
+	border-color: #b33234;
+	background-color: #ff6f5f;
+}
+
+.button-yellow {
+	border-color: #acb330;
+	background-color: #fff07f;
+}
+
+.button-pink {
+	border-color: #b34eb0;
+	background-color: #ff98cb;
+}
+
+.button-green {
+	border-color: #32b31a;
+	background-color: #8dff8b;
+}

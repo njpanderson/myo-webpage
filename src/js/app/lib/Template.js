@@ -97,7 +97,6 @@ Template.prototype = {
 		var html = '';
 
 		this._template.forEach((node) => {
-			console.log(node);
 			if (node.type === 'text') {
 				// plain text node
 				html += node.content;
@@ -160,8 +159,8 @@ Template.renderElementDroplet = function(data) {
 		}
 	}
 
-	if (data.innerHTML) {
-		markup += '>' + data.innerHTML +
+	if (data.innerHTML || Template.containerTags.indexOf(data.tagName) !== -1) {
+		markup += '>' + (data.innerHTML || '') +
 			'</' + data.tagName + '>';
 	} else {
 		markup += '/>';
@@ -185,5 +184,7 @@ Template.entities = function(str) {
 		('&#' + i.charCodeAt(0) + ';')
 	);
 };
+
+Template.containerTags = ['a'];
 
 export default Template;
