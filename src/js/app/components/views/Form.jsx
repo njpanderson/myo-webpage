@@ -119,17 +119,19 @@ class Form extends Component {
 	getButtons() {
 		var buttons = [];
 
-		this.props.buttons.forEach((button, index) => {
-			buttons.push(
-				<Button
-					key={'button-' + index}
-					type={button.type}
-					label={button.label}
-					className={button.className}
-					onCancel={this.props.onCancel}
-					onClick={button.onClick}/>
-			);
-		});
+		if (this.props.buttons && this.props.buttons.length) {
+			this.props.buttons.forEach((button, index) => {
+				buttons.push(
+					<Button
+						key={'button-' + index}
+						type={button.type}
+						label={button.label}
+						className={button.className}
+						onCancel={this.props.onCancel}
+						onClick={button.onClick}/>
+				);
+			});
+		}
 
 		return buttons;
 	}

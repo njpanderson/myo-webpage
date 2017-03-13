@@ -85,7 +85,7 @@ App.prototype = {
 				this._store.dispatch(actions.setUIState(uiStates.ACTIVE));
 			})
 			.catch((error) => {
-				console.error(error);
+				throw error;
 			});
 	},
 

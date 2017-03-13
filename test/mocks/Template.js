@@ -1,7 +1,6 @@
 import fs from 'fs';
 
 var Template = function() {
-
 };
 
 Template.prototype = {
@@ -20,9 +19,10 @@ Template.prototype = {
 	},
 
 	create: function() {
-		return fs.readFileSync('test/fixtures/template-with-drop-zones.html', {
-			encoding: 'UTF-8'
-		});
+		return {
+			template: [],
+			drop_zones: {}
+		};
 	}
 };
 

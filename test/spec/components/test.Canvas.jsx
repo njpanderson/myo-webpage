@@ -10,17 +10,15 @@ describe('Canvas', function() {
 
 	const renderer = ReactTestUtils.createRenderer(),
 		state = {
-			app: {
-				ui_state: uiStates.INITIALISING
-			}
+			ui_state: uiStates.INITIALISING
 		},
 		data = {
 			template: null
 		},
-		refCollector = () => {};
+		noop = () => {};
 
 	before(() => {
-		Canvas = require('../../../src/js/app/components/Canvas').default;
+		Canvas = require('../../../src/js/app/components/containers/Canvas').default;
 	});
 
 	it('Should render to page', function() {
@@ -28,7 +26,13 @@ describe('Canvas', function() {
 			<Canvas
 				settings={defaults}
 				state={state}
-				refCollector={refCollector}
+				refCollector={noop}
+				onMount={noop}
+				onDialogComplete={noop}
+				onDialogCancel={noop}
+				onAttachmentClick={noop}
+				class_ui={{}}
+				class_template={{}}
 				data={data}/>
 		);
 
@@ -40,7 +44,13 @@ describe('Canvas', function() {
 			<Canvas
 				settings={defaults}
 				state={state}
-				refCollector={refCollector}
+				refCollector={noop}
+				onMount={noop}
+				onDialogComplete={noop}
+				onDialogCancel={noop}
+				onAttachmentClick={noop}
+				class_ui={{}}
+				class_template={{}}
 				data={data}/>
 		);
 
@@ -52,15 +62,19 @@ describe('Canvas', function() {
 			<Canvas
 				settings={defaults}
 				state={Object.deepAssign({}, state, {
-					app: {
-						active: true,
-						ui_state: uiStates.ACTIVE
-					}
+					active: true,
+					ui_state: uiStates.ACTIVE
 				})}
-				refCollector={refCollector}
+				refCollector={noop}
+				onMount={noop}
+				onDialogComplete={noop}
+				onDialogCancel={noop}
+				onAttachmentClick={noop}
+				class_ui={{}}
+				class_template={{}}
 				data={data}/>
 		);
 
-		expect(renderer.getRenderOutput().props.className).to.equal('tag-canvas building active');
+		expect(renderer.getRenderOutput().props.className).to.equal('tag-canvas active');
 	});
 });

@@ -7,13 +7,9 @@ import structCompare from '../helpers/structCompare';
 import final_pallet from '../fixtures/parsed-pallet';
 
 describe('Index', function() {
-	let App, final_template;
+	let App;
 
 	chai.use(chaiAsPromised);
-
-	final_template = fs.readFileSync('test/fixtures/template-with-drop-zones.html', {
-		encoding: 'UTF-8'
-	});
 
 	useMockery(() => {
 		useMockery
@@ -41,10 +37,9 @@ describe('Index', function() {
 	it('Should load a template and pallet', function() {
 		var app = new App();
 		return app.load('test/fixtures/template.html', 'testpallet.json').then(() => {
-			expect(app._data.template).to.equal(final_template);
-			expect(app._data.pallet).to.have.length(2);
-			structCompare(app._data.pallet[0], final_pallet[0]);
-			structCompare(app._data.pallet[1], final_pallet[1]);
+			expect(app._data.template).to.be.an('array');
+			expect(app._data.drop_zones).to.be.an('object');
+			expect(app._data.pallet).to.be.an('array');
 		});
 	});
 

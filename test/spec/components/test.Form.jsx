@@ -5,15 +5,23 @@ import { expect } from 'chai';
 describe('Form', function() {
 	var Form;
 
-	const renderer = ReactTestUtils.createRenderer();
+	const renderer = ReactTestUtils.createRenderer(),
+		fieldSets = [{
+			key: 'test_fieldset1',
+			fields: []
+		}, {
+			key: 'test_fieldset2',
+			fields: []
+		}];
 
 	before(() => {
-		Form = require('../../../src/js/app/components/Form').default;
+		Form = require('../../../src/js/app/components/views/Form').default;
 	});
 
 	it('Should render to page', function() {
 		renderer.render(
-			<Form/>
+			<Form
+				fieldSets={fieldSets}/>
 		);
 
 		expect(renderer.getRenderOutput().type).to.equal('form');
