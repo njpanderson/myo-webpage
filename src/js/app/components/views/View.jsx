@@ -20,6 +20,7 @@ class View extends Component {
 	render() {
 		return (
 			<section className="view">
+				<div className="drag-mask"></div>
 				<iframe ref={collectRef(this.props, 'view_frame')}
 					src={this.props.settings.view.src}></iframe>
 			</section>

@@ -1,0 +1,13 @@
+.view iframe {
+	z-index: 1;
+}
+
+.overlay,
+.view .drag-mask {
+	z-index: 2;
+}
+
+.dialog,
+.droplet {
+	z-index: 3;
+}
