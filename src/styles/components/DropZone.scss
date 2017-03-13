@@ -1,17 +1,25 @@
 .drop-zone {
 	display: inline-block;
 
-	.target {
-		border-radius: $border-radius-small;
-		padding: 2px 5px;
-		background-color: $blue;
-		color: white;
+	.target-outer {
+		display: inline-block;
+		position: relative;
+	}
 
-		&.is-active {
+	.target {
+		b {
+			border-radius: $border-radius-small;
+			padding: 2px 5px;
+			background-color: $blue;
+			line-height: 120%;
+			color: white;
+		}
+
+		&.is-active b {
 			background-color: $blue-dark;
 		}
 
-		&.is-target {
+		&.is-target b {
 			box-shadow: 0 0 5px $red;
 			background-color: $red;
 		}

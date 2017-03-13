@@ -202,15 +202,21 @@ UI.prototype = {
 
 		queue.forEach((item) => {
 			var ref = this._getReferencedElement(item.collection, item.key),
-				drop_zones;
+				data;
+
+			if (item.collection === 'dropzone_target') {
+				data = {
+					zone_id: item.key
+				};
+			}
 
 			// create a DragDrop instance and assign to the pallet item data
 			if (item.type === 'drag') {
-				this._data.UI.dragdrop.droplets.addDragable(ref);
+				this._data.UI.dragdrop.droplets.addDragable(ref, {}, data);
 			} else if (item.type === 'drop') {
 				this._data.UI.dragdrop.droplets.addDropable(ref, {
 					accept: this.settings.selectors.droplet
-				});
+				}, data);
 			}
 		});
 	},
@@ -218,10 +224,13 @@ UI.prototype = {
 	/**
 	 * Handles drops of droplets into drop zones. Will attach to the zone
 	 * if the drop is valid.
+	 * @param {HTMLElement} element - The element being dragged.
+	 * @param {HTMLElement} target - The target being dropped onto.
+	 * @param {object} data - data object, as set with addDragable/addDropable.
 	 * @private
 	 */
-	_handleDropletDrop: function(element, zone) {
-		var drop_zone = this.getDropZoneById(zone.dataset.id),
+	_handleDropletDrop: function(element, target, data) {
+		var drop_zone = this.getDropZoneById(data.zone_id),
 			droplet = this.getDropletById(element.id);
 
 		if (this._isValidDrop(droplet, drop_zone)) {

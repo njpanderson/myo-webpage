@@ -7,11 +7,15 @@
 	right: 0;
 }
 
-header h1 {
-	letter-spacing: 1px;
+header {
+	border-bottom: 1px solid $gray-med;
 
-	b {
-		color: $blue-dark;
+	h1 {
+		letter-spacing: 1px;
+
+		b {
+			color: $blue-dark;
+		}
 	}
 }
 
@@ -30,13 +34,19 @@ header h1 {
 		display: flex;
 		flex-grow: 1;
 
-		> * {
+		> *:not(.drag-handle) {
 			flex-basis: 50%;
 			padding: $section-padding;
+		}
+
+		.drag-handle {
+			flex-basis: 20px;
+			background-color: $gray-dark;
 		}
 	}
 
 	.template {
+		border-right: 1px solid $gray-med;
 		background-color: $bg-code;
 	}
 

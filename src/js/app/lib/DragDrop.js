@@ -18,14 +18,14 @@ var DragDrop = function(canvas, settings, callbacks = {}) {
 };
 
 DragDrop.prototype = {
-	addDragable: function(element, settings = {}) {
+	addDragable: function(element, settings = {}, data = {}) {
 		var dragable = new Dragable(element);
 
 		settings = Object.assign({
 			restrict: {
 				restriction: this._canvas,
 				elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
-				endOnly: false
+				endOnly: true
 			}
 		}, settings);
 
@@ -39,14 +39,14 @@ DragDrop.prototype = {
 				element.classList.remove(this.settings.classes.droplet_dragging);
 
 				if (typeof this._callbacks.dragEnd === 'function') {
-					this._callbacks.dragEnd(element);
+					this._callbacks.dragEnd(element, data);
 				}
 			});
 
 		this.ui.drag.push(this._createInstance(element, dragable));
 	},
 
-	addDropable: function(element, settings = {}) {
+	addDropable: function(element, settings = {}, data = {}) {
 		var dropable = new Dropable(element);
 
 		dropable.setDropable(settings)
@@ -68,7 +68,7 @@ DragDrop.prototype = {
 			})
 			.on('drop', (event) => {
 				if (typeof this._callbacks.drop === 'function') {
-					this._callbacks.drop(event.relatedTarget, event.target);
+					this._callbacks.drop(event.relatedTarget, event.target, data);
 				}
 			})
 			.on('dropdeactivate', (event) => {

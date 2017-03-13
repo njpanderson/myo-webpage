@@ -1,5 +1,4 @@
 .droplet {
-	border-radius: $border-radius-small;
 	width: ($droplet-size * 2);
 	height: ($droplet-size / 2);
 	text-decoration: none;
@@ -10,10 +9,15 @@
 		display: flex;
 		align-items: center;
 		opacity: 1;
+		border-radius: $border-radius-small;
+		border: 1px solid $blue-dark;
+		border-left-width: 5px;
 		width: ($droplet-size * 2);
 		height: ($droplet-size / 2);
-		padding: 5px;
-		background-color: $blue;
+		padding: 5px 10px;
+		line-height: 120%;
+		@include font-size(14);
+		background-color: $bg-bright;
 		color: $black;
 	}
 
@@ -26,6 +30,5 @@
 	&.droplet-dragging .label {
 		opacity: 0.5;
 		box-shadow: $box-shadow-shallow;
-		background-color: red;
 	}
 }
