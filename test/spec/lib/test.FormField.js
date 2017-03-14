@@ -180,5 +180,27 @@ describe('FormField', function() {
 			}, 'fieldname', 'Test error'))
 				.to.be.true;
 		});
+
+		it('Throws if an field’s "maxlength" attribute isn’t a number above 0', function() {
+			expect(() => FormField.validateDataAttribute({
+				type: 'text',
+				maxlength: ''
+			}, 'fieldname', 'Test error'))
+				.to.throw(Error, 'fieldname - "maxlength" attribute isn’t a number or above zero');
+
+			expect(() => FormField.validateDataAttribute({
+				type: 'text',
+				maxlength: -1
+			}, 'fieldname', 'Test error'))
+				.to.throw(Error, 'fieldname - "maxlength" attribute isn’t a number or above zero');
+		});
+
+		it('Accepts if an field’s "maxlength" attribute is a number above 0', function() {
+			expect(FormField.validateDataAttribute({
+				type: 'text',
+				maxlength: 1
+			}, 'fieldname', 'Test error'))
+				.to.be.true;
+		});
 	});
 });

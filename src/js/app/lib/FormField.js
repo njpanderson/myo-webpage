@@ -96,6 +96,14 @@ FormField.validateDataAttribute = function(data, item, error_prefix) {
 		);
 	}
 
+	// check "maxlength" is valid
+	if (typeof data.maxlength !== 'undefined' &&
+		(typeof data.maxlength !== 'number' ||data.maxlength < 1)) {
+		throw new Error(
+			error + '"maxlength" attribute isn’t a number or above zero'
+		);
+	}
+
 	return true;
 };
 

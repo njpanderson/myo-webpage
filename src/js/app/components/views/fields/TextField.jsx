@@ -13,6 +13,7 @@ function TextField(props) {
 				name={props.field.name}
 				placeholder={props.field.placeholder}
 				onChange={props.onChange}
+				maxLength={props.field.data.maxlength}
 				value={props.value}/>
 		</div>
 	);
