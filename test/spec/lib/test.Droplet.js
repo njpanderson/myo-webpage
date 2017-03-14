@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
 describe('Droplet', function() {
-	let Droplet, test_droplet;
+	let Droplet, test_droplet, test_element_droplet, test_attribute_droplet;
 
 	before(() => {
 		Droplet = require('../../../src/js/app/lib/Droplet').default;
@@ -13,6 +13,25 @@ describe('Droplet', function() {
 			dropletType: 'text',
 			attachmentIds: ['none'],
 			value: 'Test value'
+		};
+
+		test_element_droplet = {
+			name: 'Test element droplet',
+			dropletType: 'element',
+			attachmentIds: ['none'],
+			tagName: 'a',
+			attrs: {
+				'href': '#'
+			},
+			innerHTML: 'innerhtml'
+		};
+
+		test_attribute_droplet = {
+			name: 'Test element droplet',
+			dropletType: 'attribute',
+			attachmentIds: ['none'],
+			key: 'attr_key',
+			value: 'attr_value'
 		};
 	});
 
@@ -38,25 +57,47 @@ describe('Droplet', function() {
 	it('Should inherit basic fields', function() {
 		var droplet = new Droplet(test_droplet, 0);
 		expect(droplet).to.be.an.instanceof(Droplet);
-		expect(droplet.name).to.equal('Test Droplet');
-		expect(droplet.dropletType).to.equal('text');
-		expect(droplet.attachmentIds).to.eql(['none']);
-		expect(droplet.data.value).to.equal('Test value');
+		expect(droplet.name).to.equal(test_droplet.name);
+		expect(droplet.dropletType).to.equal(test_droplet.dropletType);
+		expect(droplet.attachmentIds).to.eql(test_droplet.attachmentIds);
+		expect(droplet.data.value).to.equal(test_droplet.value);
 	});
 
 	describe('#_setExtraFields', function() {
 		describe('Type "element"', function() {
-			it('Validates and sets extra fields');
+			it('Validates and sets extra fields', function() {
+				var droplet = new Droplet(test_element_droplet);
+				expect(droplet.data.tagName).to.equal(test_element_droplet.tagName);
+				expect(droplet.data.attrs).to.eql(test_element_droplet.attrs);
+				expect(droplet.data.innerHTML).to.equal(test_element_droplet.innerHTML);
+			});
 		});
 
 		describe('Type "text"', function() {
-			it('Validates and sets extra fields');
+			it('Validates and sets extra fields', function() {
+				var droplet = new Droplet(test_droplet, 0);
+				expect(droplet.data.value).to.equal(test_droplet.value);
+			});
+		});
+
+		describe('Type "attribute"', function() {
+			it('Validates and sets extra fields', function() {
+				var droplet = new Droplet(test_attribute_droplet, 0);
+				expect(droplet.data.key).to.equal(test_attribute_droplet.key);
+				expect(droplet.data.value).to.equal(test_attribute_droplet.value);
+			});
 		});
 	});
 
-	describe('#validateAndSet', function() {
-		it('Validates and sets the basic fields');
-		it('Throws when attempting to set a non-existent field');
+	describe('#_validateAndSet', function() {
+		it('Throws when attempting to set a non-existent field', function() {
+			var droplet = new Droplet(test_droplet, 0);
+
+			expect(() => droplet._validateAndSet(
+				['testnonexistentfield'],
+				{}
+			)).to.throw(Error);
+		});
 	});
 
 	describe('#_validateEditableSet', function() {

@@ -43,7 +43,7 @@ Droplet.prototype = {
 	 */
 	init: function() {
 		// set base properties for all droplets
-		this.validateAndSet([
+		this._validateAndSet([
 			'name',
 			'dropletType',
 			'attachmentIds',
@@ -70,15 +70,15 @@ Droplet.prototype = {
 	_setExtraFields: function() {
 		switch (this.dropletType) {
 		case 'text':
-			this.validateAndSet(['value'], this.data);
+			this._validateAndSet(['value'], this.data);
 			break;
 
 		case 'element':
-			this.validateAndSet(['attrs', 'tagName', 'innerHTML'], this.data);
+			this._validateAndSet(['attrs', 'tagName', 'innerHTML'], this.data);
 			break;
 
 		case 'attribute':
-			this.validateAndSet(['key', 'value'], this.data);
+			this._validateAndSet(['key', 'value'], this.data);
 			break;
 		}
 	},
@@ -87,7 +87,7 @@ Droplet.prototype = {
 	 * Validates (using the PropType functions) and sets the instance values
 	 * given the defined properties.
 	 */
-	validateAndSet(values, context) {
+	_validateAndSet(values, context) {
 		values.forEach((value) => {
 			if (Droplet.PropTypes.hasOwnProperty(value)) {
 				if (Droplet.PropTypes[value](
