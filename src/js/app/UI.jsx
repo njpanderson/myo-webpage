@@ -28,7 +28,9 @@ var UI = function(settings, refs, data, store, template) {
 		dropletEdit: {
 			droplet: null,
 			callback: null
-		}
+		},
+		vp_width: 0,
+		dragHandlePosition: 0
 	};
 
 	this._comms = new Communicator('app', window.location.origin, {
@@ -41,6 +43,8 @@ var UI = function(settings, refs, data, store, template) {
 	this.queues = {
 		dragdropBindings: []
 	};
+
+	window.addEventListener('resize', this._handleWindowResize.bind(this));
 };
 
 UI.prototype = {
@@ -137,6 +141,12 @@ UI.prototype = {
 			// valid component mounted
 			switch (collection) {
 			case 'canvas':
+				// add drag binding for the drag handle
+				this._queueDragDropBinding('drag', 'drag_handle', null, {
+					onDragMove: this._handleDragHandleMove.bind(this)
+				});
+
+				// process all drag/drop bindings
 				this._setDragDropBindings();
 				this._refs.mounted.canvas = true;
 				break;
@@ -155,7 +165,11 @@ UI.prototype = {
 				break;
 
 			case 'view_frame':
-				this._comms.registerGuestAddress('view', this._refs.components[collection].contentWindow);
+				this._comms.registerGuestAddress(
+					'view',
+					this._refs.components[collection].contentWindow
+				);
+
 				this._refs.mounted.view_frame = true;
 			}
 
@@ -166,6 +180,9 @@ UI.prototype = {
 				) {
 				// all required refs mounted - set active
 				this._store.dispatch(actions.setUIState(uiStates.ACTIVE));
+
+				// run initial size calculations
+				this._handleWindowResize();
 			}
 		} else {
 			throw new Error(
@@ -180,13 +197,13 @@ UI.prototype = {
 	 * This is done because the canvas is relied upon as the container for dragging.
 	 * @private
 	 */
-	_queueDragDropBinding: function(type, collection, key) {
+	_queueDragDropBinding: function(type, collection, key, settings) {
 		if (this._refs.components.canvas) {
 			// canvas already exists - immediately bind
-			this._setDragDropBindings([{ type, collection, key }]);
+			this._setDragDropBindings([{ type, collection, key, settings }]);
 		} else {
 			// push to queue
-			this.queues.dragdropBindings.push({ type, collection, key });
+			this.queues.dragdropBindings.push({ type, collection, key, settings });
 		}
 	},
 
@@ -214,11 +231,11 @@ UI.prototype = {
 
 			// create a DragDrop instance and assign to the pallet item data
 			if (item.type === 'drag') {
-				this._data.UI.dragdrop.droplets.addDragable(ref, {}, data);
+				this._data.UI.dragdrop.droplets.addDragable(ref, item.settings, data);
 			} else if (item.type === 'drop') {
-				this._data.UI.dragdrop.droplets.addDropable(ref, {
+				this._data.UI.dragdrop.droplets.addDropable(ref, Object.deepAssign({}, {
 					accept: this.settings.selectors.droplet
-				}, data);
+				}, item.settings), data);
 			}
 		});
 	},
@@ -265,6 +282,26 @@ UI.prototype = {
 			(droplet = this.getDropletById(state.app.active_droplet_id))) {
 			this.attachDropletToDropZone(droplet, drop_zone);
 		}
+	},
+
+	_handleDragHandleMove: function(event) {
+		var element_offset_px,
+			element_offset_percent;
+
+		this._data.UI.dragHandlePosition += event.dx;
+
+		// figure out handle position in % of the screen
+		element_offset_px = this._data.UI.drag_handle_x + this._data.UI.dragHandlePosition;
+		element_offset_percent = (element_offset_px / this._data.UI.vp_width) * 100;
+
+		this._refs.components.template.style.flexBasis = element_offset_percent + '%';
+		this._refs.components.view.style.flexBasis = Math.abs(element_offset_percent - 100) + '%';
+	},
+
+	_handleWindowResize: function() {
+		this._data.UI.drag_handle_x = (this._getReferencedElement('drag_handle')).offsetLeft;
+		this._data.UI.vp_width =
+			Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 	},
 
 	_isValidDrop: function(droplet, drop_zone) {
@@ -366,13 +403,14 @@ UI.prototype = {
 		var ref;
 
 		if (
-			(typeof key === 'undefined' && (ref = this._refs.components[collection])) ||
+			((typeof key === 'undefined' || !key) && (ref = this._refs.components[collection])) ||
 			(ref = this._refs.components[collection][key])
 		) {
 			return ref;
+		} else {
+			throw new Error('Referenced element at ' + collection + '(' + key +
+				') could not be found.');
 		}
-
-		return false;
 	},
 
 	getDropletById: function(id) {

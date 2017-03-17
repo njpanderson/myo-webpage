@@ -46,7 +46,8 @@ class Canvas extends Component {
 						template={this.props.data.template}
 						class_ui={this.props.class_ui}
 						/>
-					<div className="drag-handle"></div>
+					<div className="drag-handle"
+						ref={collectRef(this.props, 'drag_handle')}></div>
 					<View
 						settings={this.props.settings}
 						onMount={this.props.onMount}

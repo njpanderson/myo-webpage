@@ -21,22 +21,18 @@ DragDrop.prototype = {
 	addDragable: function(element, settings = {}, data = {}) {
 		var dragable = new Dragable(element);
 
-		settings = Object.assign({
-			// restrict: {
-			// 	restriction: this._canvas,
-			// 	elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
-			// 	endOnly: true
-			// }
-		}, settings);
+		// duplicate settings
+		settings = Object.assign({}, settings);
 
+		// make the element draggable
 		dragable.setDragable(settings)
 			.on('dragstart', () => {
 				this._canvas.classList.add(this.settings.classes.is_dragging);
-				element.classList.add(this.settings.classes.droplet_dragging);
+				element.classList.add(this.settings.classes.item_dragging);
 			})
 			.on('dragend', () => {
 				this._canvas.classList.remove(this.settings.classes.is_dragging);
-				element.classList.remove(this.settings.classes.droplet_dragging);
+				element.classList.remove(this.settings.classes.item_dragging);
 
 				if (typeof this._callbacks.dragEnd === 'function') {
 					this._callbacks.dragEnd(element, data);
@@ -118,14 +114,14 @@ Dragable.prototype = {
 	setDragable: function(settings) {
 		return interact(this._element)
 			.draggable(settings)
-			.on('dragmove', (event) => {
+			.on('dragmove', settings.onDragMove || ((event) => {
 				this._x += event.dx;
 				this._y += event.dy;
 
 				this._element.style.webkitTransform =
 				this._element.style.transform =
 					'translate(' + this._x + 'px, ' + this._y + 'px)';
-			});
+			}));
 	},
 
 	resetPosition: function() {

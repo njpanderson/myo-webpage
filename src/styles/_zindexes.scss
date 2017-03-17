@@ -7,7 +7,11 @@
 	z-index: 2;
 }
 
-.dialog,
-.droplet {
+.droplet,
+.drag-handle {
 	z-index: 3;
+}
+
+.dialog {
+	z-index: 4;
 }

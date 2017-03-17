@@ -6,5 +6,8 @@ require.ensure([], () => {
 	app.load(
 		'templates/default.html',
 		'templates/pallet.json'
-	);
+	).catch((error) => {
+		console.error(error);
+		throw error;
+	});
 }, 'app');

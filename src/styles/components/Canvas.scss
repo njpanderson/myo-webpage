@@ -39,7 +39,6 @@ header {
 
 		.drag-handle {
 			flex-basis: 20px;
-			background-color: $gray-dark;
 		}
 	}
 
@@ -49,7 +48,7 @@ header {
 
 	.view {
 		position: relative;
-		background-color: pink;
+		border-left: 1px solid $gray-med;
 
 		iframe,
 		.drag-mask {

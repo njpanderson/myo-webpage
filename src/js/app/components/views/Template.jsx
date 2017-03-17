@@ -14,10 +14,6 @@ class Template extends Component {
 		}
 	}
 
-	rawMarkup(html) {
-		return { __html: html };
-	}
-
 	/**
 	 * Uses state (from props.zones) to ascertain the attachments
 	 */

@@ -4,7 +4,7 @@ export default {
 		canvas_active: 'active',
 		droplet_active: 'droplet-active',
 		is_dragging: 'dragging',
-		droplet_dragging: 'droplet-dragging',
+		item_dragging: 'item-dragging',
 		dropzone: 'drop-zone',
 		dropzone_target: 'target',
 		dropzone_is_active: 'is-active',
@@ -26,6 +26,9 @@ export default {
 	selectors: {
 		drop_zone: '.drop-zone .target',
 		droplet: '.droplet'
+	},
+	template: {
+		initial_flex_basis: 50
 	},
 	view: {
 		src: 'view.html'
