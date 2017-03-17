@@ -36,13 +36,18 @@ var config = {
 	},
 	plugins: plugins,
 	module: {
-		rules: [
-			{
-				test: /\.jsx?$/,
-				exclude: /node_modules/,
-				loader: 'babel-loader'
-			}
-		]
+		rules: [{
+			test: /\.jsx?$/,
+			exclude: /node_modules/,
+			loader: 'babel-loader'
+		}, {
+			test: /\.svg$/,
+			loader: 'svg-sprite?' + JSON.stringify({
+				name: 'icon-[1]',
+				prefixize: true,
+				regExp: './img/svg/(.*)\\.svg'
+			})
+		}]
 	}
 };
 

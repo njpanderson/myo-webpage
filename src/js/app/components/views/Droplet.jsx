@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 
 import { collectRef } from '../../lib/utils';
 import Droplet from '../../lib/Droplet';
+import { GLYPHS, Icon } from '../../lib/Droplet';
 
 class DropletComponent extends Component {
 	constructor(props) {
@@ -36,6 +37,7 @@ class DropletComponent extends Component {
 				onClick={this.onClick}
 				ref={collectRef(this.props, ['droplet'], this.props.droplet.id)}>
 				<span className="label">{this.props.droplet.name}</span>
+				<Icon gylph={GLYPHS.ACCOUNT_LOGIN}/>
 			</a>
 		);
 	}
