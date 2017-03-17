@@ -23,9 +23,7 @@ header {
 	display: flex;
 	flex-direction: column;
 
-	header,
-	.pallet {
-		flex-grow: 0;
+	header {
 		flex-shrink: 0;
 		padding: $section-padding;
 	}
@@ -74,6 +72,9 @@ header {
 	}
 
 	.pallet {
-		flex-basis: ($droplet-size / 2) + ($section-padding * 2);
+		flex-wrap: wrap;
+		flex-shrink: 0;
+		padding: ($section-padding / 2) $section-padding;
+		// flex-basis: $droplet-height + ($section-padding * 2);
 	}
 }

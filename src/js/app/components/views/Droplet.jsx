@@ -2,7 +2,13 @@ import React, { Component, PropTypes } from 'react';
 
 import { collectRef } from '../../lib/utils';
 import Droplet from '../../lib/Droplet';
-import { GLYPHS, Icon } from '../../lib/Droplet';
+import { GLYPHS, Icon } from './Icon.jsx';
+
+const dropletTypeToGlyphs = {
+	'text': GLYPHS.TEXT,
+	'element': GLYPHS.TAG,
+	'attribute': GLYPHS.PUZZLE_PIECE
+};
 
 class DropletComponent extends Component {
 	constructor(props) {
@@ -24,7 +30,10 @@ class DropletComponent extends Component {
 	}
 
 	render() {
-		var classes = [this.props.settings.classes.droplet.node];
+		var classes = [
+			this.props.settings.classes.droplet.node,
+			'type-' + this.props.droplet.dropletType
+		];
 
 		if (this.props.active) {
 			classes.push(this.props.settings.classes.droplet.active);
@@ -36,8 +45,10 @@ class DropletComponent extends Component {
 				className={classes.join(' ')}
 				onClick={this.onClick}
 				ref={collectRef(this.props, ['droplet'], this.props.droplet.id)}>
-				<span className="label">{this.props.droplet.name}</span>
-				<Icon gylph={GLYPHS.ACCOUNT_LOGIN}/>
+				<span className="label">
+					<Icon glyph={dropletTypeToGlyphs[this.props.droplet.dropletType]}/>
+					{this.props.droplet.name}
+				</span>
 			</a>
 		);
 	}

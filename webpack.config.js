@@ -42,7 +42,7 @@ var config = {
 			loader: 'babel-loader'
 		}, {
 			test: /\.svg$/,
-			loader: 'svg-sprite?' + JSON.stringify({
+			loader: 'svg-sprite-loader?' + JSON.stringify({
 				name: 'icon-[1]',
 				prefixize: true,
 				regExp: './img/svg/(.*)\\.svg'

@@ -252,8 +252,6 @@ UI.prototype = {
 		console.log('click on droplet', event, droplet);
 		if (state.app.active_droplet_id !== droplet.id) {
 			this._store.dispatch(actions.setActiveDroplet(droplet.id));
-		} else {
-			this._store.dispatch(actions.setActiveDroplet(''));
 		}
 	},
 
@@ -266,7 +264,6 @@ UI.prototype = {
 		if (state.app.active_droplet_id !== 0 &&
 			(droplet = this.getDropletById(state.app.active_droplet_id))) {
 			this.attachDropletToDropZone(droplet, drop_zone);
-			this._store.dispatch(actions.setActiveDroplet(''));
 		}
 	},
 
@@ -275,6 +272,10 @@ UI.prototype = {
 	},
 
 	attachDropletToDropZone: function(droplet, drop_zone) {
+		// clear active droplet
+		this._store.dispatch(actions.setActiveDroplet(''));
+
+		// check if valid drop
 		if (this._isValidDrop(droplet, drop_zone)) {
 			if (droplet.editable) {
 				// show edit dialog before adding the attachment

@@ -1,7 +1,7 @@
 $section-padding: 10px;
 $dialog-padding: 20px;
 
-$droplet-size: 70px;
+$droplet-height: 35px;
 
 $border-radius-small: 3px;
 $border-radius-large: 6px;
@@ -16,6 +16,9 @@ $blue: #959eff;
 $blue-dark: #464ae0;
 $red: #ff515c;
 $green: #61ff4d;
+$green-dark: #3b9e2f;
+$purple: #cc49ff;
+$purple-dark: #8f32b4;
 $tan: #f3ffc6;
 
 // ui colors
@@ -23,6 +26,14 @@ $bg-bright: $white;
 $bg-code: $tan;
 $color-button-alt: $white;
 $color-button-danger: $white;
+
+// droplet types
+$color-type-text: $blue;
+$color-type-text-active: $blue-dark;
+$color-type-attribute: $green;
+$color-type-attribute-active: $green-dark;
+$color-type-element: $purple;
+$color-type-element-active: $purple-dark;
 
 $overlay_opacity: .6;
 $lighten-factor: 5%;

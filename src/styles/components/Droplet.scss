@@ -1,35 +1,83 @@
 .droplet {
-	width: ($droplet-size * 2);
-	height: ($droplet-size / 2);
+	height: $droplet-height;
 	text-decoration: none;
 
 	.label {
 		transition: background-color .15s $ease-in-out-quart,
+			color .15s $ease-in-out-quart,
+			border-color .15s $ease-in-out-quart,
 			opacity .5s $ease-in-out-quart;
 		display: flex;
 		align-items: center;
 		opacity: 1;
 		border-radius: $border-radius-small;
-		border: 1px solid $blue-dark;
+		border: 1px solid $gray-dark;
 		border-left-width: 5px;
-		width: ($droplet-size * 2);
-		height: ($droplet-size / 2);
+		height: $droplet-height;
 		padding: 5px 10px;
 		line-height: 120%;
 		@include font-size(14);
 		background-color: $bg-bright;
 		color: $black;
+
+		.icon {
+			transition: fill .15s $ease-in-out-quart;
+			margin-right: .5em;
+		}
 	}
 
 	&:hover .label,
 	&:active .label,
 	&.active .label {
 		color: $white;
-		background-color: $blue-dark;
+		background-color: $gray-dark;
+
+		.icon {
+			fill: $white;
+		}
 	}
 
 	&.droplet-dragging .label {
 		opacity: 0.5;
 		box-shadow: $box-shadow-shallow;
+	}
+
+	&.type-text {
+		.label {
+			border-color: $color-type-text;
+		}
+
+		&:hover .label,
+		&:active .label,
+		&.active .label {
+			border-color: $color-type-text-active;
+			background-color: $color-type-text-active;
+		}
+	}
+
+	&.type-attribute {
+		.label {
+			border-color: $color-type-attribute;
+		}
+
+		&:hover .label,
+		&:active .label,
+		&.active .label {
+			border-color: $color-type-attribute-active;
+			background-color: $color-type-attribute-active;
+		}
+	}
+
+	&.type-element {
+		.label {
+			border-color: $color-type-element;
+		}
+
+		&:hover .label,
+		&:active .label,
+		&.active .label {
+			border-color: $color-type-element-active;
+			background-color: $color-type-element-active;
+		}
 	}
 }
