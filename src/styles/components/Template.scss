@@ -1,5 +1,7 @@
 .template {
 	overflow: auto;
+	background-color: $gray-light;
+
 
 	pre {
 		line-height: 130%;
@@ -16,6 +18,7 @@
 	}
 }
 
+.droplet-active .template,
 .dragging .template {
-	background-color: #eee;
+	background-color: $bg-code;
 }

@@ -2,7 +2,7 @@ export default {
 	classes: {
 		canvas: 'tag-canvas',
 		canvas_active: 'active',
-		droplet: 'droplet',
+		droplet_active: 'droplet-active',
 		is_dragging: 'dragging',
 		droplet_dragging: 'droplet-dragging',
 		dropzone: 'drop-zone',
@@ -12,6 +12,10 @@ export default {
 		attached: 'attached',
 		text_element: 'text',
 		hidden: 'hidden',
+		droplet: {
+			node: 'droplet',
+			active: 'active',
+		},
 		dialog: {
 			main: 'dialog',
 			visible: 'visible',

@@ -59,6 +59,8 @@ UI.prototype = {
 					onDialogComplete={this._completeDialogAction.bind(this)}
 					onDialogCancel={this._cancelDialogAction.bind(this)}
 					onAttachmentClick={this._handleAttachmentClick.bind(this)}
+					onDropletClick={this._handleDropletClick.bind(this)}
+					onDropZoneClick={this._handleDropZoneClick.bind(this)}
 					class_ui={this}
 					class_template={this._template}/>
 			</Provider>,
@@ -233,6 +235,46 @@ UI.prototype = {
 		var drop_zone = this.getDropZoneById(data.zone_id),
 			droplet = this.getDropletById(element.id);
 
+		return this.attachDropletToDropZone(droplet, drop_zone);
+	},
+
+	_handleAttachmentClick: function(droplet, drop_zone, attachment_index) {
+		this._showDialog(dialogModes.EDIT_DROPLET, {
+			droplet_id: droplet.id,
+			zone_id: drop_zone.id,
+			attachment_index
+		});
+	},
+
+	_handleDropletClick: function(event, droplet) {
+		var state = this._store.getState();
+
+		console.log('click on droplet', event, droplet);
+		if (state.app.active_droplet_id !== droplet.id) {
+			this._store.dispatch(actions.setActiveDroplet(droplet.id));
+		} else {
+			this._store.dispatch(actions.setActiveDroplet(''));
+		}
+	},
+
+	_handleDropZoneClick: function(event, drop_zone) {
+		var state = this._store.getState(),
+			droplet;
+
+		console.log('click on drop zone', event, drop_zone);
+
+		if (state.app.active_droplet_id !== 0 &&
+			(droplet = this.getDropletById(state.app.active_droplet_id))) {
+			this.attachDropletToDropZone(droplet, drop_zone);
+			this._store.dispatch(actions.setActiveDroplet(''));
+		}
+	},
+
+	_isValidDrop: function(droplet, drop_zone) {
+		return drop_zone.willAccept(droplet, this._store);
+	},
+
+	attachDropletToDropZone: function(droplet, drop_zone) {
 		if (this._isValidDrop(droplet, drop_zone)) {
 			if (droplet.editable) {
 				// show edit dialog before adding the attachment
@@ -249,21 +291,11 @@ UI.prototype = {
 					droplet.data
 				);
 			}
+
+			return true;
 		} else {
 			return false;
 		}
-	},
-
-	_handleAttachmentClick: function(droplet, drop_zone, attachment_index) {
-		this._showDialog(dialogModes.EDIT_DROPLET, {
-			droplet_id: droplet.id,
-			zone_id: drop_zone.id,
-			attachment_index
-		});
-	},
-
-	_isValidDrop: function(droplet, drop_zone) {
-		return drop_zone.willAccept(droplet, this._store);
 	},
 
 	zoneAddAttachment: function(zone_id, droplet_id, data) {

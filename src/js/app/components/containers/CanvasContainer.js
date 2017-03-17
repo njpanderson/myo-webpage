@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 
 import Canvas from './Canvas.jsx';
-import actions from '../../state/actions.js';
 
 const mapStateToProps = (state) => {
 	return {
@@ -9,17 +8,8 @@ const mapStateToProps = (state) => {
 	};
 };
 
-const mapDispatchToProps = (dispatch) => {
-	return {
-		onPalletDrop: (id) => {
-			dispatch(actions.palletSetAttached(id, true));
-		},
-	};
-};
-
 const CanvasContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(Canvas);
 
 export default CanvasContainer;

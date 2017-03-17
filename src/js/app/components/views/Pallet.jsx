@@ -12,12 +12,11 @@ class Pallet extends Component {
 		if (this.props.data.pallet) {
 			this.props.data.pallet.forEach((droplet) => {
 				items.push(
-					<Droplet {...droplet.data}
-						name={droplet.name}
-						dropletType={droplet.dropletType}
-						id={droplet.id}
+					<Droplet droplet={droplet}
+						active={this.props.activeDropletId === droplet.id}
 						settings={this.props.settings}
 						onMount={this.props.onMount}
+						onClick={this.props.onDropletClick}
 						refCollector={this.props.refCollector}
 						key={droplet.id}/>
 				);
@@ -37,9 +36,14 @@ class Pallet extends Component {
 }
 
 Pallet.propTypes = {
-	data: PropTypes.object,
-	settings: PropTypes.object,
+	// from PalletContainer
+	activeDropletId: PropTypes.string.isRequired,
+
+	// from Canvas
+	data: PropTypes.object.isRequired,
+	settings: PropTypes.object.isRequired,
 	onMount: PropTypes.func,
+	onDropletClick: PropTypes.func.isRequired,
 	refCollector: PropTypes.func
 };
 

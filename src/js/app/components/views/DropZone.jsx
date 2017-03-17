@@ -10,6 +10,7 @@ class DropZoneComponent extends Component {
 
 		this.myrefs = {};
 		this.attachmentClick = this.attachmentClick.bind(this);
+		this.onClick = this.onClick.bind(this);
 	}
 
 	componentDidMount() {
@@ -18,7 +19,12 @@ class DropZoneComponent extends Component {
 		}
 	}
 
-	attachmentClick(droplet, attachmentIndex) {
+	onClick(event) {
+		event.preventDefault();
+		this.props.onClick(event, this.props.zone);
+	}
+
+	attachmentClick(event, droplet, attachmentIndex) {
 		if (typeof this.props.onAttachmentClick === 'function') {
 			this.props.onAttachmentClick(droplet, this.props.zone, attachmentIndex);
 		}
@@ -63,6 +69,7 @@ class DropZoneComponent extends Component {
 				</span>
 				<span className="target-outer">
 					<span key={target_key}
+						onClick={this.onClick}
 						ref={collectRef(this.props, ['dropzone_target'], this.props.zone.id)}
 						className={target_class}>
 							<b>{this.props.settings.dropZone.label}</b>
@@ -79,6 +86,7 @@ DropZoneComponent.propTypes = {
 	activeAttachments: PropTypes.array.isRequired,
 	onMount: PropTypes.func.isRequired,
 	onAttachmentClick: PropTypes.func.isRequired,
+	onClick: PropTypes.func.isRequired,
 	refCollector: PropTypes.func.isRequired,
 	class_ui: PropTypes.object.isRequired
 };

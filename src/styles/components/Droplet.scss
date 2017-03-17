@@ -22,7 +22,8 @@
 	}
 
 	&:hover .label,
-	&:active .label {
+	&:active .label,
+	&.active .label {
 		color: $white;
 		background-color: $blue-dark;
 	}

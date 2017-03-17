@@ -47,6 +47,7 @@
     "redux-devtools": "^3.3.2",
     "redux-mock-store": "^1.2.2",
     "sass": "^0.5.0",
+    "svg-sprite-loader": "^0.3.0",
     "webpack": "^2.2.1",
     "webpack-stream": "^3.2.0"
   },

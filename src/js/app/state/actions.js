@@ -1,10 +1,17 @@
 import { actionTypes } from '../assets/constants';
 
-module.exports = {
+export default {
 	setUIState: function(ui_state) {
 		return {
 			type: actionTypes.UI_STATE,
 			ui_state
+		};
+	},
+
+	setActiveDroplet: function(droplet_id) {
+		return {
+			type: actionTypes.SET_ACTIVE_DROPLET,
+			droplet_id
 		};
 	},
 

@@ -48,3 +48,16 @@
 	background-color: skyblue;
 	cursor: pointer;
 }
+
+.droplet-active .drop-zone {
+	.target {
+		b {
+			background-color: $blue-dark;
+		}
+
+		&:hover b {
+			box-shadow: 0 0 5px $red;
+			background-color: $red;
+		}
+	}
+}

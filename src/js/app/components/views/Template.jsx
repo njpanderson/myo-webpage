@@ -58,6 +58,7 @@ class Template extends Component {
 						activeAttachments={this.getZoneAttachments(node.zone.id)}
 						refCollector={this.props.refCollector}
 						onMount={this.props.onMount}
+						onClick={this.props.onDropZoneClick}
 						onAttachmentClick={this.props.onAttachmentClick}
 						class_ui={this.props.class_ui}/>
 				);
@@ -92,6 +93,7 @@ Template.propTypes = {
 	template: PropTypes.array.isRequired,
 	onMount: PropTypes.func.isRequired,
 	onAttachmentClick: PropTypes.func.isRequired,
+	onDropZoneClick: PropTypes.func.isRequired,
 	refCollector: PropTypes.func.isRequired,
 	class_ui: PropTypes.object.isRequired
 };

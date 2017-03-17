@@ -6,7 +6,7 @@ import { combineReducers } from 'redux';
 /**
  * Sets application state values
  */
-function app (state = default_state, action) {
+function app(state = default_state.app, action) {
 	var active;
 
 	switch (action.type) {
@@ -25,6 +25,13 @@ function app (state = default_state, action) {
 		return Object.assign({}, state, {
 			ui_state: action.ui_state,
 			active
+		});
+
+	case actionTypes.SET_ACTIVE_DROPLET:
+		// set the active droplet (i.e. the one that will be "dropped" when a
+		// drop zone is next clicked
+		return Object.assign({}, state, {
+			active_droplet_id: action.droplet_id
 		});
 
 	default:

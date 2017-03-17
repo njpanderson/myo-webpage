@@ -42,17 +42,43 @@ select {
 }
 
 button {
-	border: 1px solid $gray-med;
-	padding: 5px 10px;
-	background-color: $gray-light;
+	position: relative;
+	border: 0;
+	padding: 10px 15px;
+	background-color: $gray-med;
+
+	&:hover,
+	&:focus {
+		left: 2px;
+		top: -2px;
+		cursor: pointer;
+		box-shadow: $box-shadow-shallow;
+		background-color: lighten($gray-med, $lighten-factor);
+	}
+
+	&:active {
+		left: 0;
+		top: 0;
+		box-shadow: none;
+	}
 
 	&.primary {
-		color: $color-button-alt;
+		// color: $color-button-alt;
 		background-color: $blue;
+
+		&.primary:hover,
+		&.primary:focus {
+			background-color: lighten($blue, $lighten-factor);
+		}
 	}
 
 	&.danger {
 		color: $color-button-danger;
 		background-color: $red;
+
+		&.danger:hover,
+		&.danger:focus {
+			background-color: lighten($red, $lighten-factor);
+		}
 	}
 }

@@ -22,11 +22,11 @@ DragDrop.prototype = {
 		var dragable = new Dragable(element);
 
 		settings = Object.assign({
-			restrict: {
-				restriction: this._canvas,
-				elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
-				endOnly: true
-			}
+			// restrict: {
+			// 	restriction: this._canvas,
+			// 	elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
+			// 	endOnly: true
+			// }
 		}, settings);
 
 		dragable.setDragable(settings)

@@ -112,13 +112,8 @@ class DialogEditDroplet extends Component {
 
 	render() {
 		var title, notes, buttons,
-			fieldsets = this.getFieldsets();
-
-		buttons = [{
-			type: 'cancel',
-			onClick: this.props.onDialogCancel,
-			label: 'Cancel'
-		}];
+			fieldsets = this.getFieldsets(),
+			buttons = [];
 
 		if (this.props.state.attachment_index !== null) {
 			// editing
@@ -159,6 +154,12 @@ class DialogEditDroplet extends Component {
 				label: 'Add Droplet'
 			});
 		}
+
+		buttons.push({
+			type: 'cancel',
+			onClick: this.props.onDialogCancel,
+			label: 'Cancel'
+		});
 
 		return (
 			<div className={this.props.settings.classes.dialog.container}>
