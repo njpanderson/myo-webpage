@@ -1,6 +1,8 @@
 .pallet {
 	display: flex;
+	flex-wrap: wrap;
 	border-top: 1px solid $gray-med;
+	padding: ($section-padding / 2) $section-padding;
 	background-color: $gray-light;
 
 	.droplet {

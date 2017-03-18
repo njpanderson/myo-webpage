@@ -65,6 +65,7 @@ UI.prototype = {
 					onAttachmentClick={this._handleAttachmentClick.bind(this)}
 					onDropletClick={this._handleDropletClick.bind(this)}
 					onDropZoneClick={this._handleDropZoneClick.bind(this)}
+					onDragHandlePress={this._handleDragHandleEvent.bind(this)}
 					class_ui={this}
 					class_template={this._template}/>
 			</Provider>,
@@ -143,7 +144,7 @@ UI.prototype = {
 			case 'canvas':
 				// add drag binding for the drag handle
 				this._queueDragDropBinding('drag', 'drag_handle', null, {
-					onDragMove: this._handleDragHandleMove.bind(this)
+					onDragMove: this._handleDragHandleEvent.bind(this)
 				});
 
 				// process all drag/drop bindings
@@ -284,24 +285,68 @@ UI.prototype = {
 		}
 	},
 
-	_handleDragHandleMove: function(event) {
-		var element_offset_px,
-			element_offset_percent;
+	/**
+	 * Handles events from the drag handle (between template and view containers)
+	 * @private
+	 */
+	_handleDragHandleEvent: function(event) {
+		var width;
 
-		this._data.UI.dragHandlePosition += event.dx;
+		switch (event.type) {
+		case 'dragmove':
+			// incrememt dragHandlePosition based on x delta from interact instance
+			this._data.UI.dragHandlePosition += event.dx;
 
-		// figure out handle position in % of the screen
-		element_offset_px = this._data.UI.drag_handle_x + this._data.UI.dragHandlePosition;
-		element_offset_percent = (element_offset_px / this._data.UI.vp_width) * 100;
+			// figure out handle position in % of the screen and convert it to percent,
+			// then send straight to _setTemplateViewRatio function
+			this._setTemplateViewRatio(
+				((this._data.UI.drag_handle_x + this._data.UI.dragHandlePosition) /
+					this._data.UI.vp_width) * 100
+			);
 
-		this._refs.components.template.style.flexBasis = element_offset_percent + '%';
-		this._refs.components.view.style.flexBasis = Math.abs(element_offset_percent - 100) + '%';
+			break;
+
+		case 'mouseup':
+		case 'touchend':
+			if (this._data.UI.dragHandlePosition < 5 && this._data.UI.dragHandlePosition > -5) {
+				// little movement - assume a click/tap occured
+				width = (this._getReferencedElement('drag_handle')).offsetWidth;
+
+				console.log(this._data.UI.drag_handle_x, width);
+				if (this._data.UI.drag_handle_x < width) {
+					// set to 50/50
+					this._setTemplateViewRatio(50);
+				} else {
+					// set to 0/100
+					this._setTemplateViewRatio(0);
+				}
+			}
+
+			// update metrics whenever we're stopping
+			this._handleWindowResize();
+			break;
+		}
 	},
 
 	_handleWindowResize: function() {
 		this._data.UI.drag_handle_x = (this._getReferencedElement('drag_handle')).offsetLeft;
 		this._data.UI.vp_width =
 			Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+
+		// reset dragHandlePosition because the metrics have changed
+		this._data.UI.dragHandlePosition = 0;
+	},
+
+	/**
+	 * @param {number} ratio - % ratio for the template
+	 * @description
+	 * Sets the template/view ratio by giving the template container a % width and
+	 * adjusting the view container accordingly.
+	 * @private
+	 */
+	_setTemplateViewRatio: function(ratio) {
+		this._refs.components.template.style.flexBasis = ratio + '%';
+		this._refs.components.view.style.flexBasis = Math.abs(ratio - 100) + '%';
 	},
 
 	_isValidDrop: function(droplet, drop_zone) {

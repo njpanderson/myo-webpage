@@ -2,13 +2,13 @@
 	{
 		"name": "Header",
 		"dropletType": "text",
-		"value": "My Music Maker",
+		"value": "My Light Show",
 		"attachmentIds": ["h1"],
 		"editable": {
 			"value": {
 				"type": "text",
 				"label": "Header label",
-				"value": "My Music Maker",
+				"value": "My Light Show",
 				"required": true
 			}
 		}
@@ -17,7 +17,7 @@
 		"name": "Section",
 		"dropletType": "attribute",
 		"key": "class",
-		"value": "music-maker",
+		"value": "board",
 		"attachmentIds": ["section_class"]
 	},
 	{
@@ -60,7 +60,7 @@
 		"tagName": "script",
 		"attachmentIds": ["script_main"],
 		"attrs": {
-			"src": "includes/js/music-maker.js",
+			"src": "includes/js/main.js",
 			"type": "text/javascript"
 		}
 	}

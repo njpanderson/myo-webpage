@@ -1,0 +1,12 @@
+header {
+	padding: $section-padding;
+	border-bottom: 1px solid $gray-med;
+
+	h1 {
+		letter-spacing: 1px;
+
+		b {
+			color: $blue-dark;
+		}
+	}
+}

@@ -1,9 +1,10 @@
 .template {
 	overflow: auto;
+	border-right: 1px solid $gray-med;
 	background-color: $gray-light;
 
-
 	pre {
+		margin: $section-padding;
 		line-height: 130%;
 		tab-size: 3;
 	}

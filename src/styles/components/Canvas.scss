@@ -7,25 +7,12 @@
 	right: 0;
 }
 
-header {
-	border-bottom: 1px solid $gray-med;
-
-	h1 {
-		letter-spacing: 1px;
-
-		b {
-			color: $blue-dark;
-		}
-	}
-}
-
 .tag-canvas {
 	display: flex;
 	flex-direction: column;
 
 	header {
 		flex-shrink: 0;
-		padding: $section-padding;
 	}
 
 	.main {
@@ -34,7 +21,6 @@ header {
 
 		> *:not(.drag-handle) {
 			flex-basis: 50%;
-			padding: $section-padding;
 		}
 
 		.drag-handle {
@@ -42,38 +28,7 @@ header {
 		}
 	}
 
-	.template {
-		border-right: 1px solid $gray-med;
-	}
-
-	.view {
-		position: relative;
-		border-left: 1px solid $gray-med;
-
-		iframe,
-		.drag-mask {
-			position: absolute;
-			left: 0;
-			top: 0;
-			width: 100%;
-			height: 100%;
-		}
-
-		.drag-mask {
-			visibility: hidden;
-			background-color: $bg-bright;
-		}
-	}
-
-	&.dragging .view .drag-mask {
-		visibility: visible;
-		opacity: .7;
-	}
-
 	.pallet {
-		flex-wrap: wrap;
 		flex-shrink: 0;
-		padding: ($section-padding / 2) $section-padding;
-		// flex-basis: $droplet-height + ($section-padding * 2);
 	}
 }

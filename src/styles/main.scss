@@ -15,9 +15,11 @@ body {
 }
 
 @import 'components/Canvas';
+@import 'components/Header';
 @import 'components/Template';
-@import 'components/DropZone';
+@import 'components/View';
 @import 'components/Pallet';
+@import 'components/DropZone';
 @import 'components/Droplet';
 @import 'components/Dialog';
 @import 'components/Form';
