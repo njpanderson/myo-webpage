@@ -267,7 +267,6 @@ UI.prototype = {
 	_handleDropletClick: function(event, droplet) {
 		var state = this._store.getState();
 
-		console.log('click on droplet', event, droplet);
 		if (state.app.active_droplet_id !== droplet.id) {
 			this._store.dispatch(actions.setActiveDroplet(droplet.id));
 		}
@@ -276,8 +275,6 @@ UI.prototype = {
 	_handleDropZoneClick: function(event, drop_zone) {
 		var state = this._store.getState(),
 			droplet;
-
-		console.log('click on drop zone', event, drop_zone);
 
 		if (state.app.active_droplet_id !== 0 &&
 			(droplet = this.getDropletById(state.app.active_droplet_id))) {
@@ -312,7 +309,6 @@ UI.prototype = {
 				// little movement - assume a click/tap occured
 				width = (this._getReferencedElement('drag_handle')).offsetWidth;
 
-				console.log(this._data.UI.drag_handle_x, width);
 				if (this._data.UI.drag_handle_x < width) {
 					// set to 50/50
 					this._setTemplateViewRatio(50);

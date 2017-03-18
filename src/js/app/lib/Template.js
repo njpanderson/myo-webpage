@@ -146,7 +146,7 @@ Template.renderElementDroplet = function(data) {
 	// !TODO - make sure self-closing tags are correctly rendered
 	var attrs = [],
 		markup, attr;
-	console.log('renderElementDroplet', data);
+
 	markup = '<' + data.tagName;
 
 	if (data.attrs) {

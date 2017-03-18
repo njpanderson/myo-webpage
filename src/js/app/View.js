@@ -14,12 +14,12 @@ var View = function(settings = {}) {
 
 View.prototype = {
 	_handleAppMessage: function(message) {
-		console.log('message to "view"!', message);
+		// console.log('message to "view"!', message);
 
 		if (message.cmd === messageCommands.RELOAD) {
 			// reload request
-			console.log('reloading...');
-			console.log(message.data);
+			// console.log('reloading...');
+			// console.log(message.data);
 			this.settings.container.innerHTML = message.data.markup;
 
 			this._evalScripts();
@@ -57,8 +57,6 @@ View.prototype = {
 				this.scripts[index].new,
 				this.scripts[index].old
 			);
-
-			console.log('new script', this.scripts[index].new);
 		}
 	}
 };

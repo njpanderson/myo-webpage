@@ -15,8 +15,9 @@ class DialogEditDroplet extends Component {
 	}
 
 	onDialogComplete(values) {
-		var key,
-			data = {};
+		var data = {},
+			droplet = this.props.class_ui.getDropletById(this.props.state.droplet_id),
+			key;
 
 		if (typeof this.props.onDialogComplete === 'function') {
 			// massage data back into format replicating Droplet.data format
@@ -29,6 +30,8 @@ class DialogEditDroplet extends Component {
 					}
 				}
 			}
+
+			data = Object.deepAssign({}, droplet.data, data);
 
 			// send data to callback
 			this.props.onDialogComplete(data);
@@ -111,9 +114,9 @@ class DialogEditDroplet extends Component {
 	}
 
 	render() {
-		var title, notes, buttons,
-			fieldsets = this.getFieldsets(),
-			buttons = [];
+		var fieldsets = this.getFieldsets(),
+			buttons = [],
+			title, notes;
 
 		if (this.props.state.attachment_index !== null) {
 			// editing

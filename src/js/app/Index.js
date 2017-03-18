@@ -1,6 +1,9 @@
-import UI from './UI.jsx';
+import { createStore } from 'redux';
 
 import './lib/polyfills';
+
+import UI from './UI.jsx';
+
 import Droplet from './lib/Droplet';
 import request from './lib/ajax';
 import Template from './lib/Template';
@@ -11,14 +14,12 @@ import reducers from './state/reducers';
 import appDefaults from './assets/defaults';
 import { uiStates } from './assets/constants';
 
-import { createStore } from 'redux';
-
 /*
  * Main application wraper.
  * @class
  */
 var App = function(settings = {}) {
-	this.settings = Object.deepAssign(settings, App.defaults);
+	this.settings = Object.deepAssign({}, App.defaults, settings);
 	this._init();
 };
 
