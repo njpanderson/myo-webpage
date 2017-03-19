@@ -1,8 +1,8 @@
 {
   "name": "njp-tag",
   "version": "1.0.0",
-  "description": "A small tutorial SPA to help children create their own webpages.",
-  "main": "index.js",
+  "description": "A small tutorial SPA to help people understand how webpages are made.",
+  "main": "js/Index.js",
   "scripts": {
     "webpack-show-modules": "NODE_ENV=production webpack --config webpack.config.prod.js --display-modules && rm webpack-temp*",
     "test": "NODE_ENV=test mocha",
@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/njpanderson/myo-webpage.git"
+    "url": "git+https://github.com/njpanderson/tag.git"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/njpanderson/myo-webpage/issues"
+    "url": "https://github.com/njpanderson/tag/issues"
   },
-  "homepage": "https://github.com/njpanderson/myo-webpage#readme",
+  "homepage": "https://github.com/njpanderson/tag#readme",
   "devDependencies": {
     "babel-core": "^6.22.1",
     "babel-loader": "^6.2.10",
