@@ -4,7 +4,7 @@ describe('Droplet', function() {
 	let Droplet, test_droplet, test_element_droplet, test_attribute_droplet;
 
 	before(() => {
-		Droplet = require('../../../src/js/app/lib/Droplet').default;
+		Droplet = require('../../../src/lib/Droplet').default;
 	});
 
 	beforeEach(() => {

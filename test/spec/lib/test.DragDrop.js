@@ -13,7 +13,7 @@ describe('DragDrop', function() {
 	});
 
 	before(() => {
-		DragDrop = require('../../../src/js/app/lib/DragDrop').default;
+		DragDrop = require('../../../src/lib/DragDrop').default;
 	});
 
 	it('Should instantiate', function() {

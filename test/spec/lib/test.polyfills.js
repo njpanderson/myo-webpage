@@ -4,7 +4,7 @@ import structCompare from '../../helpers/structCompare';
 
 describe('polyfills', function() {
 	before(() => {
-		require('../../../src/js/app/lib/polyfills');
+		require('../../../src/lib/polyfills');
 	});
 
 	describe('Object.deepAssign', function() {

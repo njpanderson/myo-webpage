@@ -2,8 +2,8 @@ import React from 'react';
 import ReactTestUtils from 'react-addons-test-utils';
 import { expect } from 'chai';
 
-import defaults from '../../../src/js/app/assets/defaults';
-import { uiStates } from '../../../src/js/app/assets/constants';
+import defaults from '../../../src/assets/defaults';
+import { uiStates } from '../../../src/assets/constants';
 
 describe('Canvas', function() {
 	var Canvas;
@@ -18,7 +18,7 @@ describe('Canvas', function() {
 		noop = () => {};
 
 	before(() => {
-		Canvas = require('../../../src/js/app/components/containers/Canvas').default;
+		Canvas = require('../../../src/components/containers/Canvas').default;
 	});
 
 	it('Should render to page', function() {

@@ -13,7 +13,7 @@ describe('View', function() {
 	});
 
 	before(() => {
-		View = require('../../src/js/app/View').default;
+		View = require('../../src/View').default;
 	});
 
 	it('Should instantiate', function() {

@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-import Droplet from '../../src/js/app/lib/Droplet';
+import Droplet from '../../src/lib/Droplet';
 
 var pallet_json = fs.readFileSync('test/fixtures/pallet.json', {
 		encoding: 'UTF-8'

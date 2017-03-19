@@ -4,7 +4,7 @@ describe('PropTypes', function() {
 	var PropTypes;
 
 	before(() => {
-		PropTypes = require('../../../src/js/app/lib/PropTypes').default;
+		PropTypes = require('../../../src/lib/PropTypes').default;
 	});
 
 	describe('chain', function() {

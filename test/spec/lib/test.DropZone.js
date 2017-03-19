@@ -4,7 +4,7 @@ describe('DropZone', function() {
 	let DropZone;
 
 	before(() => {
-		DropZone = require('../../../src/js/app/lib/DropZone').default;
+		DropZone = require('../../../src/lib/DropZone').default;
 	});
 
 	it('Should instantiate', function() {

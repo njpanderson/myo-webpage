@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 
 export const GLYPHS = {
-	TEXT: require('../../../../img/svg/text.svg'),
-	PUZZLE_PIECE: require('../../../../img/svg/puzzle-piece.svg'),
-	TAG: require('../../../../img/svg/tag.svg')
+	TEXT: require('../../img/svg/text.svg'),
+	PUZZLE_PIECE: require('../../img/svg/puzzle-piece.svg'),
+	TAG: require('../../img/svg/tag.svg')
 };
 
 export function Icon(props) {

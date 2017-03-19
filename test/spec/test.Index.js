@@ -21,7 +21,7 @@ describe('Index', function() {
 	});
 
 	before(() => {
-		App = require('../../src/js/app/Index').default;
+		App = require('../../src/Index').default;
 	});
 
 	it('Should instantiate', function() {

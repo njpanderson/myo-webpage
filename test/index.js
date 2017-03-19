@@ -2,7 +2,7 @@
 const glob = require('glob'),
 	jsdom = require('./fixtures/dom');
 
-require('../src/js/app/lib/polyfills');
+require('../src/lib/polyfills');
 
 jsdom('test/fixtures/index.html', (document) => {
 	global.canvas = document.querySelector('.app');

@@ -4,7 +4,7 @@ describe('Communicator', function() {
 	let Communicator;
 
 	before(() => {
-		Communicator = require('../../../src/js/app/lib/Communicator').default;
+		Communicator = require('../../../src/lib/Communicator').default;
 	});
 
 	it('Should instantiate', function() {

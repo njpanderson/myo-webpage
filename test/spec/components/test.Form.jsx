@@ -15,7 +15,7 @@ describe('Form', function() {
 		}];
 
 	before(() => {
-		Form = require('../../../src/js/app/components/views/Form').default;
+		Form = require('../../../src/components/views/Form').default;
 	});
 
 	it('Should render to page', function() {

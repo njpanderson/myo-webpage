@@ -4,7 +4,7 @@ describe('FormField', function() {
 	let FormField, test_formfield;
 
 	before(() => {
-		FormField = require('../../../src/js/app/lib/FormField').default;
+		FormField = require('../../../src/lib/FormField').default;
 	});
 
 	beforeEach(() => {

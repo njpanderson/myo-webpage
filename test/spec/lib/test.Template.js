@@ -4,7 +4,7 @@ describe('Template', function() {
 	var Template;
 
 	before(() => {
-		Template = require('../../../src/js/app/lib/Template').default;
+		Template = require('../../../src/lib/Template').default;
 	});
 
 	it('Should instantiate', function() {

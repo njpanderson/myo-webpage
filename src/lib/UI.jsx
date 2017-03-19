@@ -1,11 +1,11 @@
-import DragDrop from './lib/DragDrop.js';
-import Communicator from './lib/Communicator';
+import DragDrop from './DragDrop.js';
+import Communicator from './Communicator';
 
-import CanvasContainer from './components/containers/CanvasContainer';
+import CanvasContainer from '../components/containers/CanvasContainer';
 
-import actions from './state/actions';
+import actions from '../state/actions';
 
-import { dialogModes, uiStates, messageCommands } from './assets/constants';
+import { dialogModes, uiStates, messageCommands } from '../assets/constants';
 
 import React from 'react';
 import { render } from 'react-dom';

@@ -14,12 +14,12 @@ describe('UI', function() {
 	});
 
 	before(() => {
-		UI = require('../../src/js/app/UI').default;
+		UI = require('../../src/UI').default;
 	});
 
 	it('Should instantiate', function() {
 		var ui = new UI(
-			require('../../src/js/app/assets/defaults.js'),
+			require('../../src/assets/defaults.js'),
 			{},
 			{},
 			null,

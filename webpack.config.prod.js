@@ -1,6 +1,6 @@
 var config = require('./webpack.config.js');
 
-config.entry = './src/js/app/Index.jsx';
+config.entry = './src/Index.js';
 
 config.output = {
 	path: __dirname,

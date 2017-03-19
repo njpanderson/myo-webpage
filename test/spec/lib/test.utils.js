@@ -4,7 +4,7 @@ describe('utils', function() {
 	var utils;
 
 	before(() => {
-		utils = require('../../../src/js/app/lib/utils');
+		utils = require('../../../src/lib/utils');
 	});
 
 	describe('registerGeneralEvent', function() {

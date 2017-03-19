@@ -4,7 +4,7 @@ describe('FormParser', function() {
 	let FormParser;
 
 	before(() => {
-		FormParser = require('../../../src/js/app/lib/FormParser').default;
+		FormParser = require('../../../src/lib/FormParser').default;
 	});
 
 	it('Should instantiate', function() {

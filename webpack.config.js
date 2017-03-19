@@ -1,40 +1,25 @@
 const webpack = require('webpack');
 
-var production = (process.env.NODE_ENV === 'production'),
-	plugins = [];
-
-if (production) {
-	plugins = plugins.concat([
-		new webpack.optimize.UglifyJsPlugin({
-			mangle: true,
-			compress: {
-				warnings: false
-			}
-		}),
-	]);
-} else {
-	plugins = plugins.concat([
-		new webpack.LoaderOptionsPlugin({
-			debug: true
-		})
-	]);
-}
-
 var config = {
-	devtool: production ? 'source-map' : 'inline-source-map',
-	cache: !production,
+	devtool: 'source-map',
+	cache: false,
 	resolve: {
 		extensions: ['.js', '.jsx']
 	},
 	entry: {
-		main: './src/js/bootstrap.js',
-		view: './src/js/bootstrap-view.js'
+		main: './src/bootstrap/bootstrap.js',
+		view: './src/bootstrap/bootstrap-view.js'
 	},
 	output: {
-		filename: 'tag-[name].min.js',
-		publicPath: 'dist/js/'
+		path: 'public_html/dist/js',
+		filename: '[name].js',
+		publicPath: 'public_html/dist/js/'
 	},
-	plugins: plugins,
+	plugins: [
+		new webpack.LoaderOptionsPlugin({
+			debug: true
+		})
+	],
 	module: {
 		rules: [{
 			test: /\.jsx?$/,
@@ -47,6 +32,15 @@ var config = {
 				prefixize: true,
 				regExp: './img/svg/(.*)\\.svg'
 			})
+		},{
+			test: /\.scss$/,
+			use: [{
+				loader: 'style-loader' // creates style nodes from JS strings
+			}, {
+				loader: 'css-loader' // translates CSS into CommonJS
+			}, {
+				loader: 'sass-loader' // compiles Sass to CSS
+			}]
 		}]
 	}
 };
