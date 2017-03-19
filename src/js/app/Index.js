@@ -40,7 +40,7 @@ App.prototype = {
 		};
 
 		// templates module
-		this._template = new Template(this.settings);
+		this._template = new Template(this, this.settings);
 	},
 
 	/**
@@ -73,6 +73,7 @@ App.prototype = {
 
 				// activate the UI
 				this._UI = new UI(
+					this,
 					this.settings,
 					this._refs,
 					this._data,

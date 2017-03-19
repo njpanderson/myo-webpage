@@ -2,7 +2,8 @@ import request from './ajax';
 import DropZone from './DropZone';
 import Droplet from './Droplet';
 
-var Template = function(settings = {}) {
+var Template = function(parent, settings = {}) {
+	this._parent = parent;
 	this.settings = settings;
 	this._drop_zones = {};
 	this._template = [];
@@ -93,7 +94,7 @@ Template.prototype = {
 		return data;
 	},
 
-	renderAsHTML: function(zones, getDropletById) {
+	renderAsHTML: function(zones) {
 		var html = '';
 
 		this._template.forEach((node) => {
@@ -103,7 +104,7 @@ Template.prototype = {
 			} else if (node.type === 'dropzone' && zones[node.zone.id]) {
 				// drop zone with attachments
 				zones[node.zone.id].attachments.forEach((attachment) => {
-					var droplet = getDropletById(attachment.droplet_id),
+					var droplet = this._parent._UI.getDropletById(attachment.droplet_id),
 						data = Object.deepAssign({}, droplet.data, attachment.data);
 
 					html += Template.renderDroplet(

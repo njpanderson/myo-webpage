@@ -12,10 +12,11 @@ import { render } from 'react-dom';
 
 import { Provider } from 'react-redux';
 
-var UI = function(settings, refs, data, store, template) {
+var UI = function(parent, settings, refs, data, store, template) {
 	/**
 	 * Settings as defined when instantiating. Inherits from {@link App.defaults}
 	 */
+	this._parent = parent;
 	this.settings = settings;
 	this._refs = refs;
 	this._data = data;
@@ -430,8 +431,7 @@ UI.prototype = {
 			cmd: messageCommands.RELOAD,
 			data: {
 				markup: this._template.renderAsHTML(
-					state.zones,
-					this.getDropletById.bind(this)
+					state.zones
 				)
 			}
 		});
