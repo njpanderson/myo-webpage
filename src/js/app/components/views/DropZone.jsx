@@ -40,6 +40,7 @@ class DropZoneComponent extends Component {
 					attachmentIndex={index}
 					onClick={this.attachmentClick}
 					droplet={this.props.class_ui.getDropletById(attachment.droplet_id)}
+					zone={this.props.zone}
 					data={attachment.data}/>
 			);
 		});

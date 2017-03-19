@@ -109,7 +109,9 @@ Template.prototype = {
 
 					html += Template.renderDroplet(
 						droplet,
-						data
+						data,
+						this._parent._UI.getDropZoneById(node.zone.id),
+						this.settings.onElementRender
 					);
 				});
 			}
@@ -119,7 +121,7 @@ Template.prototype = {
 	}
 };
 
-Template.renderDroplet = function(droplet, data) {
+Template.renderDroplet = function(droplet, data, drop_zone, is_output = true) {
 	var output;
 
 	if (!(droplet instanceof Droplet)) {
@@ -128,27 +130,28 @@ Template.renderDroplet = function(droplet, data) {
 
 	switch (droplet.dropletType) {
 	case 'element':
-		output = Template.renderElementDroplet(data);
+		output = Template.renderElementDroplet(data, droplet, drop_zone, is_output);
 		break;
 
 	case 'text':
-		output = Template.renderTextDroplet(data);
+		output = Template.renderTextDroplet(data, droplet, drop_zone, is_output);
 		break;
 
 	case 'attribute':
-		output = Template.renderAttributeDroplet(data);
+		output = Template.renderAttributeDroplet(data, droplet, drop_zone, is_output);
 		break;
 	}
 
 	return output;
 };
 
-Template.renderElementDroplet = function(data) {
+Template.renderElementDroplet = function(data, droplet, drop_zone, is_output) {
 	// !TODO - make sure self-closing tags are correctly rendered
 	var attrs = [],
-		markup, attr;
+		markup = {},
+		attr;
 
-	markup = '<' + data.tagName;
+	markup.open = '<' + data.tagName;
 
 	if (data.attrs) {
 		for (attr in data.attrs) {
@@ -156,34 +159,63 @@ Template.renderElementDroplet = function(data) {
 		}
 
 		if (attrs.length) {
-			markup += ' ' + attrs.join(' ');
+			markup.open += ' ' + attrs.join(' ');
 		}
 	}
 
 	if (data.innerHTML || Template.containerTags.indexOf(data.tagName) !== -1) {
-		markup += '>' + (data.innerHTML || '') +
-			'</' + data.tagName + '>';
+		markup.open += '>';
+		markup.innerHTML = (data.innerHTML || '');
+		markup.close = '</' + data.tagName + '>';
 	} else {
-		markup += '/>';
+		markup.close = '/>';
 	}
 
-	return markup;
+	markup = Template.onElementRender(
+		markup,
+		droplet,
+		drop_zone,
+		is_output
+	);
+
+	return markup.open + markup.innerHTML + markup.close;
 };
 
-Template.renderTextDroplet = function(data) {
-	console.log('renderTextDroplet', data);
-	return Template.entities(data.value);
+Template.renderTextDroplet = function(data, droplet, drop_zone, is_output) {
+	var value = Template.onElementRender(
+		data.value,
+		droplet,
+		drop_zone,
+		is_output
+	);
+
+	return Template.entities(value);
 };
 
-Template.renderAttributeDroplet = function(data) {
-	console.log('renderAttributeDroplet', data);
-	return data.key + '="' + Template.entities(data.value) + '"';
+Template.renderAttributeDroplet = function(data, droplet, drop_zone, is_output) {
+	var markup = {
+		key: data.key,
+		value: data.value
+	};
+
+	markup = Template.onElementRender(
+		markup,
+		droplet,
+		drop_zone,
+		is_output
+	);
+
+	return markup.key + '="' + Template.entities(markup.value) + '"';
 };
 
 Template.entities = function(str) {
 	return str.replace(/[\u00A0-\u9999<>\&]/gim, (i) =>
 		('&#' + i.charCodeAt(0) + ';')
 	);
+};
+
+Template.onElementRender = function(markup, droplet, zone, is_output) {
+	return markup;
 };
 
 Template.containerTags = ['a'];

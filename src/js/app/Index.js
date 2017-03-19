@@ -21,6 +21,11 @@ import { uiStates } from './assets/constants';
 var App = function(settings = {}) {
 	this.settings = Object.deepAssign({}, App.defaults, settings);
 	this._init();
+
+	// set Template.onElementRender to settings, if defined
+	if (settings.onElementRender) {
+		Template.onElementRender = settings.onElementRender.bind(this);
+	}
 };
 
 App.prototype = {

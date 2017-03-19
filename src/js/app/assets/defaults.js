@@ -35,5 +35,6 @@ export default {
 	},
 	dropZone: {
 		label: '...'
-	}
+	},
+	onElementRender: null
 };

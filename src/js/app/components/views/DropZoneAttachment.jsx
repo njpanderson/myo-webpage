@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 
 import Template from '../../lib/Template';
 import Droplet from '../../lib/Droplet';
+import DropZone from '../../lib/DropZone';
 
 class DropZoneAttachment extends Component {
 	constructor(props) {
@@ -34,7 +35,7 @@ class DropZoneAttachment extends Component {
 			<span
 				className={className}
 				onClick={this.onClick}>
-				{Template.renderDroplet(this.props.droplet, data)}
+				{Template.renderDroplet(this.props.droplet, data, this.props.zone, false)}
 			</span>
 		);
 	}
@@ -42,6 +43,7 @@ class DropZoneAttachment extends Component {
 
 DropZoneAttachment.propTypes = {
 	droplet: PropTypes.instanceOf(Droplet).isRequired,
+	zone: PropTypes.instanceOf(DropZone).isRequired,
 	attachmentIndex: PropTypes.number.isRequired,
 	onClick: PropTypes.func.isRequired,
 	data: PropTypes.object.isRequired,
