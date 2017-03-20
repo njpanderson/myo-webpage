@@ -1,4 +1,6 @@
-const webpack = require('webpack');
+const webpack = require('webpack'),
+	ProgressBarPlugin = require('progress-bar-webpack-plugin'),
+	WebpackNotifierPlugin = require('webpack-notifier');
 
 var config = {
 	devtool: 'source-map',
@@ -18,7 +20,11 @@ var config = {
 	plugins: [
 		new webpack.LoaderOptionsPlugin({
 			debug: true
-		})
+		}),
+		new WebpackNotifierPlugin({
+			alwaysNotify: true
+		}),
+		new ProgressBarPlugin()
 	],
 	module: {
 		rules: [{
