@@ -23,6 +23,10 @@
 		padding: $dialog-padding;
 		border-bottom: 1px solid $gray-med;
 
+		.icon {
+			margin-right: .5em;
+		}
+
 		p:nth-of-type(n+2) {
 			@include font-size(14);
 		}

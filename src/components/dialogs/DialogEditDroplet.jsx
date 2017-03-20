@@ -3,12 +3,32 @@ import React, { Component, PropTypes } from 'react';
 import FormField from '../../lib/FormField';
 import { setLabels } from '../../assets/constants';
 
+import { GLYPHS } from '../views/Icon.jsx';
 import DialogHeading from './DialogHeading.jsx';
 import Form from '../views/Form.jsx';
+
+const headingsByType = {
+	'element': {
+		text: 'Element',
+		icon: GLYPHS.TAG
+	},
+	'text': {
+		text: 'Text item',
+		icon: GLYPHS.TEXT
+	},
+	'attribute': {
+		text: 'Attribute',
+		icon: GLYPHS.PUZZLE_PIECE
+	}
+};
 
 class DialogEditDroplet extends Component {
 	constructor(props) {
 		super(props);
+
+		if (this.props.state && this.props.state.droplet_id) {
+			this.droplet = this.props.class_ui.getDropletById(this.props.state.droplet_id);
+		}
 
 		this.onDialogComplete = this.onDialogComplete.bind(this);
 		this.detachAttachment = this.detachAttachment.bind(this);
@@ -16,7 +36,6 @@ class DialogEditDroplet extends Component {
 
 	onDialogComplete(values) {
 		var data = {},
-			droplet = this.props.class_ui.getDropletById(this.props.state.droplet_id),
 			key;
 
 		if (typeof this.props.onDialogComplete === 'function') {
@@ -31,7 +50,7 @@ class DialogEditDroplet extends Component {
 				}
 			}
 
-			data = Object.deepAssign({}, droplet.data, data);
+			data = Object.deepAssign({}, this.droplet.data, data);
 
 			// send data to callback
 			this.props.onDialogComplete(data);
@@ -52,8 +71,7 @@ class DialogEditDroplet extends Component {
 	}
 
 	getFieldsets() {
-		var droplet = this.props.class_ui.getDropletById(this.props.state.droplet_id),
-			fieldsets = [],
+		var fieldsets = [],
 			attachment = null,
 			fieldset, field, attribute, item;
 
@@ -64,7 +82,7 @@ class DialogEditDroplet extends Component {
 			);
 		}
 
-		for (attribute in droplet.editable) {
+		for (attribute in this.droplet.editable) {
 			fieldset = {
 				key: attribute,
 				legend: setLabels[attribute],
@@ -74,8 +92,8 @@ class DialogEditDroplet extends Component {
 			// add indidual fields, depending on editable attribute type
 			if (attribute === 'attrs') {
 				// the 'attrs' attribute, which contains key/value pairs
-				for (item in droplet.editable[attribute]) {
-					field = Object.deepAssign({}, droplet.editable[attribute][item]);
+				for (item in this.droplet.editable[attribute]) {
+					field = Object.deepAssign({}, this.droplet.editable[attribute][item]);
 
 					// preset value from attachment
 					if (attachment !== null &&
@@ -86,13 +104,13 @@ class DialogEditDroplet extends Component {
 
 					fieldset.fields.push(new FormField(
 						item,
-						droplet.editable[attribute][item].type,
+						this.droplet.editable[attribute][item].type,
 						field
 					));
 				}
 			} else {
 				// string based attributes
-				field = Object.deepAssign({}, droplet.editable[attribute]);
+				field = Object.deepAssign({}, this.droplet.editable[attribute]);
 
 				// preset value from attachment
 				if (attachment !== null && attachment.data[attribute]) {
@@ -101,7 +119,7 @@ class DialogEditDroplet extends Component {
 
 				fieldset.fields.push(new FormField(
 					attribute,
-					droplet.editable[attribute].type,
+					this.droplet.editable[attribute].type,
 					field
 				));
 			}
@@ -116,11 +134,14 @@ class DialogEditDroplet extends Component {
 	render() {
 		var fieldsets = this.getFieldsets(),
 			buttons = [],
+			classes = [this.props.settings.classes.dialog.container],
 			title, notes;
+
+		classes.push('droplet-' + this.droplet.dropletType);
 
 		if (this.props.state.attachment_index !== null) {
 			// editing
-			title = 'Edit Droplet';
+			title = 'Edit ' + headingsByType[this.droplet.dropletType].text;
 
 			if (fieldsets.length) {
 				notes = [
@@ -147,7 +168,7 @@ class DialogEditDroplet extends Component {
 			});
 		} else {
 			// adding
-			title = 'Add Droplet';
+			title = 'Add ' + headingsByType[this.droplet.dropletType].text;
 			notes = [
 				'You’ve found the right drop place to put this Droplet! ',
 				'Edit anything you would like to change and then use “Edit Droplet”.'
@@ -165,10 +186,11 @@ class DialogEditDroplet extends Component {
 		});
 
 		return (
-			<div className={this.props.settings.classes.dialog.container}>
+			<div className={classes.join(' ')}>
 				<DialogHeading
 					title={title}
 					notes={notes}
+					iconGlyph={headingsByType[this.droplet.dropletType].icon}
 					className={this.props.settings.classes.dialog.heading}/>
 
 				<Form
