@@ -2,9 +2,34 @@ const webpack = require('webpack'),
 	ProgressBarPlugin = require('progress-bar-webpack-plugin'),
 	WebpackNotifierPlugin = require('webpack-notifier');
 
+var production = (process.env.NODE_ENV === 'production'),
+	plugins = [
+		new WebpackNotifierPlugin({
+			alwaysNotify: true
+		}),
+		new ProgressBarPlugin()
+	];
+
+if (production) {
+	plugins = plugins.concat([
+		new webpack.optimize.UglifyJsPlugin({
+			mangle: true,
+			compress: {
+				warnings: false
+			}
+		}),
+	]);
+} else {
+	plugins = plugins.concat([
+		new webpack.LoaderOptionsPlugin({
+			debug: true
+		})
+	]);
+}
+
 var config = {
-	devtool: 'source-map',
-	cache: false,
+	devtool: production ? 'source-map' : 'inline-source-map',
+	cache: !production,
 	resolve: {
 		extensions: ['.js', '.jsx']
 	},
@@ -17,15 +42,7 @@ var config = {
 		filename: '[name].js',
 		publicPath: 'public_html/dist/js/'
 	},
-	plugins: [
-		new webpack.LoaderOptionsPlugin({
-			debug: true
-		}),
-		new WebpackNotifierPlugin({
-			alwaysNotify: true
-		}),
-		new ProgressBarPlugin()
-	],
+	plugins: plugins,
 	module: {
 		rules: [{
 			test: /\.jsx?$/,

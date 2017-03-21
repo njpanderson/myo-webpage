@@ -5,7 +5,7 @@
   "main": "src/Index.js",
   "scripts": {
     "build": "webpack",
-    "watch": "webpack --watch",
+    "watch": "NODE_ENV=development webpack --watch",
     "test": "NODE_ENV=test mocha",
     "test-live": "NODE_ENV=test-live mocha --inspect --debug-brk"
   },
