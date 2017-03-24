@@ -4,7 +4,7 @@
   "description": "A small tutorial SPA to help people understand how webpages are made.",
   "main": "src/Index.js",
   "scripts": {
-    "build": "webpack",
+    "build": "NODE_ENV=production webpack",
     "watch": "NODE_ENV=development webpack --watch",
     "test": "NODE_ENV=test mocha",
     "test-live": "NODE_ENV=test-live mocha --inspect --debug-brk"

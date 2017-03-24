@@ -7,16 +7,23 @@ var production = (process.env.NODE_ENV === 'production'),
 		new WebpackNotifierPlugin({
 			alwaysNotify: true
 		}),
-		new ProgressBarPlugin()
+		new webpack.DefinePlugin({
+			'process.env': {
+				'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+			}
+		}),
+		new ProgressBarPlugin(),
+		new webpack.optimize.CommonsChunkPlugin({
+			name: 'vendor',
+			minChunks: Infinity
+		})
 	];
 
 if (production) {
 	plugins = plugins.concat([
 		new webpack.optimize.UglifyJsPlugin({
 			mangle: true,
-			compress: {
-				warnings: false
-			}
+			sourceMap: true
 		}),
 	]);
 } else {
@@ -28,12 +35,22 @@ if (production) {
 }
 
 var config = {
-	devtool: production ? 'source-map' : 'inline-source-map',
+	devtool: production ? 'source-map' : 'cheap-module-eval-source-map',
 	cache: !production,
 	resolve: {
 		extensions: ['.js', '.jsx']
 	},
 	entry: {
+		vendor: [
+			'react',
+			'redux',
+			'react-redux',
+			'react-dom',
+			'interact.js',
+			'promise',
+			'superagent',
+			'superagent-promise'
+		],
 		main: './src/bootstrap/bootstrap.js',
 		view: './src/bootstrap/bootstrap-view.js'
 	},
