@@ -4,7 +4,7 @@ import Pallet from '../views/Pallet.jsx';
 
 const mapStateToProps = (state) => {
 	return {
-		activeDropletId: state.app.active_droplet_id
+		activeDropletId: state.UI.active_droplet_id
 	};
 };
 

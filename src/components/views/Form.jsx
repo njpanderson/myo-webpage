@@ -44,13 +44,15 @@ class Form extends Component {
 		super(props);
 
 		// set default state for fields based on original values
-		this.props.fieldSets.forEach((set) => {
-			formValues[set.key] = {};
+		if (this.props.fieldSets) {
+			this.props.fieldSets.forEach((set) => {
+				formValues[set.key] = {};
 
-			set.fields.forEach((field) =>
-				(formValues[set.key][field.name] = field.value)
-			);
-		});
+				set.fields.forEach((field) =>
+					(formValues[set.key][field.name] = field.value)
+				);
+			});
+		}
 
 		// set default form value state
 		this.state = {
@@ -84,19 +86,21 @@ class Form extends Component {
 	fieldSets() {
 		var output = [];
 
-		this.props.fieldSets.forEach((set) => {
-			const key = 'fieldset-' + set.key;
+		if (this.props.fieldSets) {
+			this.props.fieldSets.forEach((set) => {
+				const key = 'fieldset-' + set.key;
 
-			output.push(
-				<Fieldset
-					key={key}
-					set={set.key}
-					fields={set.fields}
-					legend={set.legend}
-					onFieldUpdate={this.elementChange}
-					/>
-			);
-		});
+				output.push(
+					<Fieldset
+						key={key}
+						set={set.key}
+						fields={set.fields}
+						legend={set.legend}
+						onFieldUpdate={this.elementChange}
+						/>
+				);
+			});
+		}
 
 		return output;
 	}
@@ -168,8 +172,7 @@ Form.propTypes = {
 
 Form.defaultProps = {
 	onCancel: () => {},
-	onSubmit: () => {},
-	fieldSets: {}
+	onSubmit: () => {}
 };
 
 export default Form;

@@ -44,19 +44,23 @@ select {
 button {
 	position: relative;
 	border: 0;
-	padding: 10px 15px;
-	background-color: $gray-med;
+	padding: 0;
 
-	&:hover,
-	&:focus {
-		left: 2px;
-		top: -2px;
+	span {
+		display: block;
+		padding: 10px 15px;
+		background-color: $gray-med;
+	}
+
+	&:hover span,
+	&:focus span {
+		transform: translate(2px, -2px);
 		cursor: pointer;
 		box-shadow: $box-shadow-shallow;
 		background-color: lighten($gray-med, $lighten-factor);
 	}
 
-	&:active {
+	&:active span {
 		left: 0;
 		top: 0;
 		box-shadow: none;

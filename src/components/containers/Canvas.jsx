@@ -23,7 +23,7 @@ class Canvas extends Component {
 			this.props.state.ui_state
 		];
 
-		if (this.props.state.active_droplet_id !== '') {
+		if (this.props.active_droplet_id !== '') {
 			classes.push(this.props.settings.classes.droplet_active);
 		}
 
@@ -67,7 +67,6 @@ class Canvas extends Component {
 
 				<div className="overlay"></div>
 				<Dialog
-					data={this.props.data}
 					settings={this.props.settings}
 					class_ui={this.props.class_ui}
 					class_template={this.props.class_template}
@@ -81,6 +80,7 @@ class Canvas extends Component {
 Canvas.propTypes = {
 	// from CanvasContainer
 	state: PropTypes.object.isRequired,
+	active_droplet_id: PropTypes.any,
 
 	// from UI#render
 	data: PropTypes.object.isRequired,

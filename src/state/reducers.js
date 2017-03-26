@@ -27,13 +27,6 @@ function app(state = default_state.app, action) {
 			active
 		});
 
-	case actionTypes.SET_ACTIVE_DROPLET:
-		// set the active droplet (i.e. the one that will be "dropped" when a
-		// drop zone is next clicked
-		return Object.assign({}, state, {
-			active_droplet_id: action.droplet_id
-		});
-
 	default:
 		return state;
 	}
@@ -84,12 +77,23 @@ function zones(state = default_state.zones, action) {
 	return zones;
 }
 
-function dialog(state = default_state.dialog, action) {
+function UI(state = default_state.UI, action) {
 	switch (action.type) {
 	case actionTypes.SET_DIALOG_MODE:
 		return Object.assign({}, state, {
-			mode: action.mode,
-			state: action.state
+			dialog: {
+				mode: action.mode,
+				data: action.data,
+				onDialogComplete: action.onDialogComplete,
+				onDialogCancel: action.onDialogCancel
+			}
+		});
+
+	case actionTypes.SET_ACTIVE_DROPLET:
+		// set the active droplet (i.e. the one that will be "dropped" when a
+		// drop zone is next clicked
+		return Object.assign({}, state, {
+			active_droplet_id: action.droplet_id
 		});
 
 	default:
@@ -100,5 +104,5 @@ function dialog(state = default_state.dialog, action) {
 export default combineReducers({
 	app,
 	zones,
-	dialog
+	UI
 });

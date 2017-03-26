@@ -9,6 +9,7 @@ export const actionTypes = {
 
 export const dialogModes = {
 	NONE: 'none',
+	GENERAL: 'general',
 	EDIT_DROPLET: 'edit-droplet'
 };
 

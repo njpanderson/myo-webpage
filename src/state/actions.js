@@ -15,11 +15,13 @@ export default {
 		};
 	},
 
-	setDialogMode: function(mode, state = {}) {
+	setDialogMode: function(mode, data = {}, onDialogComplete, onDialogCancel) {
 		return {
 			type: actionTypes.SET_DIALOG_MODE,
 			mode,
-			state
+			data,
+			onDialogComplete,
+			onDialogCancel
 		};
 	},
 

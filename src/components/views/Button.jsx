@@ -17,7 +17,7 @@ var Button = function(props) {
 			className={classes.join(' ')}
 			onClick={onClick}
 			type={type}>
-			{props.label}
+			<span>{props.label}</span>
 		</button>
 	);
 };

@@ -5,16 +5,24 @@ export default {
 	// general application
 	app: {
 		ui_state: uiStates.INITIALISING,
-		active: false,
-		active_droplet_id: ''
+		active: false
 	},
 
 	// active zones and current attachments
 	zones: {},
 
-	// dialog mode and state
-	dialog: {
-		mode: dialogModes.NONE,
-		state: {}
+	// UI states - do not persist
+	UI: {
+		// the currently active dialog and its data
+		dialog: {
+			mode: dialogModes.NONE,
+			data: null,
+			onDialogComplete: null,
+			onDialogCancel: null
+		},
+
+		// the currently active droplet (i.e. the one that will be "dropped" when a
+		// drop zone is next clicked)
+		active_droplet_id: ''
 	}
 };

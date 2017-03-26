@@ -3,10 +3,12 @@ import React, { PropTypes } from 'react';
 import { dialogModes } from '../../assets/constants';
 
 // import the dialogs used, then put into a global for referencing
+import DialogGeneral from '../dialogs/DialogGeneral.jsx';
 import DialogEditDroplet from '../dialogs/DialogEditDroplet.jsx';
 
 var DialogComponents = {};
 DialogComponents[dialogModes.EDIT_DROPLET] = DialogEditDroplet;
+DialogComponents[dialogModes.GENERAL] = DialogGeneral;
 
 function Dialog(props) {
 	var Component,
@@ -23,7 +25,7 @@ function Dialog(props) {
 		return (
 			<div className={classes.join(' ')}>
 				<Component
-					state={props.state}
+					data={props.data}
 					settings={props.settings}
 					class_template={props.class_template}
 					onDialogComplete={props.onDialogComplete}
@@ -41,7 +43,7 @@ function Dialog(props) {
 Dialog.propTypes = {
 	// from DialogContainer
 	mode: PropTypes.string,
-	state: PropTypes.object,
+	data: PropTypes.object,
 
 	// from Canvas
 	settings: PropTypes.object,

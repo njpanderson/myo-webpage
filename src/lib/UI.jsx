@@ -25,13 +25,16 @@ var UI = function(parent, settings, refs, data, store, template) {
 
 	// UI class specific data entries
 	this._data.UI = {
-		dragdrop: {},
-		dropletEdit: {
-			droplet: null,
-			callback: null
+		dragdrop: {
+			// droplets dragdrop class instance
+			droplets: {}
 		},
+
+		// the current viewport width
 		vp_width: 0,
-		dragHandlePosition: 0
+
+		// the drag handle position
+		dragHandlePosition: 0,
 	};
 
 	this._comms = new Communicator('app', window.location.origin, {
@@ -76,42 +79,67 @@ UI.prototype = {
 
 	/**
 	 * Displays an editor window for a Droplet.
-	 * @param {string} mode - One of the dropletModes modes.
+	 * @param {string} mode - One of the dialogModes modes.
 	 * @param {mixed} data - Relevant data to store for the dialog to use.
 	 * @private
 	 */
-	_showDialog: function(mode, data) {
-		this._store.dispatch(actions.setDialogMode(mode, data));
+	_showDialog: function(mode, data, onDialogComplete, onDialogCancel) {
+		this._store.dispatch(actions.setDialogMode(
+			mode,
+			data,
+			onDialogComplete,
+			onDialogCancel
+		));
+	},
+
+	_hideDialog: function() {
+		this._store.dispatch(actions.setDialogMode(dialogModes.NONE));
 	},
 
 	_completeDialogAction: function(dialog_data) {
-		var state = this._store.getState();
+		var dialog = (this._store.getState()).UI.dialog;
 
 		// reset dialog state to nothing
-		this._store.dispatch(actions.setDialogMode(dialogModes.NONE));
+		this._hideDialog();
 
-		switch (state.dialog.mode) {
+		switch (dialog.mode) {
 		case dialogModes.EDIT_DROPLET:
 			// droplet being edited prior to or during attatchment
-			if (state.dialog.state.attachment_index === null) {
+			if (dialog.data.attachment_index === null) {
 				// no attachment index - this is a new drop
 				this.zoneAddAttachment(
-					state.dialog.state.zone_id,
-					state.dialog.state.droplet_id,
+					dialog.data.zone_id,
+					dialog.data.droplet_id,
 					dialog_data
 				);
 			} else{
 				this.zoneEditAttachment(
-					state.dialog.state.zone_id,
-					state.dialog.state.attachment_index,
+					dialog.data.zone_id,
+					dialog.data.attachment_index,
 					dialog_data
 				);
+			}
+
+			break;
+
+		case dialogModes.GENERAL:
+			console.log('general dialog complete', dialog.onDialogComplete);
+			if (typeof dialog.onDialogComplete === 'function') {
+				dialog.onDialogComplete.apply(this._parent);
 			}
 		}
 	},
 
 	_cancelDialogAction: function() {
-		// noop
+		var dialog = (this._store.getState()).UI.dialog;
+
+		switch (dialog.mode) {
+		case dialogModes.GENERAL:
+			console.log('general dialog cancelled', dialog.onDialogCancel);
+			if (typeof dialog.onDialogCancel === 'function') {
+				dialog.onDialogCancel.apply(this._parent);
+			}
+		}
 	},
 
 	/**
@@ -268,7 +296,7 @@ UI.prototype = {
 	_handleDropletClick: function(event, droplet) {
 		var state = this._store.getState();
 
-		if (state.app.active_droplet_id !== droplet.id) {
+		if (state.UI.active_droplet_id !== droplet.id) {
 			this._store.dispatch(actions.setActiveDroplet(droplet.id));
 		}
 	},
@@ -277,8 +305,8 @@ UI.prototype = {
 		var state = this._store.getState(),
 			droplet;
 
-		if (state.app.active_droplet_id !== 0 &&
-			(droplet = this.getDropletById(state.app.active_droplet_id))) {
+		if (state.UI.active_droplet_id !== '' &&
+			(droplet = this.getDropletById(state.UI.active_droplet_id))) {
 			this.attachDropletToDropZone(droplet, drop_zone);
 		}
 	},

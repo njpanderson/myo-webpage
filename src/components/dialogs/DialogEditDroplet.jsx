@@ -26,8 +26,8 @@ class DialogEditDroplet extends Component {
 	constructor(props) {
 		super(props);
 
-		if (this.props.state && this.props.state.droplet_id) {
-			this.droplet = this.props.class_ui.getDropletById(this.props.state.droplet_id);
+		if (this.props.data && this.props.data.droplet_id) {
+			this.droplet = this.props.class_ui.getDropletById(this.props.data.droplet_id);
 		}
 
 		this.onDialogComplete = this.onDialogComplete.bind(this);
@@ -58,10 +58,10 @@ class DialogEditDroplet extends Component {
 	}
 
 	detachAttachment() {
-		if (this.props.state.attachment_index !== null) {
+		if (this.props.data.attachment_index !== null) {
 			this.props.class_ui.zoneDetachAttachment(
-				this.props.state.zone_id,
-				this.props.state.attachment_index
+				this.props.data.zone_id,
+				this.props.data.attachment_index
 			);
 		} else {
 			throw new Error('attachment_index is null or not defined. Cannot detach');
@@ -75,10 +75,10 @@ class DialogEditDroplet extends Component {
 			attachment = null,
 			fieldset, field, attribute, item;
 
-		if (this.props.state.attachment_index !== null) {
+		if (this.props.data.attachment_index !== null) {
 			attachment = this.props.class_ui.zoneGetAttachment(
-				this.props.state.zone_id,
-				this.props.state.attachment_index
+				this.props.data.zone_id,
+				this.props.data.attachment_index
 			);
 		}
 
@@ -139,7 +139,7 @@ class DialogEditDroplet extends Component {
 
 		classes.push('droplet-' + this.droplet.dropletType);
 
-		if (this.props.state.attachment_index !== null) {
+		if (this.props.data.attachment_index !== null) {
 			// editing
 			title = 'Edit ' + headingsByType[this.droplet.dropletType].text;
 
@@ -204,7 +204,7 @@ class DialogEditDroplet extends Component {
 }
 
 DialogEditDroplet.propTypes = {
-	state: PropTypes.object.isRequired,
+	data: PropTypes.object.isRequired,
 	settings: PropTypes.object.isRequired,
 	onDialogCancel: PropTypes.func,
 	onDialogComplete: PropTypes.func,

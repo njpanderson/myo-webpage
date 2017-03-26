@@ -1,3 +1,8 @@
+/**
+ * The built in HTMLElement type. Used to define DOM compatible nodes of Element type.
+ * @typedef HTMLElement
+ */
+
 import { createStore } from 'redux';
 
 import './lib/polyfills';
@@ -13,7 +18,7 @@ import actions from './state/actions';
 import reducers from './state/reducers';
 
 import appDefaults from './assets/defaults';
-import { uiStates } from './assets/constants';
+import { dialogModes, uiStates, actionTypes } from './assets/constants';
 
 /*
  * Main application wraper.
@@ -42,7 +47,8 @@ App.prototype = {
 		// app data store (not stateful)
 		this._data = {
 			template: '',
-			pallet: []
+			pallet: [],
+			tempCallbacks: {}
 		};
 
 		// templates module
@@ -74,7 +80,22 @@ App.prototype = {
 					// !TODO
 				} else {
 					// app state store - default
-					this._store = createStore(reducers);
+					this._store = createStore(
+						reducers,
+						undefined,
+						(
+							typeof window !== 'undefined' &&
+							window.__REDUX_DEVTOOLS_EXTENSION__ &&
+							window.__REDUX_DEVTOOLS_EXTENSION__({
+								// black list all session-based non persistant actions
+								// (some of which contain unserialisable objects)
+								actionsBlacklist: [
+									actionTypes.SET_ACTIVE_DROPLET,
+									actionTypes.SET_DIALOG_MODE
+								]
+							})
+						)
+					);
 				}
 
 				// activate the UI
@@ -132,6 +153,28 @@ App.prototype = {
 				throw error;
 			});
 	},
+
+	/**
+	 * Displays a dialog message with optional confirmations
+	 * @param {string} title - Title of the dialog.
+	 * @param {array|HTMLElement} message - Message to display.
+	 * @param {array} [buttons] - Buttons to show. Defaults to a single "OK" button.
+	 */
+	dialog: function(title, message, buttons = []) {
+		if (this._UI) {
+			return new Promise((resolve, reject) => {
+				this._UI._showDialog(dialogModes.GENERAL, {
+					title,
+					message,
+					buttons
+				},
+				resolve,
+				reject);
+			});
+		} else {
+			throw new Error('UI has not yet been initialised! Have you used #load() yet?');
+		}
+	}
 };
 
 /**

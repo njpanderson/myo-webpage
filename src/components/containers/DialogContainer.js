@@ -6,8 +6,8 @@ import actions from '../../state/actions';
 
 const mapStateToProps = (state) => {
 	return {
-		mode: state.dialog.mode,
-		state: state.dialog.state
+		mode: state.UI.dialog.mode,
+		data: state.UI.dialog.data
 	};
 };
 
