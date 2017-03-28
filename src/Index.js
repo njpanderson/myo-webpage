@@ -169,7 +169,10 @@ App.prototype = {
 					buttons
 				},
 				resolve,
-				reject);
+				() => {
+					console.log('rejection');
+					reject();
+				});
 			});
 		} else {
 			throw new Error('UI has not yet been initialised! Have you used #load() yet?');

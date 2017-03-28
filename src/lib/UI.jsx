@@ -98,6 +98,7 @@ UI.prototype = {
 
 	_completeDialogAction: function(dialog_data) {
 		var dialog = (this._store.getState()).UI.dialog;
+		console.log('_completeDialogAction', dialog);
 
 		// reset dialog state to nothing
 		this._hideDialog();
@@ -121,25 +122,22 @@ UI.prototype = {
 			}
 
 			break;
+		}
 
-		case dialogModes.GENERAL:
-			console.log('general dialog complete', dialog.onDialogComplete);
-			if (typeof dialog.onDialogComplete === 'function') {
-				dialog.onDialogComplete.apply(this._parent);
-			}
+		if (typeof dialog.onDialogComplete === 'function') {
+			dialog.onDialogComplete.apply(this._parent);
 		}
 	},
 
 	_cancelDialogAction: function() {
 		var dialog = (this._store.getState()).UI.dialog;
+		console.log('_cancelDialogAction', dialog);
 
-		switch (dialog.mode) {
-		case dialogModes.GENERAL:
-			console.log('general dialog cancelled', dialog.onDialogCancel);
-			if (typeof dialog.onDialogCancel === 'function') {
-				dialog.onDialogCancel.apply(this._parent);
-			}
+		if (typeof dialog.onDialogCancel === 'function') {
+			dialog.onDialogCancel.apply(this._parent);
 		}
+
+		this._store.dispatch(actions.setDialogMode(dialogModes.NONE));
 	},
 
 	/**

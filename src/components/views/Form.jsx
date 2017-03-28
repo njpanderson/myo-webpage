@@ -125,14 +125,29 @@ class Form extends Component {
 
 		if (this.props.buttons && this.props.buttons.length) {
 			this.props.buttons.forEach((button, index) => {
+				var click_function;
+
+				if (button.type === 'cancel') {
+					click_function = ((component, original_fn) => {
+						return function() {
+							component.props.onCancel();
+
+							if (typeof original_fn === 'function') {
+								original_fn();
+							}
+						};
+					})(this, button.onClick);
+				} else {
+					click_function = button.onClick;
+				}
+
 				buttons.push(
 					<Button
 						key={'button-' + index}
 						type={button.type}
 						label={button.label}
 						className={button.className}
-						onCancel={this.props.onCancel}
-						onClick={button.onClick}/>
+						onClick={click_function}/>
 				);
 			});
 		}

@@ -2,12 +2,17 @@ import React, { PropTypes } from 'react';
 
 import { GLYPHS, Icon } from '../views/Icon.jsx';
 
+function rawMarkup(html) {
+	return { __html: html };
+}
+
 var DialogHeading = function(props) {
 	var notes = [],
 		icon;
 
 	props.notes.forEach((note, index) => (notes.push(
-		<p key={'note-' + index}>{note}</p>
+		<p key={'note-' + index}
+			dangerouslySetInnerHTML={rawMarkup(note)}/>
 	)));
 
 	if (props.iconGlyph) {

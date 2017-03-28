@@ -7,7 +7,6 @@ var Button = function(props) {
 
 	if (props.type === 'cancel') {
 		classes.push('cancel');
-		onClick = props.onCancel;
 	} else if (props.type === 'submit') {
 		classes.push('primary');
 	}
@@ -26,8 +25,7 @@ Button.propTypes = {
 	type: PropTypes.oneOf(['submit', 'cancel', 'general']).isRequired,
 	label: PropTypes.string.isRequired,
 	className: PropTypes.string,
-	onClick: PropTypes.func,
-	onCancel: PropTypes.func
+	onClick: PropTypes.func
 };
 
 export default Button;

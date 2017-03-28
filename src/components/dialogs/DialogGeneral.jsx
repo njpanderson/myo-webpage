@@ -9,13 +9,15 @@ class DialogGeneral extends Component {
 	}
 
 	render() {
-		var buttons = [],
+		var buttons = this.props.data.buttons,
 			classes = [this.props.settings.classes.dialog.container];
 
-		buttons.push({
-			type: 'submit',
-			label: 'OK'
-		});
+		if (!buttons.length) {
+			buttons = [{
+				type: 'submit',
+				label: 'OK'
+			}];
+		}
 
 		return (
 			<div className={classes.join(' ')}>

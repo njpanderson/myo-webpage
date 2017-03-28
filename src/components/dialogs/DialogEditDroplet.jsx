@@ -181,7 +181,6 @@ class DialogEditDroplet extends Component {
 
 		buttons.push({
 			type: 'cancel',
-			onClick: this.props.onDialogCancel,
 			label: 'Cancel'
 		});
 
