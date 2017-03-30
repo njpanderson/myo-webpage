@@ -1,4 +1,5 @@
 header {
+	display: flex;
 	padding: $section-padding;
 	border-bottom: 1px solid $gray-med;
 
@@ -8,5 +9,9 @@ header {
 		b {
 			color: $blue-dark;
 		}
+	}
+
+	.toolbar {
+		margin-left: auto;
 	}
 }

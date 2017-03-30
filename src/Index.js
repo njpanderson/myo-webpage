@@ -2,13 +2,13 @@
  * The built in HTMLElement type. Used to define DOM compatible nodes of Element type.
  * @typedef HTMLElement
  */
-
 import { createStore } from 'redux';
 
 import './lib/polyfills';
 import './styles/main.scss';
 
 import UI from './lib/UI.jsx';
+import { GLYPHS } from './components/views/Icon.jsx';
 
 import Droplet from './lib/Droplet';
 import request from './lib/ajax';
@@ -177,6 +177,18 @@ App.prototype = {
 		} else {
 			throw new Error('UI has not yet been initialised! Have you used #load() yet?');
 		}
+	},
+
+	startTour: function() {
+		console.log('start tour');
+	},
+
+	reset: function() {
+		console.log('reset');
+	},
+
+	updateView: function() {
+		console.log('update view');
 	}
 };
 
@@ -184,5 +196,10 @@ App.prototype = {
  * Default settings.
  */
 App.defaults = appDefaults;
+
+/**
+ * Icon glyphs
+ */
+App.GLYPHS = GLYPHS;
 
 export default App;

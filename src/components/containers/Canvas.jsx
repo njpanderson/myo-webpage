@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { collectRef } from '../../lib/utils';
 
 import View from '../views/View.jsx';
+import Header from '../views/Header.jsx';
 import Template from './TemplateContainer';
 import Dialog from './DialogContainer';
 import Pallet from './PalletContainer';
@@ -31,9 +32,11 @@ class Canvas extends Component {
 			<div className={classes.join(' ')}
 				ref={collectRef(this.props, 'canvas')}
 				>
-				<header>
+				<Header
+					settings={this.props.settings}
+					class_app={this.props.class_app}>
 					<h1>&lt;<b>Tag</b>&gt;</h1>
-				</header>
+				</Header>
 
 				<div className="main">
 					<Template
@@ -94,7 +97,8 @@ Canvas.propTypes = {
 	refCollector: PropTypes.func.isRequired,
 	settings: PropTypes.object.isRequired,
 	class_ui: PropTypes.object.isRequired,
-	class_template: PropTypes.object.isRequired,
+	class_app: PropTypes.object.isRequired,
+	class_template: PropTypes.object.isRequired
 };
 
 export default Canvas;

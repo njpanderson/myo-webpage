@@ -1,3 +1,5 @@
+import { GLYPHS } from '../components/views/Icon.jsx';
+
 export default {
 	classes: {
 		canvas: 'tag-canvas',
@@ -36,5 +38,19 @@ export default {
 	dropZone: {
 		label: '...'
 	},
-	onElementRender: null
+	toolbar: [{
+		label: 'Tour',
+		icon: GLYPHS.COMPASS,
+		method: 'startTour'
+	}, {
+		label: 'Reset',
+		icon: GLYPHS.LOOP_CIRCULAR,
+		method: 'reset'
+	}, {
+		label: 'Run',
+		icon: GLYPHS.MEDIA_PLAY,
+		method: 'updateView'
+	}],
+	onElementRender: null,
+	showIntro: PRODUCTION
 };

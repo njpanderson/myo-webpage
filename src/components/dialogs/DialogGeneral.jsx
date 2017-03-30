@@ -12,7 +12,7 @@ class DialogGeneral extends Component {
 		var buttons = this.props.data.buttons,
 			classes = [this.props.settings.classes.dialog.container];
 
-		if (!buttons.length) {
+		if (!buttons || !buttons.length) {
 			buttons = [{
 				type: 'submit',
 				label: 'OK'

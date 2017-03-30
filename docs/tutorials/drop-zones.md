@@ -1,4 +1,4 @@
-## Drop zones
+# Drop zones
 
 Within a template, drop zones are defined using bracket syntax, similar to Twig (but really, the similarity ends there!). Drop zones define, by their name, applicable points upon which you can place Droplets. Drop zones can also define the maximum number of Droplets which can be placed on them. An example template with some drop zones on it is as follows:
 

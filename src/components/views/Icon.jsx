@@ -3,7 +3,10 @@ import React, { PropTypes } from 'react';
 export const GLYPHS = {
 	TEXT: require('../../img/svg/text.svg'),
 	PUZZLE_PIECE: require('../../img/svg/puzzle-piece.svg'),
-	TAG: require('../../img/svg/tag.svg')
+	TAG: require('../../img/svg/tag.svg'),
+	COMPASS: require('../../img/svg/compass.svg'),
+	LOOP_CIRCULAR: require('../../img/svg/loop-circular.svg'),
+	MEDIA_PLAY: require('../../img/svg/media-play.svg')
 };
 
 export function Icon(props) {

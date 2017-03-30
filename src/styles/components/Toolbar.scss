@@ -1,0 +1,28 @@
+.toolbar {
+	ul {
+		list-style: none;
+		display: flex;
+		padding: 0;
+
+		li {
+			margin-left: 10px;
+
+			a {
+				text-decoration: none;
+				padding: 5px;
+				border-radius: $border-radius-small;
+				border: 1px solid transparent;
+
+				&:hover,
+				&:focus {
+					border-color: $gray-med;
+				}
+			}
+
+			.icon {
+				margin-right: 5px;
+				vertical-align: middle;
+			}
+		}
+	}
+}

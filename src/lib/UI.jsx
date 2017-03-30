@@ -1,5 +1,6 @@
-import DragDrop from './DragDrop.js';
+import DragDrop from './DragDrop';
 import Communicator from './Communicator';
+import Tour from './Tour';
 
 import CanvasContainer from '../components/containers/CanvasContainer';
 
@@ -43,6 +44,11 @@ var UI = function(parent, settings, refs, data, store, template) {
 		}
 	});
 
+	if (this.settings.showIntro) {
+		this._tour = new Tour(this);
+		this._tour.intro();
+	}
+
 	// general queues
 	this.queues = {
 		dragdropBindings: []
@@ -71,6 +77,7 @@ UI.prototype = {
 					onDropZoneClick={this._handleDropZoneClick.bind(this)}
 					onDragHandlePress={this._handleDragHandleEvent.bind(this)}
 					class_ui={this}
+					class_app={this._parent}
 					class_template={this._template}/>
 			</Provider>,
 			this._refs.ui.app
