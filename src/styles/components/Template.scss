@@ -1,7 +1,7 @@
 .template {
 	overflow: auto;
 	border-right: 1px solid $gray-med;
-	background-color: $gray-light;
+	background-color: $bg-code;
 
 	pre {
 		margin: $section-padding;
@@ -21,5 +21,5 @@
 
 .droplet-active .template,
 .dragging .template {
-	background-color: $bg-code;
+	// background-color: $bg-code;
 }
