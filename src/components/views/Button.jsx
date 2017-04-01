@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 
 var Button = function(props) {
 	var type = (props.type === 'submit') ? 'submit' : 'button',
-		classes = [props.className],
+		classes = ['button', props.className],
 		onClick = props.onClick;
 
 	if (props.type === 'cancel') {

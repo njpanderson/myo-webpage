@@ -44,13 +44,19 @@ class Toolbar extends Component {
 		if (this.props.buttons && this.props.buttons.length) {
 			this.props.buttons.forEach((button, index) => {
 				var key = 'button-' + index,
-					classes = [button.className || ''],
+					classes = [],
 					icon;
 
 				if (button.icon) {
 					icon = (
-						<Icon glyph={button.icon}/>
+						<Icon glyph={button.icon}
+							width={14}
+							height={14}/>
 					);
+				}
+
+				if (button.className) {
+					classes.push(button.className);
 				}
 
 				if (button.separator) {
@@ -61,6 +67,7 @@ class Toolbar extends Component {
 					<li key={key}
 						className={classes.join(' ')}>
 						<a href="#"
+							className={this.props.settings.classes.button}
 							ref={this.registerButtonRef(key)}
 							onClick={this.registerButtonClick(button, key)}>
 							<span>

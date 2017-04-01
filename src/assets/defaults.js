@@ -14,6 +14,7 @@ export default {
 		attached: 'attached',
 		text_element: 'text',
 		hidden: 'hidden',
+		button: 'button',
 		droplet: {
 			node: 'droplet',
 			active: 'active',

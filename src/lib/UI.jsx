@@ -44,8 +44,9 @@ var UI = function(parent, settings, refs, data, store, template) {
 		}
 	});
 
+	this._tour = new Tour(this);
+
 	if (this.settings.showIntro) {
-		this._tour = new Tour(this);
 		this._tour.intro();
 	}
 

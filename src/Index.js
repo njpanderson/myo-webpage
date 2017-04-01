@@ -180,6 +180,7 @@ App.prototype = {
 	startTour: function() {
 		this.requireUI();
 		console.log('start tour');
+		this._UI._tour.intro();
 	},
 
 	reset: function() {

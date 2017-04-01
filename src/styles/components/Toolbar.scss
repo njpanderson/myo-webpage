@@ -12,29 +12,6 @@
 				border-left: 2px solid $gray-light;
 			}
 
-			a {
-				display: block;
-				text-decoration: none;
-
-				span {
-					display: block;
-					padding: 5px 10px;
-					border-radius: $border-radius-small;
-					border: 1px solid transparent;
-				}
-
-				&:hover span,
-				&:focus span {
-					border-color: $gray-med;
-					background-color: $gray-light;
-				}
-			}
-
-			.icon {
-				margin: 0 5px 1px 0;
-				vertical-align: middle;
-			}
-
 			&.run a {
 				color: $green-dark;
 
@@ -43,5 +20,9 @@
 				}
 			}
 		}
+	}
+
+	.button {
+		font-weight: bolder;
 	}
 }

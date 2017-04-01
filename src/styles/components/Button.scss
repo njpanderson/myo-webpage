@@ -1,0 +1,70 @@
+.button {
+	-webkit-appearance: none;
+	display: block;
+	outline: 0;
+	border: 0;
+	padding: 0;
+	text-decoration: none;
+	@include font-size(14);
+	color: $black;
+	background-color: transparent;
+
+	span {
+		display: block;
+		overflow: hidden;
+		position: relative;
+		border-radius: $border-radius-small;
+		border: 1px solid $gray-med;
+		padding: $button-padding-v $button-padding-h;
+	}
+
+	span:after {
+		content: '';
+		position: absolute;
+		opacity: 0;
+		left: 0;
+		top: -50%;
+		width: 100%;
+		padding-top: 100%;
+		border-radius: 50%;
+		background-color: $purple-dark;
+		pointer-events: none;
+	}
+
+	&:hover span,
+	&:focus span {
+		transform: translate(-2px, -2px);
+		box-shadow: $box-shadow-shallow;
+		cursor: pointer;
+		background-color: $gray-light;
+	}
+
+	&:active span:after {
+		animation: button-circle-out .6s $ease-in-out-quart;
+	}
+
+	.icon {
+		margin: 0 5px 1px 0;
+		vertical-align: middle;
+	}
+}
+
+form .button {
+	@include font-size(16);
+
+	span {
+		padding: ($button-padding-v * 1.5) ($button-padding-h * 1.5);
+	}
+}
+
+@keyframes button-circle-out {
+	0% {
+		transform: scale(0);
+		opacity: 1;
+	}
+
+	100% {
+		text-transform: scale(6);
+		opacity: 0;
+	}
+}

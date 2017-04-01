@@ -35,7 +35,6 @@ form {
 }
 
 input,
-button,
 select {
 	@include font-size(14);
 	padding: 5px;
@@ -43,46 +42,32 @@ select {
 
 button {
 	position: relative;
-	border: 0;
-	padding: 0;
 
-	span {
-		display: block;
-		padding: 10px 15px;
-		background-color: $gray-med;
-	}
-
-	&:hover span,
-	&:focus span {
-		transform: translate(2px, -2px);
-		cursor: pointer;
-		box-shadow: $box-shadow-shallow;
-		background-color: lighten($gray-med, $lighten-factor);
-	}
-
-	&:active span {
-		left: 0;
-		top: 0;
-		box-shadow: none;
-	}
-
-	&.primary {
-		// color: $color-button-alt;
-		background-color: $blue;
-
-		&.primary:hover,
-		&.primary:focus {
-			background-color: lighten($blue, $lighten-factor);
-		}
-	}
-
+	&.primary,
 	&.danger {
-		color: $color-button-danger;
-		background-color: $red;
+		font-weight: bolder;
+	}
 
-		&.danger:hover,
-		&.danger:focus {
-			background-color: lighten($red, $lighten-factor);
-		}
+	&.primary span {
+		// color: $color-button-alt;
+		border-color: $blue;
+		color: $blue;
+	}
+
+	&.primary:hover span,
+	&.primary:focus span {
+		color: $white;
+		background-color: lighten($blue, $lighten-factor);
+	}
+
+	&.danger span {
+		border-color: $red;
+		color: $color-button-danger;
+	}
+
+	&.danger:hover span,
+	&.danger:focus span {
+		color: $white;
+		background-color: lighten($red, $lighten-factor);
 	}
 }
