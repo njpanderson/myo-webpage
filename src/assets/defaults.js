@@ -23,6 +23,9 @@ export default {
 			visible: 'visible',
 			container: 'dialog-container',
 			heading: 'dialog-heading'
+		},
+		toolbar: {
+			separator: 'separator'
 		}
 	},
 	selectors: {
@@ -49,7 +52,9 @@ export default {
 	}, {
 		label: 'Run',
 		icon: GLYPHS.MEDIA_PLAY,
-		method: 'updateView'
+		method: 'updateView',
+		className: 'run',
+		separator: true
 	}],
 	onElementRender: null,
 	showIntro: PRODUCTION

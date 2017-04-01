@@ -1,6 +1,7 @@
 header {
 	display: flex;
-	padding: $section-padding;
+	align-items: center;
+	padding: ($section-padding / 2) $section-padding;
 	border-bottom: 1px solid $gray-med;
 
 	h1 {

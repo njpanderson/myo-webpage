@@ -13,6 +13,7 @@ class Header extends Component {
 				{this.props.children}
 				<Toolbar
 					buttons={this.props.settings.toolbar}
+					settings={this.props.settings}
 					class_app={this.props.class_app}/>
 			</header>
 		);
@@ -21,7 +22,7 @@ class Header extends Component {
 
 Header.propTypes = {
 	children: PropTypes.object,
-	settings: PropTypes.object,
+	settings: PropTypes.object.isRequired,
 	class_app: PropTypes.object.isRequired
 };
 
