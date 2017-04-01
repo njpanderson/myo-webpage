@@ -36,7 +36,8 @@ export default {
 		initial_flex_basis: 50
 	},
 	view: {
-		src: 'view.html'
+		src: 'view.html',
+		autoUpdate: false
 	},
 	dropZone: {
 		label: '...'

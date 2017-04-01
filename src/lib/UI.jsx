@@ -419,7 +419,9 @@ UI.prototype = {
 			data
 		));
 
-		this._updateView();
+		if (this.settings.view.autoUpdate) {
+			this._updateView();
+		}
 	},
 
 	zoneEditAttachment: function(zone_id, attachment_index, data) {
@@ -429,7 +431,9 @@ UI.prototype = {
 			data
 		));
 
-		this._updateView();
+		if (this.settings.view.autoUpdate) {
+			this._updateView();
+		}
 	},
 
 	zoneDetachAttachment: function(zone_id, attachment_index) {

@@ -161,34 +161,41 @@ App.prototype = {
 	 * @param {array} [buttons] - Buttons to show. Defaults to a single "OK" button.
 	 */
 	dialog: function(title, message, buttons = []) {
-		if (this._UI) {
-			return new Promise((resolve, reject) => {
-				this._UI._showDialog(dialogModes.GENERAL, {
-					title,
-					message,
-					buttons
-				},
-				resolve,
-				() => {
-					console.log('rejection');
-					reject();
-				});
+		this.requireUI();
+
+		return new Promise((resolve, reject) => {
+			this._UI._showDialog(dialogModes.GENERAL, {
+				title,
+				message,
+				buttons
+			},
+			resolve,
+			() => {
+				console.log('rejection');
+				reject();
 			});
-		} else {
-			throw new Error('UI has not yet been initialised! Have you used #load() yet?');
-		}
+		});
 	},
 
 	startTour: function() {
+		this.requireUI();
 		console.log('start tour');
 	},
 
 	reset: function() {
+		this.requireUI();
 		console.log('reset');
 	},
 
 	updateView: function() {
-		console.log('update view');
+		this.requireUI();
+		this._UI._updateView();
+	},
+
+	requireUI: function() {
+		if (!this._UI) {
+			throw new Error('UI has not yet been initialised! Have you used #load() yet?');
+		}
 	}
 };
 

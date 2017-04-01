@@ -38,11 +38,6 @@
 					"label": "Choose a colour",
 					"options": ["button-blue", "button-red", "button-yellow", "button-pink", "button-green"],
 					"value": "button-blue"
-				},
-				"title": {
-					"type": "text",
-					"required": true,
-					"placeholder": "Add a title"
 				}
 			},
 			"innerHTML": {
