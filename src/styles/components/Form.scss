@@ -48,25 +48,33 @@ button {
 		font-weight: bolder;
 	}
 
-	&.primary span {
+	&.primary > span {
 		// color: $color-button-alt;
 		border-color: $blue;
 		color: $blue;
 	}
 
-	&.primary:hover span,
-	&.primary:focus span {
+	&.primary .circle {
+		background-color: darken($blue, $darken-factor);
+	}
+
+	&.primary:hover > span,
+	&.primary:focus > span {
 		color: $white;
 		background-color: lighten($blue, $lighten-factor);
 	}
 
-	&.danger span {
+	&.danger > span {
 		border-color: $red;
 		color: $color-button-danger;
 	}
 
-	&.danger:hover span,
-	&.danger:focus span {
+	&.danger .circle {
+		background-color: darken($color-button-danger, $darken-factor);
+	}
+
+	&.danger:hover > span,
+	&.danger:focus > span {
 		color: $white;
 		background-color: lighten($red, $lighten-factor);
 	}

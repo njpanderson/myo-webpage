@@ -12,11 +12,15 @@
 				border-left: 2px solid $gray-light;
 			}
 
-			&.run a {
+			&.run .button {
 				color: $green-dark;
 
 				svg {
 					fill: currentColor;
+				}
+
+				.circle {
+					background-color: $green-dark;
 				}
 			}
 		}

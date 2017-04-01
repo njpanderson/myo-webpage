@@ -13,10 +13,14 @@ var Button = function(props) {
 
 	return (
 		<button
+			ref={props.refCollector}
 			className={classes.join(' ')}
 			onClick={onClick}
 			type={type}>
-			<span>{props.label}</span>
+			<span>
+				{props.label}
+				<span className="circle"></span>
+			</span>
 		</button>
 	);
 };
@@ -25,7 +29,8 @@ Button.propTypes = {
 	type: PropTypes.oneOf(['submit', 'cancel', 'general']).isRequired,
 	label: PropTypes.string.isRequired,
 	className: PropTypes.string,
-	onClick: PropTypes.func
+	onClick: PropTypes.func,
+	refCollector: PropTypes.func,
 };
 
 export default Button;

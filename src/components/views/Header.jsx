@@ -14,6 +14,7 @@ class Header extends Component {
 				<Toolbar
 					buttons={this.props.settings.toolbar}
 					settings={this.props.settings}
+					onButtonClick={this.props.onButtonClick}
 					class_app={this.props.class_app}/>
 			</header>
 		);
@@ -23,6 +24,7 @@ class Header extends Component {
 Header.propTypes = {
 	children: PropTypes.object,
 	settings: PropTypes.object.isRequired,
+	onButtonClick: PropTypes.func,
 	class_app: PropTypes.object.isRequired
 };
 

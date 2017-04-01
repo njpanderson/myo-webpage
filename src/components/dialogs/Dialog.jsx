@@ -30,6 +30,7 @@ function Dialog(props) {
 					class_template={props.class_template}
 					onDialogComplete={props.onDialogComplete}
 					onDialogCancel={props.onDialogCancel}
+					onButtonClick={props.onButtonClick}
 					class_ui={props.class_ui}/>
 			</div>
 		);
@@ -49,6 +50,7 @@ Dialog.propTypes = {
 	settings: PropTypes.object,
 	onDialogComplete: PropTypes.func,
 	onDialogCancel: PropTypes.func,
+	onButtonClick: PropTypes.func,
 	class_ui: PropTypes.object,
 	class_template: PropTypes.object
 };

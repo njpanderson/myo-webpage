@@ -15,8 +15,9 @@ class Toolbar extends Component {
 
 			event.preventDefault();
 
-			if (this.buttonRefs) {
+			if (this.buttonRefs && this.buttonRefs[key]) {
 				this.buttonRefs[key].blur();
+				this.props.onButtonClick(this.buttonRefs[key], event);
 			}
 
 			if (typeof button.method === 'string' &&
@@ -73,6 +74,7 @@ class Toolbar extends Component {
 							<span>
 								{icon}
 								{button.label}
+								<span className="circle"></span>
 							</span>
 						</a>
 					</li>
@@ -97,6 +99,7 @@ class Toolbar extends Component {
 Toolbar.propTypes = {
 	buttons: PropTypes.arrayOf(PropTypes.object),
 	settings: PropTypes.object.isRequired,
+	onButtonClick: PropTypes.func,
 	class_app: PropTypes.object.isRequired
 };
 

@@ -15,6 +15,7 @@ export default {
 		text_element: 'text',
 		hidden: 'hidden',
 		button: 'button',
+		button_animate: 'animate',
 		droplet: {
 			node: 'droplet',
 			active: 'active',
@@ -31,7 +32,8 @@ export default {
 	},
 	selectors: {
 		drop_zone: '.drop-zone .target',
-		droplet: '.droplet'
+		droplet: '.droplet',
+		button_circle: '.circle'
 	},
 	template: {
 		initial_flex_basis: 50

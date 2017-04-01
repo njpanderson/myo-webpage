@@ -77,6 +77,7 @@ UI.prototype = {
 					onDropletClick={this._handleDropletClick.bind(this)}
 					onDropZoneClick={this._handleDropZoneClick.bind(this)}
 					onDragHandlePress={this._handleDragHandleEvent.bind(this)}
+					onButtonClick={this._handleButtonClick.bind(this)}
 					class_ui={this}
 					class_app={this._parent}
 					class_template={this._template}/>
@@ -101,12 +102,14 @@ UI.prototype = {
 	},
 
 	_hideDialog: function() {
-		this._store.dispatch(actions.setDialogMode(dialogModes.NONE));
+		// hides the dialog (after a short timeout)
+		window.setTimeout(function() {
+			this._store.dispatch(actions.setDialogMode(dialogModes.NONE));
+		}.bind(this), 300);
 	},
 
 	_completeDialogAction: function(dialog_data) {
 		var dialog = (this._store.getState()).UI.dialog;
-		console.log('_completeDialogAction', dialog);
 
 		// reset dialog state to nothing
 		this._hideDialog();
@@ -139,13 +142,12 @@ UI.prototype = {
 
 	_cancelDialogAction: function() {
 		var dialog = (this._store.getState()).UI.dialog;
-		console.log('_cancelDialogAction', dialog);
 
 		if (typeof dialog.onDialogCancel === 'function') {
 			dialog.onDialogCancel.apply(this._parent);
 		}
 
-		this._store.dispatch(actions.setDialogMode(dialogModes.NONE));
+		this._hideDialog();
 	},
 
 	/**
@@ -366,6 +368,29 @@ UI.prototype = {
 
 		// reset dragHandlePosition because the metrics have changed
 		this._data.UI.dragHandlePosition = 0;
+	},
+
+	_handleButtonClick: function(button, event) {
+		var offset = {},
+			rect, circle;
+
+		if (button && event && event.pageX && event.pageY &&
+			(circle = button.querySelector(this.settings.selectors.button_circle))) {
+			// get metrics and offset by scroll
+			rect = button.getBoundingClientRect();
+			rect.leftScrolled = rect.left + window.pageXOffset;
+			rect.topScrolled = rect.top + window.pageYOffset;
+
+			// calculate cursor offset on the button
+			offset.left = event.pageX - (rect.left + window.pageXOffset);
+			offset.top = event.pageY - (rect.top + window.pageYOffset);
+
+			// position the circle based on the pointer position on the button
+			circle.classList.remove(this.settings.classes.button_animate);
+			circle.style.left = offset.left - (circle.offsetWidth / 2) + 'px';
+			circle.style.top = offset.top - (circle.offsetHeight / 2) + 'px';
+			circle.classList.add(this.settings.classes.button_animate);
+		}
 	},
 
 	/**

@@ -43,6 +43,8 @@ class Form extends Component {
 
 		super(props);
 
+		this.buttonRefs = {};
+
 		// set default state for fields based on original values
 		if (this.props.fieldSets) {
 			this.props.fieldSets.forEach((set) => {
@@ -120,30 +122,43 @@ class Form extends Component {
 		this.props.onSubmit(this.state.formValues);
 	}
 
+	registerButtonRef(key) {
+		return function(ref) {
+			if (ref !== null) {
+				this.buttonRefs[key] = ref;
+			}
+		}.bind(this);
+	}
+
 	getButtons() {
 		var buttons = [];
 
 		if (this.props.buttons && this.props.buttons.length) {
 			this.props.buttons.forEach((button, index) => {
-				var click_function;
+				var key = 'button-' + index,
+					click_function;
 
-				if (button.type === 'cancel') {
-					click_function = ((component, original_fn) => {
-						return function() {
+				click_function = ((component, key, original_fn) => {
+					return function(event) {
+						if (component.buttonRefs && component.buttonRefs[key]) {
+							component.buttonRefs[key].blur();
+							component.props.onButtonClick(component.buttonRefs[key], event);
+						}
+
+						if (button.type === 'cancel') {
 							component.props.onCancel();
+						}
 
-							if (typeof original_fn === 'function') {
-								original_fn();
-							}
-						};
-					})(this, button.onClick);
-				} else {
-					click_function = button.onClick;
-				}
+						if (typeof original_fn === 'function') {
+							original_fn(event);
+						}
+					};
+				})(this, key, button.onClick);
 
 				buttons.push(
 					<Button
-						key={'button-' + index}
+						key={key}
+						refCollector={this.registerButtonRef(key)}
 						type={button.type}
 						label={button.label}
 						className={button.className}
@@ -175,6 +190,7 @@ class Form extends Component {
  * @property {FormFieldSets} fieldSets - fieldsets for display
  */
 Form.propTypes = {
+	onButtonClick: PropTypes.func.isRequired,
 	onCancel: PropTypes.func,
 	onSubmit: PropTypes.func,
 	fieldSets: PropTypes.arrayOf(PropTypes.shape({

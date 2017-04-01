@@ -195,6 +195,7 @@ class DialogEditDroplet extends Component {
 				<Form
 					fieldSets={fieldsets}
 					buttons={buttons}
+					onButtonClick={this.props.onButtonClick}
 					onSubmit={this.onDialogComplete}
 					onCancel={this.props.onDialogCancel}/>
 			</div>
@@ -207,6 +208,7 @@ DialogEditDroplet.propTypes = {
 	settings: PropTypes.object.isRequired,
 	onDialogCancel: PropTypes.func,
 	onDialogComplete: PropTypes.func,
+	onButtonClick: PropTypes.func,
 	class_ui: PropTypes.object.isRequired
 };
 

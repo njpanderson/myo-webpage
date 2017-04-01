@@ -28,6 +28,7 @@ class DialogGeneral extends Component {
 
 				<Form
 					buttons={buttons}
+					onButtonClick={this.props.onButtonClick}
 					onSubmit={this.props.onDialogComplete}
 					onCancel={this.props.onDialogCancel}/>
 			</div>
@@ -40,12 +41,13 @@ DialogGeneral.propTypes = {
 	settings: PropTypes.object.isRequired,
 	onDialogCancel: PropTypes.func,
 	onDialogComplete: PropTypes.func,
+	onButtonClick: PropTypes.func,
 	class_ui: PropTypes.object.isRequired
 };
 
 DialogGeneral.defaultProps = {
 	onDialogCancel: null,
-	onDialogComplete: null,
+	onDialogComplete: null
 };
 
 export default DialogGeneral;
