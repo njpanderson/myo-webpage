@@ -1,10 +1,16 @@
+// global metrics
 $section-padding: 10px;
 $dialog-padding: 20px;
 
 $droplet-height: 35px;
 
+// ui effects
 $border-radius-small: 3px;
 $border-radius-large: 6px;
+
+$overlay_opacity: .6;
+$lighten-factor: 5%;
+$darken-factor: 15%;
 
 // named colours
 $black: #333;
@@ -12,13 +18,13 @@ $white: #fff;
 $gray-dark: #a0a0a0;
 $gray-med: #ccc;
 $gray-light: #eee;
-$blue: #959eff;
-$blue-dark: #464ae0;
+$blue: #5d6bec;
+$blue-dark: darken($blue, $darken-factor);
 $red: #ff515c;
-$green: #61ff4d;
-$green-dark: #3b9e2f;
-$purple: #cc49ff;
-$purple-dark: #8f32b4;
+$green: #51cc4d;
+$green-dark: darken($green, $darken-factor);
+$purple: #c044f1;
+$purple-dark: darken($purple, $darken-factor);
 $tan: #f3ffc6;
 
 // ui colors
@@ -34,10 +40,6 @@ $color-type-attribute: $green;
 $color-type-attribute-active: $green-dark;
 $color-type-element: $purple;
 $color-type-element-active: $purple-dark;
-
-$overlay_opacity: .6;
-$lighten-factor: 5%;
-$darken-factor: 15%;
 
 // typography
 $font-size-base: 16; // px
