@@ -4,14 +4,6 @@ header {
 	padding: ($section-padding / 2) $section-padding;
 	border-bottom: 1px solid $gray-med;
 
-	h1 {
-		letter-spacing: 1px;
-
-		b {
-			color: $blue-dark;
-		}
-	}
-
 	.toolbar {
 		margin-left: auto;
 	}

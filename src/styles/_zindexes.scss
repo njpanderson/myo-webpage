@@ -14,6 +14,16 @@
 
 .dialog {
 	z-index: 4;
+
+	.dialog-container[x-placement] .arrow {
+		&:before {
+			z-index: 6;
+		}
+
+		&:after {
+			z-index: 5;
+		}
+	}
 }
 
 .button {

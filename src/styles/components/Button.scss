@@ -57,6 +57,27 @@ form .button {
 	}
 }
 
+.pseudo-button {
+	display: inline-block;
+	border: 1px solid $gray-med;
+	border-radius: $border-radius-small;
+	padding: 1px 5px;
+
+	> * {
+		vertical-align: middle;
+	}
+
+	svg {
+		margin-bottom: .15em;
+		fill: currentColor;
+	}
+
+	&.run {
+		color: $green;
+		fill: $green;
+	}
+}
+
 @keyframes button-circle-out {
 	100% {
 		transform: scale(6);

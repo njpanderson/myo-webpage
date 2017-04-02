@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import { dialogModes } from '../../assets/constants';
 
@@ -10,34 +10,71 @@ var DialogComponents = {};
 DialogComponents[dialogModes.EDIT_DROPLET] = DialogEditDroplet;
 DialogComponents[dialogModes.GENERAL] = DialogGeneral;
 
-function Dialog(props) {
-	var Component,
-		classes = [props.settings.classes.dialog.main];
-
-	if (props.mode !== dialogModes.NONE) {
-		classes.push(props.settings.classes.dialog.visible);
+class Dialog extends Component {
+	constructor(props) {
+		super(props);
 	}
 
-	// get appropriate component for dialog mode
-	Component = DialogComponents[props.mode];
+	/**
+	 * `ref` and `popper` reference is refreshed here instead of componentDidMount
+	 * because this component doesn't really "unmount" as such - it just changes the
+	 * inner `Component` value for dialog contents.
+	 */
+	collectRef(ref) {
+		if (ref !== null) {
+			this.dialogRef = ref;
 
-	if (Component) {
-		return (
-			<div className={classes.join(' ')}>
-				<Component
-					data={props.data}
-					settings={props.settings}
-					class_template={props.class_template}
-					onDialogComplete={props.onDialogComplete}
-					onDialogCancel={props.onDialogCancel}
-					onButtonClick={props.onButtonClick}
-					class_ui={props.class_ui}/>
-			</div>
-		);
-	} else {
-		return (
-			<div className={classes.join(' ')}></div>
-		);
+			if (this.popper) {
+				// popper already exists - remove and set null
+				this.popper.destroy();
+				this.popper = null;
+			}
+
+			if (this.props.data && this.props.data.attachment) {
+				// attachment data exists - apply with popper
+				this.popper = this.props.class_ui._setUIAttachment(
+					this.props.data.attachment,
+					this.dialogRef
+				);
+			}
+		}
+	}
+
+	render() {
+		var Component,
+			classes = [this.props.settings.classes.dialog.main];
+
+		if (this.props.mode !== dialogModes.NONE) {
+			classes.push(this.props.settings.classes.dialog.visible);
+		}
+
+		// get appropriate component for dialog mode
+		Component = DialogComponents[this.props.mode];
+
+		if (Component) {
+			// a dialog is being requested - render the appropriate component
+			if (this.props.data.overlay === false) {
+				classes.push(this.props.settings.classes.dialog.no_overlay);
+			}
+
+			return (
+				<div className={classes.join(' ')}>
+					<Component
+						data={this.props.data}
+						settings={this.props.settings}
+						refCollector={this.collectRef.bind(this)}
+						class_template={this.props.class_template}
+						onDialogComplete={this.props.onDialogComplete}
+						onDialogCancel={this.props.onDialogCancel}
+						onButtonClick={this.props.onButtonClick}
+						class_ui={this.props.class_ui}/>
+				</div>
+			);
+		} else {
+			return (
+				<div className={classes.join(' ')}></div>
+			);
+		}
 	}
 }
 

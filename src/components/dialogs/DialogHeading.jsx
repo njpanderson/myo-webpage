@@ -23,7 +23,7 @@ var DialogHeading = function(props) {
 		<div className={props.className}>
 			<h2>
 				{icon}
-				<span>{props.title}</span>
+				<span dangerouslySetInnerHTML={rawMarkup(props.title)}/>
 			</h2>
 			{notes}
 		</div>

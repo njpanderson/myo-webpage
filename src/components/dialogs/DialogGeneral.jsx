@@ -20,7 +20,8 @@ class DialogGeneral extends Component {
 		}
 
 		return (
-			<div className={classes.join(' ')}>
+			<div className={classes.join(' ')}
+				ref={this.props.refCollector}>
 				<DialogHeading
 					title={this.props.data.title}
 					notes={this.props.data.message}
@@ -31,6 +32,7 @@ class DialogGeneral extends Component {
 					onButtonClick={this.props.onButtonClick}
 					onSubmit={this.props.onDialogComplete}
 					onCancel={this.props.onDialogCancel}/>
+				<span className="arrow"/>
 			</div>
 		);
 	}
@@ -39,6 +41,7 @@ class DialogGeneral extends Component {
 DialogGeneral.propTypes = {
 	data: PropTypes.object.isRequired,
 	settings: PropTypes.object.isRequired,
+	refCollector: PropTypes.func,
 	onDialogCancel: PropTypes.func,
 	onDialogComplete: PropTypes.func,
 	onButtonClick: PropTypes.func,

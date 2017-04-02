@@ -43,6 +43,7 @@ $color-type-element-active: $purple-dark;
 
 // typography
 $font-size-base: 16; // px
+$font-size-code: 14;
 $line-height: 140%;
 
 $font-family-base: 'Muli', sans-serif;
@@ -52,8 +53,12 @@ $font-family-mono: 'Fira Mono', monospace;
 $ease-in-out-quart: cubic-bezier(0.770, 0.000, 0.175, 1.000);
 
 // shadows
-$box-shadow-shallow: 2px 2px rgba(0, 0, 0, 0.3);
-$box-shadow-deep: 5px 5px rgba(0, 0, 0, 0.1);
+$color-box-shadow-deep: rgba(0, 0, 0, 0.1);
+$color-box-shadow-shallow: rgba(0, 0, 0, 0.3);
+$distance-box-shadow-deep: 4px;
+$distance-box-shadow-shallow: 2px;
+$box-shadow-shallow: $distance-box-shadow-shallow $distance-box-shadow-shallow $color-box-shadow-shallow;
+$box-shadow-deep: $distance-box-shadow-deep $distance-box-shadow-deep $color-box-shadow-deep;
 
 // buttons
 $button-padding-h: 10px;

@@ -34,26 +34,30 @@ class DialogEditDroplet extends Component {
 		this.detachAttachment = this.detachAttachment.bind(this);
 	}
 
-	onDialogComplete(values) {
-		var data = {},
+	/**
+	 * Instead of passing completion straight to the prop, handles conversion of raw form
+	 * data back into a format matching the original droplet data.
+	 */
+	onDialogComplete(values, action, action_data) {
+		var droplet_values = {},
 			key;
 
 		if (typeof this.props.onDialogComplete === 'function') {
-			// massage data back into format replicating Droplet.data format
+			// convert data back into format replicating Droplet.data format
 			for (key in values) {
 				if (values.hasOwnProperty(key)) {
 					if (key === 'attrs') {
-						data[key] = values[key];
+						droplet_values[key] = values[key];
 					} else {
-						data[key] = values[key][key];
+						droplet_values[key] = values[key][key];
 					}
 				}
 			}
 
-			data = Object.deepAssign({}, this.droplet.data, data);
+			droplet_values = Object.deepAssign({}, this.droplet.data, droplet_values);
 
-			// send data to callback
-			this.props.onDialogComplete(data);
+			// finally, fire the original prop with the converted data
+			this.props.onDialogComplete(droplet_values, action, action_data);
 		}
 	}
 
@@ -140,7 +144,7 @@ class DialogEditDroplet extends Component {
 		classes.push('droplet-' + this.droplet.dropletType);
 
 		if (this.props.data.attachment_index !== null) {
-			// editing
+			// editing an existing droplet
 			title = 'Edit ' + headingsByType[this.droplet.dropletType].text;
 
 			if (fieldsets.length) {
@@ -161,10 +165,14 @@ class DialogEditDroplet extends Component {
 			}
 
 			buttons.push({
-				type: 'general',
+				type: 'remove_droplet',
 				label: 'Remove Droplet',
 				className: 'danger pull-left',
-				onClick: this.detachAttachment
+				data: {
+					attachment_index: this.props.data.attachment_index,
+					zone_id: this.props.data.zone_id
+				}
+				// onClick: this.detachAttachment
 			});
 		} else {
 			// adding
@@ -185,7 +193,8 @@ class DialogEditDroplet extends Component {
 		});
 
 		return (
-			<div className={classes.join(' ')}>
+			<div className={classes.join(' ')}
+				ref={this.props.refCollector}>
 				<DialogHeading
 					title={title}
 					notes={notes}
@@ -198,6 +207,7 @@ class DialogEditDroplet extends Component {
 					onButtonClick={this.props.onButtonClick}
 					onSubmit={this.onDialogComplete}
 					onCancel={this.props.onDialogCancel}/>
+				<span className="arrow"/>
 			</div>
 		);
 	}
@@ -206,6 +216,7 @@ class DialogEditDroplet extends Component {
 DialogEditDroplet.propTypes = {
 	data: PropTypes.object.isRequired,
 	settings: PropTypes.object.isRequired,
+	refCollector: PropTypes.func,
 	onDialogCancel: PropTypes.func,
 	onDialogComplete: PropTypes.func,
 	onButtonClick: PropTypes.func,

@@ -24,7 +24,8 @@ export default {
 			main: 'dialog',
 			visible: 'visible',
 			container: 'dialog-container',
-			heading: 'dialog-heading'
+			heading: 'dialog-heading',
+			no_overlay: 'no-overlay'
 		},
 		toolbar: {
 			separator: 'separator'

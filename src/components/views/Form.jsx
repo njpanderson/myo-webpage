@@ -117,9 +117,16 @@ class Form extends Component {
 		});
 	}
 
-	onSubmit(event) {
-		event.preventDefault();
-		this.props.onSubmit(this.state.formValues);
+	componentOnSubmit(proxy_event) {
+		this.onSubmit(proxy_event);
+	}
+
+	onSubmit(event, button, data) {
+		if (event) {
+			event.preventDefault();
+		}
+
+		this.props.onSubmit(this.state.formValues, button, data);
 	}
 
 	registerButtonRef(key) {
@@ -146,12 +153,16 @@ class Form extends Component {
 						}
 
 						if (button.type === 'cancel') {
+							// cancel button
 							component.props.onCancel();
+						} else if (button.type !== 'submit') {
+							// anything except submit
+							component.onSubmit(null, button.type, button.data);
 						}
 
-						if (typeof original_fn === 'function') {
-							original_fn(event);
-						}
+						// if (typeof original_fn === 'function') {
+						// 	original_fn(event);
+						// }
 					};
 				})(this, key, button.onClick);
 
@@ -172,7 +183,7 @@ class Form extends Component {
 
 	render() {
 		return (
-			<form action="" onSubmit={this.onSubmit.bind(this)}>
+			<form action="" onSubmit={this.componentOnSubmit.bind(this)}>
 				<div className="fields">
 					{this.fieldSets()}
 				</div>

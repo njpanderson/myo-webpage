@@ -7,16 +7,36 @@ var Tour = function(parent) {
 
 Tour.prototype = {
 	intro: function() {
-		this._parent._showDialog(dialogModes.GENERAL, Tour.dialogs.intro);
+		return this._parent._showDialog(dialogModes.GENERAL, Tour.dialogs.intro);
 	},
 
-	tour: function() {
+	start: function() {
+		this._progressTour();
+	},
 
+	_progressTour: function(index = 0) {
+		if ((Tour.dialogs.tour.length - 1) >= index) {
+			this._showTourElement(index)
+				.then(() => {
+					this._progressTour((index + 1));
+				});
+		} else {
+			this._parent._hideDialog();
+		}
+	},
+
+	_showTourElement(index) {
+		return this._parent._showDialog(
+			dialogModes.GENERAL,
+			Tour.dialogs.tour[index]
+		)
+			.catch(this._parent._hideDialog);
 	}
 };
 
 Tour.dialogs = {
-	intro: dialogs.intro
+	intro: dialogs.intro,
+	tour: dialogs.tour
 };
 
 export default Tour;

@@ -159,28 +159,26 @@ App.prototype = {
 	 * @param {string} title - Title of the dialog.
 	 * @param {array|HTMLElement} message - Message to display.
 	 * @param {array} [buttons] - Buttons to show. Defaults to a single "OK" button.
+	 * @returns {Promise} a Promise, the resolve/reject methods of which will denote
+	 * completion or cancellation of the dialog. Custom button events will not complete
+	 * the promise.
 	 */
 	dialog: function(title, message, buttons = []) {
 		this.requireUI();
 
-		return new Promise((resolve, reject) => {
-			this._UI._showDialog(dialogModes.GENERAL, {
+		return this._UI._showDialog(
+			dialogModes.GENERAL, {
 				title,
 				message,
 				buttons
-			},
-			resolve,
-			() => {
-				console.log('rejection');
-				reject();
-			});
-		});
+			}
+		);
 	},
 
 	startTour: function() {
 		this.requireUI();
 		console.log('start tour');
-		this._UI._tour.intro();
+		this._UI._tour.start();
 	},
 
 	reset: function() {

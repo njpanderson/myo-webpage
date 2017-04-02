@@ -43,18 +43,19 @@
     "babel-plugin-transform-object-rest-spread": "^6.22.0",
     "babel-preset-latest": "^6.22.0",
     "babel-preset-react": "^6.22.0",
+    "css-loader": "^0.27.3",
     "interact.js": "^1.2.8",
+    "node-sass": "^4.5.0",
+    "popper.js": "^1.0.8",
     "promise": "^7.1.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
-    "superagent": "^3.4.1",
-    "superagent-promise": "^1.1.0",
-    "css-loader": "^0.27.3",
-    "node-sass": "^4.5.0",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.14.1",
+    "superagent": "^3.4.1",
+    "superagent-promise": "^1.1.0",
     "svg-sprite-loader": "^0.3.0"
   }
 }

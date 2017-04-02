@@ -1,3 +1,8 @@
+import React from 'react';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import Popper from 'popper.js';
+
 import DragDrop from './DragDrop';
 import Communicator from './Communicator';
 import Tour from './Tour';
@@ -7,11 +12,6 @@ import CanvasContainer from '../components/containers/CanvasContainer';
 import actions from '../state/actions';
 
 import { dialogModes, uiStates, messageCommands } from '../assets/constants';
-
-import React from 'react';
-import { render } from 'react-dom';
-
-import { Provider } from 'react-redux';
 
 var UI = function(parent, settings, refs, data, store, template) {
 	/**
@@ -71,8 +71,6 @@ UI.prototype = {
 					settings={this.settings}
 					refCollector={this._refCollector.bind(this)}
 					onMount={this._mountEvent.bind(this)}
-					onDialogComplete={this._completeDialogAction.bind(this)}
-					onDialogCancel={this._cancelDialogAction.bind(this)}
 					onAttachmentClick={this._handleAttachmentClick.bind(this)}
 					onDropletClick={this._handleDropletClick.bind(this)}
 					onDropZoneClick={this._handleDropZoneClick.bind(this)}
@@ -87,67 +85,46 @@ UI.prototype = {
 	},
 
 	/**
-	 * Displays an editor window for a Droplet.
 	 * @param {string} mode - One of the dialogModes modes.
 	 * @param {mixed} data - Relevant data to store for the dialog to use.
+	 * @param {function} [onDialogComplete] - Function to invoke on dialog completion.
+	 * @param {function} [onDialogCancel] - Function to invoke on dialog cancellation.
+	 * @returns {mixed} undefined, or a Promise in the case that neither callback is defined.
+	 * @description
+	 *	Displays a dialog element. In this case that no callbacks (`onDialogComplete` or
+	 * `onDialogCancel` are defined, a Promise is returned, the resolve/reject methods
+	 * of which denote completion or cancellation of the dialog.
 	 * @private
 	 */
-	_showDialog: function(mode, data, onDialogComplete, onDialogCancel) {
-		this._store.dispatch(actions.setDialogMode(
-			mode,
-			data,
-			onDialogComplete,
-			onDialogCancel
-		));
+	_showDialog: function(mode, data) {
+		return new Promise((resolve, reject) => {
+			this._store.dispatch(actions.setDialogMode(
+				mode,
+				data,
+				(data, action, action_data) => {
+					resolve({ data, action, action_data });
+				},
+				reject
+			));
+		});
 	},
 
+	/**
+	 * @description
+	 * Hides the dialog (after a short timeout) - uses state comparison to ensure
+	 * the dialog being hidden isn't a new one.
+	 */
 	_hideDialog: function() {
-		// hides the dialog (after a short timeout)
+		var state = (this._store.getState()).UI.dialog;
+
 		window.setTimeout(function() {
-			this._store.dispatch(actions.setDialogMode(dialogModes.NONE));
-		}.bind(this), 300);
-	},
+			var inner_state = (this._store.getState()).UI.dialog;
 
-	_completeDialogAction: function(dialog_data) {
-		var dialog = (this._store.getState()).UI.dialog;
-
-		// reset dialog state to nothing
-		this._hideDialog();
-
-		switch (dialog.mode) {
-		case dialogModes.EDIT_DROPLET:
-			// droplet being edited prior to or during attatchment
-			if (dialog.data.attachment_index === null) {
-				// no attachment index - this is a new drop
-				this.zoneAddAttachment(
-					dialog.data.zone_id,
-					dialog.data.droplet_id,
-					dialog_data
-				);
-			} else{
-				this.zoneEditAttachment(
-					dialog.data.zone_id,
-					dialog.data.attachment_index,
-					dialog_data
-				);
+			if (state.id === inner_state.id) {
+				// still the same dialog - close it
+				this._store.dispatch(actions.setDialogMode(dialogModes.NONE));
 			}
-
-			break;
-		}
-
-		if (typeof dialog.onDialogComplete === 'function') {
-			dialog.onDialogComplete.apply(this._parent);
-		}
-	},
-
-	_cancelDialogAction: function() {
-		var dialog = (this._store.getState()).UI.dialog;
-
-		if (typeof dialog.onDialogCancel === 'function') {
-			dialog.onDialogCancel.apply(this._parent);
-		}
-
-		this._hideDialog();
+		}.bind(this), 300);
 	},
 
 	/**
@@ -298,7 +275,20 @@ UI.prototype = {
 			droplet_id: droplet.id,
 			zone_id: drop_zone.id,
 			attachment_index
-		});
+		})
+			.then(((dialog) => {
+				if (dialog.action === 'remove_droplet') {
+					this._hideDialog();
+
+					this.zoneDetachAttachment(
+						dialog.action_data.zone_id,
+						dialog.action_data.attachment_index
+					);
+				} else {
+					this._commitDropletIntoDropZone.apply(this, [dialog.data]);
+				}
+			}).bind(this))
+			.catch(this._hideDialog.bind(this));
 	},
 
 	_handleDropletClick: function(event, droplet) {
@@ -421,7 +411,11 @@ UI.prototype = {
 					droplet_id: droplet.id,
 					zone_id: drop_zone.id,
 					attachment_index: null
-				});
+				})
+					.then(((dialog) => {
+						this._commitDropletIntoDropZone.apply(this, [dialog.data]);
+					}).bind(this))
+					.catch(this._hideDialog.bind(this));
 			} else {
 				// add attachment without dialog
 				this.zoneAddAttachment(
@@ -434,6 +428,29 @@ UI.prototype = {
 			return true;
 		} else {
 			return false;
+		}
+	},
+
+	_commitDropletIntoDropZone: function(data) {
+		var dialog = (this._store.getState()).UI.dialog;
+
+		// reset dialog state to nothing
+		this._hideDialog();
+
+		// droplet being edited prior to or during attatchment
+		if (dialog.data.attachment_index === null) {
+			// no attachment index - this is a new drop
+			this.zoneAddAttachment(
+				dialog.data.zone_id,
+				dialog.data.droplet_id,
+				data
+			);
+		} else{
+			this.zoneEditAttachment(
+				dialog.data.zone_id,
+				dialog.data.attachment_index,
+				data
+			);
 		}
 	},
 
@@ -525,6 +542,19 @@ UI.prototype = {
 
 	getDropZoneById: function(id) {
 		return this._data.drop_zones[id] || null;
+	},
+
+	_setUIAttachment: function(attachment, element) {
+		var attached;
+
+		if (attachment && attachment.selector &&
+			(attached = document.querySelector(attachment.selector))) {
+			return new Popper(
+				attached,
+				element,
+				attachment.options
+			);
+		}
 	}
 };
 

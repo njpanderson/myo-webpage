@@ -3,6 +3,8 @@ import { actionTypes, uiStates } from '../assets/constants';
 
 import { combineReducers } from 'redux';
 
+var dialog_id = 0;
+
 /**
  * Sets application state values
  */
@@ -85,7 +87,10 @@ function UI(state = default_state.UI, action) {
 				mode: action.mode,
 				data: action.data,
 				onDialogComplete: action.onDialogComplete,
-				onDialogCancel: action.onDialogCancel
+				onDialogCancel: action.onDialogCancel,
+				overlay: (typeof action.overlay !== 'undefined' ? action.overlay : true),
+				attachment: action.attachment,
+				id: 'dialog-' + (++dialog_id)
 			}
 		});
 

@@ -36,7 +36,7 @@ class Canvas extends Component {
 					settings={this.props.settings}
 					onButtonClick={this.props.onButtonClick}
 					class_app={this.props.class_app}>
-					<h1>&lt;<b>Tag</b>&gt;</h1>
+					<h1 className="logo">&lt;<b>Tag</b>&gt;</h1>
 				</Header>
 
 				<div className="main">
@@ -74,8 +74,6 @@ class Canvas extends Component {
 					settings={this.props.settings}
 					class_ui={this.props.class_ui}
 					class_template={this.props.class_template}
-					onDialogComplete={this.props.onDialogComplete}
-					onDialogCancel={this.props.onDialogCancel}
 					onButtonClick={this.props.onButtonClick}/>
 			</div>
 		);
@@ -90,8 +88,6 @@ Canvas.propTypes = {
 	// from UI#render
 	data: PropTypes.object.isRequired,
 	onMount: PropTypes.func.isRequired,
-	onDialogComplete: PropTypes.func.isRequired,
-	onDialogCancel: PropTypes.func.isRequired,
 	onAttachmentClick: PropTypes.func.isRequired,
 	onDropletClick: PropTypes.func.isRequired,
 	onDropZoneClick: PropTypes.func.isRequired,
