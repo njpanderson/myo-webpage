@@ -60,6 +60,7 @@ class Dialog extends Component {
 			return (
 				<div className={classes.join(' ')}>
 					<Component
+						key={this.props.id}
 						data={this.props.data}
 						settings={this.props.settings}
 						refCollector={this.collectRef.bind(this)}
@@ -82,12 +83,13 @@ Dialog.propTypes = {
 	// from DialogContainer
 	mode: PropTypes.string,
 	data: PropTypes.object,
+	onDialogCancel: PropTypes.func,
+	onButtonClick: PropTypes.func,
+	id: PropTypes.string.isRequired,
 
 	// from Canvas
 	settings: PropTypes.object,
 	onDialogComplete: PropTypes.func,
-	onDialogCancel: PropTypes.func,
-	onButtonClick: PropTypes.func,
 	class_ui: PropTypes.object,
 	class_template: PropTypes.object
 };

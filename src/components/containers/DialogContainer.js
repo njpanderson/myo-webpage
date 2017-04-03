@@ -4,6 +4,7 @@ import Dialog from '../dialogs/Dialog.jsx';
 
 const mapStateToProps = (state) => {
 	return {
+		id: state.UI.dialog.id,
 		mode: state.UI.dialog.mode,
 		data: state.UI.dialog.data,
 		onDialogComplete: state.UI.dialog.onDialogComplete,

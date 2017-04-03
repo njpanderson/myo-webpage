@@ -18,7 +18,10 @@ export default {
 			mode: dialogModes.NONE,
 			data: null,
 			onDialogComplete: null,
-			onDialogCancel: null
+			onDialogCancel: null,
+			overlay: true,
+			attachment: null,
+			id: ''
 		},
 
 		// the currently active droplet (i.e. the one that will be "dropped" when a
