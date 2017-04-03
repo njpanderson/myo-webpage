@@ -24,7 +24,8 @@ class Canvas extends Component {
 			this.props.state.ui_state
 		];
 
-		if (this.props.active_droplet_id !== '') {
+		if (typeof this.props.active_droplet_id === 'string' &&
+			this.props.active_droplet_id !== '') {
 			classes.push(this.props.settings.classes.droplet_active);
 		}
 
