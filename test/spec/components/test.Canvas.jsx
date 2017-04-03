@@ -1,12 +1,24 @@
 import React from 'react';
 import ReactTestUtils from 'react-addons-test-utils';
 import { expect } from 'chai';
+import useMockery from '../../helpers/mockery';
 
-import defaults from '../../../src/assets/defaults';
+import defaults from '../../fixtures/defaults';
 import { uiStates } from '../../../src/assets/constants';
 
 describe('Canvas', function() {
-	var Canvas;
+	let Canvas;
+
+	useMockery(() => {
+		useMockery
+			.registerMultiple({
+				'../views/View.jsx': require('../../mocks/views/GenericComponent.js'),
+				'../views/Header.jsx': require('../../mocks/views/GenericComponent.js'),
+				'./TemplateContainer': require('../../mocks/views/GenericComponent.js'),
+				'./DialogContainer': require('../../mocks/views/GenericComponent.js'),
+				'./PalletContainer': require('../../mocks/views/GenericComponent.js')
+			});
+	});
 
 	const renderer = ReactTestUtils.createRenderer(),
 		state = {
@@ -15,7 +27,21 @@ describe('Canvas', function() {
 		data = {
 			template: null
 		},
-		noop = () => {};
+		noop = () => {},
+		props_std = {
+			refCollector: noop,
+			onMount: noop,
+			onDialogComplete: noop,
+			onDialogCancel: noop,
+			onAttachmentClick: noop,
+			onDropletClick: noop,
+			onDropZoneClick: noop,
+			onDragHandlePress: noop,
+			onButtonClick: noop,
+			class_ui: {},
+			class_app: {},
+			class_template: {}
+		};
 
 	before(() => {
 		Canvas = require('../../../src/components/containers/Canvas').default;
@@ -23,16 +49,9 @@ describe('Canvas', function() {
 
 	it('Should render to page', function() {
 		renderer.render(
-			<Canvas
+			<Canvas {...props_std}
 				settings={defaults}
 				state={state}
-				refCollector={noop}
-				onMount={noop}
-				onDialogComplete={noop}
-				onDialogCancel={noop}
-				onAttachmentClick={noop}
-				class_ui={{}}
-				class_template={{}}
 				data={data}/>
 		);
 
@@ -41,16 +60,9 @@ describe('Canvas', function() {
 
 	it('Should accumulate classname for initial state', function() {
 		renderer.render(
-			<Canvas
+			<Canvas {...props_std}
 				settings={defaults}
 				state={state}
-				refCollector={noop}
-				onMount={noop}
-				onDialogComplete={noop}
-				onDialogCancel={noop}
-				onAttachmentClick={noop}
-				class_ui={{}}
-				class_template={{}}
 				data={data}/>
 		);
 
@@ -59,19 +71,12 @@ describe('Canvas', function() {
 
 	it('Should accumulate classname for active state', function() {
 		renderer.render(
-			<Canvas
+			<Canvas {...props_std}
 				settings={defaults}
 				state={Object.deepAssign({}, state, {
 					active: true,
 					ui_state: uiStates.ACTIVE
 				})}
-				refCollector={noop}
-				onMount={noop}
-				onDialogComplete={noop}
-				onDialogCancel={noop}
-				onAttachmentClick={noop}
-				class_ui={{}}
-				class_template={{}}
 				data={data}/>
 		);
 

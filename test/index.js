@@ -2,6 +2,8 @@
 const glob = require('glob'),
 	jsdom = require('./fixtures/dom');
 
+global.PRODUCTION = false;
+
 require('../src/lib/polyfills');
 
 jsdom('test/fixtures/index.html', (document) => {

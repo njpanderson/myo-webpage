@@ -1,10 +1,6 @@
 import chai, { expect } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-import fs from 'fs';
-
 import useMockery from '../helpers/mockery';
-import structCompare from '../helpers/structCompare';
-import final_pallet from '../fixtures/parsed-pallet';
 
 describe('Index', function() {
 	let App;
@@ -14,9 +10,12 @@ describe('Index', function() {
 	useMockery(() => {
 		useMockery
 			.registerMultiple({
-				'./UI.jsx': require('../mocks/UI'),
+				'./styles/main.scss': require('../mocks/styles/main'),
+				'./assets/defaults': require('../fixtures/defaults'),
+				'./lib/UI.jsx': require('../mocks/UI'),
 				'./lib/Template': require('../mocks/Template'),
-				'./lib/ajax': require('../mocks/node/ajax')
+				'./lib/ajax': require('../mocks/node/ajax'),
+				'./components/views/Icon.jsx': require('../mocks/views/Icon')
 			});
 	});
 

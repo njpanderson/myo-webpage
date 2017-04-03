@@ -1,0 +1,8 @@
+export const GLYPHS = {
+	TEXT: 1,
+	PUZZLE_PIECE: 2,
+	TAG: 3,
+	COMPASS: 4,
+	LOOP_CIRCULAR: 5,
+	MEDIA_PLAY: 6
+};

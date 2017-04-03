@@ -8,21 +8,23 @@ describe('UI', function() {
 	useMockery(() => {
 		useMockery
 			.registerMultiple({
-				'./lib/DragDrop.js': require('../mocks/DragDrop'),
-				'./lib/Communicator': require('../mocks/Communicator')
+				'./DragDrop': require('../mocks/DragDrop'),
+				'./Communicator': require('../mocks/Communicator')
 			});
 	});
 
 	before(() => {
-		UI = require('../../src/UI').default;
+		UI = require('../../src/lib/UI').default;
 	});
 
 	it('Should instantiate', function() {
 		var ui = new UI(
-			require('../../src/assets/defaults.js'),
+			require('../fixtures/defaults.js'),
 			{},
 			{},
-			null,
+			{
+				_data: {}
+			},
 			require('../mocks/Template')
 		);
 		expect(ui).to.be.an.instanceof(UI);

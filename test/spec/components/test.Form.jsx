@@ -12,7 +12,8 @@ describe('Form', function() {
 		}, {
 			key: 'test_fieldset2',
 			fields: []
-		}];
+		}],
+		noop = (() => {});
 
 	before(() => {
 		Form = require('../../../src/components/views/Form').default;
@@ -21,6 +22,7 @@ describe('Form', function() {
 	it('Should render to page', function() {
 		renderer.render(
 			<Form
+				onButtonClick={noop}
 				fieldSets={fieldSets}/>
 		);
 
@@ -34,6 +36,7 @@ describe('Form', function() {
 
 		renderer.render(
 			<Form
+				onButtonClick={noop}
 				fields={fields}/>
 		);
 

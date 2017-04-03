@@ -1,6 +1,4 @@
-var UI = function() {
-
-};
+var UI = function() {};
 
 UI.prototype = {
 	render: function() {
