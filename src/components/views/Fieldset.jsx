@@ -29,6 +29,14 @@ class Fieldset extends Component {
 		this.elementChange = this.elementChange.bind(this);
 	}
 
+	collectRef(key) {
+		return function(ref) {
+			if (typeof this.props.refCollector === 'function') {
+				this.props.refCollector(key, ref);
+			}
+		}.bind(this);
+	}
+
 	fields() {
 		var Component,
 			output = [];
@@ -42,6 +50,7 @@ class Fieldset extends Component {
 			case 'text':
 				output.push(
 					<Component key={key}
+						refCollector={this.collectRef(key)}
 						field={field}
 						onChange={this.elementChange}
 						value={this.state.formValues[field.name]}/>
@@ -51,6 +60,7 @@ class Fieldset extends Component {
 			case 'dropdown':
 				output.push(
 					<Component key={key}
+						refCollector={this.collectRef(key)}
 						field={field}
 						onChange={this.elementChange}
 						value={this.state.formValues[field.name]}/>
@@ -85,6 +95,7 @@ class Fieldset extends Component {
 }
 
 Fieldset.propTypes = {
+	refCollector: PropTypes.func,
 	set: PropTypes.string.isRequired,
 	onFieldUpdate: PropTypes.func.isRequired,
 	legend: PropTypes.string,

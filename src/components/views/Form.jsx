@@ -43,7 +43,12 @@ class Form extends Component {
 
 		super(props);
 
-		this.buttonRefs = {};
+		this.ui = {
+			refs: {
+				buttons: {},
+				fields: {}
+			}
+		};
 
 		// set default state for fields based on original values
 		if (this.props.fieldSets) {
@@ -95,6 +100,7 @@ class Form extends Component {
 				output.push(
 					<Fieldset
 						key={key}
+						refCollector={this.collectFieldRef.bind(this)}
 						set={set.key}
 						fields={set.fields}
 						legend={set.legend}
@@ -129,14 +135,61 @@ class Form extends Component {
 		this.props.onSubmit(this.state.formValues, button, data);
 	}
 
-	registerButtonRef(key) {
+	/**
+	 * Return a function to collect Button component DOM references.
+	 */
+	collectButtonRef(key) {
 		return function(ref) {
-			if (ref !== null) {
-				this.buttonRefs[key] = ref;
-			}
+			this.ui.refs.buttons[key] = ref;
 		}.bind(this);
 	}
 
+	/**
+	 * @description
+	 * Collect a reference to a field. Each field component uses two arguments
+	 * for their refCollector prop (unlike the usual one):
+	 * 1. An identifying key
+	 * 2. The DOM reference
+	 */
+	collectFieldRef(key, ref) {
+		this.ui.refs.fields[key] = ref;
+	}
+
+	componentDidMount() {
+		var a, b, key;
+
+		// handle focusing of the first field (or button) in the form
+		if (this.props.fieldSets && this.props.fieldSets.length) {
+			// highlight first collected field
+			for (a = 0; a < this.props.fieldSets.length; a += 1) {
+				for (b = 0; b < this.props.fieldSets[a].fields.length; b += 1) {
+					key = 'field-' + this.props.fieldSets[a].fields[b].name;
+
+					if (this.props.fieldSets[a].fields[b].type !== 'hidden' &&
+						this.ui.refs.fields[key]) {
+						this.ui.refs.fields[key].focus();
+						a = this.props.fieldSets.length;
+						break;
+					}
+				}
+			}
+		} else {
+			// highlight first collected button
+			this.props.buttons.forEach((button, index) => {
+				var key = 'button-' + index;
+
+				if (this.ui.refs.buttons[key] && button.type === 'submit') {
+					this.ui.refs.buttons[key].focus();
+				}
+			});
+		}
+	}
+
+	/**
+	 * @description
+	 * Iterate through the `buttons` object in `props` and produce a list of Button
+	 * components.
+	 */
 	getButtons() {
 		var buttons = [];
 
@@ -145,11 +198,11 @@ class Form extends Component {
 				var key = 'button-' + index,
 					click_function;
 
-				click_function = ((component, key, original_fn) => {
+				click_function = ((component, key) => {
 					return function(event) {
-						if (component.buttonRefs && component.buttonRefs[key]) {
-							component.buttonRefs[key].blur();
-							component.props.onButtonClick(component.buttonRefs[key], event);
+						if (component.ui.refs.buttons && component.ui.refs.buttons[key]) {
+							component.ui.refs.buttons[key].blur();
+							component.props.onButtonClick(component.ui.refs.buttons[key], event);
 						}
 
 						if (button.type === 'cancel') {
@@ -159,17 +212,13 @@ class Form extends Component {
 							// anything except submit
 							component.onSubmit(null, button.type, button.data);
 						}
-
-						// if (typeof original_fn === 'function') {
-						// 	original_fn(event);
-						// }
 					};
 				})(this, key, button.onClick);
 
 				buttons.push(
 					<Button
 						key={key}
-						refCollector={this.registerButtonRef(key)}
+						refCollector={this.collectButtonRef(key)}
 						type={button.type}
 						label={button.label}
 						className={button.className}

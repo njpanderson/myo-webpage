@@ -35,3 +35,16 @@ Object.deepAssign = function(target, varArgs) {
 
 	return to;
 };
+
+/**
+ * Curry implementation for functions
+ */
+Function.prototype.curry = function() {
+	var args = Array.prototype.slice.call(arguments),
+		fn = this;
+
+	return function() {
+		// return result of original function with curried arguments before invocation arguments
+		return fn.apply(null, args.concat(Array.prototype.slice.call(arguments)));
+	};
+};

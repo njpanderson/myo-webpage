@@ -13,7 +13,8 @@ function DropDown(props) {
 				type="text"
 				name={props.field.name}
 				onChange={props.onChange}
-				value={props.value}>
+				value={props.value}
+				ref={props.refCollector}>
 				{optionValueSet(props.field.options)}
 			</select>
 		</div>
