@@ -271,24 +271,29 @@ UI.prototype = {
 	},
 
 	_handleAttachmentClick: function(droplet, drop_zone, attachment_index) {
-		this._showDialog(dialogModes.EDIT_DROPLET, {
-			droplet_id: droplet.id,
-			zone_id: drop_zone.id,
-			attachment_index
-		})
-			.then(((dialog) => {
-				if (dialog.action === 'remove_droplet') {
-					this._hideDialog();
+		var state = this._store.getState();
 
-					this.zoneDetachAttachment(
-						dialog.action_data.zone_id,
-						dialog.action_data.attachment_index
-					);
-				} else {
-					this._commitDropletIntoDropZone.apply(this, [dialog.data]);
-				}
-			}).bind(this))
-			.catch(this._hideDialog.bind(this));
+		if (state.UI.active_droplet_id === '') {
+			// only allow editing if there is no droplet placement occuring
+			this._showDialog(dialogModes.EDIT_DROPLET, {
+				droplet_id: droplet.id,
+				zone_id: drop_zone.id,
+				attachment_index
+			})
+				.then(((dialog) => {
+					if (dialog.action === 'remove_droplet') {
+						this._hideDialog();
+
+						this.zoneDetachAttachment(
+							dialog.action_data.zone_id,
+							dialog.action_data.attachment_index
+						);
+					} else {
+						this._commitDropletIntoDropZone.apply(this, [dialog.data]);
+					}
+				}).bind(this))
+				.catch(this._hideDialog.bind(this));
+		}
 	},
 
 	_handleDropletEvent: function(event, droplet) {
