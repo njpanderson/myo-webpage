@@ -168,7 +168,7 @@ App.prototype = {
 	 * the promise.
 	 */
 	dialog: function(title, message, buttons = []) {
-		this.requireUI();
+		this._requireUI();
 
 		if (!Array.isArray(message)) {
 			message = [message];
@@ -183,17 +183,26 @@ App.prototype = {
 		);
 	},
 
+	/**
+	 * Hides whichever active dialog is currently open.
+	 */
 	hideDialog: function() {
 		this._UI._hideDialog.apply(this._UI);
 	},
 
+	/**
+	 * Starts the standardised tour process, guiding the user through the interface.
+	 */
 	startTour: function() {
-		this.requireUI();
+		this._requireUI();
 		this._UI._tour.start();
 	},
 
+	/**
+	 * Resets the template and view frame. *note*, all placements will be lost.
+	 */
 	reset: function() {
-		this.requireUI();
+		this._requireUI();
 
 		this._UI._showDialog(dialogModes.GENERAL, dialogs.resetState)
 			.then(() => {
@@ -213,12 +222,18 @@ App.prototype = {
 			}.bind(this));
 	},
 
+	/**
+	 * Updates the view frame with the latest template and its attachments.
+	 */
 	updateView: function() {
-		this.requireUI();
+		this._requireUI();
 		this._UI._updateView();
 	},
 
-	requireUI: function() {
+	/**
+	 * Requires a _UI instance. Will throw if one doesn't exist.
+	 */
+	_requireUI: function() {
 		if (!this._UI) {
 			throw new Error('UI has not yet been initialised! Have you used #load() yet?');
 		}

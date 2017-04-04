@@ -38,6 +38,11 @@ var UI = function(parent, settings, refs, data, store, template) {
 		dragHandlePosition: 0,
 	};
 
+	// set up library methods for passing to React components
+	this.libraryMethods = {
+		getDropletById: this.getDropletById.bind(this)
+	};
+
 	this._comms = new Communicator('app', window.location.origin, {
 		message: (message) => {
 			console.log('message to "app"!', message);
@@ -78,7 +83,8 @@ UI.prototype = {
 					onButtonClick={this._handleButtonClick.bind(this)}
 					class_ui={this}
 					class_app={this._parent}
-					class_template={this._template}/>
+					class_template={this._template}
+					lib={this.libraryMethods}/>
 			</Provider>,
 			this._refs.ui.app
 		);

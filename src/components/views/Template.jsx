@@ -18,14 +18,11 @@ class Template extends Component {
 	 * Uses state (from props.zones) to ascertain the attachments
 	 */
 	getZoneAttachments(dropzone_id) {
-		var zone,
-			attachments = [];
-
-		if (this.props.zones && (zone = this.props.zones[dropzone_id])) {
-			attachments = zone.attachments;
+		if (this.props.zones && this.props.zones[dropzone_id]) {
+			return this.props.zones[dropzone_id].attachments;
+		} else {
+			return [];
 		}
-
-		return attachments;
 	}
 
 	/**
@@ -85,7 +82,8 @@ class Template extends Component {
 						onMount={this.props.onMount}
 						onEvent={this.props.onDropZoneEvent}
 						onAttachmentClick={this.props.onAttachmentClick}
-						class_ui={this.props.class_ui}/>
+						class_ui={this.props.class_ui}
+						lib={this.props.lib}/>
 				);
 				break;
 			}
@@ -95,8 +93,7 @@ class Template extends Component {
 	}
 
 	render() {
-		console.group('Template render');
-		var output = (
+		return (
 			<section className="template"
 				ref={collectRef(this.props, 'template')}>
 				<pre>
@@ -107,8 +104,6 @@ class Template extends Component {
 				</pre>
 			</section>
 		);
-		console.groupEnd();
-		return output;
 	}
 }
 
@@ -124,7 +119,8 @@ Template.propTypes = {
 	onAttachmentClick: PropTypes.func.isRequired,
 	onDropZoneEvent: PropTypes.func.isRequired,
 	refCollector: PropTypes.func.isRequired,
-	class_ui: PropTypes.object.isRequired
+	class_ui: PropTypes.object.isRequired,
+	lib: PropTypes.object.isRequired
 };
 
 Template.defaultProps = {

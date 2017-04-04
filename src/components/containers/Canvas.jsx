@@ -50,6 +50,7 @@ class Canvas extends Component {
 						onDropZoneEvent={this.props.onDropZoneEvent}
 						template={this.props.data.template}
 						class_ui={this.props.class_ui}
+						lib={this.props.lib}
 						/>
 					<div className="drag-handle"
 						onMouseDown={this.props.onDragHandlePress}
@@ -98,7 +99,8 @@ Canvas.propTypes = {
 	settings: PropTypes.object.isRequired,
 	class_ui: PropTypes.object.isRequired,
 	class_app: PropTypes.object.isRequired,
-	class_template: PropTypes.object.isRequired
+	class_template: PropTypes.object.isRequired,
+	lib: PropTypes.object.isRequired
 };
 
 export default Canvas;
