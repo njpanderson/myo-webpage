@@ -21,6 +21,7 @@ export default {
 		},
 		dropzone: {
 			node: 'drop-zone',
+			possible_target: 'possible-target',
 			will_accept: 'will-accept',
 			will_decline: 'will-decline'
 		},

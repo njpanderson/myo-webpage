@@ -34,19 +34,25 @@ class Template extends Component {
 	 * - The active Droplet ID
 	 * - Whether or not this drop zone will accept the droplet
 	 */
-	getDropZoneClassName(dropzone) {
-		var droplet;
+	getDropZoneClassNames(dropzone) {
+		var classes = [],
+			droplet;
 
 		if (this.props.activeDropletID !== '' &&
 			(droplet = this.props.class_ui.getDropletById(this.props.activeDropletID))) {
-			return this.props.settings.classes.dropzone[
+			classes.push(this.props.settings.classes.dropzone.possible_target);
+			classes.push(
+				this.props.settings.classes.dropzone[
 					(
 						this.props.class_ui._isValidDrop(droplet, dropzone) ?
 						'will_accept' : 'will_decline'
 					)
-				];
+				]
+			);
+
+			return classes;
 		} else {
-			return '';
+			return [];
 		}
 	}
 
@@ -72,7 +78,7 @@ class Template extends Component {
 					<DropZone
 						key={node.zone.id}
 						zone={node.zone}
-						className={this.getDropZoneClassName(node.zone)}
+						className={this.getDropZoneClassNames(node.zone).join(' ')}
 						settings={this.props.settings}
 						activeAttachments={this.getZoneAttachments(node.zone.id)}
 						refCollector={this.props.refCollector}
@@ -89,7 +95,8 @@ class Template extends Component {
 	}
 
 	render() {
-		return (
+		console.group('Template render');
+		var output = (
 			<section className="template"
 				ref={collectRef(this.props, 'template')}>
 				<pre>
@@ -100,6 +107,8 @@ class Template extends Component {
 				</pre>
 			</section>
 		);
+		console.groupEnd();
+		return output;
 	}
 }
 

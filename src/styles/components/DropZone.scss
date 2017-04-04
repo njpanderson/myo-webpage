@@ -46,16 +46,16 @@
 }
 
 .drop-zone.accept .target b,
-.droplet-active .drop-zone.will-accept:hover .target b {
+.droplet-active .drop-zone.will-accept .target:hover b {
 	background-color: $green;
 }
 
 .drop-zone.decline .target b,
-.droplet-active .drop-zone.will-decline:hover .target b {
+.droplet-active .drop-zone.will-decline .target:hover b {
 	background-color: $red;
 }
 
-.drop-zone .dropzone-attachment:hover {
+.drop-zone:not(.possible-target) .dropzone-attachment:hover {
 	color: $white;
 	background-color: $green-dark;
 	cursor: pointer;
