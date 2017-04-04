@@ -5,12 +5,12 @@ form {
 	}
 
 	fieldset.buttons {
-		@include clearfix();
+		text-align: right;
 		border-top: 1px solid $gray-med;
 		padding: $dialog-padding;
 
 		button {
-			float: right;
+			display: inline-block;
 			margin: 0 .25em;
 
 			&.pull-left {
@@ -36,6 +36,7 @@ form {
 
 input,
 select {
+	user-select: all;
 	@include font-size(14);
 	padding: 5px;
 }

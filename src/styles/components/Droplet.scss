@@ -19,6 +19,7 @@
 		@include font-size(14);
 		background-color: $bg-bright;
 		color: $black;
+		cursor: pointer;
 
 		.icon {
 			transition: fill .15s $ease-in-out-quart;

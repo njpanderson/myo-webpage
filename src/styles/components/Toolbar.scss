@@ -1,18 +1,24 @@
 .toolbar {
+	$button_margin: 5px;
+	$separator_width: 2px;
+
 	ul {
 		list-style: none;
 		display: flex;
 		padding: 0;
 
 		li {
-			margin-left: 5px;
-			padding-left: 5px;
+			margin-left: $button_margin;
+			padding-left: $button_margin;
 
 			&.separator {
-				border-left: 2px solid $gray-light;
+				margin-left: ($button_margin * 1.5);
+				padding-left: ($button_margin * 1.5) + $separator_width;
+				border-left: $separator_width solid $gray-light;
 			}
 
 			&.run .button {
+				border-color: $green-dark;
 				color: $green-dark;
 
 				svg {
@@ -21,6 +27,11 @@
 
 				.circle {
 					background-color: $green-dark;
+				}
+
+				&:hover > span {
+					color: $white;
+					background-color: $green;
 				}
 			}
 		}

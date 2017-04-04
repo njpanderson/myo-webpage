@@ -10,7 +10,7 @@ class DropZoneComponent extends Component {
 
 		this.myrefs = {};
 		this.attachmentClick = this.attachmentClick.bind(this);
-		this.onClick = this.onClick.bind(this);
+		this.onEvent = this.onEvent.bind(this);
 	}
 
 	componentDidMount() {
@@ -19,9 +19,12 @@ class DropZoneComponent extends Component {
 		}
 	}
 
-	onClick(event) {
-		event.preventDefault();
-		this.props.onClick(event, this.props.zone);
+	onEvent(event) {
+		if (event.type === 'click') {
+			event.preventDefault();
+		}
+
+		this.props.onEvent(event, this.props.zone);
 	}
 
 	attachmentClick(event, droplet, attachmentIndex) {
@@ -51,16 +54,21 @@ class DropZoneComponent extends Component {
 	render() {
 		var key = this.props.zone.id + '-zone',
 			target_key = this.props.zone.id + '-target',
+			dropzone_class = [this.props.settings.classes.dropzone.node],
 			target_class;
 
 		target_class = (this.props.activeAttachments.length < this.props.zone.maxAttachments) ?
 			this.props.settings.classes.dropzone_target :
 			this.props.settings.classes.dropzone_target + ' ' + this.props.settings.classes.hidden;
 
+		if (this.props.className !== '') {
+			dropzone_class.push(this.props.className);
+		}
+
 		return (
 			<span
 				key={key}
-				className={this.props.settings.classes.dropzone}
+				className={dropzone_class.join(' ')}
 				ref={collectRef(this.props, ['dropzone'], this.props.zone.id)}
 				data-id={this.props.zone.id}
 				data-attachment={this.props.zone.attachmentId}>
@@ -70,7 +78,7 @@ class DropZoneComponent extends Component {
 				</span>
 				<span className="target-outer">
 					<span key={target_key}
-						onClick={this.onClick}
+						onClick={this.onEvent}
 						ref={collectRef(this.props, ['dropzone_target'], this.props.zone.id)}
 						className={target_class}>
 							<b>{this.props.settings.dropZone.label}</b>
@@ -83,11 +91,12 @@ class DropZoneComponent extends Component {
 
 DropZoneComponent.propTypes = {
 	zone: PropTypes.instanceOf(DropZone).isRequired,
+	className: PropTypes.string,
 	settings: PropTypes.object.isRequired,
 	activeAttachments: PropTypes.array.isRequired,
 	onMount: PropTypes.func.isRequired,
 	onAttachmentClick: PropTypes.func.isRequired,
-	onClick: PropTypes.func.isRequired,
+	onEvent: PropTypes.func.isRequired,
 	refCollector: PropTypes.func.isRequired,
 	class_ui: PropTypes.object.isRequired
 };

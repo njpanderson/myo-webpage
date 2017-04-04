@@ -51,4 +51,10 @@ export default {
 			attachment_index
 		};
 	},
+
+	zoneClearAllAttachments: function() {
+		return {
+			type: actionTypes.ZONE_CLEAR_ALL_ATTACHMENTS
+		};
+	}
 };

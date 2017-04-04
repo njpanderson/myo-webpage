@@ -7,6 +7,11 @@
 		margin: $section-padding;
 		line-height: 130%;
 		tab-size: 3;
+
+		* {
+			user-select: text;
+			cursor: text;
+		}
 	}
 
 	.hljs {
@@ -17,9 +22,4 @@
 			color: white;
 		}
 	}
-}
-
-.droplet-active .template,
-.dragging .template {
-	// background-color: $bg-code;
 }

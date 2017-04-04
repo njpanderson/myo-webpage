@@ -72,6 +72,9 @@ function zones(state = default_state.zones, action) {
 
 		break;
 
+	case actionTypes.ZONE_CLEAR_ALL_ATTACHMENTS:
+		return {};
+
 	default:
 		return state;
 	}

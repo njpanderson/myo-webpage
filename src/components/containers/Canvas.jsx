@@ -47,7 +47,7 @@ class Canvas extends Component {
 						refCollector={this.props.refCollector}
 						onMount={this.props.onMount}
 						onAttachmentClick={this.props.onAttachmentClick}
-						onDropZoneClick={this.props.onDropZoneClick}
+						onDropZoneEvent={this.props.onDropZoneEvent}
 						template={this.props.data.template}
 						class_ui={this.props.class_ui}
 						/>
@@ -67,7 +67,7 @@ class Canvas extends Component {
 					data={this.props.data}
 					settings={this.props.settings}
 					onMount={this.props.onMount}
-					onDropletClick={this.props.onDropletClick}
+					onDropletEvent={this.props.onDropletEvent}
 					refCollector={this.props.refCollector}/>
 
 				<div className="overlay"></div>
@@ -90,8 +90,8 @@ Canvas.propTypes = {
 	data: PropTypes.object.isRequired,
 	onMount: PropTypes.func.isRequired,
 	onAttachmentClick: PropTypes.func.isRequired,
-	onDropletClick: PropTypes.func.isRequired,
-	onDropZoneClick: PropTypes.func.isRequired,
+	onDropletEvent: PropTypes.func.isRequired,
+	onDropZoneEvent: PropTypes.func.isRequired,
 	onDragHandlePress: PropTypes.func.isRequired,
 	onButtonClick: PropTypes.func.isRequired,
 	refCollector: PropTypes.func.isRequired,

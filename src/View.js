@@ -16,13 +16,18 @@ View.prototype = {
 	_handleAppMessage: function(message) {
 		// console.log('message to "view"!', message);
 
-		if (message.cmd === messageCommands.RELOAD) {
+		switch (message.cmd) {
+		case messageCommands.RELOAD:
 			// reload request
 			// console.log('reloading...');
 			// console.log(message.data);
 			this.settings.container.innerHTML = message.data.markup;
 
 			this._evalScripts();
+			break;
+
+		case messageCommands.RESET:
+			this._reset();
 		}
 	},
 
@@ -58,6 +63,10 @@ View.prototype = {
 				this.scripts[index].old
 			);
 		}
+	},
+
+	_reset: function() {
+		this.settings.container.innerHTML = '';
 	}
 };
 

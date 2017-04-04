@@ -16,14 +16,14 @@
 			color: white;
 		}
 
-		&.is-active b {
-			background-color: $blue-dark;
-		}
+		// &.is-active b {
+		// 	background-color: $blue-dark;
+		// }
 
-		&.is-target b {
-			box-shadow: 0 0 5px $red;
-			background-color: $red;
-		}
+		// &.is-target b {
+		// 	box-shadow: 0 0 5px $red;
+		// 	background-color: $red;
+		// }
 
 		&.hidden {
 			display: none;
@@ -45,20 +45,31 @@
 	}
 }
 
-.drop-zone:hover .target {
-	background-color: skyblue;
+.drop-zone.accept .target b,
+.droplet-active .drop-zone.will-accept:hover .target b {
+	background-color: $green;
+}
+
+.drop-zone.decline .target b,
+.droplet-active .drop-zone.will-decline:hover .target b {
+	background-color: $red;
+}
+
+.drop-zone .dropzone-attachment:hover {
+	color: $white;
+	background-color: $green-dark;
 	cursor: pointer;
 }
 
 .droplet-active .drop-zone {
 	.target {
 		b {
+			cursor: pointer;
 			background-color: $blue-dark;
 		}
 
 		&:hover b {
-			box-shadow: 0 0 5px $red;
-			background-color: $red;
+			box-shadow: $box-shadow-shallow;
 		}
 	}
 }

@@ -72,8 +72,8 @@ UI.prototype = {
 					refCollector={this._refCollector.bind(this)}
 					onMount={this._mountEvent.bind(this)}
 					onAttachmentClick={this._handleAttachmentClick.bind(this)}
-					onDropletClick={this._handleDropletClick.bind(this)}
-					onDropZoneClick={this._handleDropZoneClick.bind(this)}
+					onDropletEvent={this._handleDropletEvent.bind(this)}
+					onDropZoneEvent={this._handleDropZoneEvent.bind(this)}
 					onDragHandlePress={this._handleDragHandleEvent.bind(this)}
 					onButtonClick={this._handleButtonClick.bind(this)}
 					class_ui={this}
@@ -291,19 +291,26 @@ UI.prototype = {
 			.catch(this._hideDialog.bind(this));
 	},
 
-	_handleDropletClick: function(event, droplet) {
-		var state = this._store.getState();
+	_handleDropletEvent: function(event, droplet) {
+		var state;
 
-		if (state.UI.active_droplet_id !== droplet.id) {
-			this._store.dispatch(actions.setActiveDroplet(droplet.id));
+		if (event.type === 'click') {
+			state = this._store.getState();
+
+			if (state.UI.active_droplet_id !== droplet.id) {
+				this._store.dispatch(actions.setActiveDroplet(droplet.id));
+			} else {
+				this._store.dispatch(actions.setActiveDroplet(''));
+			}
 		}
 	},
 
-	_handleDropZoneClick: function(event, drop_zone) {
+	_handleDropZoneEvent: function(event, drop_zone) {
 		var state = this._store.getState(),
 			droplet;
 
-		if (state.UI.active_droplet_id !== '' &&
+		if (event.type === 'click' &&
+			state.UI.active_droplet_id !== '' &&
 			(droplet = this.getDropletById(state.UI.active_droplet_id))) {
 			this.attachDropletToDropZone(droplet, drop_zone);
 		}

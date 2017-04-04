@@ -3,6 +3,7 @@ export const actionTypes = {
 	ZONE_ADD_ATTACHMENT: 'zone-add-attachment',
 	ZONE_EDIT_ATTACHMENT: 'zone-edit-attachment',
 	ZONE_DETACH_ATTACHMENT: 'zone-detach-attachment',
+	ZONE_CLEAR_ALL_ATTACHMENTS: 'zone-clear-all-attachments',
 	SET_DIALOG_MODE: 'set-dialog-mode',
 	SET_ACTIVE_DROPLET: 'set-active-droplet'
 };
@@ -19,7 +20,8 @@ export const uiStates = {
 };
 
 export const messageCommands = {
-	RELOAD: 'reload'
+	RELOAD: 'reload',
+	RESET: 'reset'
 };
 
 export const errorCodes = {

@@ -70,10 +70,11 @@ Template.prototype = {
 
 	_createTemplateArray: function(markup) {
 		var sandbox = document.createElement('div'),
-			data = [];
+			data = [],
+			node, a;
 		sandbox.innerHTML = markup;
 
-		sandbox.childNodes.forEach((node) => {
+		for (a = 0; (node = sandbox.childNodes[a]); a += 1) {
 			switch (node.nodeType) {
 			case Node.TEXT_NODE:
 				data.push({
@@ -89,7 +90,7 @@ Template.prototype = {
 				});
 				break;
 			}
-		});
+		}
 
 		return data;
 	},

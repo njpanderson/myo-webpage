@@ -7,7 +7,8 @@ var Tour = function(parent) {
 
 Tour.prototype = {
 	intro: function() {
-		return this._parent._showDialog(dialogModes.GENERAL, Tour.dialogs.intro);
+		return this._parent._showDialog(dialogModes.GENERAL, Tour.dialogs.intro)
+			.then(this._parent._hideDialog.bind(this._parent));
 	},
 
 	start: function() {

@@ -16,7 +16,7 @@ class Pallet extends Component {
 						active={this.props.activeDropletId === droplet.id}
 						settings={this.props.settings}
 						onMount={this.props.onMount}
-						onClick={this.props.onDropletClick}
+						onClick={this.props.onDropletEvent}
 						refCollector={this.props.refCollector}
 						key={droplet.id}/>
 				);
@@ -43,7 +43,7 @@ Pallet.propTypes = {
 	data: PropTypes.object.isRequired,
 	settings: PropTypes.object.isRequired,
 	onMount: PropTypes.func,
-	onDropletClick: PropTypes.func.isRequired,
+	onDropletEvent: PropTypes.func.isRequired,
 	refCollector: PropTypes.func
 };
 

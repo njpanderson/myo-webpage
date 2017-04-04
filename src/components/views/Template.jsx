@@ -28,6 +28,28 @@ class Template extends Component {
 		return attachments;
 	}
 
+	/**
+	 * @description
+	 * Computes the correct potential className for the drop zone based on:
+	 * - The active Droplet ID
+	 * - Whether or not this drop zone will accept the droplet
+	 */
+	getDropZoneClassName(dropzone) {
+		var droplet;
+
+		if (this.props.activeDropletID !== '' &&
+			(droplet = this.props.class_ui.getDropletById(this.props.activeDropletID))) {
+			return this.props.settings.classes.dropzone[
+					(
+						this.props.class_ui._isValidDrop(droplet, dropzone) ?
+						'will_accept' : 'will_decline'
+					)
+				];
+		} else {
+			return '';
+		}
+	}
+
 	getTemplate() {
 		var children = [];
 
@@ -50,11 +72,12 @@ class Template extends Component {
 					<DropZone
 						key={node.zone.id}
 						zone={node.zone}
+						className={this.getDropZoneClassName(node.zone)}
 						settings={this.props.settings}
 						activeAttachments={this.getZoneAttachments(node.zone.id)}
 						refCollector={this.props.refCollector}
 						onMount={this.props.onMount}
-						onClick={this.props.onDropZoneClick}
+						onEvent={this.props.onDropZoneEvent}
 						onAttachmentClick={this.props.onAttachmentClick}
 						class_ui={this.props.class_ui}/>
 				);
@@ -83,13 +106,14 @@ class Template extends Component {
 Template.propTypes = {
 	// from TemplateContainer
 	zones: PropTypes.object.isRequired,
+	activeDropletID: PropTypes.string,
 
 	// from Canvas
 	settings: PropTypes.object.isRequired,
 	template: PropTypes.array.isRequired,
 	onMount: PropTypes.func.isRequired,
 	onAttachmentClick: PropTypes.func.isRequired,
-	onDropZoneClick: PropTypes.func.isRequired,
+	onDropZoneEvent: PropTypes.func.isRequired,
 	refCollector: PropTypes.func.isRequired,
 	class_ui: PropTypes.object.isRequired
 };

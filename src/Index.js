@@ -18,7 +18,8 @@ import actions from './state/actions';
 import reducers from './state/reducers';
 
 import appDefaults from './assets/defaults';
-import { dialogModes, uiStates, actionTypes } from './assets/constants';
+import dialogs from './assets/dialogs';
+import { dialogModes, uiStates, actionTypes, messageCommands } from './assets/constants';
 
 /*
  * Main application wraper.
@@ -32,6 +33,9 @@ var App = function(settings = {}) {
 	if (settings.onElementRender) {
 		Template.onElementRender = settings.onElementRender.bind(this);
 	}
+
+	// bind hideDialog to this context in case its used as a direct argument within a promise
+	this.hideDialog = this.hideDialog.bind(this);
 };
 
 App.prototype = {
@@ -166,6 +170,10 @@ App.prototype = {
 	dialog: function(title, message, buttons = []) {
 		this.requireUI();
 
+		if (!Array.isArray(message)) {
+			message = [message];
+		}
+
 		return this._UI._showDialog(
 			dialogModes.GENERAL, {
 				title,
@@ -175,15 +183,34 @@ App.prototype = {
 		);
 	},
 
+	hideDialog: function() {
+		this._UI._hideDialog.apply(this._UI);
+	},
+
 	startTour: function() {
 		this.requireUI();
-		console.log('start tour');
 		this._UI._tour.start();
 	},
 
 	reset: function() {
 		this.requireUI();
-		console.log('reset');
+
+		this._UI._showDialog(dialogModes.GENERAL, dialogs.resetState)
+			.then(() => {
+				// clear all zones
+				this._store.dispatch(actions.zoneClearAllAttachments());
+
+				// clear view
+				this._UI._comms.send('view', {
+					cmd: messageCommands.RESET
+				});
+
+				this.hideDialog();
+			})
+			.catch(function(error) {
+				error && console.error(error);
+				this.hideDialog();
+			}.bind(this));
 	},
 
 	updateView: function() {

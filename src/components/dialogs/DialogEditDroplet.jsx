@@ -143,6 +143,12 @@ class DialogEditDroplet extends Component {
 
 		classes.push('droplet-' + this.droplet.dropletType);
 
+		// add cancel button (for every dialog type)
+		buttons.push({
+			type: 'cancel',
+			label: 'Cancel'
+		});
+
 		if (this.props.data.attachment_index !== null) {
 			// editing an existing droplet
 			title = 'Edit ' + headingsByType[this.droplet.dropletType].text;
@@ -186,11 +192,6 @@ class DialogEditDroplet extends Component {
 				label: 'Add Droplet'
 			});
 		}
-
-		buttons.push({
-			type: 'cancel',
-			label: 'Cancel'
-		});
 
 		return (
 			<div className={classes.join(' ')}

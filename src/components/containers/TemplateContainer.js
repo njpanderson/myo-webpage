@@ -4,7 +4,8 @@ import Template from '../views/Template.jsx';
 
 const mapStateToProps = (state) => {
 	return {
-		zones: state.zones
+		zones: state.zones,
+		activeDropletID: state.UI.active_droplet_id
 	};
 };
 
