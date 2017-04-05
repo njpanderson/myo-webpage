@@ -9,6 +9,9 @@
 * {
 	box-sizing: border-box;
 	user-select: none;
+}
+
+:not(svg) {
 	cursor: default;
 }
 
