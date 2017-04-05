@@ -164,7 +164,7 @@ Template.renderElementDroplet = function(data, droplet, drop_zone, is_output) {
 		}
 	}
 
-	if (data.innerHTML || Template.containerTags.indexOf(data.tagName) !== -1) {
+	if (data.innerHTML || Template.voidTags.indexOf(data.tagName) === -1) {
 		markup.open += '>';
 		markup.innerHTML = (data.innerHTML || '');
 		markup.close = '</' + data.tagName + '>';
@@ -179,7 +179,7 @@ Template.renderElementDroplet = function(data, droplet, drop_zone, is_output) {
 		is_output
 	);
 
-	return markup.open + markup.innerHTML + markup.close;
+	return markup.open + (markup.innerHTML || '') + markup.close;
 };
 
 Template.renderTextDroplet = function(data, droplet, drop_zone, is_output) {
@@ -219,6 +219,14 @@ Template.onElementRender = function(markup, droplet, zone, is_output) {
 	return markup;
 };
 
-Template.containerTags = ['a'];
+/**
+ * From https://www.w3.org/TR/html/syntax.html#writing-html-documents-elements
+ * This array is a list of tag considered to be "void" and have no closing tag.
+ * All other tags can (and do) have closing tags when being rendered.
+ */
+Template.voidTags = [
+	'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'keygen',
+	'link', 'menuitem', 'meta', 'param', 'source', 'track', 'wbr'
+];
 
 export default Template;
