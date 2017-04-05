@@ -36,7 +36,7 @@ class Canvas extends Component {
 				<Header
 					settings={this.props.settings}
 					onButtonClick={this.props.onButtonClick}
-					class_app={this.props.class_app}>
+					lib={this.props.lib}>
 					<h1 className="logo">&lt;<b>Tag</b>&gt;</h1>
 				</Header>
 
@@ -49,7 +49,6 @@ class Canvas extends Component {
 						onAttachmentClick={this.props.onAttachmentClick}
 						onDropZoneEvent={this.props.onDropZoneEvent}
 						template={this.props.data.template}
-						class_ui={this.props.class_ui}
 						lib={this.props.lib}
 						/>
 					<div className="drag-handle"
@@ -74,8 +73,7 @@ class Canvas extends Component {
 				<div className="overlay"></div>
 				<Dialog
 					settings={this.props.settings}
-					class_ui={this.props.class_ui}
-					class_template={this.props.class_template}
+					lib={this.props.lib}
 					onButtonClick={this.props.onButtonClick}/>
 			</div>
 		);
@@ -97,9 +95,6 @@ Canvas.propTypes = {
 	onButtonClick: PropTypes.func.isRequired,
 	refCollector: PropTypes.func.isRequired,
 	settings: PropTypes.object.isRequired,
-	class_ui: PropTypes.object.isRequired,
-	class_app: PropTypes.object.isRequired,
-	class_template: PropTypes.object.isRequired,
 	lib: PropTypes.object.isRequired
 };
 

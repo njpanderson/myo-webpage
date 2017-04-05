@@ -32,7 +32,7 @@ class Dialog extends Component {
 
 			if (this.props.data && this.props.data.attachment) {
 				// attachment data exists - apply with popper
-				this.popper = this.props.class_ui._setUIAttachment(
+				this.popper = this.props.lib.setUIAttachment(
 					this.props.data.attachment,
 					this.dialogRef
 				);
@@ -64,11 +64,10 @@ class Dialog extends Component {
 						data={this.props.data}
 						settings={this.props.settings}
 						refCollector={this.collectRef.bind(this)}
-						class_template={this.props.class_template}
 						onDialogComplete={this.props.onDialogComplete}
 						onDialogCancel={this.props.onDialogCancel}
 						onButtonClick={this.props.onButtonClick}
-						class_ui={this.props.class_ui}/>
+						lib={this.props.lib}/>
 				</div>
 			);
 		} else {
@@ -90,8 +89,7 @@ Dialog.propTypes = {
 	// from Canvas
 	settings: PropTypes.object,
 	onDialogComplete: PropTypes.func,
-	class_ui: PropTypes.object,
-	class_template: PropTypes.object
+	lib: PropTypes.object
 };
 
 Dialog.defaultProps = {};

@@ -38,9 +38,7 @@ describe('Canvas', function() {
 			onDropZoneClick: noop,
 			onDragHandlePress: noop,
 			onButtonClick: noop,
-			class_ui: {},
-			class_app: {},
-			class_template: {}
+			lib: {}
 		};
 
 	before(() => {

@@ -21,12 +21,12 @@ class Toolbar extends Component {
 			}
 
 			if (typeof button.method === 'string' &&
-				this.props.class_app[button.method]) {
+				this.props.lib.tools[button.method]) {
 				// method is a defined App method (as a string)
-				this.props.class_app[button.method].apply(this.props.class_app, args);
+				this.props.lib.tools[button.method].apply(null, args);
 			} else {
 				// method is a custom function. call with app context (unless bound elsewhere)
-				button.method.apply(this.props.class_app, args);
+				button.method.apply(null, args);
 			}
 		}.bind(this);
 	}
@@ -100,7 +100,7 @@ Toolbar.propTypes = {
 	buttons: PropTypes.arrayOf(PropTypes.object),
 	settings: PropTypes.object.isRequired,
 	onButtonClick: PropTypes.func,
-	class_app: PropTypes.object.isRequired
+	lib: PropTypes.object.isRequired
 };
 
 export default Toolbar;

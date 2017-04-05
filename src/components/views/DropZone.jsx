@@ -67,7 +67,6 @@ DropZoneComponent.propTypes = {
 	onAttachmentClick: PropTypes.func.isRequired,
 	onEvent: PropTypes.func.isRequired,
 	refCollector: PropTypes.func.isRequired,
-	class_ui: PropTypes.object.isRequired,
 	lib: PropTypes.object.isRequired
 };
 

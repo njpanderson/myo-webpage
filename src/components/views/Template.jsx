@@ -36,12 +36,12 @@ class Template extends Component {
 			droplet;
 
 		if (this.props.activeDropletID !== '' &&
-			(droplet = this.props.class_ui.getDropletById(this.props.activeDropletID))) {
+			(droplet = this.props.lib.getDropletById(this.props.activeDropletID))) {
 			classes.push(this.props.settings.classes.dropzone.possible_target);
 			classes.push(
 				this.props.settings.classes.dropzone[
 					(
-						this.props.class_ui._isValidDrop(droplet, dropzone) ?
+						this.props.lib.isValidDrop(droplet, dropzone) ?
 						'will_accept' : 'will_decline'
 					)
 				]
@@ -82,7 +82,6 @@ class Template extends Component {
 						onMount={this.props.onMount}
 						onEvent={this.props.onDropZoneEvent}
 						onAttachmentClick={this.props.onAttachmentClick}
-						class_ui={this.props.class_ui}
 						lib={this.props.lib}/>
 				);
 				break;
@@ -119,7 +118,6 @@ Template.propTypes = {
 	onAttachmentClick: PropTypes.func.isRequired,
 	onDropZoneEvent: PropTypes.func.isRequired,
 	refCollector: PropTypes.func.isRequired,
-	class_ui: PropTypes.object.isRequired,
 	lib: PropTypes.object.isRequired
 };
 

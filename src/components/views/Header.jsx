@@ -15,7 +15,7 @@ class Header extends Component {
 					buttons={this.props.settings.toolbar}
 					settings={this.props.settings}
 					onButtonClick={this.props.onButtonClick}
-					class_app={this.props.class_app}/>
+					lib={this.props.lib}/>
 			</header>
 		);
 	}
@@ -25,7 +25,7 @@ Header.propTypes = {
 	children: PropTypes.object,
 	settings: PropTypes.object.isRequired,
 	onButtonClick: PropTypes.func,
-	class_app: PropTypes.object.isRequired
+	lib: PropTypes.object.isRequired
 };
 
 export default Header;

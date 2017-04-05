@@ -27,7 +27,7 @@ class DialogEditDroplet extends Component {
 		super(props);
 
 		if (this.props.data && this.props.data.droplet_id) {
-			this.droplet = this.props.class_ui.getDropletById(this.props.data.droplet_id);
+			this.droplet = this.props.lib.getDropletById(this.props.data.droplet_id);
 		}
 
 		this.onDialogComplete = this.onDialogComplete.bind(this);
@@ -63,7 +63,7 @@ class DialogEditDroplet extends Component {
 
 	detachAttachment() {
 		if (this.props.data.attachment_index !== null) {
-			this.props.class_ui.zoneDetachAttachment(
+			this.props.lib.zoneDetachAttachment(
 				this.props.data.zone_id,
 				this.props.data.attachment_index
 			);
@@ -80,7 +80,7 @@ class DialogEditDroplet extends Component {
 			fieldset, field, attribute, item;
 
 		if (this.props.data.attachment_index !== null) {
-			attachment = this.props.class_ui.zoneGetAttachment(
+			attachment = this.props.lib.zoneGetAttachment(
 				this.props.data.zone_id,
 				this.props.data.attachment_index
 			);
@@ -221,7 +221,7 @@ DialogEditDroplet.propTypes = {
 	onDialogCancel: PropTypes.func,
 	onDialogComplete: PropTypes.func,
 	onButtonClick: PropTypes.func,
-	class_ui: PropTypes.object.isRequired
+	lib: PropTypes.object
 };
 
 DialogEditDroplet.defaultProps = {

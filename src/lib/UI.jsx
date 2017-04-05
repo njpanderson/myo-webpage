@@ -38,11 +38,6 @@ var UI = function(parent, settings, refs, data, store, template) {
 		dragHandlePosition: 0,
 	};
 
-	// set up library methods for passing to React components
-	this.libraryMethods = {
-		getDropletById: this.getDropletById.bind(this)
-	};
-
 	this._comms = new Communicator('app', window.location.origin, {
 		message: (message) => {
 			console.log('message to "app"!', message);
@@ -51,6 +46,23 @@ var UI = function(parent, settings, refs, data, store, template) {
 
 	this._tour = new Tour(this);
 
+	// set up library methods for passing to React components
+	this.libraryMethods = {
+		getDropletById: this.getDropletById.bind(this),
+		setUIAttachment: this._setUIAttachment.bind(this),
+		zoneDetachAttachment: this.zoneDetachAttachment.bind(this),
+		zoneGetAttachment: this.zoneGetAttachment.bind(this),
+		isValidDrop: this._isValidDrop.bind(this),
+		tools: {
+			dialog: this._parent.dialog.bind(this._parent),
+			hideDialog: this._hideDialog.bind(this),
+			startTour: this._tour.start.bind(this._tour),
+			reset: this._parent.reset.bind(this._parent),
+			updateView: this._updateView.bind(this)
+		}
+	};
+
+	// show introduction (or not)
 	if (this.settings.showIntro) {
 		this._tour.intro();
 	}
@@ -81,9 +93,6 @@ UI.prototype = {
 					onDropZoneEvent={this._handleDropZoneEvent.bind(this)}
 					onDragHandlePress={this._handleDragHandleEvent.bind(this)}
 					onButtonClick={this._handleButtonClick.bind(this)}
-					class_ui={this}
-					class_app={this._parent}
-					class_template={this._template}
 					lib={this.libraryMethods}/>
 			</Provider>,
 			this._refs.ui.app

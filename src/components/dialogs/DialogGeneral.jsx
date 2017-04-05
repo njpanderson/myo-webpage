@@ -44,8 +44,7 @@ DialogGeneral.propTypes = {
 	refCollector: PropTypes.func,
 	onDialogCancel: PropTypes.func,
 	onDialogComplete: PropTypes.func,
-	onButtonClick: PropTypes.func,
-	class_ui: PropTypes.object.isRequired
+	onButtonClick: PropTypes.func
 };
 
 DialogGeneral.defaultProps = {
