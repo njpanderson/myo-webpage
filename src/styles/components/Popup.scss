@@ -1,0 +1,73 @@
+.popup {
+	&[x-placement^="top"] {
+		margin-bottom: 20px;
+	}
+
+	&[x-placement^="right"] {
+		margin-left: 20px;
+	}
+
+	&[x-placement^="left"] {
+		margin-right: 20px;
+	}
+
+	&[x-placement] .arrow {
+		position: absolute;
+
+		&:before,
+		&:after {
+			content: '';
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 0;
+			border: 20px solid $dialog-bg-color;
+		}
+
+		&:after {
+			border: 22px solid $gray-dark;
+		}
+	}
+
+	&[x-placement^="top"] .arrow {
+		bottom: 0;
+
+		&:before {
+			border-color: $dialog-bg-color transparent transparent transparent;
+		}
+
+		&:after {
+			left: -2px;
+			top: 0;
+			border-color: $gray-dark transparent transparent transparent;
+		}
+	}
+
+	&[x-placement^="left"] .arrow {
+		right: 0;
+
+		&:before {
+			border-color: transparent transparent transparent $dialog-bg-color;
+		}
+
+		&:after {
+			left: 0;
+			top: -2px;
+			border-color: transparent transparent transparent $gray-dark;
+		}
+	}
+
+	&[x-placement^="right"] .arrow {
+		left: -40px;
+
+		&:before {
+			border-color: transparent $dialog-bg-color transparent transparent;
+		}
+
+		&:after {
+			left: -4px;
+			top: -2px;
+			border-color: transparent $gray-dark transparent transparent;
+		}
+	}
+}

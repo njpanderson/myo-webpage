@@ -30,8 +30,9 @@ $tan: #f3ffc6;
 // ui colors
 $bg-bright: $white;
 $bg-code: $tan;
-$color-button-alt: $white;
-$color-button-danger: $red;
+$button-alt-color: $white;
+$button-danger-color: $red;
+$dialog-bg-color: lighten($gray-light, $lighten-factor);
 
 // droplet types
 $color-type-text: $blue;

@@ -50,7 +50,7 @@ button {
 	}
 
 	&.primary > span {
-		// color: $color-button-alt;
+		// color: $button-alt-color;
 		border-color: $blue;
 		color: $blue;
 	}
@@ -67,11 +67,11 @@ button {
 
 	&.danger > span {
 		border-color: $red;
-		color: $color-button-danger;
+		color: $button-danger-color;
 	}
 
 	&.danger .circle {
-		background-color: darken($color-button-danger, $darken-factor);
+		background-color: darken($button-danger-color, $darken-factor);
 	}
 
 	&.danger:hover > span,

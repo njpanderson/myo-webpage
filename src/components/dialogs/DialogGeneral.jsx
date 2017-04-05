@@ -19,6 +19,10 @@ class DialogGeneral extends Component {
 			}];
 		}
 
+		if (this.props.data.attachment) {
+			classes.push(this.props.settings.classes.popup);
+		}
+
 		return (
 			<div className={classes.join(' ')}
 				ref={this.props.refCollector}>
