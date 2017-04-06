@@ -15,6 +15,14 @@
 	cursor: default;
 }
 
+:focus {
+	outline:none;
+}
+
+::-moz-focus-inner {
+	border:0;
+}
+
 /* main layout */
 body {
 	background-color: #fff;
