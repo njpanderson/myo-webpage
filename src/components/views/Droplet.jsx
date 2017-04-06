@@ -40,7 +40,7 @@ class DropletComponent extends Component {
 		}
 
 		return (
-			<a href="#"
+			<button
 				id={this.props.droplet.id}
 				className={classes.join(' ')}
 				onClick={this.onClick}
@@ -49,7 +49,7 @@ class DropletComponent extends Component {
 					<Icon glyph={dropletTypeToGlyphs[this.props.droplet.dropletType]}/>
 					{this.props.droplet.name}
 				</span>
-			</a>
+			</button>
 		);
 	}
 }

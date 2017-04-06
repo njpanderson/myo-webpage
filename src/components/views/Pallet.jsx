@@ -29,7 +29,9 @@ class Pallet extends Component {
 	render() {
 		return (
 			<section className="pallet">
-				{this.getItems.apply(this)}
+				<form>
+					{this.getItems.apply(this)}
+				</form>
 			</section>
 		);
 	}

@@ -39,5 +39,6 @@
 
 	.button {
 		font-weight: bolder;
+		@include font-size(14);
 	}
 }

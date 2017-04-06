@@ -35,6 +35,12 @@ form {
 }
 
 input,
+select,
+button {
+	font-family: $font-family-base;
+}
+
+input,
 select {
 	user-select: all;
 	@include font-size(14);

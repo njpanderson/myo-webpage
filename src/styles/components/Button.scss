@@ -49,14 +49,6 @@
 	}
 }
 
-form .button {
-	@include font-size(16);
-
-	> span {
-		padding: ($button-padding-v * 1.5) ($button-padding-h * 1.5);
-	}
-}
-
 .pseudo-button {
 	display: inline-block;
 	border: 1px solid $gray-med;

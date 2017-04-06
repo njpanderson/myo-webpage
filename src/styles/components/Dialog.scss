@@ -38,4 +38,13 @@
 			@include font-size(14);
 		}
 	}
+
+	.button {
+		@include font-size(16);
+
+		> span {
+			padding: ($button-padding-v * 1.5) ($button-padding-h * 1.5);
+		}
+	}
+
 }

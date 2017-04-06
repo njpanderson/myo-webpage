@@ -67,7 +67,7 @@ class Toolbar extends Component {
 				buttons.push(
 					<li key={key}
 						className={classes.join(' ')}>
-						<a href="#"
+						<button
 							className={this.props.settings.classes.button}
 							ref={this.registerButtonRef(key)}
 							onClick={this.registerButtonClick(button, key)}>
@@ -76,7 +76,7 @@ class Toolbar extends Component {
 								{button.label}
 								<span className="circle"></span>
 							</span>
-						</a>
+						</button>
 					</li>
 				);
 			});
@@ -88,9 +88,11 @@ class Toolbar extends Component {
 	render() {
 		return (
 			<menu className="toolbar">
-				<ul>
-					{this.getToolbarButtons()}
-				</ul>
+				<form>
+					<ul>
+						{this.getToolbarButtons()}
+					</ul>
+				</form>
 			</menu>
 		);
 	}
