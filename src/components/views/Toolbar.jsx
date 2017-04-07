@@ -46,7 +46,7 @@ class Toolbar extends Component {
 			this.props.buttons.forEach((button, index) => {
 				var key = 'button-' + index,
 					classes = [],
-					icon;
+					icon, label;
 
 				if (button.icon) {
 					icon = (
@@ -64,6 +64,19 @@ class Toolbar extends Component {
 					classes.push(this.props.settings.classes.toolbar.separator);
 				}
 
+				if (typeof button.label === 'function') {
+					label = button.label({
+						UI: {
+							dialog: {
+								mode: this.props.dialog_mode
+							},
+							tour_stage: this.props.tour_stage,
+						}
+					});
+				} else {
+					label = button.label;
+				}
+
 				buttons.push(
 					<li key={key}
 						className={classes.join(' ')}>
@@ -73,7 +86,7 @@ class Toolbar extends Component {
 							onClick={this.registerButtonClick(button, key)}>
 							<span>
 								{icon}
-								{button.label}
+								{label}
 								<span className="circle"></span>
 							</span>
 						</button>
@@ -100,6 +113,8 @@ class Toolbar extends Component {
 
 Toolbar.propTypes = {
 	buttons: PropTypes.arrayOf(PropTypes.object),
+	tour_stage: PropTypes.any,
+	dialog_mode: PropTypes.string,
 	settings: PropTypes.object.isRequired,
 	onButtonClick: PropTypes.func,
 	lib: PropTypes.object.isRequired

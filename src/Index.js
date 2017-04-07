@@ -95,7 +95,9 @@ App.prototype = {
 								// (some of which contain unserialisable objects)
 								actionsBlacklist: [
 									actionTypes.SET_ACTIVE_DROPLET,
-									actionTypes.SET_DIALOG_MODE
+									actionTypes.SET_DIALOG_MODE,
+									actionTypes.SET_TOUR_MODE,
+									actionTypes.SET_TOUR_STAGE
 								]
 							})
 						)

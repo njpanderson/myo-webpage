@@ -1,5 +1,5 @@
 import default_state from '../assets/default-state';
-import { actionTypes, uiStates } from '../assets/constants';
+import { actionTypes, uiStates, tourModes } from '../assets/constants';
 
 import { combineReducers } from 'redux';
 
@@ -102,6 +102,11 @@ function UI(state = default_state.UI, action) {
 		// drop zone is next clicked
 		return Object.assign({}, state, {
 			active_droplet_id: action.droplet_id
+		});
+
+	case actionTypes.SET_TOUR_STAGE:
+		return Object.assign({}, state, {
+			tour_stage: action.stage
 		});
 
 	default:

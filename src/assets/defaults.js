@@ -1,4 +1,5 @@
 import { GLYPHS } from '../components/views/Icon.jsx';
+import { dialogModes } from './constants';
 
 export default {
 	classes: {
@@ -53,7 +54,14 @@ export default {
 		label: '...'
 	},
 	toolbar: [{
-		label: 'Tour',
+		label: (state) => {
+			console.log(state);
+			if (state.UI.tour_stage !== null && state.UI.dialog.mode === dialogModes.NONE) {
+				return 'Continue tour';
+			} else {
+				return 'Tour';
+			}
+		},
 		icon: GLYPHS.COMPASS,
 		method: 'startTour'
 	}, {

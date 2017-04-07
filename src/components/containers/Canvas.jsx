@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { collectRef } from '../../lib/utils';
 
 import View from '../views/View.jsx';
-import Header from '../views/Header.jsx';
+import Header from './HeaderContainer';
 import Template from './TemplateContainer';
 import Dialog from './DialogContainer';
 import Pallet from './PalletContainer';

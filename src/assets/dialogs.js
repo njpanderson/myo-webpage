@@ -4,6 +4,24 @@ const tourDialogModifiers = {
 	}
 };
 
+const tourButtons = {
+	proceed: [{
+		type: 'submit',
+		label: 'Continue'
+	}],
+	try_it: [{
+		type: 'pause',
+		label: 'Try it out'
+	}, {
+		type: 'submit',
+		label: 'Continue'
+	}],
+	end: [{
+		type: 'submit',
+		label: 'Finish tour'
+	}]
+};
+
 export default {
 	intro: {
 		title: 'Welcome to <span class="logo">&lt;<b>Tag</b>&gt;</span>!',
@@ -34,7 +52,8 @@ export default {
 			'Tag is an app designed to explain how web pages are constructed.',
 			'The idea is simple: Place <b>elements</b> onto the <b>template</b>, and then use the ' +
 				'<span class="pseudo-button run"><svg class="icon" width="14" height="14"><use xlink:href="#icon-media-play"></use></svg>Run</span> button to see how the page will look in the <b>view</b>.'
-		]
+		],
+		buttons: tourButtons.proceed
 	}, {
 		title: 'The template',
 		message: [
@@ -48,12 +67,12 @@ export default {
 				placement: 'right',
 				modifiers: tourDialogModifiers
 			}
-		}
+		},
+		buttons: tourButtons.proceed
 	}, {
 		title: 'The pallet',
 		message: [
-			'This is the pallet. It contains Droplets, which can be added to the template above.',
-			'Click on a Droplet and then click on one of the <span class="drop-zone"><span class="target"><b>...</b></span></span> targets in the template to attach it.'
+			'This is the pallet. It contains Droplets, which can be added to the template above.'
 		],
 		overlay: false,
 		attachment: {
@@ -62,12 +81,15 @@ export default {
 				placement: 'top',
 				modifiers: tourDialogModifiers
 			}
-		}
+		},
+		buttons: tourButtons.proceed
 	}, {
 		title: 'Droplet',
 		message: [
 			'This is a Droplet. It can be added to the template above.',
-			'Certain <span class="drop-zone"><span class="target"><b>...</b></span></span> targets only allow certain Droplets to be added to them. The target will turn into <span class="drop-zone accept"><span class="target"><b>...</b></span></span> if it can accept the Droplet you have chosen, or <span class="drop-zone decline"><span class="target"><b>...</b></span></span> if you can’t drop the Droplet there.'
+			'Certain <span class="drop-zone"><span class="target"><b>...</b></span></span> targets only allow certain Droplets to be added to them.',
+			'When a target goes green <span class="drop-zone accept"><span class="target"><b>...</b></span></span>, it means it can accept the Droplet you have chosen, or <span class="drop-zone decline"><span class="target"><b>...</b></span></span> if the Droplet can’t be placed there.',
+			'Click on a Droplet and then click on one of the <span class="drop-zone"><span class="target"><b>...</b></span></span> targets in the template to attach it.'
 		],
 		overlay: false,
 		attachment: {
@@ -76,7 +98,8 @@ export default {
 				placement: 'top',
 				modifiers: tourDialogModifiers
 			}
-		}
+		},
+		buttons: tourButtons.try_it
 	}, {
 		title: 'The view',
 		message: [
@@ -90,6 +113,7 @@ export default {
 				placement: 'left',
 				modifiers: tourDialogModifiers
 			}
-		}
+		},
+		buttons: tourButtons.end
 	}]
 };

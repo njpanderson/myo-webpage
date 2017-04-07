@@ -49,7 +49,7 @@ var UI = function(parent, settings, refs, data, store, template) {
 	// set up library methods for passing to React components
 	this.libraryMethods = {
 		getDropletById: this.getDropletById.bind(this),
-		setUIAttachment: this._setUIAttachment.bind(this),
+		setUIPopperAttachment: this._setUIPopperAttachment.bind(this),
 		zoneDetachAttachment: this.zoneDetachAttachment.bind(this),
 		zoneGetAttachment: this.zoneGetAttachment.bind(this),
 		isValidDrop: this._isValidDrop.bind(this),
@@ -571,7 +571,7 @@ UI.prototype = {
 		return this._data.drop_zones[id] || null;
 	},
 
-	_setUIAttachment: function(attachment, element) {
+	_setUIPopperAttachment: function(attachment, element) {
 		var attached;
 
 		if (attachment && attachment.selector &&

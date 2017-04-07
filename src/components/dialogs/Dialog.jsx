@@ -9,6 +9,7 @@ import DialogEditDroplet from '../dialogs/DialogEditDroplet.jsx';
 var DialogComponents = {};
 DialogComponents[dialogModes.EDIT_DROPLET] = DialogEditDroplet;
 DialogComponents[dialogModes.GENERAL] = DialogGeneral;
+DialogComponents[dialogModes.TOUR] = DialogGeneral;
 
 class Dialog extends Component {
 	constructor(props) {
@@ -32,7 +33,7 @@ class Dialog extends Component {
 
 			if (this.props.data && this.props.data.attachment) {
 				// attachment data exists - apply with popper
-				this.popper = this.props.lib.setUIAttachment(
+				this.popper = this.props.lib.setUIPopperAttachment(
 					this.props.data.attachment,
 					this.dialogRef
 				);

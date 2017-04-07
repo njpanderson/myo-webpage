@@ -56,5 +56,12 @@ export default {
 		return {
 			type: actionTypes.ZONE_CLEAR_ALL_ATTACHMENTS
 		};
+	},
+
+	setTourStage: function(stage) {
+		return {
+			type: actionTypes.SET_TOUR_STAGE,
+			stage
+		};
 	}
 };

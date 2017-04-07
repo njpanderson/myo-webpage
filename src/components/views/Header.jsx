@@ -11,8 +11,11 @@ class Header extends Component {
 		return (
 			<header>
 				{this.props.children}
+				<p><b>{this.props.dialog_mode}</b>, <b>{this.props.tour_stage}</b></p>
 				<Toolbar
 					buttons={this.props.settings.toolbar}
+					tour_stage={this.props.tour_stage}
+					dialog_mode={this.props.dialog_mode}
 					settings={this.props.settings}
 					onButtonClick={this.props.onButtonClick}
 					lib={this.props.lib}/>
@@ -22,6 +25,11 @@ class Header extends Component {
 }
 
 Header.propTypes = {
+	// from HeaderContainer
+	tour_stage: PropTypes.any,
+	dialog_mode: PropTypes.string,
+
+	// from Canvas
 	children: PropTypes.object,
 	settings: PropTypes.object.isRequired,
 	onButtonClick: PropTypes.func,
