@@ -55,7 +55,6 @@ export default {
 	},
 	toolbar: [{
 		label: (state) => {
-			console.log(state);
 			if (state.UI.tour_stage !== null && state.UI.dialog.mode === dialogModes.NONE) {
 				return 'Continue tour';
 			} else {

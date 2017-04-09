@@ -13,7 +13,7 @@ Tour.prototype = {
 	},
 
 	start: function() {
-		this._progressTour();
+		return this._progressTour();
 	},
 
 	_progressTour: function(index = null) {
@@ -27,17 +27,21 @@ Tour.prototype = {
 
 		if ((Tour.dialogs.tour.length - 1) >= index) {
 			this._setTourStage(index);
-			this._showTourElement(index)
+			return this._showTourElement(index)
 				.then((data) => {
-					if (data.action === 'pause') {
-						this._parent._hideDialog();
+					this._parent._hideDialog();
+
+					if (data) {
+						if (data.action !== 'pause') {
+							this._progressTour((index + 1));
+						}
 					} else {
-						this._progressTour((index + 1));
+						this._setTourStage(null);
 					}
 				});
 		} else {
 			this._setTourStage(null);
-			this._parent._hideDialog();
+			return this._parent._hideDialog();
 		}
 	},
 
@@ -45,8 +49,7 @@ Tour.prototype = {
 		return this._parent._showDialog(
 			dialogModes.TOUR,
 			Tour.dialogs.tour[index]
-		)
-			.catch(this._parent._hideDialog);
+		);
 	},
 
 	_setTourStage: function(stage) {

@@ -62,6 +62,10 @@ var UI = function(parent, settings, refs, data, store, template) {
 		}
 	};
 
+	// perform bindings for methods commonly used within promises
+	this._hideDialog = this._hideDialog.bind(this);
+	this._showDialog = this._showDialog.bind(this);
+
 	// show introduction (or not)
 	if (this.settings.showIntro) {
 		this._tour.intro();
@@ -112,14 +116,14 @@ UI.prototype = {
 	 * @private
 	 */
 	_showDialog: function(mode, data) {
-		return new Promise((resolve, reject) => {
+		return new Promise((resolve) => {
 			this._store.dispatch(actions.setDialogMode(
 				mode,
 				data,
 				(data, action, action_data) => {
 					resolve({ data, action, action_data });
 				},
-				reject
+				resolve
 			));
 		});
 	},
@@ -306,8 +310,7 @@ UI.prototype = {
 					} else {
 						this._commitDropletIntoDropZone.apply(this, [dialog.data]);
 					}
-				}).bind(this))
-				.catch(this._hideDialog.bind(this));
+				}).bind(this));
 		}
 	},
 
@@ -439,10 +442,13 @@ UI.prototype = {
 					zone_id: drop_zone.id,
 					attachment_index: null
 				})
-					.then(((dialog) => {
-						this._commitDropletIntoDropZone.apply(this, [dialog.data]);
-					}).bind(this))
-					.catch(this._hideDialog.bind(this));
+					.then((dialog) => {
+						this._hideDialog();
+
+						if (dialog) {
+							this._commitDropletIntoDropZone.apply(this, [dialog.data]);
+						}
+					});
 			} else {
 				// add attachment without dialog
 				this.zoneAddAttachment(

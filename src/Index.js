@@ -96,7 +96,6 @@ App.prototype = {
 								actionsBlacklist: [
 									actionTypes.SET_ACTIVE_DROPLET,
 									actionTypes.SET_DIALOG_MODE,
-									actionTypes.SET_TOUR_MODE,
 									actionTypes.SET_TOUR_STAGE
 								]
 							})
@@ -217,11 +216,7 @@ App.prototype = {
 				});
 
 				this.hideDialog();
-			})
-			.catch(function(error) {
-				error && console.error(error);
-				this.hideDialog();
-			}.bind(this));
+			});
 	},
 
 	/**

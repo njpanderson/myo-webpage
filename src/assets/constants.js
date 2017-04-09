@@ -6,7 +6,6 @@ export const actionTypes = {
 	ZONE_CLEAR_ALL_ATTACHMENTS: 'zone-clear-all-attachments',
 	SET_DIALOG_MODE: 'set-dialog-mode',
 	SET_ACTIVE_DROPLET: 'set-active-droplet',
-	SET_TOUR_MODE: 'set-tour-mode',
 	SET_TOUR_STAGE: 'set-tour-stage'
 };
 

@@ -34,8 +34,8 @@ describe('Canvas', function() {
 			onDialogComplete: noop,
 			onDialogCancel: noop,
 			onAttachmentClick: noop,
-			onDropletClick: noop,
-			onDropZoneClick: noop,
+			onDropletEvent: noop,
+			onDropZoneEvent: noop,
 			onDragHandlePress: noop,
 			onButtonClick: noop,
 			lib: {}

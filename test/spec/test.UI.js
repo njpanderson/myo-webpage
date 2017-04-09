@@ -1,9 +1,10 @@
 import { expect } from 'chai';
 
 import useMockery from '../helpers/mockery';
+import MockIndex from '../mocks/Index';
 
 describe('UI', function() {
-	let UI;
+	let UI, index;
 
 	useMockery(() => {
 		useMockery
@@ -17,8 +18,13 @@ describe('UI', function() {
 		UI = require('../../src/lib/UI').default;
 	});
 
+	beforeEach(() => {
+		index = new MockIndex();
+	});
+
 	it('Should instantiate', function() {
 		var ui = new UI(
+			index,
 			require('../fixtures/defaults.js'),
 			{},
 			{},
