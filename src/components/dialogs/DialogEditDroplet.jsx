@@ -179,7 +179,6 @@ class DialogEditDroplet extends Component {
 					attachment_index: this.props.data.attachment_index,
 					zone_id: this.props.data.zone_id
 				}
-				// onClick: this.detachAttachment
 			});
 		} else {
 			// adding

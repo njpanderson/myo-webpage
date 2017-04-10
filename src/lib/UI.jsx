@@ -300,15 +300,17 @@ UI.prototype = {
 				attachment_index
 			})
 				.then(((dialog) => {
-					if (dialog.action === 'remove_droplet') {
-						this._hideDialog();
+					this._hideDialog();
 
-						this.zoneDetachAttachment(
-							dialog.action_data.zone_id,
-							dialog.action_data.attachment_index
-						);
-					} else {
-						this._commitDropletIntoDropZone.apply(this, [dialog.data]);
+					if (dialog) {
+						if (dialog.action === 'remove_droplet') {
+							this.zoneDetachAttachment(
+								dialog.action_data.zone_id,
+								dialog.action_data.attachment_index
+							);
+						} else {
+							this._commitDropletIntoDropZone.apply(this, [dialog.data]);
+						}
 					}
 				}).bind(this));
 		}
