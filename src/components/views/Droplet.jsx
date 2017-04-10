@@ -42,8 +42,6 @@ class DropletComponent extends Component {
 
 		if (event.type === 'mouseenter' || event.type === 'touchstart') {
 			if (this.tooltip_cache === '') {
-				this.tooltip_cache = '<h2>' + this.props.droplet.name + '</h2>';
-
 				this.tooltip_cache +=
 					'<code>' +
 					Template.entities(
@@ -56,9 +54,6 @@ class DropletComponent extends Component {
 					) +
 					'</code>';
 
-				console.log(this.tooltip_cache);
-
-
 				if (this.props.droplet.guidance) {
 					this.tooltip_cache += this.props.droplet.guidance;
 				}
@@ -67,7 +62,9 @@ class DropletComponent extends Component {
 
 		this.props.onEvent(event, this.props.droplet, {
 			ref: this.ui.droplet,
-			tooltip: this.tooltip_cache
+			title: this.props.droplet.name,
+			content: this.tooltip_cache,
+			iconGlyph: GLYPHS.LIGHTBULB
 		});
 	}
 

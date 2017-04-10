@@ -78,10 +78,12 @@ export default {
 		};
 	},
 
-	setTooltipContent: function(content) {
+	setTooltipContent: function(title, content, iconGlyph) {
 		return {
 			type: actionTypes.SET_TOOLTIP_CONTENT,
-			content
+			content,
+			title,
+			iconGlyph
 		};
 	}
 };

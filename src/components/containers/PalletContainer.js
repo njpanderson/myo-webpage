@@ -15,7 +15,7 @@ const mapDispatchToProps = (dispatch, props) => {
 			switch (event.type) {
 			case 'mouseenter':
 			case 'touchstart':
-				dispatch(actions.setTooltipContent(data.tooltip));
+				dispatch(actions.setTooltipContent(data.title, data.content, data.iconGlyph));
 				dispatch(actions.showTooltip(data.ref));
 				break;
 

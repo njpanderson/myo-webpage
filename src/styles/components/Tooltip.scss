@@ -9,15 +9,23 @@
 
 		code {
 			display: block;
-			margin: .5em 0;
+			box-shadow: $box-shadow-shallow;
+			margin: 1em 0;
 			width: 100%;
 			padding: 5px;
 			word-wrap: break-word;
+			@include font-size(12);
 			background-color: $bg-code;
 		}
 
 		h2 {
 			@include font-size(18);
+			// color: $blue-dark;
+
+			svg {
+				vertical-align: middle;
+				fill: $blue-dark;
+			}
 		}
 	}
 

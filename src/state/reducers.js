@@ -111,7 +111,9 @@ function UI(state = default_state.UI, action) {
 				tooltip: {
 					show: true,
 					attachment: action.attachment,
-					content: state.tooltip.content
+					content: state.tooltip.content,
+					title: state.tooltip.title,
+					iconGlyph: state.tooltip.iconGlyph
 				}
 			});
 		} else {
@@ -119,7 +121,9 @@ function UI(state = default_state.UI, action) {
 				tooltip: {
 					show: false,
 					attachment: null,
-					content: ''
+					content: '',
+					title: '',
+					iconGlyph: ''
 				}
 			});
 		}
@@ -128,7 +132,9 @@ function UI(state = default_state.UI, action) {
 		return Object.assign({}, state, {
 			tooltip: {
 				show: state.tooltip.show,
-				content: action.content
+				content: action.content,
+				title: action.title,
+				iconGlyph: action.iconGlyph
 			}
 		});
 

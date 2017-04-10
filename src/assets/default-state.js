@@ -34,6 +34,8 @@ export default {
 		tooltip: {
 			show: false,
 			attachment: null,
+			title: '',
+			iconGlyph: '',
 			content: ''
 		}
 	}

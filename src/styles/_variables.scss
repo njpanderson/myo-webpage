@@ -54,8 +54,8 @@ $font-family-mono: 'Fira Mono', monospace;
 $ease-in-out-quart: cubic-bezier(0.770, 0.000, 0.175, 1.000);
 
 // shadows
-$color-box-shadow-deep: rgba(0, 0, 0, 0.1);
-$color-box-shadow-shallow: rgba(0, 0, 0, 0.3);
+$color-box-shadow-deep: rgba(0, 0, 0, .1);
+$color-box-shadow-shallow: rgba(0, 0, 0, .2);
 $distance-box-shadow-deep: 4px;
 $distance-box-shadow-shallow: 2px;
 $box-shadow-shallow: $distance-box-shadow-shallow $distance-box-shadow-shallow $color-box-shadow-shallow;

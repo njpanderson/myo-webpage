@@ -53,7 +53,7 @@
 		"guidance": "<p>Each letter button will be a single letter that will light up when you press its key on the keyboard.</p>"
 	},
 	{
-		"name": "Javascript",
+		"name": "JavaScript",
 		"dropletType": "element",
 		"tagName": "script",
 		"attachmentIds": ["script_main"],

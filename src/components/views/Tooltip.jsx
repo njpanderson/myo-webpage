@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
+import { Icon } from '../views/Icon.jsx';
 import { rawMarkup } from '../../lib/utils';
 
 class Tooltip extends Component {
@@ -25,8 +26,8 @@ class Tooltip extends Component {
 	}
 
 	updateAttachment() {
-		if (this.props.show) {
-			this.popper = this.props.attacher(this.props.attachment, this.ui.tooltip, {
+		if (this.props.state.show) {
+			this.popper = this.props.attacher(this.props.state.attachment, this.ui.tooltip, {
 				placement: 'top',
 				modifiers: {
 					flip: ['top', 'bottom'],
@@ -44,23 +45,32 @@ class Tooltip extends Component {
 	}
 
 	render() {
-		var classes;
+		var classes, icon;
 
 		classes = [
 			this.props.settings.classes.popup,
 			this.props.settings.classes.tooltip
 		];
 
-		if (!this.props.show) {
+		if (!this.props.state.show) {
 			classes.push(this.props.settings.classes.hidden);
+		} else {
+			if (this.props.state.iconGlyph) {
+				icon = <Icon glyph={this.props.state.iconGlyph}/>;
+			}
 		}
 
 		return (
 			<div
 				ref={this.refCollector.bind(this)}
 				className={classes.join(' ')}>
-				<div className="content"
-					dangerouslySetInnerHTML={rawMarkup(this.props.content)}/>
+				<div className="content">
+					<h2>
+						{icon}
+						<span>{this.props.state.title}</span>
+					</h2>
+					<div dangerouslySetInnerHTML={rawMarkup(this.props.state.content)}/>
+				</div>
 				<span className="arrow"/>
 			</div>
 		);
@@ -70,9 +80,7 @@ class Tooltip extends Component {
 Tooltip.propTypes = {
 	settings: PropTypes.object.isRequired,
 	attacher: PropTypes.func.isRequired,
-	show: PropTypes.bool.isRequired,
-	attachment: PropTypes.object,
-	content: PropTypes.string
+	state: PropTypes.object.isRequired
 };
 
 export default Tooltip;

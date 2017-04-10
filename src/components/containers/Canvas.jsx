@@ -80,9 +80,7 @@ class Canvas extends Component {
 				<Tooltip
 					settings={this.props.settings}
 					attacher={this.props.lib.setUIPopperAttachment}
-					show={this.props.state_tooltip.show}
-					attachment={this.props.state_tooltip.attachment}
-					content={this.props.state_tooltip.content}/>
+					state={this.props.state_tooltip}/>
 			</div>
 		);
 	}
