@@ -1,7 +1,9 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 
 import DialogHeading from './DialogHeading.jsx';
 import Form from '../views/Form.jsx';
+
+import { dialog } from '../../assets/common-prop-types';
 
 class DialogGeneral extends Component {
 	constructor(props) {
@@ -42,18 +44,6 @@ class DialogGeneral extends Component {
 	}
 }
 
-DialogGeneral.propTypes = {
-	data: PropTypes.object.isRequired,
-	settings: PropTypes.object.isRequired,
-	refCollector: PropTypes.func,
-	onDialogCancel: PropTypes.func,
-	onDialogComplete: PropTypes.func,
-	onButtonClick: PropTypes.func
-};
-
-DialogGeneral.defaultProps = {
-	onDialogCancel: null,
-	onDialogComplete: null
-};
+DialogGeneral.propTypes = dialog;
 
 export default DialogGeneral;

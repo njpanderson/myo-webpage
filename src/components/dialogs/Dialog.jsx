@@ -93,6 +93,9 @@ Dialog.propTypes = {
 	lib: PropTypes.object
 };
 
-Dialog.defaultProps = {};
+Dialog.defaultProps = {
+	onDialogCancel: null,
+	onDialogComplete: null
+};
 
 export default Dialog;

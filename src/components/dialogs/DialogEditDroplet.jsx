@@ -1,7 +1,8 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 
 import FormField from '../../lib/FormField';
 import { setLabels } from '../../assets/constants';
+import { dialog } from '../../assets/common-prop-types';
 
 import { GLYPHS } from '../views/Icon.jsx';
 import DialogHeading from './DialogHeading.jsx';
@@ -214,19 +215,6 @@ class DialogEditDroplet extends Component {
 	}
 }
 
-DialogEditDroplet.propTypes = {
-	data: PropTypes.object.isRequired,
-	settings: PropTypes.object.isRequired,
-	refCollector: PropTypes.func,
-	onDialogCancel: PropTypes.func,
-	onDialogComplete: PropTypes.func,
-	onButtonClick: PropTypes.func,
-	lib: PropTypes.object
-};
-
-DialogEditDroplet.defaultProps = {
-	onDialogCancel: null,
-	onDialogComplete: null,
-};
+DialogEditDroplet.propTypes = dialog;
 
 export default DialogEditDroplet;

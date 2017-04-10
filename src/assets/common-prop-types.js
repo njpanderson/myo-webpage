@@ -12,3 +12,13 @@ export const field = {
 	]).isRequired,
 	onChange: PropTypes.func
 };
+
+export const dialog = {
+	data: PropTypes.object.isRequired,
+	settings: PropTypes.object.isRequired,
+	refCollector: PropTypes.func,
+	onDialogCancel: PropTypes.func,
+	onDialogComplete: PropTypes.func,
+	onButtonClick: PropTypes.func,
+	lib: PropTypes.object
+};
