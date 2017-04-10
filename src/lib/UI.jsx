@@ -191,11 +191,11 @@ UI.prototype = {
 				break;
 
 			case 'droplet':
-				this._queueDragDropBinding('drag', collection, key);
+				// this._queueDragDropBinding('drag', collection, key);
 				break;
 
 			case 'dropzone':
-				this._queueDragDropBinding('drop', 'dropzone_target', key);
+				// this._queueDragDropBinding('drop', 'dropzone_target', key);
 				break;
 
 			case 'view_frame':
