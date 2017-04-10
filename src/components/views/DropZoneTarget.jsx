@@ -10,12 +10,6 @@ class DropZoneTarget extends Component {
 		this.onEvent = this.onEvent.bind(this);
 	}
 
-	shouldComponentUpdate(props) {
-		return (
-			props.activeAttachments.length != this.props.activeAttachments.length
-		);
-	}
-
 	onEvent(event) {
 		if (event.type === 'click') {
 			event.preventDefault();
