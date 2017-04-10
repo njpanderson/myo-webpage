@@ -22,6 +22,7 @@ Attribute        | Required | Default | Description
 `dropletType`    | Required | (empty) | As above.
 `attachmentIds`  | Required | []      | An array of drop zone IDs this droplet can be attached to.
 `editable`       | Optional | {}      | An object of attributes which can be edited when attaching the droplet to the template. Only certain attributes are supported (listed below).
+`guidance`       | Optional | (empty) | Guidance HTML, explaining how the droplet will work. Will be displayed within the Droplet tooltip.
 
 ## Droplet type specific attributes
 

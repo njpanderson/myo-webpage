@@ -17,6 +17,7 @@ export default {
 		button: 'button',
 		button_animate: 'animate',
 		popup: 'popup',
+		tooltip: 'tooltip',
 		droplet: {
 			node: 'droplet',
 			active: 'active',

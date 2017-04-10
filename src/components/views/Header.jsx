@@ -11,7 +11,6 @@ class Header extends Component {
 		return (
 			<header>
 				{this.props.children}
-				<p><b>{this.props.dialog_mode}</b>, <b>{this.props.tour_stage}</b></p>
 				<Toolbar
 					buttons={this.props.settings.toolbar}
 					tour_stage={this.props.tour_stage}

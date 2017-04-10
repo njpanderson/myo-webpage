@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { collectRef } from '../../lib/utils';
 
 import View from '../views/View.jsx';
+import Tooltip from '../views/Tooltip.jsx';
 import Header from './HeaderContainer';
 import Template from './TemplateContainer';
 import Dialog from './DialogContainer';
@@ -66,6 +67,7 @@ class Canvas extends Component {
 				<Pallet
 					data={this.props.data}
 					settings={this.props.settings}
+					lib={this.props.lib}
 					onMount={this.props.onMount}
 					onDropletEvent={this.props.onDropletEvent}
 					refCollector={this.props.refCollector}/>
@@ -75,6 +77,12 @@ class Canvas extends Component {
 					settings={this.props.settings}
 					lib={this.props.lib}
 					onButtonClick={this.props.onButtonClick}/>
+				<Tooltip
+					settings={this.props.settings}
+					attacher={this.props.lib.setUIPopperAttachment}
+					show={this.props.state_tooltip.show}
+					attachment={this.props.state_tooltip.attachment}
+					content={this.props.state_tooltip.content}/>
 			</div>
 		);
 	}
@@ -84,6 +92,7 @@ Canvas.propTypes = {
 	// from CanvasContainer
 	state: PropTypes.object.isRequired,
 	active_droplet_id: PropTypes.any,
+	state_tooltip: PropTypes.object,
 
 	// from UI#render
 	data: PropTypes.object.isRequired,

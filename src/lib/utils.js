@@ -50,3 +50,7 @@ export const validatePropKeys = function(require) {
 export const escapeRegExp = function(str) {
 	return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\$&');
 };
+
+export const rawMarkup = function(html) {
+	return { __html: html };
+};

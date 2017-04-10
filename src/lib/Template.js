@@ -215,8 +215,23 @@ Template.entities = function(str) {
 	);
 };
 
-Template.onElementRender = function(markup, droplet, zone, is_output) {
-	return markup;
+/**
+ * @param {object} markup - The current markup data as set by Template#renderDroplet.
+ * @param {object} droplet - The Droplet being rendered.
+ * @param {object} zone - The Drop Zone the Droplet is attached to.
+ * @param {bool} is_output - See below.
+ * @description
+ * Receives element data from Droplets as attached to Drop Zones, as well as the
+ * existing markup about to be rendered. The return value should equal the `markup`
+ * argument sent but can be augmented to alter rendering.
+ *
+ * ## The `is_output` argument.
+ * Rendering can take place in two forms: Either for the template display or within as
+ * tooltips as visible source code, or within the view frame as part of an outputted page.
+ * The `is_output` argument will be `false` in the former case and `true` in the latter.
+ */
+Template.onElementRender = function() {
+	return arguments[0];
 };
 
 /**

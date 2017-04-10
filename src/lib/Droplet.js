@@ -47,7 +47,8 @@ Droplet.prototype = {
 			'name',
 			'dropletType',
 			'attachmentIds',
-			'editable'
+			'editable',
+			'guidance'
 		], this);
 
 		// check droplet type is valid
@@ -198,6 +199,7 @@ Droplet.PropTypes = {
 	innerHTML: PropTypes.string,
 	editable: Droplet._validateEditableSet,
 	key: PropTypes.string.notEmpty.isRequired,
+	guidance: PropTypes.string
 };
 
 Droplet.editableAttributes = [

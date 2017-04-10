@@ -15,8 +15,9 @@ class Pallet extends Component {
 					<Droplet droplet={droplet}
 						active={this.props.activeDropletId === droplet.id}
 						settings={this.props.settings}
+						lib={this.props.lib}
 						onMount={this.props.onMount}
-						onClick={this.props.onDropletEvent}
+						onEvent={this.props.onDropletEvent}
 						refCollector={this.props.refCollector}
 						key={droplet.id}/>
 				);
@@ -44,6 +45,7 @@ Pallet.propTypes = {
 	// from Canvas
 	data: PropTypes.object.isRequired,
 	settings: PropTypes.object.isRequired,
+	lib: PropTypes.object.isRequired,
 	onMount: PropTypes.func,
 	onDropletEvent: PropTypes.func.isRequired,
 	refCollector: PropTypes.func

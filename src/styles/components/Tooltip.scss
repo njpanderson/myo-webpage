@@ -1,0 +1,27 @@
+.tooltip {
+	position: absolute;
+	max-width: 400px;
+
+	.content {
+		box-shadow: $box-shadow-deep;
+		padding: 10px;
+		background-color: $dialog-bg-color;
+
+		code {
+			display: block;
+			margin: .5em 0;
+			width: 100%;
+			padding: 5px;
+			word-wrap: break-word;
+			background-color: $bg-code;
+		}
+
+		h2 {
+			@include font-size(18);
+		}
+	}
+
+	.arrow:after {
+		display: none;
+	}
+}

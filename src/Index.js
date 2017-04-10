@@ -96,7 +96,10 @@ App.prototype = {
 								actionsBlacklist: [
 									actionTypes.SET_ACTIVE_DROPLET,
 									actionTypes.SET_DIALOG_MODE,
-									actionTypes.SET_TOUR_STAGE
+									actionTypes.SET_TOUR_STAGE,
+									// actionTypes.SHOW_TOOLTIP,
+									// actionTypes.HIDE_TOOLTIP,
+									// actionTypes.SET_TOOLTIP_CONTENT
 								]
 							})
 						)

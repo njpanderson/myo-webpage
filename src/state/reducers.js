@@ -104,9 +104,32 @@ function UI(state = default_state.UI, action) {
 			active_droplet_id: action.droplet_id
 		});
 
-	case actionTypes.SET_TOUR_STAGE:
+	case actionTypes.SHOW_TOOLTIP:
+	case actionTypes.HIDE_TOOLTIP:
+		if (action.type === actionTypes.SHOW_TOOLTIP) {
+			return Object.assign({}, state, {
+				tooltip: {
+					show: true,
+					attachment: action.attachment,
+					content: state.tooltip.content
+				}
+			});
+		} else {
+			return Object.assign({}, state, {
+				tooltip: {
+					show: false,
+					attachment: null,
+					content: ''
+				}
+			});
+		}
+
+	case actionTypes.SET_TOOLTIP_CONTENT:
 		return Object.assign({}, state, {
-			tour_stage: action.stage
+			tooltip: {
+				show: state.tooltip.show,
+				content: action.content
+			}
 		});
 
 	default:

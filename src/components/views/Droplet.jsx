@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 
 import { collectRef } from '../../lib/utils';
 import Droplet from '../../lib/Droplet';
+import Template from '../../lib/Template';
 import { GLYPHS, Icon } from './Icon.jsx';
 
 const dropletTypeToGlyphs = {
@@ -14,8 +15,18 @@ class DropletComponent extends Component {
 	constructor(props) {
 		super(props);
 
-		this.myrefs = {};
-		this.onClick = this.onClick.bind(this);
+		this.tooltip_cache = '';
+		this.ui = {
+			droplet: null
+		};
+
+		this.onEvent = this.onEvent.bind(this);
+	}
+
+	refCollector(ref) {
+		var collector = collectRef(this.props, ['droplet'], this.props.droplet.id);
+		this.ui.droplet = ref;
+		collector(ref);
 	}
 
 	componentDidMount() {
@@ -24,9 +35,44 @@ class DropletComponent extends Component {
 		}
 	}
 
-	onClick(event) {
-		event.preventDefault();
-		this.props.onClick(event, this.props.droplet);
+	onEvent(event) {
+		if (event.type === 'click') {
+			event.preventDefault();
+		}
+
+		if (event.type === 'mouseenter' || event.type === 'touchstart') {
+			if (this.tooltip_cache === '') {
+				this.tooltip_cache = '<h2>' + this.props.droplet.name + '</h2>';
+
+				this.tooltip_cache +=
+					'<code>' +
+					Template.entities(
+						Template.renderDroplet(
+							this.props.droplet,
+							this.props.droplet.data,
+							null,
+							false
+						)
+					) +
+					'</code>';
+
+				console.log(this.tooltip_cache);
+
+
+				if (this.props.droplet.guidance) {
+					this.tooltip_cache += this.props.droplet.guidance;
+				}
+			}
+		}
+
+		this.props.onEvent(event, this.props.droplet, {
+			ref: this.ui.droplet,
+			tooltip: this.tooltip_cache
+		});
+	}
+
+	showDescription(show=true) {
+		console.log('showDescription', this.props.droplet.id, show);
 	}
 
 	render() {
@@ -43,8 +89,12 @@ class DropletComponent extends Component {
 			<button
 				id={this.props.droplet.id}
 				className={classes.join(' ')}
-				onClick={this.onClick}
-				ref={collectRef(this.props, ['droplet'], this.props.droplet.id)}>
+				onClick={this.onEvent}
+				onMouseEnter={this.onEvent}
+				onMouseLeave={this.onEvent}
+				onTouchStart={this.onEvent}
+				onTouchEnd={this.onEvent}
+				ref={this.refCollector.bind(this)}>
 				<span className="label">
 					<Icon glyph={dropletTypeToGlyphs[this.props.droplet.dropletType]}/>
 					{this.props.droplet.name}
@@ -57,9 +107,11 @@ class DropletComponent extends Component {
 DropletComponent.propTypes = {
 	active: PropTypes.bool,
 	settings: PropTypes.object.isRequired,
+	lib: PropTypes.object.isRequired,
+	refCollector: PropTypes.func.isRequired,
 	droplet: PropTypes.instanceOf(Droplet).isRequired,
 	onMount: PropTypes.func,
-	onClick: PropTypes.func
+	onEvent: PropTypes.func
 };
 
 export default DropletComponent;

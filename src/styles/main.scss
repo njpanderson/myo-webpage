@@ -23,6 +23,10 @@
 	border:0;
 }
 
+.hidden {
+	display: none;
+}
+
 /* main layout */
 body {
 	background-color: #fff;
@@ -42,3 +46,4 @@ body {
 @import 'components/Form';
 @import 'components/Icon';
 @import 'components/DragHandle';
+@import 'components/Tooltip';

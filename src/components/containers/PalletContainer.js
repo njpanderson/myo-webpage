@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 
+import actions from '../../state/actions';
 import Pallet from '../views/Pallet.jsx';
 
 const mapStateToProps = (state) => {
@@ -8,8 +9,30 @@ const mapStateToProps = (state) => {
 	};
 };
 
+const mapDispatchToProps = (dispatch, props) => {
+	return {
+		onDropletEvent: (event, droplet, data) => {
+			switch (event.type) {
+			case 'mouseenter':
+			case 'touchstart':
+				dispatch(actions.setTooltipContent(data.tooltip));
+				dispatch(actions.showTooltip(data.ref));
+				break;
+
+			case 'mouseleave':
+			case 'touchend':
+				dispatch(actions.hideTooltip());
+				break;
+			}
+
+			props.onDropletEvent(event, droplet, data);
+		}
+	};
+};
+
 const PalletContainer = connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(Pallet);
 
 export default PalletContainer;

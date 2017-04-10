@@ -577,16 +577,23 @@ UI.prototype = {
 		return this._data.drop_zones[id] || null;
 	},
 
-	_setUIPopperAttachment: function(attachment, element) {
+	_setUIPopperAttachment: function(attachment, element, options) {
 		var attached;
 
-		if (attachment && attachment.selector &&
-			(attached = document.querySelector(attachment.selector))) {
+		if (attachment instanceof window.HTMLElement) {
+			attached = attachment;
+		} else if (attachment && attachment.selector) {
+			attached = document.querySelector(attachment.selector);
+		}
+
+		if (attached) {
 			return new Popper(
 				attached,
 				element,
-				attachment.options
+				attachment.options || options
 			);
+		} else {
+			throw new Error('_setUIPopperAttachment: Attachment or selector could not be found.');
 		}
 	}
 };

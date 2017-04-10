@@ -11,14 +11,16 @@
 				"value": "My Light Show",
 				"required": true
 			}
-		}
+		},
+		"guidance": "<p>The header will appear at the top of the page.</p>"
 	},
 	{
-		"name": "Section",
+		"name": "Section class",
 		"dropletType": "attribute",
 		"key": "class",
 		"value": "board",
-		"attachmentIds": ["section_class"]
+		"attachmentIds": ["section_class"],
+		"guidance": "<p>A 'class' is a common way to tell the CSS how things on the page should look.</p>"
 	},
 	{
 		"name": "Letter button",
@@ -47,7 +49,8 @@
 				"placeholder": "A, B, C etc...",
 				"maxlength": 1
 			}
-		}
+		},
+		"guidance": "<p>Each letter button will be a single letter that will light up when you press its key on the keyboard.</p>"
 	},
 	{
 		"name": "Javascript",
@@ -57,6 +60,7 @@
 		"attrs": {
 			"src": "includes/js/main.js",
 			"type": "text/javascript"
-		}
+		},
+		"guidance": "<p>The JavaScript will make everything work together to display a light show.</p>"
 	}
 ]

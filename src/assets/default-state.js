@@ -29,6 +29,12 @@ export default {
 		active_droplet_id: '',
 
 		// stage the tour is at (from 1 - dialogs.tour.length)
-		tour_stage: null
+		tour_stage: null,
+
+		tooltip: {
+			show: false,
+			attachment: null,
+			content: ''
+		}
 	}
 };

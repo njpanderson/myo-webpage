@@ -1,10 +1,7 @@
 import React, { PropTypes } from 'react';
 
 import { GLYPHS, Icon } from '../views/Icon.jsx';
-
-function rawMarkup(html) {
-	return { __html: html };
-}
+import { rawMarkup } from '../../lib/utils';
 
 var DialogHeading = function(props) {
 	var notes = [],

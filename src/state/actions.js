@@ -63,5 +63,25 @@ export default {
 			type: actionTypes.SET_TOUR_STAGE,
 			stage
 		};
+	},
+
+	showTooltip: function(attachment) {
+		return {
+			type: actionTypes.SHOW_TOOLTIP,
+			attachment
+		};
+	},
+
+	hideTooltip: function() {
+		return {
+			type: actionTypes.HIDE_TOOLTIP
+		};
+	},
+
+	setTooltipContent: function(content) {
+		return {
+			type: actionTypes.SET_TOOLTIP_CONTENT,
+			content
+		};
 	}
 };

@@ -13,6 +13,9 @@
 
 	&[x-placement] .arrow {
 		position: absolute;
+		overflow: hidden;
+		width: 40px;
+		height: 40px;
 
 		&:before,
 		&:after {
@@ -29,8 +32,19 @@
 		}
 	}
 
+	&[x-placement^="top"] .arrow,
+	&[x-placement^="bottom"] .arrow {
+		height: 20px;
+	}
+
+	&[x-placement^="left"] .arrow,
+	&[x-placement^="right"] .arrow {
+		width: 20px;
+	}
+
 	&[x-placement^="top"] .arrow {
-		bottom: 0;
+		bottom: -20px;
+		margin-left: -10px;
 
 		&:before {
 			border-color: $dialog-bg-color transparent transparent transparent;
@@ -38,34 +52,37 @@
 
 		&:after {
 			left: -2px;
-			top: 0;
+			top: -1px;
 			border-color: $gray-dark transparent transparent transparent;
 		}
 	}
 
 	&[x-placement^="left"] .arrow {
-		right: 0;
+		right: -20px;
 
 		&:before {
 			border-color: transparent transparent transparent $dialog-bg-color;
 		}
 
 		&:after {
-			left: 0;
+			left: -1px;
 			top: -2px;
 			border-color: transparent transparent transparent $gray-dark;
 		}
 	}
 
 	&[x-placement^="right"] .arrow {
-		left: -40px;
+		left: -20px;
 
 		&:before {
+			left: auto;
+			right: 0;
 			border-color: transparent $dialog-bg-color transparent transparent;
 		}
 
 		&:after {
-			left: -4px;
+			left: auto;
+			right: -1px;
 			top: -2px;
 			border-color: transparent $gray-dark transparent transparent;
 		}
