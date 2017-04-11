@@ -53,10 +53,12 @@ class Canvas extends Component {
 						lib={this.props.lib}
 						/>
 					<div className="drag-handle"
-						onMouseDown={this.props.onDragHandlePress}
-						onMouseUp={this.props.onDragHandlePress}
-						onTouchStart={this.props.onDragHandlePress}
-						onTouchEnd={this.props.onDragHandlePress}
+						onMouseEnter={this.props.onDragHandleEvent}
+						onMouseLeave={this.props.onDragHandleEvent}
+						onMouseDown={this.props.onDragHandleEvent}
+						onMouseUp={this.props.onDragHandleEvent}
+						onTouchStart={this.props.onDragHandleEvent}
+						onTouchEnd={this.props.onDragHandleEvent}
 						ref={collectRef(this.props, 'drag_handle')}></div>
 					<View
 						settings={this.props.settings}
@@ -98,7 +100,7 @@ Canvas.propTypes = {
 	onAttachmentClick: PropTypes.func.isRequired,
 	onDropletEvent: PropTypes.func.isRequired,
 	onDropZoneEvent: PropTypes.func.isRequired,
-	onDragHandlePress: PropTypes.func.isRequired,
+	onDragHandleEvent: PropTypes.func.isRequired,
 	onButtonClick: PropTypes.func.isRequired,
 	refCollector: PropTypes.func.isRequired,
 	settings: PropTypes.object.isRequired,

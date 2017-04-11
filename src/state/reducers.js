@@ -111,6 +111,7 @@ function UI(state = default_state.UI, action) {
 				tooltip: {
 					show: true,
 					attachment: action.attachment,
+					options: action.options,
 					content: state.tooltip.content,
 					title: state.tooltip.title,
 					iconGlyph: state.tooltip.iconGlyph
@@ -121,6 +122,7 @@ function UI(state = default_state.UI, action) {
 				tooltip: {
 					show: false,
 					attachment: null,
+					options: null,
 					content: '',
 					title: '',
 					iconGlyph: ''

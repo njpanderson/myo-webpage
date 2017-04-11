@@ -7,7 +7,8 @@ export const GLYPHS = {
 	COMPASS: require('../../img/svg/compass.svg'),
 	LOOP_CIRCULAR: require('../../img/svg/loop-circular.svg'),
 	MEDIA_PLAY: require('../../img/svg/media-play.svg'),
-	LIGHTBULB: require('../../img/svg/lightbulb.svg')
+	LIGHTBULB: require('../../img/svg/lightbulb.svg'),
+	RESIZE_WIDTH: require('../../img/svg/resize-width.svg'),
 };
 
 export function Icon(props) {

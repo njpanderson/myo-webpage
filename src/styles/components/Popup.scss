@@ -3,6 +3,10 @@
 		margin-bottom: 20px;
 	}
 
+	&[x-placement^="bottom"] {
+		margin-top: 20px;
+	}
+
 	&[x-placement^="right"] {
 		margin-left: 20px;
 	}
@@ -54,6 +58,22 @@
 			left: -2px;
 			top: -1px;
 			border-color: $gray-dark transparent transparent transparent;
+		}
+	}
+
+	&[x-placement^="bottom"] .arrow {
+		top: -20px;
+		margin-left: -10px;
+
+		&:before {
+			top: -20px;
+			border-color: transparent transparent $dialog-bg-color transparent;
+		}
+
+		&:after {
+			left: -2px;
+			top: -21px;
+			border-color: transparent transparent $gray-dark transparent;
 		}
 	}
 

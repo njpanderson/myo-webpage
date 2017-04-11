@@ -6,6 +6,7 @@ import Popper from 'popper.js';
 import DragDrop from './DragDrop';
 import Communicator from './Communicator';
 import Tour from './Tour';
+import { GLYPHS } from '../components/views/Icon.jsx';
 
 import CanvasContainer from '../components/containers/CanvasContainer';
 
@@ -38,6 +39,9 @@ var UI = function(parent, settings, refs, data, store, template) {
 
 		// the drag handle position
 		dragHandlePosition: 0,
+
+		// has the drag handle been moved?
+		dragHandleMoved: false
 	};
 
 	this._comms = new Communicator('app', window.location.origin, {
@@ -97,7 +101,7 @@ UI.prototype = {
 					onAttachmentClick={this._handleAttachmentClick.bind(this)}
 					onDropletEvent={this._handleDropletEvent.bind(this)}
 					onDropZoneEvent={this._handleDropZoneEvent.bind(this)}
-					onDragHandlePress={this._handleDragHandleEvent.bind(this)}
+					onDragHandleEvent={this._handleDragHandleEvent.bind(this)}
 					onButtonClick={this._handleButtonClick.bind(this)}
 					lib={this.libraryMethods}/>
 			</Provider>,
@@ -351,9 +355,40 @@ UI.prototype = {
 		var width;
 
 		switch (event.type) {
+		case 'mouseenter':
+		case 'mouseleave':
+			if (!this._data.UI.dragHandleMoved) {
+				if (event.type === 'mouseenter') {
+					this._store.dispatch(actions.setTooltipContent(
+						'Drag handle',
+						'<b>Drag</b> this handle to resize the template and the view.' +
+							' <b>Press</b> to toggle the full page view.',
+						GLYPHS.RESIZE_WIDTH
+					));
+					this._store.dispatch(actions.showTooltip(
+						this._getReferencedElement('drag_handle'),
+						{
+							placement: 'left',
+							modifiers: {
+								flip: ['left', 'right']
+							}
+						}
+					));
+				} else {
+					this._store.dispatch(actions.hideTooltip());
+				}
+			}
+			break;
+
 		case 'dragmove':
 			// incrememt dragHandlePosition based on x delta from interact instance
 			this._data.UI.dragHandlePosition += event.dx;
+
+			if (!this._data.UI.dragHandleMoved) {
+				// remove the tooltip, in case it's still around
+				this._data.UI.dragHandleMoved = true;
+				this._store.dispatch(actions.hideTooltip());
+			}
 
 			// figure out handle position in % of the screen and convert it to percent,
 			// then send straight to _setTemplateViewRatio function
@@ -381,6 +416,9 @@ UI.prototype = {
 
 			// update metrics whenever we're stopping
 			this._handleWindowResize();
+
+			this._data.UI.dragHandleMoved = false;
+
 			break;
 		}
 	},

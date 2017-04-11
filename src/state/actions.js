@@ -65,10 +65,11 @@ export default {
 		};
 	},
 
-	showTooltip: function(attachment) {
+	showTooltip: function(attachment, options={}) {
 		return {
 			type: actionTypes.SHOW_TOOLTIP,
-			attachment
+			attachment,
+			options
 		};
 	},
 

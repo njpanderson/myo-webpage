@@ -26,8 +26,10 @@ class Tooltip extends Component {
 	}
 
 	updateAttachment() {
+		var options;
+
 		if (this.props.state.show) {
-			this.popper = this.props.attacher(this.props.state.attachment, this.ui.tooltip, {
+			options = Object.deepAssign({}, {
 				placement: 'top',
 				modifiers: {
 					flip: ['top', 'bottom'],
@@ -35,7 +37,9 @@ class Tooltip extends Component {
 						element: '.arrow'
 					}
 				}
-			});
+			}, this.props.state.options);
+
+			this.popper = this.props.attacher(this.props.state.attachment, this.ui.tooltip, options);
 		} else {
 			if (this.popper) {
 				this.popper.destroy();

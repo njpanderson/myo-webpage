@@ -22,7 +22,8 @@
 			@include font-size(18);
 			// color: $blue-dark;
 
-			svg {
+			.icon {
+				margin-right: .5em;
 				vertical-align: middle;
 				fill: $blue-dark;
 			}
