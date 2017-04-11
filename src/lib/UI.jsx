@@ -10,6 +10,7 @@ import Tour from './Tour';
 import CanvasContainer from '../components/containers/CanvasContainer';
 
 import actions from '../state/actions';
+import createDialogs from '../assets/dialogs';
 
 import { dialogModes, uiStates, messageCommands } from '../assets/constants';
 
@@ -23,6 +24,7 @@ var UI = function(parent, settings, refs, data, store, template) {
 	this._data = data;
 	this._store = store;
 	this._template = template;
+	this.dialogs = createDialogs(settings);
 
 	// UI class specific data entries
 	this._data.UI = {
@@ -462,6 +464,11 @@ UI.prototype = {
 
 			return true;
 		} else {
+			if (this.settings.dropZone.warnOnBadPlacement) {
+				this._showDialog(dialogModes.GENERAL, this.dialogs.dropletBadPlacement)
+					.then(this._hideDialog);
+			}
+
 			return false;
 		}
 	},

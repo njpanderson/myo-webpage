@@ -1,4 +1,4 @@
-import dialogs from '../assets/dialogs';
+import createDialogs from '../assets/dialogs';
 import { dialogModes } from '../assets/constants';
 import actions from '../state/actions';
 
@@ -8,7 +8,7 @@ var Tour = function(parent) {
 
 Tour.prototype = {
 	intro: function() {
-		return this._parent._showDialog(dialogModes.GENERAL, Tour.dialogs.intro)
+		return this._parent._showDialog(dialogModes.GENERAL, this._parent.dialogs.intro)
 			.then(this._parent._hideDialog.bind(this._parent));
 	},
 
@@ -25,7 +25,7 @@ Tour.prototype = {
 			index = (state.tour_stage !== null) ? (state.tour_stage + 1) : 0;
 		}
 
-		if ((Tour.dialogs.tour.length - 1) >= index) {
+		if ((this._parent.dialogs.tour.length - 1) >= index) {
 			this._setTourStage(index);
 			return this._showTourElement(index)
 				.then((data) => {
@@ -48,7 +48,7 @@ Tour.prototype = {
 	_showTourElement(index) {
 		return this._parent._showDialog(
 			dialogModes.TOUR,
-			Tour.dialogs.tour[index]
+			this._parent.dialogs.tour[index]
 		);
 	},
 
@@ -57,11 +57,6 @@ Tour.prototype = {
 			actions.setTourStage(stage)
 		);
 	}
-};
-
-Tour.dialogs = {
-	intro: dialogs.intro,
-	tour: dialogs.tour
 };
 
 export default Tour;

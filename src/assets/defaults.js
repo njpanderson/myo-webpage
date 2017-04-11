@@ -52,7 +52,8 @@ export default {
 		autoUpdate: false
 	},
 	dropZone: {
-		label: '...'
+		label: '...',
+		warnOnBadPlacement: true
 	},
 	toolbar: [{
 		label: (state) => {

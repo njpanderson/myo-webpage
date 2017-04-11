@@ -1,15 +1,17 @@
 import { expect } from 'chai';
 
 import { dialogModes, actionTypes } from '../../../src/assets/constants';
-import dialogs from '../../../src/assets/dialogs';
+import createDialogs from '../../../src/assets/dialogs';
+import defaults from '../../fixtures/default';
 import MockUI from '../../mocks/UI';
 
 describe('Tour', function() {
-	var stats = {},
+	var stats = {}, dialogs,
 		Tour, ui;
 
 	before(() => {
 		Tour = require('../../../src/lib/Tour').default;
+		dialogs = createDialogs(defaults);
 	});
 
 	beforeEach(() => {

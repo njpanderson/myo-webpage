@@ -18,7 +18,7 @@ import actions from './state/actions';
 import reducers from './state/reducers';
 
 import appDefaults from './assets/defaults';
-import dialogs from './assets/dialogs';
+import createDialogs from './assets/dialogs';
 import { dialogModes, uiStates, actionTypes, messageCommands } from './assets/constants';
 
 /*
@@ -28,6 +28,7 @@ import { dialogModes, uiStates, actionTypes, messageCommands } from './assets/co
 var App = function(settings = {}) {
 	this.settings = Object.deepAssign({}, App.defaults, settings);
 	this._init();
+	this.dialogs = createDialogs(this.settings);
 
 	// set Template.onElementRender to settings, if defined
 	if (settings.onElementRender) {
@@ -208,7 +209,7 @@ App.prototype = {
 	reset: function() {
 		this._requireUI();
 
-		this._UI._showDialog(dialogModes.GENERAL, dialogs.resetState)
+		this._UI._showDialog(dialogModes.GENERAL, this.dialogs.resetState)
 			.then(() => {
 				// clear all zones
 				this._store.dispatch(actions.zoneClearAllAttachments());
