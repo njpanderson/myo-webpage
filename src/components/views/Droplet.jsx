@@ -57,6 +57,10 @@ class DropletComponent extends Component {
 				if (this.props.droplet.guidance) {
 					this.tooltip_cache += this.props.droplet.guidance;
 				}
+
+				this.tooltip_cache += '<p>' +
+					('touchstart' in window ? 'Tap' : 'Click') +
+					' on the Droplet to place it in the template.</p>';
 			}
 		}
 

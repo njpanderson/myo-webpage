@@ -21,6 +21,7 @@ const mapDispatchToProps = (dispatch, props) => {
 
 			case 'mouseleave':
 			case 'touchend':
+			case 'click':
 				dispatch(actions.hideTooltip());
 				break;
 			}
