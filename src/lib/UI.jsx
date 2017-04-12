@@ -417,8 +417,6 @@ UI.prototype = {
 			// update metrics whenever we're stopping
 			this._handleWindowResize();
 
-			this._data.UI.dragHandleMoved = false;
-
 			break;
 		}
 	},
