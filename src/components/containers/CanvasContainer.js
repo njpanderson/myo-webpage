@@ -5,8 +5,7 @@ import Canvas from './Canvas.jsx';
 const mapStateToProps = (state) => {
 	return {
 		state: state.app,
-		active_droplet_id: state.UI.active_droplet_id,
-		state_tooltip: state.UI.tooltip
+		active_droplet_id: state.UI.active_droplet_id
 	};
 };
 

@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { collectRef } from '../../lib/utils';
 
 import View from '../views/View.jsx';
-import Tooltip from '../views/Tooltip.jsx';
+import Tooltip from './TooltipContainer';
 import Header from './HeaderContainer';
 import Template from './TemplateContainer';
 import Dialog from './DialogContainer';
@@ -82,8 +82,7 @@ class Canvas extends Component {
 					onButtonClick={this.props.onButtonClick}/>
 				<Tooltip
 					settings={this.props.settings}
-					attacher={this.props.lib.setUIPopperAttachment}
-					state={this.props.state_tooltip}/>
+					attacher={this.props.lib.setUIPopperAttachment}/>
 			</div>
 		);
 	}
