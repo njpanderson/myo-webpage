@@ -1,8 +1,13 @@
 header {
 	display: flex;
 	align-items: center;
+	border-bottom: 1px solid $gray-med;
 	padding: ($section-padding / 2) $section-padding;
-	border-bottom: 2px solid $gray-med;
+	background: linear-gradient(to bottom, lighten($gray-light, 2%) 0%, lighten($gray-light, 1%) 100%);
+
+	.logo {
+		margin-right: 1em;
+	}
 
 	.toolbar {
 		margin-left: auto;

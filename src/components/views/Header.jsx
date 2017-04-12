@@ -29,7 +29,7 @@ Header.propTypes = {
 	dialog_mode: PropTypes.string,
 
 	// from Canvas
-	children: PropTypes.object,
+	children: PropTypes.node,
 	settings: PropTypes.object.isRequired,
 	onButtonClick: PropTypes.func,
 	lib: PropTypes.object.isRequired

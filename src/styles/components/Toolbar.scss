@@ -14,7 +14,7 @@
 			&.separator {
 				margin-left: ($button_margin * 1.5);
 				padding-left: ($button_margin * 1.5) + $separator_width;
-				border-left: $separator_width solid $gray-light;
+				border-left: $separator_width solid $gray-med;
 			}
 
 			&.run .button {
@@ -36,5 +36,6 @@
 	.button {
 		font-weight: bolder;
 		@include font-size(14);
+		background-color: $white;
 	}
 }

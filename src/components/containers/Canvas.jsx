@@ -39,6 +39,7 @@ class Canvas extends Component {
 					onButtonClick={this.props.onButtonClick}
 					lib={this.props.lib}>
 					<h1 className="logo">&lt;<b>Tag</b>&gt;</h1>
+					<p>The webpage learning tool.</p>
 				</Header>
 
 				<div className="main">
