@@ -1,4 +1,7 @@
 .icon {
-	fill: $black;
 	pointer-events: none;
+
+	use {
+		fill: currentColor;
+	}
 }

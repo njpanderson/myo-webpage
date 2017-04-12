@@ -12,9 +12,11 @@ export const GLYPHS = {
 };
 
 export function Icon(props) {
+	var className = props.glyph.replace(/^#/, '');
+
 	return (
 		<svg className="icon" width={props.width} height={props.height}>
-			<use xlinkHref={props.glyph}/>
+			<use xlinkHref={props.glyph} className={className}/>
 		</svg>
 	);
 }
