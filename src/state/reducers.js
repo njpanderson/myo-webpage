@@ -29,6 +29,11 @@ function app(state = default_state.app, action) {
 			active
 		});
 
+	case actionTypes.COMPLETE_FIRST_DROP:
+		return Object.assign({}, state, {
+			first_valid_drop: true
+		});
+
 	default:
 		return state;
 	}

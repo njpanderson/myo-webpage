@@ -6,6 +6,7 @@ import Popper from 'popper.js';
 import DragDrop from './DragDrop';
 import Communicator from './Communicator';
 import Tour from './Tour';
+import Template from '../lib/Template';
 import { GLYPHS } from '../components/views/Icon.jsx';
 
 import CanvasContainer from '../components/containers/CanvasContainer';
@@ -470,6 +471,8 @@ UI.prototype = {
 	},
 
 	attachDropletToDropZone: function(droplet, drop_zone) {
+		var state;
+
 		// clear active droplet
 		this._store.dispatch(actions.setActiveDroplet(''));
 
@@ -487,6 +490,7 @@ UI.prototype = {
 
 						if (dialog) {
 							this._commitDropletIntoDropZone.apply(this, [dialog.data]);
+							this._postDropletAttachment(droplet, dialog.data);
 						}
 					});
 			} else {
@@ -496,6 +500,8 @@ UI.prototype = {
 					droplet.id,
 					droplet.data
 				);
+
+				this._postDropletAttachment(droplet, droplet.data);
 			}
 
 			return true;
@@ -506,6 +512,31 @@ UI.prototype = {
 			}
 
 			return false;
+		}
+	},
+
+	_postDropletAttachment: function(droplet, data) {
+		var state = this._store.getState(),
+			droplet_output;
+
+		if (!state.app.first_valid_drop &&
+			Object.keys(state.zones).length > 0) {
+			this._store.dispatch(actions.completeFirstDrop());
+
+			droplet_output = Template.entities(
+				Template.renderDroplet(
+					droplet,
+					Object.deepAssign({}, droplet.data, data),
+					null,
+					false
+				)
+			);
+
+			this._showDialog(
+				dialogModes.GENERAL,
+				this.dialogs.firstDropletDrop(droplet_output)
+			)
+				.then(this._hideDialog);
 		}
 	},
 

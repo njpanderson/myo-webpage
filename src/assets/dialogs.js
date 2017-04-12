@@ -61,6 +61,16 @@ export default function createDialogs(settings) {
 				'Remember, the target will be <span class="drop-zone accept"><span class="target"><b>green</b></span></span> when you can place the Droplet.'
 			]
 		},
+		firstDropletDrop: function(droplet_output) {
+			return {
+				title: 'Well done!',
+				message: [
+					'<code>' + droplet_output + '</code>',
+					'You’ve placed your <b>very first</b> Droplet onto the Template. Hurrah!',
+					'Press the <span class="pseudo-button run"><svg class="icon" width="14" height="14"><use xlink:href="#icon-media-play"></use></svg>Run</span> button to see how it looks.'
+				]
+			};
+		},
 		tour: [{
 			title: 'Welcome to <span class="logo">&lt;<b>Tag</b>&gt;</span>!',
 			message: [

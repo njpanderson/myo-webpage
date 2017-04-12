@@ -107,4 +107,15 @@
 			border-color: transparent $gray-dark transparent transparent;
 		}
 	}
+
+	code {
+		display: block;
+		box-shadow: $box-shadow-shallow;
+		margin: 1em 0;
+		width: 100%;
+		padding: 5px;
+		word-wrap: break-word;
+		@include font-size(12);
+		background-color: $bg-code;
+	}
 }

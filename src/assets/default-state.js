@@ -1,11 +1,12 @@
-import { uiStates, dialogModes, tourModes } from './constants.js';
+import { uiStates, dialogModes } from './constants.js';
 
 // default state for...
 export default {
 	// general application
 	app: {
 		ui_state: uiStates.INITIALISING,
-		active: false
+		active: false,
+		first_valid_drop: false
 	},
 
 	// active zones and current attachments

@@ -9,7 +9,8 @@ export const actionTypes = {
 	SET_TOUR_STAGE: 'set-tour-stage',
 	SHOW_TOOLTIP: 'show-tooltip',
 	HIDE_TOOLTIP: 'hide-tooltip',
-	SET_TOOLTIP_CONTENT: 'set-tooltip-content'
+	SET_TOOLTIP_CONTENT: 'set-tooltip-content',
+	COMPLETE_FIRST_DROP: 'complete-first-drop'
 };
 
 export const dialogModes = {

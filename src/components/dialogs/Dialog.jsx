@@ -43,7 +43,10 @@ class Dialog extends Component {
 
 	render() {
 		var Component,
-			classes = [this.props.settings.classes.dialog.main];
+			classes = [
+				this.props.settings.classes.dialog.main,
+				this.props.settings.classes.popup
+			];
 
 		if (this.props.mode !== dialogModes.NONE) {
 			classes.push(this.props.settings.classes.dialog.visible);

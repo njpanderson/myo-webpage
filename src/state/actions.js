@@ -8,6 +8,12 @@ export default {
 		};
 	},
 
+	completeFirstDrop: function() {
+		return {
+			type: actionTypes.COMPLETE_FIRST_DROP
+		};
+	},
+
 	setActiveDroplet: function(droplet_id) {
 		return {
 			type: actionTypes.SET_ACTIVE_DROPLET,
