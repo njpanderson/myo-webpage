@@ -2,6 +2,16 @@
  * The built in HTMLElement type. Used to define DOM compatible nodes of Element type.
  * @typedef HTMLElement
  */
+
+/**
+ * React's internal simulated event type. Exposes further properties for ease of development.
+ * @typedef ReactEvent
+ */
+
+/**
+ * A dialog Promise response.
+ * @typedef DialogPromise
+ */
 import { createStore } from 'redux';
 
 import './lib/polyfills';
@@ -232,8 +242,9 @@ App.prototype = {
 
 		this._UI._showDialog(dialogModes.GENERAL, this.dialogs.resetState)
 			.then(() => {
-				// clear all zones
+				// clear all zones and reset the app
 				this._store.dispatch(actions.zoneClearAllAttachments());
+				this._store.dispatch(actions.resetApp());
 
 				// clear view
 				this._UI._comms.send('view', {

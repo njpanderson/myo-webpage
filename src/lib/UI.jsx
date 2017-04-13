@@ -113,9 +113,7 @@ UI.prototype = {
 	/**
 	 * @param {string} mode - One of the dialogModes modes.
 	 * @param {mixed} data - Relevant data to store for the dialog to use.
-	 * @param {function} [onDialogComplete] - Function to invoke on dialog completion.
-	 * @param {function} [onDialogCancel] - Function to invoke on dialog cancellation.
-	 * @returns {mixed} undefined, or a Promise in the case that neither callback is defined.
+	 * @returns {DialogPromise} a Promise which will resolve with the dialog results.
 	 * @description
 	 *	Displays a dialog element. In this case that no callbacks (`onDialogComplete` or
 	 * `onDialogCancel` are defined, a Promise is returned, the resolve/reject methods
@@ -154,6 +152,9 @@ UI.prototype = {
 	},
 
 	/**
+	 * @param {string} collection - The element's collection name.
+	 * @param {HTMLElement} element - The element being collected.
+	 * @param {string} key - The collection's key name.
 	 * Element reference collector. Collects DOM elements from React components.
 	 * Bind an element reference using the ref attribute and collectRef from utils.js
 	 * @private
@@ -173,6 +174,9 @@ UI.prototype = {
 	},
 
 	/**
+	 * @param {string} collection - The element's collection name.
+	 * @param {string} key - The collection's key name.
+	 * @description
 	 * Captures mount events from React components by collection/key identifiers.
 	 * Identifiers are the same as the ones stored with App#_refCollector
 	 * @private
@@ -234,6 +238,11 @@ UI.prototype = {
 	},
 
 	/**
+	 * @param {string} type - Either 'drag' or 'drop'.
+	 * @param {string} collection - The ref collection.
+	 * @param {string} key - The ref key, within the collection.
+	 * @param {ojbect} settings - The settings for the interaction.
+	 * @description
 	 * Queues a drag/drop DOM binding till the mount event for the Canvas component.
 	 * This is done because the canvas is relied upon as the container for dragging.
 	 * @private
@@ -248,6 +257,11 @@ UI.prototype = {
 		}
 	},
 
+	/**
+	 * Processes queued up drag/drop bindings created by UI#_queueDragDropBindings.
+	 * @param {array} [queue] - The bindings queue.
+	 * @private
+	 */
 	_setDragDropBindings: function(queue = this.queues.dragdropBindings) {
 		// bind dragDrop handlers to the elements in the queue
 		this._data.UI.dragdrop.droplets = new DragDrop(
@@ -296,6 +310,13 @@ UI.prototype = {
 		return this.attachDropletToDropZone(droplet, drop_zone);
 	},
 
+	/**
+	 * Handle a click on a Drop Zone attachment item. May produce an editor window.
+	 * @param {Droplet} droplet - The Droplet.
+	 * @param {DropZone} drop_zone - The Drop Zone.
+	 * @param {number} attachment_index - The Drop Zone's attachment index, if it applies.
+	 * @private
+	 */
 	_handleAttachmentClick: function(droplet, drop_zone, attachment_index) {
 		var state = this._store.getState();
 
@@ -323,6 +344,12 @@ UI.prototype = {
 		}
 	},
 
+	/**
+	 * Handles events being fired from a Droplet
+	 * @param {ReactEvent} event - The event object.
+	 * @param {Droplet} droplet - The Droplet.
+	 * @private
+	 */
 	_handleDropletEvent: function(event, droplet) {
 		var state;
 
@@ -337,6 +364,12 @@ UI.prototype = {
 		}
 	},
 
+	/**
+	 * Handles events being fired from a Drop Zone.
+	 * @param {ReactEvent} event - The event object.
+	 * @param {DropZone} drop_zone - The Drop Zone.
+	 * @private
+	 */
 	_handleDropZoneEvent: function(event, drop_zone) {
 		var state = this._store.getState(),
 			droplet;
@@ -349,7 +382,8 @@ UI.prototype = {
 	},
 
 	/**
-	 * Handles events from the drag handle (between template and view containers)
+	 * Handles events from the drag handle (between template and view containers).
+	 * @param {ReactEvent} event - The event object.
 	 * @private
 	 */
 	_handleDragHandleEvent: function(event) {
@@ -422,6 +456,10 @@ UI.prototype = {
 		}
 	},
 
+	/**
+	 * Updates various metrics when the window has been resized
+	 * @private
+	 */
 	_handleWindowResize: function() {
 		this._data.UI.drag_handle_x = (this._getReferencedElement('drag_handle')).offsetLeft;
 		this._data.UI.vp_width =
@@ -431,6 +469,11 @@ UI.prototype = {
 		this._data.UI.dragHandlePosition = 0;
 	},
 
+	/**
+	 * Generically handles the click of any button within the UI.
+	 * @param {HTMLElement} button - The button being clicked.
+	 * @param {ReactEvent} event - The event object.
+	 */
 	_handleButtonClick: function(button, event) {
 		var offset = {},
 			rect, circle;
@@ -466,13 +509,22 @@ UI.prototype = {
 		this._refs.components.view.style.flexBasis = Math.abs(ratio - 100) + '%';
 	},
 
+	/**
+	 * Checks to see if a Droplet drop on a Drop Zone is valid. I.e. it can be dropped.
+	 * @param {Droplet} droplet - The Droplet being dropped.
+	 * @param {DropZone} drop_zone - The Drop Zone being dropped into.
+	 * @private
+	 */
 	_isValidDrop: function(droplet, drop_zone) {
 		return drop_zone.willAccept(droplet, this._store);
 	},
 
+	/**
+	 * Optionally displays an editing dialog and then attaches the Droplet to a Drop Zone.
+	 * @param {Droplet} droplet - The Droplet to attach
+	 * @param {DropZone} drop_zone - The Drop Zone to attach it to.
+	 */
 	attachDropletToDropZone: function(droplet, drop_zone) {
-		var state;
-
 		// clear active droplet
 		this._store.dispatch(actions.setActiveDroplet(''));
 
@@ -515,14 +567,25 @@ UI.prototype = {
 		}
 	},
 
+	/**
+	 * Perform actions after Droplet attachment.
+	 * @param {Droplet} droplet - The Droplet instance.
+	 * @param {object} data - The Droplet data to be set into the Drop Zone.
+	 * @private
+	 */
 	_postDropletAttachment: function(droplet, data) {
 		var state = this._store.getState(),
-			droplet_output;
+			keys = Object.keys(state.zones),
+			notice = false,
+			key, droplet_output;
 
-		if (!state.app.first_valid_drop &&
-			Object.keys(state.zones).length > 0) {
+		// should we display a "first droplet" notice?
+		if (this.settings.dropZone.noticeOnFirstPlacement &&
+			(!state.app.first_valid_drop && keys.length > 0)) {
+			// set first droplet state
 			this._store.dispatch(actions.completeFirstDrop());
 
+			// format the droplet for display
 			droplet_output = Template.entities(
 				Template.renderDroplet(
 					droplet,
@@ -532,14 +595,48 @@ UI.prototype = {
 				)
 			);
 
+			// show dialog
 			this._showDialog(
 				dialogModes.GENERAL,
 				this.dialogs.firstDropletDrop(droplet_output)
 			)
 				.then(this._hideDialog);
 		}
+
+		// should we display a "last droplet" notice?
+		if (this.settings.dropZone.noticeOnLastPlacement &&
+			(!state.app.last_valid_drop && keys.length === this._data.pallet.length)) {
+			notice = true;
+
+			// check zones all have placements
+			for (key in state.zones) {
+				if (state.zones[key].attachments.length === 0) {
+					notice = false;
+					break;
+				}
+			}
+
+			if (notice) {
+				// show set last drop state
+				this._store.dispatch(actions.completeLastDrop());
+
+				// show dialog
+				this._showDialog(
+					dialogModes.GENERAL,
+					this.dialogs.lastDropletDrop
+				)
+					.then(this._hideDialog);
+			}
+		}
 	},
 
+	/**
+	 * @param {object} data - The Droplet data to be set into the Drop Zone.
+	 * @description
+	 * Called after editing dialog has been completed, either adds a new
+	 * Drop Zone attachment or edits an existing one.
+	 * @private
+	 */
 	_commitDropletIntoDropZone: function(data) {
 		var dialog = (this._store.getState()).UI.dialog;
 
@@ -563,6 +660,12 @@ UI.prototype = {
 		}
 	},
 
+	/**
+	 * Adds a Drop Zone attachment.
+	 * @param {string} zone_id - The Drop Zone ID.
+	 * @param {string} droplet_id - The Droplet ID.
+	 * @param {object} data - The droplet data to be set into the Drop Zone.
+	 */
 	zoneAddAttachment: function(zone_id, droplet_id, data) {
 		this._store.dispatch(actions.zoneAddAttachment(
 			zone_id,
@@ -576,6 +679,12 @@ UI.prototype = {
 		}
 	},
 
+	/**
+	 * Edits an existing Drop Zone attachment at `attachment_index` index.
+	 * @param {string} zone_id - The Drop Zone ID.
+	 * @param {number} attachment_index - The existing attachment index.
+	 * @param {object} data - The new droplet data to be replaced into the Drop Zone.
+	 */
 	zoneEditAttachment: function(zone_id, attachment_index, data) {
 		this._store.dispatch(actions.zoneEditAttachment(
 			zone_id,
@@ -588,6 +697,11 @@ UI.prototype = {
 		}
 	},
 
+	/**
+	 * Detaches a Droplet attachment from a Drop Zone by its `attachment_index` index.
+	 * @param {string} zone_id - Drop Zone ID.
+	 * @param {number} attachment_index - The existing attachment index.
+	 */
 	zoneDetachAttachment: function(zone_id, attachment_index) {
 		this._store.dispatch(actions.zoneDetachAttachment(
 			zone_id,
@@ -596,7 +710,9 @@ UI.prototype = {
 	},
 
 	/**
-	 * Retrieve a zone's attachment (by index)
+	 * Retrieve a zone's attachment by its `attachment_index` index.
+	 * @param {string} zone_id - Drop Zone ID.
+	 * @param {number} attachment_index - The existing attachment index.
 	 */
 	zoneGetAttachment: function(zone_id, attachment_index) {
 		var zone,
@@ -613,6 +729,9 @@ UI.prototype = {
 		return null;
 	},
 
+	/**
+	 * Sends a message to the View frame for updating.
+	 */
 	_updateView: function() {
 		var state = this._store.getState();
 
@@ -643,16 +762,34 @@ UI.prototype = {
 		}
 	},
 
+	/**
+	 * Retrieves a Droplet instance by its ID.
+	 * @param {string} id - ID of the Droplet to retrieve.
+	 */
 	getDropletById: function(id) {
 		return this._data.pallet.find((element) => {
 			return element.id === id;
 		});
 	},
 
+	/**
+	 * Retrieves a Drop Zone instance by its ID.
+	 * @param {string} id - ID of the Drop Zone to retrieve.
+	 */
 	getDropZoneById: function(id) {
 		return this._data.drop_zones[id] || null;
 	},
 
+	/**
+	 * @param {HTMLElement} attachment - The element to attach to.
+	 * @param {HTMLElement} element - The element being attached.
+	 * @param {object} options - The popper `options` object (see link).
+	 * @description
+	 * Using 'popper', sets the an attachment from the `attachment` node to an `element`
+	 * defining the "popup" to be displayed.
+	 * @see https://popper.js.org/popper-documentation.html#new_Popper_new
+	 * @private
+	 */
 	_setUIPopperAttachment: function(attachment, element, options) {
 		var attached;
 

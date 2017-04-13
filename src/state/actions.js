@@ -8,9 +8,21 @@ export default {
 		};
 	},
 
+	resetApp: function() {
+		return {
+			type: actionTypes.RESET_APP
+		};
+	},
+
 	completeFirstDrop: function() {
 		return {
 			type: actionTypes.COMPLETE_FIRST_DROP
+		};
+	},
+
+	completeLastDrop: function() {
+		return {
+			type: actionTypes.COMPLETE_LAST_DROP
 		};
 	},
 

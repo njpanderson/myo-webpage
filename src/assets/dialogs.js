@@ -71,6 +71,13 @@ export default function createDialogs(settings) {
 				]
 			};
 		},
+		lastDropletDrop: {
+			title: 'Well done!',
+			message: [
+				'You’ve placed at <b>least one Droplet</b> on every target in the template. Yippee!',
+				'Why not try the <span class="pseudo-button run"><svg class="icon" width="14" height="14"><use xlink:href="#icon-media-play"></use></svg>Run</span> button to see how it looks?'
+			]
+		},
 		tour: [{
 			title: 'Welcome to <span class="logo">&lt;<b>Tag</b>&gt;</span>!',
 			message: [

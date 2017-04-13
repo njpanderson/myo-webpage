@@ -10,7 +10,9 @@ export const actionTypes = {
 	SHOW_TOOLTIP: 'show-tooltip',
 	HIDE_TOOLTIP: 'hide-tooltip',
 	SET_TOOLTIP_CONTENT: 'set-tooltip-content',
-	COMPLETE_FIRST_DROP: 'complete-first-drop'
+	COMPLETE_FIRST_DROP: 'complete-first-drop',
+	COMPLETE_LAST_DROP: 'complete-last-drop',
+	RESET_APP: 'reset-app'
 };
 
 export const dialogModes = {

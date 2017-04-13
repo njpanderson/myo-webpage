@@ -53,7 +53,9 @@ export default {
 	},
 	dropZone: {
 		label: '...',
-		warnOnBadPlacement: true
+		warnOnBadPlacement: true,
+		noticeOnFirstPlacement: true,
+		noticeOnLastPlacement: true
 	},
 	toolbar: [{
 		label: (state) => {

@@ -6,7 +6,8 @@ export default {
 	app: {
 		ui_state: uiStates.INITIALISING,
 		active: false,
-		first_valid_drop: false
+		first_valid_drop: false,
+		last_valid_drop: false
 	},
 
 	// active zones and current attachments

@@ -12,7 +12,7 @@ var dialog_id = 0,
  * @private
  */
 function app(state = defaultState.app, action) {
-	var active, newstate;
+	var active, newstate, key;
 
 	switch (action.type) {
 	// set ui state
@@ -32,16 +32,29 @@ function app(state = defaultState.app, action) {
 			active
 		});
 
-		storeState(newstate, 'app');
-		return newstate;
+		return storeState(newstate, 'app');
 
-	case actionTypes.COMPLETE_FIRST_DROP:
+	case actionTypes.RESET_APP:
 		newstate = Object.assign({}, state, {
-			first_valid_drop: true
+			first_valid_drop: false,
+			last_valid_drop: false
 		});
 
-		storeState(newstate, 'app');
-		return newstate;
+		return storeState(newstate, 'app');
+
+	case actionTypes.COMPLETE_FIRST_DROP:
+	case actionTypes.COMPLETE_LAST_DROP:
+		if (action.type === actionTypes.COMPLETE_FIRST_DROP) {
+			newstate = Object.assign({}, state, {
+				first_valid_drop: true
+			});
+		} else {
+			newstate = Object.assign({}, state, {
+				last_valid_drop: true
+			});
+		}
+
+		return storeState(newstate, 'app');
 
 	default:
 		return state;
@@ -95,9 +108,7 @@ function zones(state = defaultState.zones, action) {
 		return state;
 	}
 
-	storeState(zones, 'zones');
-
-	return zones;
+	return storeState(zones, 'zones');
 }
 
 /**
@@ -182,6 +193,8 @@ function storeState(state, key) {
 	new_state.UI = null;
 
 	storage.set('state', new_state);
+
+	return state;
 }
 
 
