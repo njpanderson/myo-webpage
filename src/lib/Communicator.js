@@ -1,26 +1,4 @@
-var localStorage = window.localStorage,
-	JSON = JSON || window.JSON;
-
-/**
- * from https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
- */
-const checkStorage = function(type) {
-	try {
-		var storage = window[type],
-			x = '__tag_storage_test__';
-		storage.setItem(x, x);
-		storage.removeItem(x);
-		return true;
-	} catch(e) {
-		return false;
-	}
-};
-
 var Communicator = function(id, origin, callbacks = {}) {
-	if (!checkStorage('localStorage')) {
-		return false;
-	}
-
 	if (typeof id !== 'string') {
 		throw new Error('Please choose a string-based ID for the guest.');
 	}
@@ -65,7 +43,6 @@ Communicator.prototype = {
 		}
 
 		if (node) {
-			// console.log(this.id + ' >> ping!');
 			this._post(node, ping);
 		}
 	},
@@ -75,7 +52,6 @@ Communicator.prototype = {
 			pong: this.id
 		});
 
-		// console.log('pong! << ' + this.id);
 		this._post(node, pong);
 	},
 
@@ -193,18 +169,12 @@ Communicator.prototype = {
 	_getGuestByNode: function(node) {
 		var id;
 
-		// console.group('_getGuestByNode');
-		// console.log('finding', node);
-
 		for (id in this._guests) {
-			// console.log(id, this._guests[id], (this._guests[id].node === node));
 			if (this._guests.hasOwnProperty(id) &&
 				this._guests[id].node === node) {
-				// console.log('node found!', id);
 				return this._getGuestById(id);
 			}
 		}
-		// console.groupEnd();
 
 		return null;
 	},
@@ -245,15 +215,13 @@ Communicator.prototype = {
 			message = event.data,
 			guest;
 
-		// console.group('_receiveMessage');
-		// console.log('to "' + this.id + '":', event.data);
 		if (origin !== location.origin)
 			return;
 
 		if ((message.ping || message.pong) && this._getGuestByNode(source)) {
 			// received a ping/pong from valid source
 			guest = message.ping || message.pong;
-			// console.log(this.id, 'setting guest "', guest, '" live');
+
 			this._setGuestLive(guest);
 			this._sendQueue(guest);
 
@@ -266,8 +234,6 @@ Communicator.prototype = {
 		if (this._callbacks.message && message.originalMessage) {
 			this._callbacks.message(message.originalMessage);
 		}
-
-		// console.groupEnd();
 	},
 
 	_setGuestLive: function(id) {
