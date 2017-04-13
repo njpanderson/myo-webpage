@@ -30,8 +30,6 @@
 		}
 	}
 
-	&:hover .label,
-	&:active .label,
 	&.active .label {
 		color: $white;
 		background-color: $gray-dark;
@@ -51,9 +49,12 @@
 			border-color: $color-type-text;
 		}
 
-		&:hover .label,
-		&:active .label,
+		&:hover .label {
+			color: $color-type-text;
+		}
+
 		&.active .label {
+			color: $white;
 			border-color: $color-type-text-active;
 			background-color: $color-type-text-active;
 		}
@@ -64,9 +65,12 @@
 			border-color: $color-type-attribute;
 		}
 
-		&:hover .label,
-		&:active .label,
+		&:hover .label {
+			color: $color-type-attribute;
+		}
+
 		&.active .label {
+			color: $white;
 			border-color: $color-type-attribute-active;
 			background-color: $color-type-attribute-active;
 		}
@@ -77,9 +81,12 @@
 			border-color: $color-type-element;
 		}
 
-		&:hover .label,
-		&:active .label,
+		&:hover .label {
+			color: $color-type-element;
+		}
+
 		&.active .label {
+			color: $white;
 			border-color: $color-type-element-active;
 			background-color: $color-type-element-active;
 		}
