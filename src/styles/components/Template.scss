@@ -1,7 +1,15 @@
 .template {
-	overflow: auto;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
 	border-right: 1px solid $gray-med;
+	// min-height is set to fix FireFox's handling of Pre elements within flex containers
+	min-height: 0;
 	background-color: $bg-code;
+
+	.template-inner {
+		overflow: auto;
+	}
 
 	pre {
 		margin: $section-padding;
@@ -22,5 +30,14 @@
 		.drop-zone .hljs-string {
 			color: white;
 		}
+	}
+
+	.instruction {
+		display: block;
+		flex-shrink: 0;
+		margin: 0;
+		padding: 5px;
+		color: $white;
+		background-color: $blue-dark;
 	}
 }

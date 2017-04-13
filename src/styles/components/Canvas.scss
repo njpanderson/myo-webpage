@@ -18,6 +18,8 @@
 	.main {
 		display: flex;
 		flex-grow: 1;
+		// min-height is set to fix FireFox's handling of Pre elements within flex containers
+		min-height: 0;
 
 		> *:not(.drag-handle) {
 			flex-basis: 50%;

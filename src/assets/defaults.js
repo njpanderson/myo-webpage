@@ -18,6 +18,10 @@ export default {
 		button_animate: 'animate',
 		popup: 'popup',
 		tooltip: 'tooltip',
+		template: {
+			node: 'template',
+			inner: 'template-inner'
+		},
 		droplet: {
 			node: 'droplet',
 			active: 'active',

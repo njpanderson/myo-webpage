@@ -18,9 +18,11 @@ $white: #fff;
 $gray-dark: #a0a0a0;
 $gray-med: #ccc;
 $gray-light: #eee;
-$blue: #5d6bec;
-$blue-dark: darken($blue, $darken-factor);
+$blue: #6172ec;
+$blue-dark: darken($blue, ($darken-factor / .75));
 $red: #ff515c;
+$teal: #2f9ed8;
+$teal-dark: darken($teal, $darken-factor);
 $green: #51cc4d;
 $green-dark: darken($green, $darken-factor);
 $purple: #c044f1;
@@ -35,8 +37,8 @@ $button-danger-color: $red;
 $dialog-bg-color: lighten($gray-light, $lighten-factor);
 
 // droplet types
-$color-type-text: $blue;
-$color-type-text-active: $blue-dark;
+$color-type-text: $teal;
+$color-type-text-active: $teal-dark;
 $color-type-attribute: $green;
 $color-type-attribute-active: $green-dark;
 $color-type-element: $purple;

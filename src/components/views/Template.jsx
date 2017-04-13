@@ -91,16 +91,27 @@ class Template extends Component {
 		return children;
 	}
 
+	getInstruction() {
+		if (this.props.activeDropletID != '') {
+			return (
+				<p className="instruction">Choose a target for the droplet...</p>
+			);
+		}
+	}
+
 	render() {
 		return (
-			<section className="template"
+			<section className={this.props.settings.classes.template.node}
 				ref={collectRef(this.props, 'template')}>
-				<pre>
-					<code className="html"
-						ref={collectRef(this.props, 'template_inner')}>
-						{this.getTemplate()}
-					</code>
-				</pre>
+				{this.getInstruction()}
+				<div className={this.props.settings.classes.template.inner}>
+					<pre>
+						<code className="html"
+							ref={collectRef(this.props, 'template_inner')}>
+							{this.getTemplate()}
+						</code>
+					</pre>
+				</div>
 			</section>
 		);
 	}
