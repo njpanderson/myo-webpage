@@ -13,11 +13,14 @@ import { GLYPHS } from './components/views/Icon.jsx';
 import Droplet from './lib/Droplet';
 import request from './lib/ajax';
 import Template from './lib/Template';
+import Storage from './lib/Storage';
+import { structCompare } from './lib/utils';
 
 import actions from './state/actions';
 import reducers from './state/reducers';
 
 import appDefaults from './assets/defaults';
+import defaultState from './assets/default-state';
 import createDialogs from './assets/dialogs';
 import { dialogModes, uiStates, actionTypes, messageCommands } from './assets/constants';
 
@@ -29,6 +32,7 @@ var App = function(settings = {}) {
 	this.settings = Object.deepAssign({}, App.defaults, settings);
 	this._init();
 	this.dialogs = createDialogs(this.settings);
+	this.storage = new Storage('tag_app');
 
 	// set Template.onElementRender to settings, if defined
 	if (settings.onElementRender) {
@@ -52,8 +56,7 @@ App.prototype = {
 		// app data store (not stateful)
 		this._data = {
 			template: '',
-			pallet: [],
-			tempCallbacks: {}
+			pallet: []
 		};
 
 		// templates module
@@ -77,35 +80,44 @@ App.prototype = {
 				return this._loadPallet(pallet);
 			})
 			.then(() => {
-				var stored_state = false;
+				var stored_state = this.storage.get('state', undefined);
 
-				// create state store
-				if (stored_state) {
-					// app state store - from session
-					// !TODO
+				if (stored_state !== undefined &&
+					typeof stored_state === 'object') {
+					// stored state exists - reset UI (which is non-persistant)
+					stored_state.UI = {};
+					stored_state.UI = defaultState.UI;
+
+					if (!this._validate_state(stored_state)) {
+						// reset stored_state back to undefined if  it's not valid
+						stored_state = undefined;
+					}
 				} else {
-					// app state store - default
-					this._store = createStore(
-						reducers,
-						undefined,
-						(
-							typeof window !== 'undefined' &&
-							window.__REDUX_DEVTOOLS_EXTENSION__ &&
-							window.__REDUX_DEVTOOLS_EXTENSION__({
-								// black list all session-based non persistant actions
-								// (some of which contain unserialisable objects)
-								actionsBlacklist: [
-									actionTypes.SET_ACTIVE_DROPLET,
-									actionTypes.SET_DIALOG_MODE,
-									actionTypes.SET_TOUR_STAGE,
-									actionTypes.SHOW_TOOLTIP,
-									actionTypes.HIDE_TOOLTIP,
-									actionTypes.SET_TOOLTIP_CONTENT
-								]
-							})
-						)
-					);
+					// reset back to undefined
+					stored_state = undefined;
 				}
+
+				// app state store - default
+				this._store = createStore(
+					reducers,
+					stored_state,
+					(
+						typeof window !== 'undefined' &&
+						window.__REDUX_DEVTOOLS_EXTENSION__ &&
+						window.__REDUX_DEVTOOLS_EXTENSION__({
+							// black list all session-based non persistant actions
+							// (some of which contain unserialisable objects)
+							actionsBlacklist: [
+								actionTypes.SET_ACTIVE_DROPLET,
+								actionTypes.SET_DIALOG_MODE,
+								actionTypes.SET_TOUR_STAGE,
+								actionTypes.SHOW_TOOLTIP,
+								actionTypes.HIDE_TOOLTIP,
+								actionTypes.SET_TOOLTIP_CONTENT
+							]
+						})
+					)
+				);
 
 				// activate the UI
 				this._UI = new UI(
@@ -120,6 +132,7 @@ App.prototype = {
 				// render
 				this._UI.render();
 
+				// set active state
 				this._store.dispatch(actions.setUIState(uiStates.ACTIVE));
 			})
 			.catch((error) => {
@@ -161,6 +174,14 @@ App.prototype = {
 			.catch((error) => {
 				throw error;
 			});
+	},
+
+	/**
+	 * Validates a state object by comparing it to the default state.
+	 * @private
+	 */
+	_validate_state: function(state) {
+		return structCompare(state, defaultState);
 	},
 
 	/**

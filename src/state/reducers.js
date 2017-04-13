@@ -1,15 +1,18 @@
-import default_state from '../assets/default-state';
-import { actionTypes, uiStates, tourModes } from '../assets/constants';
-
 import { combineReducers } from 'redux';
 
-var dialog_id = 0;
+import defaultState from '../assets/default-state';
+import { actionTypes, uiStates, tourModes } from '../assets/constants';
+import Storage from '../lib/Storage';
+
+var dialog_id = 0,
+	storage = new Storage('tag_app');
 
 /**
- * Sets application state values
+ * Sets application state values.
+ * @private
  */
-function app(state = default_state.app, action) {
-	var active;
+function app(state = defaultState.app, action) {
+	var active, newstate;
 
 	switch (action.type) {
 	// set ui state
@@ -24,15 +27,21 @@ function app(state = default_state.app, action) {
 			active = false;
 		}
 
-		return Object.assign({}, state, {
+		newstate = Object.assign({}, state, {
 			ui_state: action.ui_state,
 			active
 		});
 
+		storeState(newstate, 'app');
+		return newstate;
+
 	case actionTypes.COMPLETE_FIRST_DROP:
-		return Object.assign({}, state, {
+		newstate = Object.assign({}, state, {
 			first_valid_drop: true
 		});
+
+		storeState(newstate, 'app');
+		return newstate;
 
 	default:
 		return state;
@@ -41,8 +50,9 @@ function app(state = default_state.app, action) {
 
 /**
  * Sets drop zone state values
+ * @private
  */
-function zones(state = default_state.zones, action) {
+function zones(state = defaultState.zones, action) {
 	var zones = Object.assign({}, state);
 
 	switch (action.type) {
@@ -78,16 +88,25 @@ function zones(state = default_state.zones, action) {
 		break;
 
 	case actionTypes.ZONE_CLEAR_ALL_ATTACHMENTS:
-		return {};
+		zones = {};
+		break;
 
 	default:
 		return state;
 	}
 
+	storeState(zones, 'zones');
+
 	return zones;
 }
 
-function UI(state = default_state.UI, action) {
+/**
+ * Sets UI state values. This state collection is non persistant and will not be stored
+ * within local/session storage. Due to that fact, it is safe to place circular references,
+ * functions and large quantities of data in here.
+ * @private
+ */
+function UI(state = defaultState.UI, action) {
 	switch (action.type) {
 	case actionTypes.SET_DIALOG_MODE:
 		return Object.assign({}, state, {
@@ -149,6 +168,22 @@ function UI(state = default_state.UI, action) {
 		return state;
 	}
 }
+
+/**
+ * Stores state into local/session storage for recall on reloading the app.
+ * @private
+ */
+function storeState(state, key) {
+	var current_state = storage.get('state'),
+		new_state;
+
+	new_state = Object.assign({}, defaultState, current_state);
+	new_state[key] = Object.assign({}, state);
+	new_state.UI = null;
+
+	storage.set('state', new_state);
+}
+
 
 export default combineReducers({
 	app,
