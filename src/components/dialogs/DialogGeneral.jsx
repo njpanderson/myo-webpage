@@ -12,7 +12,10 @@ class DialogGeneral extends Component {
 
 	render() {
 		var buttons = this.props.data.buttons,
-			classes = [this.props.settings.classes.dialog.container];
+			classes = [
+				this.props.settings.classes.dialog.container,
+				this.props.settings.classes.popup
+			];
 
 		if (!buttons || !buttons.length) {
 			buttons = [{

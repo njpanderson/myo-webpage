@@ -44,8 +44,7 @@ class Dialog extends Component {
 	render() {
 		var Component,
 			classes = [
-				this.props.settings.classes.dialog.main,
-				this.props.settings.classes.popup
+				this.props.settings.classes.dialog.main
 			];
 
 		if (this.props.mode !== dialogModes.NONE) {

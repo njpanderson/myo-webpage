@@ -139,7 +139,10 @@ class DialogEditDroplet extends Component {
 	render() {
 		var fieldsets = this.getFieldsets(),
 			buttons = [],
-			classes = [this.props.settings.classes.dialog.container],
+			classes = [
+				this.props.settings.classes.dialog.container,
+				this.props.settings.classes.popup
+			],
 			title, notes;
 
 		classes.push('droplet-' + this.droplet.dropletType);
