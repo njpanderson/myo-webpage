@@ -59,7 +59,7 @@ class DropletComponent extends Component {
 				}
 
 				this.tooltip_cache += '<p>' +
-					('touchstart' in window ? 'Tap' : 'Click') +
+					('ontouchstart' in window ? 'Tap' : 'Click') +
 					' on the Droplet to place it in the template.</p>';
 			}
 		}
