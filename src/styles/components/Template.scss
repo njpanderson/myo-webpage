@@ -3,8 +3,6 @@
 	flex-direction: column;
 	overflow: hidden;
 	border-right: 1px solid $gray-med;
-	// min-height is set to fix FireFox's handling of Pre elements within flex containers
-	min-height: 0;
 	background-color: $bg-code;
 
 	.template-inner {

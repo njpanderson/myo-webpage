@@ -18,6 +18,9 @@ time, mark, audio, video {
 	font-size:100%;
 	vertical-align:baseline;
 	background:transparent;
+	// min-x is set to adjust FireFox's default handling of elements within flex containers
+	min-height: 0;
+	min-width: 0;
 }
 
 body {
