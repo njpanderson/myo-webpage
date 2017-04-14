@@ -35,6 +35,9 @@ class Tooltip extends Component {
 					flip: ['top', 'bottom'],
 					arrow: {
 						element: '.arrow'
+					},
+					preventOverflow: {
+						boundariesElement: 'viewport'
 					}
 				}
 			}, this.props.state.options);
