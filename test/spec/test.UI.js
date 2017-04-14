@@ -84,7 +84,7 @@ describe('UI', function() {
 	});
 
 	describe('#_updateView', function() {
-		// !TODO
+		// TODO
 	});
 
 	describe('#_getReferencedElement', function() {

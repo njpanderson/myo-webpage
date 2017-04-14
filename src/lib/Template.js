@@ -147,7 +147,7 @@ Template.renderDroplet = function(droplet, data, drop_zone, is_output = true) {
 };
 
 Template.renderElementDroplet = function(data, droplet, drop_zone, is_output) {
-	// !TODO - make sure self-closing tags are correctly rendered
+	// TODO - make sure self-closing tags are correctly rendered
 	var attrs = [],
 		markup = {},
 		attr;
