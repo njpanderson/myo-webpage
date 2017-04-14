@@ -11,6 +11,7 @@ class Header extends Component {
 		return (
 			<header>
 				{this.props.children}
+
 				<Toolbar
 					buttons={this.props.settings.toolbar}
 					tour_stage={this.props.tour_stage}

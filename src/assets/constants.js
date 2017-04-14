@@ -1,3 +1,11 @@
+/**
+ * @module assets/constants
+ */
+
+/**
+ * Action types
+ * @private
+ */
 export const actionTypes = {
 	UI_STATE: 'ui-state',
 	ZONE_ADD_ATTACHMENT: 'zone-add-attachment',
@@ -15,6 +23,9 @@ export const actionTypes = {
 	RESET_APP: 'reset-app'
 };
 
+/**
+ * Dialog modes
+ */
 export const dialogModes = {
 	NONE: 'none',
 	GENERAL: 'general',

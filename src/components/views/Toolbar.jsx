@@ -1,3 +1,28 @@
+/**
+ * @typedef ToolbarStateSegment
+ * @description
+ * A small segment of the App's internal state which includes values relevant to toolbar
+ * button production.
+ * @property {object} UI
+ * @property {object} UI.dialog
+ * @property {module:assets/constants.dialogModes} UI.dialog.mode - The current mode of the active dialog.
+ * @property {number|null} tour_stage - The current tour stage index. (Or `null`).
+ */
+
+/**
+ * A toolbar label function will be invoked with the following arguments:
+ * @typedef {function} ToolbarItemLabel
+ * @param {ToolbarStateSegment} state - A segment of the current application state.
+ */
+
+/**
+ * @typedef ToolbarItem
+ * @property {ToolbarItemLabel|string} label - The toolbar label. Either a function or a literal string.
+ * @property {module:components/views/Icon.GLYPHS} glyph - The icon glyph to use.
+ * @property {string} method - The App method to invoke when the buttons is pressed.
+ * @property {string} className - Extra class name(s) to apply to the button.
+ * @property {boolean} separator=false - Produce a separator to the left of the button.
+ */
 import React, { Component, PropTypes } from 'react';
 
 import { Icon } from './Icon.jsx';

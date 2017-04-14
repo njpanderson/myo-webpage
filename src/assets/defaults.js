@@ -1,6 +1,25 @@
 import { GLYPHS } from '../components/views/Icon.jsx';
 import { dialogModes } from './constants';
 
+/**
+ * The default settings applied to tag's App class on instantiation.
+ * @typedef AppDefaults
+ * @property {object} classes - Class definitions.
+ * @property {object} selectors - CSS Selector definitions.
+ * @property {object} template - Template options.
+ * @property {number} template.initial_flex_basis=50 - The initial flex basis (width) of
+ * the template container.
+ * @property {object} view - View options.
+ * @property {string} view.src='view.html' - Source filename for the view frame (relative to the App index).
+ * @property {boolean} view.autoUpdate=false - Whether to automatically update the view when Droplet attachments change.
+ * @property {object} dropZone - Drop Zone options.
+ * @property {string} dropZone.label='...' - The label to use for Drop Zone targets.
+ * @property {boolean} dropZone.warnOnBadPlacement=true - Produce a dialog when placing a Droplet into an invalid Drop Zone.
+ * @property {boolean} dropZone.noticeOnFirstPlacement=true - Produce a dialog on the first valid placement of a Droplet
+ * @property {boolean} dropZone.noticeOnLastPlacement=true - Produce a dialog when all of the Drop Zones have at least one attachment.
+ * @property {ToolbarItem[]} toolbar - Toolbar items.
+ */
+
 export default {
 	classes: {
 		canvas: 'tag-canvas',

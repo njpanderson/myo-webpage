@@ -1,5 +1,19 @@
+/**
+ * @module components/views/Icon
+ */
 import React, { PropTypes } from 'react';
 
+/**
+ * Icon glyphs available for use.
+ * @property {string} TEXT
+ * @property {string} PUZZLE_PIECE
+ * @property {string} TAG
+ * @property {string} COMPASS
+ * @property {string} LOOP_CIRCULAR
+ * @property {string} MEDIA_PLAY
+ * @property {string} LIGHTBULB
+ * @property {string} RESIZE_WIDTH
+ */
 export const GLYPHS = {
 	TEXT: require('../../img/svg/text.svg'),
 	PUZZLE_PIECE: require('../../img/svg/puzzle-piece.svg'),

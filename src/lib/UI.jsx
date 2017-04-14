@@ -16,16 +16,44 @@ import createDialogs from '../assets/dialogs';
 
 import { dialogModes, uiStates, messageCommands } from '../assets/constants';
 
+/**
+ * Handles User Interface components and acts as the main controller.
+ * @class
+ */
 var UI = function(parent, settings, refs, data, store, template) {
+	/**
+	 * @private
+	 */
+	this._parent = parent;
+
 	/**
 	 * Settings as defined when instantiating. Inherits from {@link App.defaults}
 	 */
-	this._parent = parent;
 	this.settings = settings;
+
+	/**
+	 * @private
+	 */
 	this._refs = refs;
+
+	/**
+	 * @private
+	 */
 	this._data = data;
+
+	/**
+	 * @private
+	 */
 	this._store = store;
+
+	/**
+	 * @private
+	 */
 	this._template = template;
+
+	/**
+	 * Dialog objects for use with {@link App#dialog}
+	 */
 	this.dialogs = createDialogs(settings);
 
 	// UI class specific data entries

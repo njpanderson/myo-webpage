@@ -34,8 +34,9 @@ import defaultState from './assets/default-state';
 import createDialogs from './assets/dialogs';
 import { dialogModes, uiStates, actionTypes, messageCommands } from './assets/constants';
 
-/*
+/**
  * Main application wraper.
+ * @param {AppDefaults} settings - Settings object.
  * @class
  */
 var App = function(settings = {}) {

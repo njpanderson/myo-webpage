@@ -132,6 +132,11 @@ function UI(state = defaultState.UI, action) {
 			}
 		});
 
+	case actionTypes.SET_TOUR_STAGE:
+		return Object.assign({}, state, {
+			tour_stage: action.stage
+		});
+
 	case actionTypes.SET_ACTIVE_DROPLET:
 		// set the active droplet (i.e. the one that will be "dropped" when a
 		// drop zone is next clicked
