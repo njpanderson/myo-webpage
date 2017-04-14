@@ -158,6 +158,12 @@ class Form extends Component {
 	componentDidMount() {
 		var a, b, key;
 
+		if ('ontouchstart' in window) {
+			// if it's a touch device, it'll likely have an on-screen keyboard
+			// which could get in the way of the dialog opening and cause UX issues.
+			return;
+		}
+
 		// handle focusing of the first field (or button) in the form
 		if (this.props.fieldSets && this.props.fieldSets.length) {
 			// highlight first collected field
