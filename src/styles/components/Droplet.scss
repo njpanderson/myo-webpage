@@ -4,6 +4,7 @@
 	height: $droplet-height;
 	padding: 0;
 	text-decoration: none;
+	cursor: pointer;
 
 	.label {
 		transition: background-color .15s $ease-in-out-quart,

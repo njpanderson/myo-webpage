@@ -1,3 +1,8 @@
+button::-moz-focus-inner {
+	padding: 0;
+	border: 0
+}
+
 .button {
 	-webkit-appearance: none;
 	display: block;
@@ -7,6 +12,7 @@
 	@include font-size(14);
 	color: $black;
 	background-color: transparent;
+	cursor: pointer;
 
 	> span {
 		display: block;

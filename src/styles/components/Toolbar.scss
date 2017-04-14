@@ -36,6 +36,9 @@
 	.button {
 		font-weight: bolder;
 		@include font-size(14);
-		background-color: $white;
+
+		span {
+			background-color: $white;
+		}
 	}
 }
