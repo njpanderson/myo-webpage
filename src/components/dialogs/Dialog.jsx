@@ -35,13 +35,7 @@ class Dialog extends Component {
 				// attachment data exists - apply with popper
 				this.popper = this.props.lib.setUIPopperAttachment(
 					this.props.data.attachment,
-					this.dialogRef, {
-						modifiers: {
-							preventOverflow: {
-								boundariesElement: 'viewport'
-							}
-						}
-					}
+					this.dialogRef
 				);
 			}
 		}

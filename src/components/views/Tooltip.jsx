@@ -29,15 +29,13 @@ class Tooltip extends Component {
 		var options;
 
 		if (this.props.state.show) {
+			// merge default options with those assigned via the state change
 			options = Object.deepAssign({}, {
 				placement: 'top',
 				modifiers: {
 					flip: ['top', 'bottom'],
 					arrow: {
 						element: '.arrow'
-					},
-					preventOverflow: {
-						boundariesElement: 'viewport'
 					}
 				}
 			}, this.props.state.options);
