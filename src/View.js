@@ -14,13 +14,9 @@ var View = function(settings = {}) {
 
 View.prototype = {
 	_handleAppMessage: function(message) {
-		// console.log('message to "view"!', message);
-
 		switch (message.cmd) {
 		case messageCommands.RELOAD:
 			// reload request
-			// console.log('reloading...');
-			// console.log(message.data);
 			this.settings.container.innerHTML = message.data.markup;
 
 			this._evalScripts();
