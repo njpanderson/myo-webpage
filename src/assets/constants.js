@@ -40,7 +40,9 @@ export const uiStates = {
 
 export const messageCommands = {
 	RELOAD: 'reload',
-	RESET: 'reset'
+	RESET: 'reset',
+	DIALOG: 'dialog',
+	DIALOG_CALLBACK: 'dialog-callback'
 };
 
 export const errorCodes = {

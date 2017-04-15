@@ -1,5 +1,5 @@
 import View from '../View';
 
-new View({
+window.view = new View({
 	container: document.querySelector('.view')
 });

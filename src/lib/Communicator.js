@@ -14,6 +14,7 @@ var Communicator = function(id, origin, callbacks = {}) {
 	this._guests = {};
 	this._queue = {};
 	this.id = id;
+	this.message_index = 0;
 
 	this._origin = origin;
 	this._callbacks = Object.assign({
@@ -109,31 +110,42 @@ Communicator.prototype = {
 	},
 
 	/**
-	 * Sends a message to the defined guest.
 	 * @param {string} to - Guest ID, as stored.
 	 * @param {mixed} message - Any JS compatible data to send as a message.
+	 * @param {string} id - Add a message ID to allow the recipient to prevent race conditions.
+	 * @description
+	 * Sends a message to the defined guest.
+	 * If no ID is defined, one will be generated.
+	 * @returns {string} The ID of the message as defined or generated.
 	 */
-	send: function(to, message) {
+	send: function(to, message, id = null) {
 		var guest = this._getGuestById(to);
+
+		id = (id || this._generateSendId(to));
 
 		if (guest && guest.live) {
 			// post message immediately
-			this._post(to, this._createMessage(message));
+			this._post(to, this._createMessage(message, {}, id));
 		} else {
 			// queue message for posting
-			this._addToQueue(to, message);
+			this._addToQueue(to, message, id);
 		}
+
+		return id;
 	},
 
 	/**
 	 * Adds a message to the local 'outbox' for the guest (by ID).
 	 */
-	_addToQueue: function(to, message) {
+	_addToQueue: function(to, message, id) {
 		if (!this._queue[to]) {
 			this._queue[to] = [];
 		}
 
-		this._queue[to].push(message);
+		this._queue[to].push({
+			message,
+			id
+		});
 	},
 
 	_sendQueue: function(to) {
@@ -144,7 +156,11 @@ Communicator.prototype = {
 			for (a = 0; a < this._queue[to].length; a += 1) {
 				this._post(
 					this._guests[to].node,
-					this._createMessage(this._queue[to][a])
+					this._createMessage(
+						this._queue[to][a].message,
+						{},
+						this._queue[to][a].id
+					)
 				);
 			}
 
@@ -232,7 +248,10 @@ Communicator.prototype = {
 		}
 
 		if (this._callbacks.message && message.originalMessage) {
-			this._callbacks.message(message.originalMessage);
+			this._callbacks.message(
+				message.originalMessage,
+				message.id
+			);
 		}
 	},
 
@@ -242,11 +261,23 @@ Communicator.prototype = {
 		});
 	},
 
-	_createMessage: function(message, data) {
+	_createMessage: function(message, data, id) {
 		return Object.assign({}, data, {
 			host: this.id,
+			id: id,
 			originalMessage: message
 		});
+	},
+
+	_generateSendId: function(prefix) {
+		if (window.performance && ('now' in window.performance)) {
+			return prefix + '-xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+				var r = (window.performance.now() + Math.random() * 16) % 16 | 0;
+				return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+			});
+		} else {
+			return prefix + '-' + (this.message_index++);
+		}
 	}
 };
 

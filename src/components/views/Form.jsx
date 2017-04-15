@@ -27,6 +27,14 @@
  * 	{@link FormField}...
  * ]
  */
+
+/**
+ * @typedef FormButton
+ * @property {string} type - Either 'cancel', 'submit' or a custom type.
+ * @property {string} label - Button label.
+ * @property {object} data - Data sent as `data` to the form onSubmit prop.
+ * @property {object} className - Extra class name(s) for the button.
+ */
 import React, { Component, PropTypes } from 'react';
 
 import Fieldset from './Fieldset.jsx';
@@ -124,15 +132,15 @@ class Form extends Component {
 	}
 
 	componentOnSubmit(proxy_event) {
-		this.onSubmit(proxy_event);
+		this.onSubmit(proxy_event, 'submit');
 	}
 
-	onSubmit(event, button, data) {
+	onSubmit(event, button, button_data) {
 		if (event) {
 			event.preventDefault();
 		}
 
-		this.props.onSubmit(this.state.formValues, button, data);
+		this.props.onSubmit(this.state.formValues, button, button_data);
 	}
 
 	/**

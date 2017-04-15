@@ -42,17 +42,16 @@ Tour.prototype = {
 		if ((this._parent.dialogs.tour.length - 1) >= index) {
 			this._setTourStage(index);
 			return this._showTourElement(index)
-				.then((data) => {
+				.then((dialog) => {
 					this._parent._hideDialog();
 
-					if (data) {
-						if (data.action !== 'pause') {
-							// progress the tour
-							this._progressTour((index + 1));
-						} // otherwise, will pause the tour by doing nothing (but close the dialog)
-					} else {
+					// if action is pause, will pause the tour by doing nothing
+					if (dialog.action === 'cancel') {
 						// end the tour
 						this._setTourStage(null);
+					} else if (dialog.action !== 'pause') {
+						// progress the tour
+						this._progressTour((index + 1));
 					}
 				});
 		} else {

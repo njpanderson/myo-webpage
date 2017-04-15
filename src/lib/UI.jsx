@@ -1,3 +1,11 @@
+/**
+ * @typedef DialogData
+ * @property {string} title - The title of the dialog.
+ * @property {array|string} message - Either a single string or an array of strings, defining
+ * each paragraph of the dialog message. Basic HTML is allowed.
+ * @property {FormButton[]|undefined} buttons - An array of FormButton buttons, or leave undefined
+ * to use the default "OK" button.
+ */
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
@@ -74,9 +82,7 @@ var UI = function(parent, settings, refs, data, store, template) {
 	};
 
 	this._comms = new Communicator('app', window.location.origin, {
-		message: (message) => {
-			console.log('message to "app"!', message);
-		}
+		message: this._handleAppMessage.bind(this)
 	});
 
 	this._tour = new Tour(this);
@@ -139,8 +145,28 @@ UI.prototype = {
 	},
 
 	/**
+	 * Handles messages sent via the Communicator class (mainly from the View class).
+	 * @param {object} message - Data, as sent by the originator
+	 * @param {string} id - Message ID.
+	 * @private
+	 */
+	_handleAppMessage: function(message, id) {
+		switch (message.cmd) {
+		case 'dialog':
+			// a dialog is being requested
+			this._showCommunicatorDialog(
+				message.data.title,
+				message.data.message,
+				message.data.buttons,
+				id
+			);
+			break;
+		}
+	},
+
+	/**
 	 * @param {string} mode - One of the dialogModes modes.
-	 * @param {mixed} data - Relevant data to store for the dialog to use.
+	 * @param {DialogData} data - Relevant data to store for the dialog to use.
 	 * @returns {DialogPromise} a Promise which will resolve with the dialog results.
 	 * @description
 	 *	Displays a dialog element. In this case that no callbacks (`onDialogComplete` or
@@ -156,7 +182,9 @@ UI.prototype = {
 				(data, action, action_data) => {
 					resolve({ data, action, action_data });
 				},
-				resolve
+				() => {
+					resolve({ action: 'cancel' });
+				}
 			));
 		});
 	},
@@ -165,6 +193,7 @@ UI.prototype = {
 	 * @description
 	 * Hides the dialog (after a short timeout) - uses state comparison to ensure
 	 * the dialog being hidden isn't a new one.
+	 * @private
 	 */
 	_hideDialog: function() {
 		var state = (this._store.getState()).UI.dialog;
@@ -177,6 +206,35 @@ UI.prototype = {
 				this._store.dispatch(actions.setDialogMode(dialogModes.NONE));
 			}
 		}.bind(this), 300);
+	},
+
+	_showCommunicatorDialog(title, message, buttons, comms_id) {
+		this._showDialog(
+			dialogModes.GENERAL,
+			{
+				title,
+				message,
+				buttons
+			}
+		)
+			.then((dialog) => {
+				this._hideDialog();
+
+				if (dialog) {
+					// submit/custom callback
+					this._comms.send('view', {
+						cmd: messageCommands.DIALOG_CALLBACK,
+						data: dialog.data,
+						action: dialog.action,
+						action_data: dialog.action_data
+					}, comms_id);
+				} else {
+					// cancel callback
+					this._comms.send('view', {
+						cmd: messageCommands.DIALOG_CALLBACK
+					}, comms_id);
+				}
+			});
 	},
 
 	/**
@@ -358,15 +416,13 @@ UI.prototype = {
 				.then(((dialog) => {
 					this._hideDialog();
 
-					if (dialog) {
-						if (dialog.action === 'remove_droplet') {
-							this.zoneDetachAttachment(
-								dialog.action_data.zone_id,
-								dialog.action_data.attachment_index
-							);
-						} else {
-							this._commitDropletIntoDropZone.apply(this, [dialog.data]);
-						}
+					if (dialog.action === 'remove_droplet') {
+						this.zoneDetachAttachment(
+							dialog.action_data.zone_id,
+							dialog.action_data.attachment_index
+						);
+					} else if (dialog.action !== 'cancel') {
+						this._commitDropletIntoDropZone.apply(this, [dialog.data]);
 					}
 				}).bind(this));
 		}
@@ -568,7 +624,7 @@ UI.prototype = {
 					.then((dialog) => {
 						this._hideDialog();
 
-						if (dialog) {
+						if (dialog.action === 'submit') {
 							this._commitDropletIntoDropZone.apply(this, [dialog.data]);
 							this._postDropletAttachment(droplet, dialog.data);
 						}
@@ -758,7 +814,7 @@ UI.prototype = {
 	},
 
 	/**
-	 * Sends a message to the View frame for updating.
+	 * Sends a key the View frame for updating.
 	 */
 	_updateView: function() {
 		var state = this._store.getState();

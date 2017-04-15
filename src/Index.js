@@ -9,9 +9,17 @@
  */
 
 /**
- * A dialog Promise response.
- * @typedef DialogPromise
+ * @callback DialogPromise
+ * @param {DialogData} dialog - Data from the dialog.
  */
+
+/**
+ * @typedef DialogData
+ * @property {object} data - Data from any form elements within the dialog.
+ * @property {string} action - Action string. 'submit', 'cancel' or a custom action, if set.
+ * @property {object} action_data - Data specific to the special action, if set.
+ */
+
 import { createStore } from 'redux';
 
 import './lib/polyfills';
@@ -200,7 +208,7 @@ App.prototype = {
 	 * @param {string} title - Title of the dialog.
 	 * @param {array|HTMLElement} message - Message to display.
 	 * @param {array} [buttons] - Buttons to show. Defaults to a single "OK" button.
-	 * @returns {Promise} a Promise, the resolve/reject methods of which will denote
+	 * @returns {DialogPromise} a Promise, the resolve/reject methods of which will denote
 	 * completion or cancellation of the dialog. Custom button events will not complete
 	 * the promise.
 	 */
