@@ -2,17 +2,17 @@
 	{
 		"name": "Header",
 		"dropletType": "text",
-		"value": "My Light Show",
+		"value": "Page header",
 		"attachmentIds": ["h1"],
 		"editable": {
 			"value": {
 				"type": "text",
 				"label": "Header label",
-				"value": "My Light Show",
+				"value": "Page header",
 				"required": true
 			}
 		},
-		"guidance": "<p>The header will appear at the top of the page.</p>"
+		"guidance": "<p>(Guidance text for header)</p>"
 	},
 	{
 		"name": "Section class",
@@ -20,16 +20,16 @@
 		"key": "class",
 		"value": "board",
 		"attachmentIds": ["section_class"],
-		"guidance": "<p>A 'class' is a common way to tell the CSS how things on the page should look.</p>"
+		"guidance": "<p>(Guidance text for class)</p>"
 	},
 	{
-		"name": "Letter button",
+		"name": "Link",
 		"dropletType": "element",
 		"innerHTML": "",
 		"tagName": "a",
 		"attrs": {
 			"href": "#",
-			"class": "button-blue"
+			"class": "blue"
 		},
 		"attachmentIds": ["button"],
 		"editable": {
@@ -38,29 +38,16 @@
 					"type": "dropdown",
 					"required": true,
 					"label": "Choose a colour",
-					"options": ["button-blue", "button-red", "button-yellow", "button-pink", "button-green"],
-					"value": "button-blue"
+					"options": ["blue", "red", "green"],
+					"value": "blue"
 				}
 			},
 			"innerHTML": {
 				"type": "text",
 				"required": true,
-				"label": "Type one letter",
-				"placeholder": "A, B, C etc...",
-				"maxlength": 1
+				"label": "Set innerHTML"
 			}
 		},
-		"guidance": "<p>Each letter button will be a single letter that will light up when you press its key on the keyboard.</p>"
-	},
-	{
-		"name": "JavaScript",
-		"dropletType": "element",
-		"tagName": "script",
-		"attachmentIds": ["script_main"],
-		"attrs": {
-			"src": "includes/js/main.js",
-			"type": "text/javascript"
-		},
-		"guidance": "<p>The JavaScript will make everything work together to display a light show.</p>"
+		"guidance": "<p>(Guidance text for link)</p>"
 	}
 ]
