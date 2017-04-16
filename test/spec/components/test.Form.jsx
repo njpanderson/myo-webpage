@@ -1,11 +1,21 @@
 import React from 'react';
-import ReactTestUtils from 'react-addons-test-utils';
+import { createRenderer } from 'react-test-renderer/shallow';
 import { expect } from 'chai';
+
+import useMockery from '../../helpers/mockery';
 
 describe('Form', function() {
 	var Form;
 
-	const renderer = ReactTestUtils.createRenderer(),
+	useMockery(() => {
+		useMockery
+			.registerMultiple({
+				'./Fieldset.jsx': require('../../mocks/views/GenericComponent.js'),
+				'./Button.jsx': require('../../mocks/views/GenericComponent.js')
+			});
+	});
+
+	const renderer = createRenderer(),
 		fieldSets = [{
 			key: 'test_fieldset1',
 			fields: []

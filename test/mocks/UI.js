@@ -1,4 +1,7 @@
+import defaults from '../fixtures/defaults';
+
 import defaultState from '../../src/assets/default-state';
+import createDialogs from '../../src/assets/dialogs';
 
 var UI = function() {
 	this.__resolve_showDialog = (resolve) => {
@@ -6,6 +9,8 @@ var UI = function() {
 	};
 
 	this._store.dispatch = this._store.dispatch.bind(this);
+
+	this.dialogs = createDialogs(defaults);
 };
 
 UI.prototype = {

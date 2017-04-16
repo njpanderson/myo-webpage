@@ -35,7 +35,7 @@ export default function createDialogs(settings) {
 			message: [
 				'Tag is an app designed to explain how web pages are constructed.',
 				'If you are new to tag, you can use the Tour button in the toolbar.',
-				'Otherwise, just click “OK” and get creating!'
+				'Otherwise, just click “OK” and get building!'
 			]
 		},
 		resetState: {
@@ -66,7 +66,7 @@ export default function createDialogs(settings) {
 				title: 'Well done!',
 				message: [
 					'<code>' + droplet_output + '</code>',
-					'You’ve placed your <b>very first</b> Droplet onto the Template. Hurrah!',
+					'You’ve placed your <b>very first</b> Droplet onto the Template.',
 					'Press the <span class="pseudo-button run"><svg class="icon" width="14" height="14"><use xlink:href="#icon-media-play"></use></svg>Run</span> button to see how it looks.'
 				]
 			};
@@ -74,7 +74,7 @@ export default function createDialogs(settings) {
 		lastDropletDrop: {
 			title: 'Well done!',
 			message: [
-				'You’ve placed at <b>least one Droplet</b> on every target in the template. Yippee!',
+				'You’ve placed at <b>least one Droplet</b> on every target in the template.',
 				'Why not try the <span class="pseudo-button run"><svg class="icon" width="14" height="14"><use xlink:href="#icon-media-play"></use></svg>Run</span> button to see how it looks?'
 			]
 		},
@@ -146,7 +146,7 @@ export default function createDialogs(settings) {
 		}, {
 			title: 'The view',
 			message: [
-				'This is the view. It will show you how the page looks after running the code!',
+				'This is the view. It will show you how the page looks after running the code.',
 				'Use the <span class="pseudo-button run"><svg class="icon" width="14" height="14"><use xlink:href="#icon-media-play"></use></svg>Run</span> button to update the view'
 			],
 			overlay: false,
@@ -161,7 +161,7 @@ export default function createDialogs(settings) {
 		}, {
 			title: 'All done!',
 			message: [
-				'Once you’ve used the <span class="pseudo-button run"><svg class="icon" width="14" height="14"><use xlink:href="#icon-media-play"></use></svg>Run</span> button, the view has updated and your last change should now be showing here!'
+				'Once you’ve used the <span class="pseudo-button run"><svg class="icon" width="14" height="14"><use xlink:href="#icon-media-play"></use></svg>Run</span> button, the view has updated and your last change should now be showing here.'
 			],
 			overlay: false,
 			attachment: {

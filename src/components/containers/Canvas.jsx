@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { collectRef } from '../../lib/utils';
 
+import { collectRef } from '../../lib/utils';
 import View from '../views/View.jsx';
 import Tooltip from './TooltipContainer';
 import Header from './HeaderContainer';

@@ -1,8 +1,8 @@
 import React from 'react';
-import ReactTestUtils from 'react-addons-test-utils';
+import { createRenderer } from 'react-test-renderer/shallow';
 import { expect } from 'chai';
-import useMockery from '../../helpers/mockery';
 
+import useMockery from '../../helpers/mockery';
 import defaults from '../../fixtures/defaults';
 import { uiStates } from '../../../src/assets/constants';
 
@@ -15,12 +15,13 @@ describe('Canvas', function() {
 				'../views/View.jsx': require('../../mocks/views/GenericComponent.js'),
 				'../views/Header.jsx': require('../../mocks/views/GenericComponent.js'),
 				'./TemplateContainer': require('../../mocks/views/GenericComponent.js'),
+				'./TooltipContainer': require('../../mocks/views/GenericComponent.js'),
 				'./DialogContainer': require('../../mocks/views/GenericComponent.js'),
 				'./PalletContainer': require('../../mocks/views/GenericComponent.js')
 			});
 	});
 
-	const renderer = ReactTestUtils.createRenderer(),
+	const renderer = createRenderer(),
 		state = {
 			ui_state: uiStates.INITIALISING
 		},

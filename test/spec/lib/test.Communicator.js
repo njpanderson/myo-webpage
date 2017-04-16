@@ -8,7 +8,7 @@ describe('Communicator', function() {
 	});
 
 	it('Should instantiate', function() {
-		var comm = new Communicator();
+		var comm = new Communicator('test-guest', 'test-origin');
 		expect(comm).to.be.an.instanceof(Communicator);
 	});
 

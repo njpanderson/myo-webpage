@@ -43,7 +43,9 @@ export default {
 	},
 	dropZone: {
 		label: '...',
-		warnOnBadPlacement: true
+		warnOnBadPlacement: false,
+		noticeOnFirstPlacement: false,
+		noticeOnLastPlacement: false
 	},
 	toolbar: [],
 	onElementRender: null,

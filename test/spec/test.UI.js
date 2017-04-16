@@ -10,7 +10,9 @@ describe('UI', function() {
 		useMockery
 			.registerMultiple({
 				'./DragDrop': require('../mocks/DragDrop'),
-				'./Communicator': require('../mocks/Communicator')
+				'./Communicator': require('../mocks/Communicator'),
+				'../components/containers/CanvasContainer': require('../mocks/views/GenericComponent'),
+				'../components/views/Icon.jsx': require('../mocks/views/Icon')
 			});
 	});
 
@@ -25,7 +27,7 @@ describe('UI', function() {
 	it('Should instantiate', function() {
 		var ui = new UI(
 			index,
-			require('../fixtures/defaults.js'),
+			require('../fixtures/defaults.js').default,
 			{},
 			{},
 			{
