@@ -2,7 +2,7 @@ import { expect } from 'chai';
 
 import { dialogModes, actionTypes } from '../../../src/assets/constants';
 import createDialogs from '../../../src/assets/dialogs';
-import defaults from '../../fixtures/default';
+import defaults from '../../fixtures/defaults';
 import MockUI from '../../mocks/UI';
 
 describe('Tour', function() {
