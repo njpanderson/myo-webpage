@@ -28,6 +28,7 @@ export default {
 		is_dragging: 'dragging',
 		item_dragging: 'item-dragging',
 		dropzone_target: 'target',
+		dropzone_target_outer: 'target-outer',
 		dropzone_is_active: 'is-active',
 		dropzone_is_target: 'is-target',
 		attached: 'attached',

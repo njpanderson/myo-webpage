@@ -5,6 +5,10 @@
 	.target-outer {
 		display: inline-block;
 		position: relative;
+
+		&.hidden {
+			display: none;
+		}
 	}
 
 	.target {
@@ -14,19 +18,6 @@
 			background-color: $blue;
 			line-height: 120%;
 			color: white;
-		}
-
-		// &.is-active b {
-		// 	background-color: $blue-dark;
-		// }
-
-		// &.is-target b {
-		// 	box-shadow: 0 0 5px $red;
-		// 	background-color: $red;
-		// }
-
-		&.hidden {
-			display: none;
 		}
 	}
 

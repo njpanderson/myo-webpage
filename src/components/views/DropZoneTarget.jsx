@@ -20,18 +20,18 @@ class DropZoneTarget extends Component {
 
 	render() {
 		var key = this.props.zone.id + '-target',
-			classNames = [this.props.settings.classes.dropzone_target];
+			classNames = [this.props.settings.classes.dropzone_target_outer];
 
 		if (this.props.activeAttachments.length >= this.props.zone.maxAttachments) {
 			classNames.push(this.props.settings.classes.hidden);
 		}
 
 		return (
-			<span className="target-outer">
+			<span className={classNames.join(' ')}>
 				<span key={key}
 					onClick={this.onEvent}
 					ref={collectRef(this.props, ['dropzone_target'], this.props.zone.id)}
-					className={classNames.join(' ')}>
+					className={this.props.settings.classes.dropzone_target}>
 						<b>{this.props.settings.dropZone.label}</b>
 					</span>
 			</span>
