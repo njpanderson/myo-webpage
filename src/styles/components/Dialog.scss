@@ -1,6 +1,7 @@
 .dialog {
 	position: fixed;
 	display: none;
+	overflow: auto;
 	justify-content: center;
 	align-items: center;
 	left: 0;
