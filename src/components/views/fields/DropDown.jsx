@@ -1,13 +1,13 @@
 import React from 'react';
 
 import { field } from '../../../assets/common-prop-types';
-import { optionValueSet } from '../../component-utils.jsx';
+import { optionValueSet, getFieldErrorMarkup } from '../../component-utils.jsx';
 
 function DropDown(props) {
 	var label = props.field.label || props.field.name;
 
 	return (
-		<div className="field">
+		<div className={props.className.join(' ')}>
 			<label>{label}</label>
 			<select
 				type="text"
@@ -17,6 +17,7 @@ function DropDown(props) {
 				ref={props.refCollector}>
 				{optionValueSet(props.field.options)}
 			</select>
+			{getFieldErrorMarkup(props.error)}
 		</div>
 	);
 }

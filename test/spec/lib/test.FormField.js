@@ -54,13 +54,31 @@ describe('FormField', function() {
 				type: 'text',
 				required: 'yes'
 			}, 'fieldname', 'Test error'))
-				.to.throw(Error, '"required" attribute isn’t a boolean true or false');
+				.to.throw(Error, '"required" attribute isn’t a boolean or function');
 		});
 
 		it('Accepts if an field’s "required" attribute is a boolean', function() {
 			expect(FormField.validateDataAttribute({
 				type: 'text',
 				required: true
+			}, 'fieldname', 'Test error'))
+				.to.be.true;
+		});
+
+		it('Throws if an field’s "required" attribute isn’t a function', function() {
+			expect(() => FormField.validateDataAttribute({
+				type: 'text',
+				required: 'yes'
+			}, 'fieldname', 'Test error'))
+				.to.throw(Error, '"required" attribute isn’t a boolean or function');
+		});
+
+		it('Accepts if an field’s "required" attribute is a function', function() {
+			expect(FormField.validateDataAttribute({
+				type: 'text',
+				required: function() {
+					return true;
+				}
 			}, 'fieldname', 'Test error'))
 				.to.be.true;
 		});

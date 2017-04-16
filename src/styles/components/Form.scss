@@ -25,11 +25,38 @@ form {
 
 	.field {
 		display: flex;
+		flex-wrap: wrap;
 		align-items: center;
-		margin: ($dialog-padding / 2) 0;
+		margin: ($dialog-padding / 4) 0;
 
 		label {
 			width: 40%;
+		}
+
+		&.is-required label:after {
+			content: '*';
+			margin-left: .125em;
+		}
+
+		&.has-error {
+			outline: 2px solid $red;
+			padding: 10px;
+			background-color: lighten($red, ($lighten-factor * 6));
+
+			label:after {
+				color: $red;
+			}
+		}
+
+		.error {
+			width: 100%;
+			@include font-size(14);
+			color: $red;
+
+			.icon {
+				margin-right: .25em;
+				vertical-align: middle;
+			}
 		}
 	}
 }

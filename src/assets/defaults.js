@@ -38,6 +38,11 @@ export default {
 		button_animate: 'animate',
 		popup: 'popup',
 		tooltip: 'tooltip',
+		field: {
+			node: 'field',
+			has_error: 'has-error',
+			is_required: 'is-required'
+		},
 		template: {
 			node: 'template',
 			inner: 'template-inner'

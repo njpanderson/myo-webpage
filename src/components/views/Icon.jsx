@@ -23,6 +23,7 @@ export const GLYPHS = {
 	MEDIA_PLAY: require('../../img/svg/media-play.svg'),
 	LIGHTBULB: require('../../img/svg/lightbulb.svg'),
 	RESIZE_WIDTH: require('../../img/svg/resize-width.svg'),
+	WARNING: require('../../img/svg/warning.svg'),
 };
 
 export function Icon(props) {

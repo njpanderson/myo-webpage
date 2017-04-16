@@ -208,6 +208,7 @@ class DialogEditDroplet extends Component {
 				<Form
 					fieldSets={fieldsets}
 					buttons={buttons}
+					settings={this.props.settings}
 					onButtonClick={this.props.onButtonClick}
 					onSubmit={this.onDialogComplete}
 					onCancel={this.props.onDialogCancel}/>

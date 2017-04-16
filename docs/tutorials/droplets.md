@@ -124,8 +124,10 @@ The possible settings for each definition are:
 Setting        | Optional | Description
 :---           | :---     | :---
 `type`         | No       | One of 'text', 'longtext', 'dropdown', 'checkbox', or 'radio'.
-`required`     | Yes      | Boolean defining that the attribute must contain a value.
+`required`     | Yes      | Boolean defining that the attribute must contain a value, or a function which will be invoked with the form values and can either return a boolean `true` or a string containing an error message. (**See note below**).
 `label`        | Yes      | Field label (will otherwise inherit from the attribute name).
 `options`      | Yes      | In the case of `dropdown` or `radio` types, either an array of possible values or an object defining key/value pairs.
 `placeholder`  | Yes      | In the case of a text value, this will show in place of empty values.
 `value`        | Yes      | In the case of array/object options, this set the value as 'selected'. If the type is `checkbox`, a boolean `true` or `false` will define its checked state.
+
+**Note:** When using a function definition for the `required` value, the pallet cannot be defined with JSON and must be loaded directly as a JS object with the `App#load` method.

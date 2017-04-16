@@ -70,8 +70,9 @@ FormField.validateDataAttribute = function(data, item, error_prefix) {
 	var error = error_prefix + ' ' + item + ' - ';
 
 	// check "required" is a boolean, if defined
-	if (typeof data.required !== 'undefined' && typeof data.required !== 'boolean') {
-		throw new Error(error + '"required" attribute isn’t a boolean true or false');
+	if (typeof data.required !== 'undefined' &&
+		(typeof data.required !== 'boolean' && typeof data.required !== 'function')) {
+		throw new Error(error + '"required" attribute isn’t a boolean or function');
 	}
 
 	// check "options" is valid

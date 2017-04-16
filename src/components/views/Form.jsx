@@ -71,7 +71,8 @@ class Form extends Component {
 
 		// set default form value state
 		this.state = {
-			formValues
+			formValues,
+			errors: []
 		};
 
 		// bind functions for events
@@ -102,15 +103,17 @@ class Form extends Component {
 		var output = [];
 
 		if (this.props.fieldSets) {
-			this.props.fieldSets.forEach((set) => {
+			this.props.fieldSets.forEach((set, index) => {
 				const key = 'fieldset-' + set.key;
 
 				output.push(
 					<Fieldset
 						key={key}
+						settings={this.props.settings}
 						refCollector={this.collectFieldRef.bind(this)}
 						set={set.key}
 						fields={set.fields}
+						errors={this.findErrorsForFieldsetIndex(index)}
 						legend={set.legend}
 						onFieldUpdate={this.elementChange}
 						/>
@@ -136,11 +139,98 @@ class Form extends Component {
 	}
 
 	onSubmit(event, button, button_data) {
+		var errors;
+
 		if (event) {
 			event.preventDefault();
 		}
 
-		this.props.onSubmit(this.state.formValues, button, button_data);
+		errors = this.validateFields();
+
+		if (errors.length === 0) {
+			this.props.onSubmit(this.state.formValues, button, button_data);
+		} else {
+			this.setState({
+				errors: Array.prototype.slice.apply(errors)
+			});
+		}
+	}
+
+	/**
+	 * Validates all the form fields based on the current form spec.
+	 */
+	validateFields() {
+		var errors = [];
+
+		this.props.fieldSets.forEach((fieldset, index) => {
+			if (fieldset.fields) {
+				fieldset.fields.forEach((field) => {
+					var validation = this.validateField(field, index);
+
+					if (validation !== true) {
+						errors.push(validation);
+					}
+				});
+			}
+		});
+
+		return errors;
+	}
+
+	/**
+	 * Validates a single field.
+	 */
+	validateField(field, fieldset_index) {
+		var value;
+
+		if (field && field.required) {
+			if (typeof field.required === 'function') {
+				// validate using a function
+				value = field.required(this.state.formValues);
+				return (value === true) || ({
+					field,
+					fieldset_index,
+					error: value
+				});
+			} else {
+				// validate by value only
+				value = this.findFieldValue(field.name, this.state.formValues);
+				return (value !== undefined && value !== '') || ({
+					field,
+					fieldset_index,
+					error: 'This value is required.'
+				});
+			}
+		} else {
+			return true;
+		}
+	}
+
+	/**
+	 * Finds a field's value by its name.
+	 */
+	findFieldValue(fieldname, search) {
+		var key, value;
+
+		for (key in search) {
+			if (typeof search[key] === 'object') {
+				value = this.findFieldValue(fieldname, search[key]);
+			} else {
+				if (key === fieldname) {
+					value = search[key];
+				}
+			}
+
+			if (value !== undefined) {
+				return value;
+			}
+		}
+	}
+
+	findErrorsForFieldsetIndex(index) {
+		return this.state.errors.filter((error) => {
+			return (error.fieldset_index === index);
+		});
 	}
 
 	/**
@@ -264,6 +354,7 @@ class Form extends Component {
  * @property {FormFieldSets} fieldSets - fieldsets for display
  */
 Form.propTypes = {
+	settings: PropTypes.object.isRequired,
 	onButtonClick: PropTypes.func.isRequired,
 	onCancel: PropTypes.func,
 	onSubmit: PropTypes.func,

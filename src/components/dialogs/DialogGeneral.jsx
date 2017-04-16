@@ -33,6 +33,7 @@ class DialogGeneral extends Component {
 					className={this.props.settings.classes.dialog.heading}/>
 
 				<Form
+					settings={this.props.settings}
 					buttons={buttons}
 					onButtonClick={this.props.onButtonClick}
 					onSubmit={this.props.onDialogComplete}

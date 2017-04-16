@@ -42,9 +42,20 @@ class Fieldset extends Component {
 			output = [];
 
 		this.props.fields.forEach((field) => {
-			var key = 'field-' + field.name;
+			var key = 'field-' + field.name,
+				field_error = this.getErrorForField(field) || null,
+				className = [this.props.settings.classes.field.node];
 
 			Component = FieldComponents[field.type];
+
+			if (field.required) {
+				className.push(this.props.settings.classes.field.is_required);
+			}
+
+			if (field_error !== null) {
+				field_error = field_error.error;
+				className.push(this.props.settings.classes.field.has_error);
+			}
 
 			switch (field.type) {
 			case 'text':
@@ -52,6 +63,8 @@ class Fieldset extends Component {
 					<Component key={key}
 						refCollector={this.collectRef(key)}
 						field={field}
+						className={className}
+						error={field_error}
 						onChange={this.elementChange}
 						value={this.state.formValues[field.name]}/>
 				);
@@ -62,6 +75,8 @@ class Fieldset extends Component {
 					<Component key={key}
 						refCollector={this.collectRef(key)}
 						field={field}
+						className={className}
+						error={field_error}
 						onChange={this.elementChange}
 						value={this.state.formValues[field.name]}/>
 				);
@@ -69,6 +84,12 @@ class Fieldset extends Component {
 		});
 
 		return output;
+	}
+
+	getErrorForField(field) {
+		return this.props.errors.find((error) => {
+			return (error.field.name === field.name);
+		});
 	}
 
 	elementChange(event) {
@@ -95,16 +116,19 @@ class Fieldset extends Component {
 }
 
 Fieldset.propTypes = {
+	settings: PropTypes.object.isRequired,
 	refCollector: PropTypes.func,
 	set: PropTypes.string.isRequired,
 	onFieldUpdate: PropTypes.func.isRequired,
 	legend: PropTypes.string,
-	fields: PropTypes.arrayOf(React.PropTypes.instanceOf(FormField))
+	fields: PropTypes.arrayOf(React.PropTypes.instanceOf(FormField)),
+	errors: PropTypes.array
 };
 
 Fieldset.defaultProps = {
 	onFieldUpdate: () => {},
-	fields: {}
+	fields: {},
+	errors: []
 };
 
 export default Fieldset;

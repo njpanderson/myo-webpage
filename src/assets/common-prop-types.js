@@ -10,6 +10,8 @@ export const field = {
 		PropTypes.number,
 		PropTypes.arrayOf(PropTypes.string)
 	]).isRequired,
+	error: PropTypes.string,
+	className: PropTypes.arrayOf(PropTypes.string).isRequired,
 	onChange: PropTypes.func
 };
 

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Icon, GLYPHS } from './views/Icon.jsx';
+
 export const optionValueSet = function(values) {
 	var nodes = [], key;
 
@@ -19,4 +21,20 @@ export const optionValueSet = function(values) {
 	}
 
 	return nodes;
+};
+
+/**
+ * Returns a React component containing an error string.
+ */
+export const getFieldErrorMarkup = function(error) {
+	if (error) {
+		return (
+			<p className="error">
+				<Icon glyph={GLYPHS.WARNING} width={12} height={12}/>
+				<span>{error}</span>
+			</p>
+		);
+	} else {
+		return null;
+	}
 };
