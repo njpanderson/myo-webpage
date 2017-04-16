@@ -1,22 +1,10 @@
 import fs from 'fs';
 
 export default {
-	get: function(url) {
-		if (url === 'testpallet.json') {
+	get: function(path) {
+		if (fs.existsSync(path)) {
 			return Promise.resolve({
-				text: fs.readFileSync('test/fixtures/pallet.json', {
-					encoding: 'UTF-8'
-				})
-			});
-		} else if (url === 'corrupted.json') {
-			return Promise.resolve({
-				text: fs.readFileSync('test/fixtures/corrupted.json', {
-					encoding: 'UTF-8'
-				})
-			});
-		} else if (url === 'empty.json') {
-			return Promise.resolve({
-				text: fs.readFileSync('test/fixtures/empty.json', {
+				text: fs.readFileSync(path, {
 					encoding: 'UTF-8'
 				})
 			});

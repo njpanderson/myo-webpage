@@ -163,10 +163,21 @@ App.prototype = {
 	 * Load the pallet data
 	 * @private
 	 */
-	_loadPallet: function(url) {
+	_loadPallet: function(src) {
+		if (typeof src === 'string') {
+			// load pallet as a url
+			return this._loadPalletFromFile(src);
+		} else if (typeof src === 'object') {
+			// load pallet directly
+			this._loadPalletFromArray(src);
+			return Promise.resolve();
+		}
+	},
+
+	_loadPalletFromFile: function(url) {
 		return request.get(url)
 			.then((response) => {
-				var pallet, item;
+				var pallet;
 
 				try {
 					pallet = JSON.parse(response.text);
@@ -178,11 +189,7 @@ App.prototype = {
 				}
 
 				if (Array.isArray(pallet) && pallet.length) {
-					for (item in pallet) {
-						this._data.pallet.push(
-							new Droplet(pallet[item])
-						);
-					}
+					this._loadPalletFromArray(pallet);
 				} else {
 					throw new Error(
 						'Looks like the pallet at path ' + url +
@@ -193,6 +200,16 @@ App.prototype = {
 			.catch((error) => {
 				throw error;
 			});
+	},
+
+	_loadPalletFromArray: function(pallet) {
+		var item;
+
+		for (item in pallet) {
+			this._data.pallet.push(
+				new Droplet(pallet[item])
+			);
+		}
 	},
 
 	/**
