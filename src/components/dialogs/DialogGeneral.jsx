@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import DialogHeading from './DialogHeading.jsx';
 import Form from '../views/Form.jsx';
 
 import { dialog } from '../../assets/common-prop-types';
 
-class DialogGeneral extends Component {
+class DialogGeneral extends React.Component {
 	constructor(props) {
 		super(props);
 	}

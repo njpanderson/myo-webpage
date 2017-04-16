@@ -1,7 +1,9 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+
 import Droplet from './Droplet.jsx';
 
-class Pallet extends Component {
+class Pallet extends React.Component {
 	constructor(props) {
 		super(props);
 	}

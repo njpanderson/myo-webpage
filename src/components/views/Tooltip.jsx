@@ -1,9 +1,10 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Icon } from '../views/Icon.jsx';
 import { rawMarkup } from '../../lib/utils';
 
-class Tooltip extends Component {
+class Tooltip extends React.Component {
 	constructor(props) {
 		super(props);
 

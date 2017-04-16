@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import { collectRef } from '../../lib/utils';
 import Droplet from '../../lib/Droplet';
@@ -11,7 +12,7 @@ const dropletTypeToGlyphs = {
 	'attribute': GLYPHS.PUZZLE_PIECE
 };
 
-class DropletComponent extends Component {
+class DropletComponent extends React.Component {
 	constructor(props) {
 		super(props);
 

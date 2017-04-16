@@ -1,7 +1,9 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+
 import { collectRef } from '../../lib/utils';
 
-class View extends Component {
+class View extends React.Component {
 	constructor(props) {
 		super(props);
 	}

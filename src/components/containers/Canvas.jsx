@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { collectRef } from '../../lib/utils';
 
 import View from '../views/View.jsx';
@@ -8,7 +9,7 @@ import Template from './TemplateContainer';
 import Dialog from './DialogContainer';
 import Pallet from './PalletContainer';
 
-class Canvas extends Component {
+class Canvas extends React.Component {
 	constructor(props) {
 		super(props);
 	}

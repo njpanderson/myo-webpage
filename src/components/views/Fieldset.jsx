@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import FormField from '../../lib/FormField';
 import TextField from './fields/TextField.jsx';
@@ -9,7 +10,7 @@ const FieldComponents = {
 	'dropdown': DropDown
 };
 
-class Fieldset extends Component {
+class Fieldset extends React.Component {
 	constructor(props) {
 		var formValues = {};
 
@@ -121,7 +122,7 @@ Fieldset.propTypes = {
 	set: PropTypes.string.isRequired,
 	onFieldUpdate: PropTypes.func.isRequired,
 	legend: PropTypes.string,
-	fields: PropTypes.arrayOf(React.PropTypes.instanceOf(FormField)),
+	fields: PropTypes.arrayOf(PropTypes.instanceOf(FormField)),
 	errors: PropTypes.array
 };
 

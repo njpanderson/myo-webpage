@@ -35,7 +35,8 @@
  * @property {object} data - Data sent as `data` to the form onSubmit prop.
  * @property {object} className - Extra class name(s) for the button.
  */
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import Fieldset from './Fieldset.jsx';
 import Button from './Button.jsx';
@@ -45,7 +46,7 @@ import Button from './Button.jsx';
  * Takes a form specification and produces an HTML form.
  * See {@link Form.propTypes} for more information
  */
-class Form extends Component {
+class Form extends React.Component {
 	constructor(props) {
 		var formValues = {};
 

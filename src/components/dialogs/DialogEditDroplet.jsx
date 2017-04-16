@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import FormField from '../../lib/FormField';
 import { setLabels } from '../../assets/constants';
@@ -23,7 +23,7 @@ const headingsByType = {
 	}
 };
 
-class DialogEditDroplet extends Component {
+class DialogEditDroplet extends React.Component {
 	constructor(props) {
 		super(props);
 

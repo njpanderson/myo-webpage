@@ -1,8 +1,9 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import Toolbar from './Toolbar.jsx';
 
-class Header extends Component {
+class Header extends React.Component {
 	constructor(props) {
 		super(props);
 	}

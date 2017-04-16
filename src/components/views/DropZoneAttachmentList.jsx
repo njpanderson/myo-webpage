@@ -1,9 +1,10 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import DropZone from '../../lib/DropZone';
 import DropZoneAttachment from './DropZoneAttachment.jsx';
 
-class DropZoneAttachmentList extends Component {
+class DropZoneAttachmentList extends React.Component {
 	constructor(props) {
 		super(props);
 

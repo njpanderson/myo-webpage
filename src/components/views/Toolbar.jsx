@@ -23,11 +23,12 @@
  * @property {string} className - Extra class name(s) to apply to the button.
  * @property {boolean} separator=false - Produce a separator to the left of the button.
  */
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Icon } from './Icon.jsx';
 
-class Toolbar extends Component {
+class Toolbar extends React.Component {
 	constructor(props) {
 		super(props);
 

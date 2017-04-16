@@ -1,4 +1,5 @@
 const webpack = require('webpack'),
+	path = require('path'),
 	ProgressBarPlugin = require('progress-bar-webpack-plugin'),
 	WebpackNotifierPlugin = require('webpack-notifier');
 
@@ -56,7 +57,7 @@ var config = {
 		view: './src/bootstrap/bootstrap-view.js'
 	},
 	output: {
-		path: 'public_html/dist/js',
+		path: path.resolve('public_html/dist/js'),
 		filename: '[name].js',
 		publicPath: 'public_html/dist/js/'
 	},

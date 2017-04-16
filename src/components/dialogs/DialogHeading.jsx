@@ -1,6 +1,7 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import { GLYPHS, Icon } from '../views/Icon.jsx';
+import { Icon } from '../views/Icon.jsx';
 import { rawMarkup } from '../../lib/utils';
 
 var DialogHeading = function(props) {

@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import { dialogModes } from '../../assets/constants';
 
@@ -11,7 +12,7 @@ DialogComponents[dialogModes.EDIT_DROPLET] = DialogEditDroplet;
 DialogComponents[dialogModes.GENERAL] = DialogGeneral;
 DialogComponents[dialogModes.TOUR] = DialogGeneral;
 
-class Dialog extends Component {
+class Dialog extends React.Component {
 	constructor(props) {
 		super(props);
 	}

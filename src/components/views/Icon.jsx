@@ -1,7 +1,8 @@
 /**
  * @module components/views/Icon
  */
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * Icon glyphs available for use.
