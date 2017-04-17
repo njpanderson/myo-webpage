@@ -60,15 +60,13 @@ class Form extends React.Component {
 		};
 
 		// set default state for fields based on original values
-		if (this.props.fieldSets) {
-			this.props.fieldSets.forEach((set) => {
-				formValues[set.key] = {};
+		this.props.fieldSets.forEach((set) => {
+			formValues[set.key] = {};
 
-				set.fields.forEach((field) =>
-					(formValues[set.key][field.name] = field.value)
-				);
-			});
-		}
+			set.fields.forEach((field) =>
+				(formValues[set.key][field.name] = field.value)
+			);
+		});
 
 		// set default form value state
 		this.state = {
@@ -103,24 +101,22 @@ class Form extends React.Component {
 	fieldSets() {
 		var output = [];
 
-		if (this.props.fieldSets) {
-			this.props.fieldSets.forEach((set, index) => {
-				const key = 'fieldset-' + set.key;
+		this.props.fieldSets.forEach((set, index) => {
+			const key = 'fieldset-' + set.key;
 
-				output.push(
-					<Fieldset
-						key={key}
-						settings={this.props.settings}
-						refCollector={this.collectFieldRef.bind(this)}
-						set={set.key}
-						fields={set.fields}
-						errors={this.findErrorsForFieldsetIndex(index)}
-						legend={set.legend}
-						onFieldUpdate={this.elementChange}
-						/>
-				);
-			});
-		}
+			output.push(
+				<Fieldset
+					key={key}
+					settings={this.props.settings}
+					refCollector={this.collectFieldRef.bind(this)}
+					set={set.key}
+					fields={set.fields}
+					errors={this.findErrorsForFieldsetIndex(index)}
+					legend={set.legend}
+					onFieldUpdate={this.elementChange}
+					/>
+			);
+		});
 
 		return output;
 	}
@@ -369,7 +365,8 @@ Form.propTypes = {
 
 Form.defaultProps = {
 	onCancel: () => {},
-	onSubmit: () => {}
+	onSubmit: () => {},
+	fieldSets: []
 };
 
 export default Form;
