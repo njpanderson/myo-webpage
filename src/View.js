@@ -82,21 +82,22 @@ View.prototype = {
 	_evalScripts: function() {
 		this._scripts = [];
 
-		document.querySelectorAll('.view script').forEach((script, index) => {
-			var new_script;
+		Array.prototype.slice.apply(document.querySelectorAll('.view script'))
+			.forEach((script, index) => {
+				var new_script;
 
-			new_script = document.createElement('script');
-			new_script.src = script.src;
-			new_script.type = script.type;
-			new_script.onload = function() {
-				this._loadScript(index + 1);
-			}.bind(this);
+				new_script = document.createElement('script');
+				new_script.src = script.src;
+				new_script.type = script.type;
+				new_script.onload = function() {
+					this._loadScript(index + 1);
+				}.bind(this);
 
-			this._scripts.push({
-				new: new_script,
-				old: script
+				this._scripts.push({
+					new: new_script,
+					old: script
+				});
 			});
-		});
 
 		this._loadScript(0);
 	},
