@@ -39,15 +39,14 @@
     "redux-mock-store": "^1.2.2",
     "webpack": "^2.2.1",
     "webpack-notifier": "^1.5.0",
+  },
+  "dependencies": {
     "babel-plugin-transform-object-rest-spread": "^6.22.0",
     "babel-preset-react": "^6.22.0",
-    "css-loader": "^0.27.3",
     "babel-preset-env": "^1.4.0",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.14.1",
-    "svg-sprite-loader": "^0.3.0"
-  },
-  "dependencies": {
+    "svg-sprite-loader": "^0.3.0",
     "interact.js": "^1.2.8",
     "node-sass": "^4.5.0",
     "popper.js": "1.0.8",
