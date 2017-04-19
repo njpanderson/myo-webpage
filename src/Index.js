@@ -23,7 +23,7 @@
 import { createStore } from 'redux';
 
 import './lib/polyfills';
-import './styles/main.scss';
+// import './styles/main.scss';
 
 import UI from './lib/UI.jsx';
 import { GLYPHS } from './components/views/Icon.jsx';

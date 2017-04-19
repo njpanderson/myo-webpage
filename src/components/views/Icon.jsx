@@ -15,16 +15,28 @@ import PropTypes from 'prop-types';
  * @property {string} LIGHTBULB
  * @property {string} RESIZE_WIDTH
  */
+// export const GLYPHS = {
+// 	TEXT: require('../../img/svg/text.svg'),
+// 	PUZZLE_PIECE: require('../../img/svg/puzzle-piece.svg'),
+// 	TAG: require('../../img/svg/tag.svg'),
+// 	COMPASS: require('../../img/svg/compass.svg'),
+// 	LOOP_CIRCULAR: require('../../img/svg/loop-circular.svg'),
+// 	MEDIA_PLAY: require('../../img/svg/media-play.svg'),
+// 	LIGHTBULB: require('../../img/svg/lightbulb.svg'),
+// 	RESIZE_WIDTH: require('../../img/svg/resize-width.svg'),
+// 	WARNING: require('../../img/svg/warning.svg'),
+// };
+
 export const GLYPHS = {
-	TEXT: require('../../img/svg/text.svg'),
-	PUZZLE_PIECE: require('../../img/svg/puzzle-piece.svg'),
-	TAG: require('../../img/svg/tag.svg'),
-	COMPASS: require('../../img/svg/compass.svg'),
-	LOOP_CIRCULAR: require('../../img/svg/loop-circular.svg'),
-	MEDIA_PLAY: require('../../img/svg/media-play.svg'),
-	LIGHTBULB: require('../../img/svg/lightbulb.svg'),
-	RESIZE_WIDTH: require('../../img/svg/resize-width.svg'),
-	WARNING: require('../../img/svg/warning.svg'),
+	TEXT: '',
+	PUZZLE_PIECE: '',
+	TAG: '',
+	COMPASS: '',
+	LOOP_CIRCULAR: '',
+	MEDIA_PLAY: '',
+	LIGHTBULB: '',
+	RESIZE_WIDTH: '',
+	WARNING: '',
 };
 
 export function Icon(props) {
