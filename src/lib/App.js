@@ -44,7 +44,7 @@ import { dialogModes, uiStates, actionTypes, messageCommands } from '../assets/c
 import '../img/svg-sprite';
 
 /**
- * Main application wraper.
+ * Main application wrapper.
  * @param {AppDefaults} settings - Settings object.
  * @class
  */

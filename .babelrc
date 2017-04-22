@@ -2,8 +2,11 @@
   "plugins": ["external-helpers", "transform-object-rest-spread"],
   "presets": [
 		"react",
-		["es2015", {
-			"modules": false
+		["env", {
+        "modules": false,
+			"targets": {
+				"browsers": ["last 2 versions"]
+			}
 		}]
   ]
 }
