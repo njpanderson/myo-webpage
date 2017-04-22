@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
 import defaultState from '../assets/default-state';
-import { actionTypes, uiStates, tourModes } from '../assets/constants';
+import { actionTypes, uiStates } from '../assets/constants';
 import Storage from '../lib/Storage';
 
 var dialog_id = 0,
@@ -12,7 +12,7 @@ var dialog_id = 0,
  * @private
  */
 function app(state = defaultState.app, action) {
-	var active, newstate, key;
+	var active, newstate;
 
 	switch (action.type) {
 	// set ui state

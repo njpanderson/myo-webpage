@@ -7,7 +7,7 @@ import useMockery from '../helpers/mockery';
 import parsed_pallet from '../fixtures/parsed-pallet';
 import Droplet, { resetDropletCounter } from '../mocks/Droplet';
 
-describe('Index', function() {
+describe('App', function() {
 	let App, pallet;
 
 	chai.use(chaiAsPromised);

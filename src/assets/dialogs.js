@@ -67,7 +67,7 @@ export default function createDialogs(settings) {
 				message: [
 					'<code>' + droplet_output + '</code>',
 					'You’ve placed your <b>very first</b> Droplet onto the Template.',
-					'Press the <span class="pseudo-button run"><svg class="icon" width="14" height="14"><use xlink:href="#icon-media-play"></use></svg>Run</span> button to see how it looks.'
+					'Press the <span class="pseudo-button run"><svg class="icon" width="14" height="14"><use xlink:href="#media-play-sprite"></use></svg>Run</span> button to see how it looks.'
 				]
 			};
 		},
@@ -75,7 +75,7 @@ export default function createDialogs(settings) {
 			title: 'Well done!',
 			message: [
 				'You’ve placed at <b>least one Droplet</b> on every target in the template.',
-				'Why not try the <span class="pseudo-button run"><svg class="icon" width="14" height="14"><use xlink:href="#icon-media-play"></use></svg>Run</span> button to see how it looks?'
+				'Why not try the <span class="pseudo-button run"><svg class="icon" width="14" height="14"><use xlink:href="#media-play-sprite"></use></svg>Run</span> button to see how it looks?'
 			]
 		},
 		tour: [{
@@ -83,8 +83,8 @@ export default function createDialogs(settings) {
 			message: [
 				'Tag is an app designed to explain how web pages are constructed.',
 				'The idea is simple: Place <b>elements</b> onto the <b>template</b>, and then use the ' +
-					'<span class="pseudo-button run"><svg class="icon" width="14" height="14"><use xlink:href="#icon-media-play"></use></svg>Run</span> button to see how the page will look in the <b>view</b>.',
-				'Some parts of the tour will let you try things out before moving on. If you want to, use the <span class="pseudo-button">Try it out</span> button when you see it, then use <span class="pseudo-button"><svg class="icon" width="14" height="14"><use xlink:href="#icon-compass"></use></svg>Continue tour</span> to go back to the tour.'
+					'<span class="pseudo-button run"><svg class="icon" width="14" height="14"><use xlink:href="#media-play-sprite"></use></svg>Run</span> button to see how the page will look in the <b>view</b>.',
+				'Some parts of the tour will let you try things out before moving on. If you want to, use the <span class="pseudo-button">Try it out</span> button when you see it, then use <span class="pseudo-button"><svg class="icon" width="14" height="14"><use xlink:href="#compass-sprite"></use></svg>Continue tour</span> to go back to the tour.'
 			],
 			buttons: tourButtons.proceed
 		}, {
@@ -147,7 +147,7 @@ export default function createDialogs(settings) {
 			title: 'The view',
 			message: [
 				'This is the view. It will show you how the page looks after running the code.',
-				'Use the <span class="pseudo-button run"><svg class="icon" width="14" height="14"><use xlink:href="#icon-media-play"></use></svg>Run</span> button to update the view'
+				'Use the <span class="pseudo-button run"><svg class="icon" width="14" height="14"><use xlink:href="#media-play-sprite"></use></svg>Run</span> button to update the view'
 			],
 			overlay: false,
 			attachment: {
@@ -161,7 +161,7 @@ export default function createDialogs(settings) {
 		}, {
 			title: 'All done!',
 			message: [
-				'Once you’ve used the <span class="pseudo-button run"><svg class="icon" width="14" height="14"><use xlink:href="#icon-media-play"></use></svg>Run</span> button, the view has updated and your last change should now be showing here.'
+				'Once you’ve used the <span class="pseudo-button run"><svg class="icon" width="14" height="14"><use xlink:href="#media-play-sprite"></use></svg>Run</span> button, the view has updated and your last change should now be showing here.'
 			],
 			overlay: false,
 			attachment: {

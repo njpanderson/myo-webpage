@@ -20,6 +20,10 @@ import { dialogModes } from './constants';
  * @property {ToolbarItem[]} toolbar - Toolbar items.
  */
 
+/*
+ * Globals available from the Rollup process:
+ * ENVIRONMENT (string) - The environment being worked in ('production', 'development')
+ */
 export default {
 	classes: {
 		canvas: 'tag-canvas',
@@ -108,5 +112,5 @@ export default {
 		separator: true
 	}],
 	onElementRender: null,
-	showIntro: PRODUCTION
+	showIntro: (ENVIRONMENT === 'production')
 };
