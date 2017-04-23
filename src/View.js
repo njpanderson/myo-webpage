@@ -15,6 +15,8 @@ var View = function(settings = {}) {
 
 	this._scripts = [];
 	this._callbacks = {};
+
+	this._createInternalEvents();
 };
 
 View.prototype = {
@@ -53,8 +55,8 @@ View.prototype = {
 		case messageCommands.RELOAD:
 			// reload request
 			this.settings.container.innerHTML = message.data.markup;
-
-			this._evalScripts();
+			this._warnScripts();
+			this._fire(this.settings.container, 'update');
 			break;
 
 		case messageCommands.RESET:
@@ -76,27 +78,23 @@ View.prototype = {
 		}
 	},
 
+	_fire: function(element, event) {
+		if (element instanceof HTMLElement && this._events[event]) {
+			element.dispatchEvent(this._events[event]);
+		}
+	},
+
 	/**
-	 * Gather scripts (besides view script) and re-insert in order
+	 * Gather any scripts within view and warn in order
 	 */
-	_evalScripts: function() {
-		this._scripts = [];
-
-		Array.prototype.slice.apply(document.querySelectorAll('.view script'))
+	_warnScripts: function() {
+		Array.prototype.slice.apply(this.settings.container.querySelectorAll('script'))
 			.forEach((script, index) => {
-				var new_script;
-
-				new_script = document.createElement('script');
-				new_script.src = script.src;
-				new_script.type = script.type;
-				new_script.onload = function() {
-					this._loadScript(index + 1);
-				}.bind(this);
-
-				this._scripts.push({
-					new: new_script,
-					old: script
-				});
+				console.warn(
+					'JS Script (' + (index + 1) + ') at "' + script.src + '"' +
+					' should not be part of the template as it cannot be removed from memory on reload.' +
+					' Please consider moving this script into your base View HTML.'
+				);
 			});
 
 		this._loadScript(0);
@@ -113,6 +111,19 @@ View.prototype = {
 
 	_reset: function() {
 		this.settings.container.innerHTML = '';
+	},
+
+	_createInternalEvents: function() {
+		this._events = {};
+
+		if (window.document &&  'createEvent' in window.document) {
+			/**
+			 * Fires after the view container has been updated with new markup.
+			 * @event tag:update
+			 */
+			this._events.update = window.document.createEvent('Event');
+			this._events.update.initEvent('tag:update', true, true);
+		}
 	}
 };
 
