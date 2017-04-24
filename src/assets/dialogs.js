@@ -90,7 +90,7 @@ export default function createDialogs(settings) {
 		}, {
 			title: 'The template',
 			message: [
-				'This is the template. It contains the source code for your web page, and is where you’ll add snippets of code.',
+				'This is the template. It contains the code for your web page, and is where you’ll add snippets of code.',
 				'Add elements to the <span class="drop-zone"><span class="target"><b>' +
 					settings.dropZone.label +
 					'</b></span></span> targets to construct the page.'
