@@ -105,13 +105,13 @@ export default function createDialogs(settings) {
 			},
 			buttons: tourButtons.proceed
 		}, {
-			title: 'The pallet',
+			title: 'The palette',
 			message: [
-				'This is the pallet. It contains Droplets, which can be added to the template above.'
+				'This is the palette. It contains Droplets, which can be added to the template above.'
 			],
 			overlay: false,
 			attachment: {
-				selector: 'section.pallet',
+				selector: 'section.palette',
 				options: {
 					placement: 'top',
 					modifiers: tourDialogModifiers
@@ -136,7 +136,7 @@ export default function createDialogs(settings) {
 			],
 			overlay: false,
 			attachment: {
-				selector: 'section.pallet .droplet:first-child',
+				selector: 'section.palette .droplet:first-child',
 				options: {
 					placement: 'top',
 					modifiers: tourDialogModifiers

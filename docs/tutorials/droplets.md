@@ -1,6 +1,6 @@
 # Droplets
 
-Droplets are individual components defined in a JSON format which, when dropped onto the template, form snippets of code. They are represented as buttons on the lower pallet which can be dragged into drop zones on the template.
+Droplets are individual components defined in a JSON format which, when dropped onto the template, form snippets of code. They are represented as buttons on the lower palette which can be dragged into drop zones on the template.
 
 Droplets can be placed anywhere within your template, which is injected into the `view` container on the view page.
 
@@ -18,7 +18,7 @@ The following droplet attributes are commonly used:
 
 Attribute        | Required | Default | Description
 :---             | :---     | :---    | :---
-`name`           | Required | (empty) | The user-friendly name shown within the pallet.
+`name`           | Required | (empty) | The user-friendly name shown within the palette.
 `dropletType`    | Required | (empty) | As above.
 `attachmentIds`  | Required | []      | An array of drop zone IDs this droplet can be attached to.
 `editable`       | Optional | {}      | An object of attributes which can be edited when attaching the droplet to the template. Only certain attributes are supported (listed below).
@@ -130,4 +130,4 @@ Setting        | Optional | Description
 `placeholder`  | Yes      | In the case of a text value, this will show in place of empty values.
 `value`        | Yes      | In the case of array/object options, this set the value as 'selected'. If the type is `checkbox`, a boolean `true` or `false` will define its checked state.
 
-**Note:** When using a function definition for the `required` value, the pallet cannot be defined with JSON and must be loaded directly as a JS object with the `App#load` method.
+**Note:** When using a function definition for the `required` value, the palette cannot be defined with JSON and must be loaded directly as a JS object with the `App#load` method.

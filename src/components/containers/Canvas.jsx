@@ -7,7 +7,7 @@ import Tooltip from './TooltipContainer';
 import Header from './HeaderContainer';
 import Template from './TemplateContainer';
 import Dialog from './DialogContainer';
-import Pallet from './PalletContainer';
+import Palette from './PaletteContainer';
 
 class Canvas extends React.Component {
 	constructor(props) {
@@ -68,7 +68,7 @@ class Canvas extends React.Component {
 						refCollector={this.props.refCollector}/>
 				</div>
 
-				<Pallet
+				<Palette
 					data={this.props.data}
 					settings={this.props.settings}
 					lib={this.props.lib}

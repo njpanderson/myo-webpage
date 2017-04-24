@@ -10,7 +10,7 @@ const app = new App({
 	}
 });
 
-const pallet = [
+const palette = [
 	{
 		'name': 'Header',
 		'dropletType': 'text',
@@ -76,7 +76,7 @@ const pallet = [
 
 app.load(
 	'templates/default.html',
-	pallet
+	palette
 )
 	.catch((error) => {
 		console.error(error);

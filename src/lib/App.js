@@ -76,7 +76,7 @@ App.prototype = {
 		// app data store (not stateful)
 		this._data = {
 			template: '',
-			pallet: []
+			palette: []
 		};
 
 		// templates module
@@ -84,9 +84,9 @@ App.prototype = {
 	},
 
 	/**
-	 * Load the template/pallet data and activate Tag.
+	 * Load the template/palette data and activate Tag.
 	 */
-	load: function(url, pallet) {
+	load: function(url, palette) {
 		return this._template.load(url)
 			.then(() => {
 				// load the HTML template and create it
@@ -96,8 +96,8 @@ App.prototype = {
 				this._data.template = data.template;
 			})
 			.then(() => {
-				// load the JSON based pallet data
-				return this._loadPallet(pallet);
+				// load the JSON based palette data
+				return this._loadPalette(palette);
 			})
 			.then(() => {
 				var stored_state = this.storage.get('state', undefined);
@@ -161,39 +161,39 @@ App.prototype = {
 	},
 
 	/**
-	 * Load the pallet data
+	 * Load the palette data
 	 * @private
 	 */
-	_loadPallet: function(src) {
+	_loadPalette: function(src) {
 		if (typeof src === 'string') {
-			// load pallet as a url
-			return this._loadPalletFromFile(src);
+			// load palette as a url
+			return this._loadPaletteFromFile(src);
 		} else if (typeof src === 'object') {
-			// load pallet directly
-			this._loadPalletFromArray(src);
+			// load palette directly
+			this._loadPaletteFromArray(src);
 			return Promise.resolve();
 		}
 	},
 
-	_loadPalletFromFile: function(url) {
+	_loadPaletteFromFile: function(url) {
 		return request.get(url)
 			.then((response) => {
-				var pallet;
+				var palette;
 
 				try {
-					pallet = JSON.parse(response.text);
+					palette = JSON.parse(response.text);
 				} catch(e) {
 					return Promise.reject(new Error(
-						'Pallet data at file "' + url + '"" could not be parsed.' +
+						'Palette data at file "' + url + '"" could not be parsed.' +
 						' is it valid JSON?'
 					));
 				}
 
-				if (Array.isArray(pallet) && pallet.length) {
-					this._loadPalletFromArray(pallet);
+				if (Array.isArray(palette) && palette.length) {
+					this._loadPaletteFromArray(palette);
 				} else {
 					throw new Error(
-						'Looks like the pallet at path ' + url +
+						'Looks like the palette at path ' + url +
 						' isn’t a valid array in JSON format.'
 					);
 				}
@@ -203,12 +203,12 @@ App.prototype = {
 			});
 	},
 
-	_loadPalletFromArray: function(pallet) {
+	_loadPaletteFromArray: function(palette) {
 		var item;
 
-		for (item in pallet) {
-			this._data.pallet.push(
-				new Droplet(pallet[item])
+		for (item in palette) {
+			this._data.palette.push(
+				new Droplet(palette[item])
 			);
 		}
 	},

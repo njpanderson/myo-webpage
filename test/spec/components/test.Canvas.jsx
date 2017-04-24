@@ -17,7 +17,7 @@ describe('Canvas', function() {
 				'./TemplateContainer': require('../../mocks/views/GenericComponent.js'),
 				'./TooltipContainer': require('../../mocks/views/GenericComponent.js'),
 				'./DialogContainer': require('../../mocks/views/GenericComponent.js'),
-				'./PalletContainer': require('../../mocks/views/GenericComponent.js')
+				'./PaletteContainer': require('../../mocks/views/GenericComponent.js')
 			});
 	});
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Droplet from './Droplet.jsx';
 
-class Pallet extends React.Component {
+class Palette extends React.Component {
 	constructor(props) {
 		super(props);
 	}
@@ -11,8 +11,8 @@ class Pallet extends React.Component {
 	getItems() {
 		var items = [];
 
-		if (this.props.data.pallet) {
-			this.props.data.pallet.forEach((droplet) => {
+		if (this.props.data.palette) {
+			this.props.data.palette.forEach((droplet) => {
 				items.push(
 					<Droplet droplet={droplet}
 						active={this.props.activeDropletId === droplet.id}
@@ -31,7 +31,7 @@ class Pallet extends React.Component {
 
 	render() {
 		return (
-			<section className="pallet">
+			<section className="palette">
 				<form>
 					{this.getItems.apply(this)}
 				</form>
@@ -40,8 +40,8 @@ class Pallet extends React.Component {
 	}
 }
 
-Pallet.propTypes = {
-	// from PalletContainer
+Palette.propTypes = {
+	// from PaletteContainer
 	activeDropletId: PropTypes.string.isRequired,
 
 	// from Canvas
@@ -53,10 +53,10 @@ Pallet.propTypes = {
 	refCollector: PropTypes.func
 };
 
-Pallet.defaultProps = {
+Palette.defaultProps = {
 	data: {
-		pallet: []
+		palette: []
 	}
 };
 
-export default Pallet;
+export default Palette;

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import actions from '../../state/actions';
-import Pallet from '../views/Pallet.jsx';
+import Palette from '../views/Palette.jsx';
 
 const mapStateToProps = (state) => {
 	return {
@@ -31,9 +31,9 @@ const mapDispatchToProps = (dispatch, props) => {
 	};
 };
 
-const PalletContainer = connect(
+const PaletteContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Pallet);
+)(Palette);
 
-export default PalletContainer;
+export default PaletteContainer;

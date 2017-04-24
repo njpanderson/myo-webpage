@@ -39,7 +39,7 @@ An example for the bare minimum required for Tag to work is as follows:
 │   ├── css/ [5]
 │   ├── templates/
 │   │   ├── default.html [6]
-│   │   ├── pallet.json [7]
+│   │   ├── palette.json [7]
 ```
 
 [1] Main page for displaying Tag's interface.
@@ -48,9 +48,9 @@ An example for the bare minimum required for Tag to work is as follows:
 [4] Vour bootstrapping script for the view frame class.
 [5] Any css you wish to use for the view frame.
 [6] The view template.
-[7] Your Droplet pallet, in JSON format.
+[7] Your Droplet palette, in JSON format.
 
-With the exception of the `html` files and `pallet.json`, these are compiled files, usually from somewhere like `src/` in your project's root.
+With the exception of the `html` files and `palette.json`, these are compiled files, usually from somewhere like `src/` in your project's root.
 
 The following is required at bare minimum within the `main.js` source file:
 
@@ -64,8 +64,8 @@ var app = new App();
 app.load(
 	// the view template, with drop zones
 	'templates/default.html',
-	// the pallet, containing droplets
-	'templates/pallet.json'
+	// the palette, containing droplets
+	'templates/palette.json'
 ).catch((error) => {
 	// show errors caught during the promise process
 	console.error(error);

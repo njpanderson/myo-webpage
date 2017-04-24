@@ -370,7 +370,7 @@ UI.prototype = {
 				};
 			}
 
-			// create a DragDrop instance and assign to the pallet item data
+			// create a DragDrop instance and assign to the palette item data
 			if (item.type === 'drag') {
 				this._data.UI.dragdrop.droplets.addDragable(ref, item.settings, data);
 			} else if (item.type === 'drop') {
@@ -689,7 +689,7 @@ UI.prototype = {
 
 		// should we display a "last droplet" notice?
 		if (this.settings.dropZone.noticeOnLastPlacement &&
-			(!state.app.last_valid_drop && keys.length === this._data.pallet.length)) {
+			(!state.app.last_valid_drop && keys.length === this._data.palette.length)) {
 			notice = true;
 
 			// check zones all have placements
@@ -851,7 +851,7 @@ UI.prototype = {
 	 * @param {string} id - ID of the Droplet to retrieve.
 	 */
 	getDropletById: function(id) {
-		return this._data.pallet.find((element) => {
+		return this._data.palette.find((element) => {
 			return element.id === id;
 		});
 	},
