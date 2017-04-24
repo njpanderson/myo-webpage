@@ -268,15 +268,17 @@ App.prototype = {
 		this._requireUI();
 
 		this._UI._showDialog(dialogModes.GENERAL, this.dialogs.resetState)
-			.then(() => {
-				// clear all zones and reset the app
-				this._store.dispatch(actions.zoneClearAllAttachments());
-				this._store.dispatch(actions.resetApp());
+			.then((dialog) => {
+				if (dialog.action !== 'cancel') {
+					// clear all zones and reset the app
+					this._store.dispatch(actions.zoneClearAllAttachments());
+					this._store.dispatch(actions.resetApp());
 
-				// clear view
-				this._UI._comms.send('view', {
-					cmd: messageCommands.RESET
-				});
+					// clear view
+					this._UI._comms.send('view', {
+						cmd: messageCommands.RESET
+					});
+				}
 
 				this.hideDialog();
 			});
