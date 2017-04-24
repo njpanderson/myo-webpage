@@ -188,7 +188,7 @@ class DialogEditDroplet extends React.Component {
 			title = 'Add ' + headingsByType[this.droplet.dropletType].text;
 			notes = [
 				'You’ve found the right drop place to put this Droplet! ',
-				'Edit anything you would like to change and then use “Edit Droplet”.'
+				'Edit anything you would like to change and then press “Add Droplet”.'
 			];
 			buttons = buttons.concat({
 				type: 'submit',
