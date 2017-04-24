@@ -130,7 +130,7 @@ export default function createDialogs(settings) {
 					'</b></span></span>, it means it can accept the Droplet you have chosen, or <span class="drop-zone decline"><span class="target"><b>' +
 						settings.dropZone.label +
 						'</b></span></span> if the Droplet can’t be placed there.',
-				'Click on a Droplet and then click on one of the <span class="drop-zone"><span class="target"><b>' +
+				'You can click on a Droplet and then click on one of the <span class="drop-zone"><span class="target"><b>' +
 					settings.dropZone.label +
 					'</b></span></span> targets in the template to attach it.'
 			],
@@ -142,7 +142,7 @@ export default function createDialogs(settings) {
 					modifiers: tourDialogModifiers
 				}
 			},
-			buttons: tourButtons.try_it
+			buttons: tourButtons.proceed
 		}, {
 			title: 'The view',
 			message: [
@@ -157,8 +157,8 @@ export default function createDialogs(settings) {
 					modifiers: tourDialogModifiers
 				}
 			},
-			buttons: tourButtons.try_it
-		}, {
+			buttons: tourButtons.proceed
+		}/*, {
 			title: 'All done!',
 			message: [
 				'Once you’ve used the <span class="pseudo-button run"><svg class="icon" width="14" height="14"><use xlink:href="#media-play-sprite"></use></svg>Run</span> button, the view has updated and your last change should now be showing here.'
@@ -172,6 +172,14 @@ export default function createDialogs(settings) {
 				}
 			},
 			buttons: tourButtons.finish
+		}*/, {
+			title: 'End of tour',
+			message: [
+				'That’s everything. Now have a go yourself and see what you can build. Don’t forget to press the <span class="pseudo-button run"><svg class="icon" width="14" height="14"><use xlink:href="#media-play-sprite"></use></svg>Run</span> button to check how things look.',
+				'Now get creating!'
+			],
+			overlay: false,
+			buttons: tourButtons.finish
 		}]
 	};
-};
+}
