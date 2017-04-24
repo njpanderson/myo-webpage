@@ -74,7 +74,7 @@ export default function createDialogs(settings) {
 		lastDropletDrop: {
 			title: 'Well done!',
 			message: [
-				'You’ve placed at <b>least one Droplet</b> on every target in the template.',
+				'You’ve placed at <b>least one Droplet</b> on every target in the Template.',
 				'Why not try the <span class="pseudo-button run"><svg class="icon" width="14" height="14"><use xlink:href="#media-play-sprite"></use></svg>Run</span> button to see how it looks?'
 			]
 		},
@@ -82,16 +82,16 @@ export default function createDialogs(settings) {
 			title: 'Welcome to <span class="logo">&lt;<b>Tag</b>&gt;</span>!',
 			message: [
 				'Tag is an app designed to explain how web pages are constructed.',
-				'The idea is simple: Place <b>elements</b> onto the <b>template</b>, and then use the ' +
-					'<span class="pseudo-button run"><svg class="icon" width="14" height="14"><use xlink:href="#media-play-sprite"></use></svg>Run</span> button to see how the page will look in the <b>view</b>.'
+				'The idea is simple: Place <b>Droplets</b> onto the <b>Template</b>, and then use the ' +
+					'<span class="pseudo-button run"><svg class="icon" width="14" height="14"><use xlink:href="#media-play-sprite"></use></svg>Run</span> button to see how the page will look in the <b>View</b>.'
 				//'Some parts of the tour will let you try things out before moving on. If you want to, use the <span class="pseudo-button">Try it out</span> button when you see it, then use <span class="pseudo-button"><svg class="icon" width="14" height="14"><use xlink:href="#compass-sprite"></use></svg>Continue tour</span> to go back to the tour.'
 			],
 			buttons: tourButtons.proceed
 		}, {
-			title: 'The template',
+			title: 'The Template',
 			message: [
-				'This is the template. It contains the code for your web page, and is where you’ll add snippets of code.',
-				'Add elements to the <span class="drop-zone"><span class="target"><b>' +
+				'This is the Template. It contains the code for your web page, and is where you’ll add snippets of code.',
+				'Add Droplets to the <span class="drop-zone"><span class="target"><b>' +
 					settings.dropZone.label +
 					'</b></span></span> targets to construct the page.'
 			],
@@ -105,9 +105,9 @@ export default function createDialogs(settings) {
 			},
 			buttons: tourButtons.proceed
 		}, {
-			title: 'The palette',
+			title: 'The Palette',
 			message: [
-				'This is the palette. It contains Droplets, which can be added to the template above.'
+				'This is the Palette. It contains Droplets, which can be added to the Template above.'
 			],
 			overlay: false,
 			attachment: {
@@ -121,7 +121,7 @@ export default function createDialogs(settings) {
 		}, {
 			title: 'Droplet',
 			message: [
-				'This is a Droplet. It can be added to the template above.',
+				'This is a Droplet. It can be added to the Template above.',
 				'Certain <span class="drop-zone"><span class="target"><b>' +
 					settings.dropZone.label +
 					'</b></span></span> targets only allow certain Droplets to be added to them.',
@@ -132,7 +132,7 @@ export default function createDialogs(settings) {
 						'</b></span></span> if the Droplet can’t be placed there.',
 				'You can click on a Droplet and then click on one of the <span class="drop-zone"><span class="target"><b>' +
 					settings.dropZone.label +
-					'</b></span></span> targets in the template to attach it.'
+					'</b></span></span> targets in the Template to attach it.'
 			],
 			overlay: false,
 			attachment: {
@@ -144,10 +144,10 @@ export default function createDialogs(settings) {
 			},
 			buttons: tourButtons.proceed
 		}, {
-			title: 'The view',
+			title: 'The View',
 			message: [
-				'This is the view. It will show you how the page looks after running the code.',
-				'Use the <span class="pseudo-button run"><svg class="icon" width="14" height="14"><use xlink:href="#media-play-sprite"></use></svg>Run</span> button to update the view'
+				'This is the View. It will show you how the page looks after running the code.',
+				'Use the <span class="pseudo-button run"><svg class="icon" width="14" height="14"><use xlink:href="#media-play-sprite"></use></svg>Run</span> button to update the View'
 			],
 			overlay: false,
 			attachment: {
@@ -161,7 +161,7 @@ export default function createDialogs(settings) {
 		}/*, {
 			title: 'All done!',
 			message: [
-				'Once you’ve used the <span class="pseudo-button run"><svg class="icon" width="14" height="14"><use xlink:href="#media-play-sprite"></use></svg>Run</span> button, the view has updated and your last change should now be showing here.'
+				'Once you’ve used the <span class="pseudo-button run"><svg class="icon" width="14" height="14"><use xlink:href="#media-play-sprite"></use></svg>Run</span> button, the View has updated and your last change should now be showing here.'
 			],
 			overlay: false,
 			attachment: {
