@@ -27,3 +27,9 @@ Icon.propTypes = {
 };
 
 export { GLYPHS };
+
+export const dropletTypeToGlyphs = {
+	'text': GLYPHS.TEXT,
+	'element': GLYPHS.TAG,
+	'attribute': GLYPHS.PUZZLE_PIECE
+};

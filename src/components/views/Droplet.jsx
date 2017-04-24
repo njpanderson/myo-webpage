@@ -4,13 +4,7 @@ import PropTypes from 'prop-types';
 import { collectRef } from '../../lib/utils';
 import Droplet from '../../lib/Droplet';
 import Template from '../../lib/Template';
-import { GLYPHS, Icon } from './Icon.jsx';
-
-const dropletTypeToGlyphs = {
-	'text': GLYPHS.TEXT,
-	'element': GLYPHS.TAG,
-	'attribute': GLYPHS.PUZZLE_PIECE
-};
+import { GLYPHS, Icon, dropletTypeToGlyphs } from './Icon.jsx';
 
 class DropletComponent extends React.Component {
 	constructor(props) {

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { collectRef } from '../../lib/utils';
 import DropZone from './DropZone.jsx';
+import { Icon, dropletTypeToGlyphs } from './Icon.jsx';
 
 class Template extends React.Component {
 	constructor(props) {
@@ -93,9 +94,22 @@ class Template extends React.Component {
 	}
 
 	getInstruction() {
-		if (this.props.activeDropletID != '') {
+		var className = [
+				this.props.settings.classes.instruction
+			], droplet;
+
+		if (this.props.activeDropletID != '' &&
+			(droplet = this.props.lib.getDropletById(this.props.activeDropletID))) {
+			className.push(droplet.dropletType);
+
 			return (
-				<p className="instruction">Choose a target for the droplet...</p>
+				<div className={className.join(' ')}>
+					<h2>
+						<Icon glyph={dropletTypeToGlyphs[droplet.dropletType]}/>
+						<span>{droplet.name}</span>
+					</h2>
+					<p><b>Choose a target</b> for the selected droplet below.</p>
+				</div>
 			);
 		}
 	}

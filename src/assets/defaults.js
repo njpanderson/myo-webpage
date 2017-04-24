@@ -42,6 +42,7 @@ export default {
 		button_animate: 'animate',
 		popup: 'popup',
 		tooltip: 'tooltip',
+		instruction: 'instruction',
 		field: {
 			node: 'field',
 			has_error: 'has-error',
