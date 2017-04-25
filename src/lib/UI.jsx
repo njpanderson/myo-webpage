@@ -819,6 +819,7 @@ UI.prototype = {
 	_updateView: function() {
 		var state = this._store.getState();
 
+		// send 'reload' command to view frame
 		this._comms.send('view', {
 			cmd: messageCommands.RELOAD,
 			data: {
@@ -827,6 +828,9 @@ UI.prototype = {
 				)
 			}
 		});
+
+		// focus view frame
+		this._refs.components.view_frame.contentWindow.focus();
 	},
 
 	/**
