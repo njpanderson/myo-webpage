@@ -16,7 +16,13 @@ Tour.prototype = {
 	 */
 	intro: function() {
 		return this._parent._showDialog(dialogModes.GENERAL, this._parent.dialogs.intro)
-			.then(this._parent._hideDialog.bind(this._parent));
+			.then((dialog) => {
+				this._parent._hideDialog();
+
+				if (dialog.action === 'tour') {
+					this.start();
+				}
+			});
 	},
 
 	/**

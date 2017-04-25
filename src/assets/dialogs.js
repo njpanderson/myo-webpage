@@ -34,9 +34,16 @@ export default function createDialogs(settings) {
 			title: 'Welcome to <span class="logo">&lt;<b>Tag</b>&gt;</span>!',
 			message: [
 				'Tag is an app designed to explain how web pages are constructed.',
-				'If you are new to tag, you can use the Tour button in the toolbar.',
+				'If you are new to tag, you can use the “Start tour” button.',
 				'Otherwise, just click “OK” and get building!'
-			]
+			],
+			buttons: [{
+				type: 'tour',
+				label: 'Start tour'
+			}, {
+				type: 'submit',
+				label: 'OK'
+			}]
 		},
 		resetState: {
 			title: 'Reset Tag',
