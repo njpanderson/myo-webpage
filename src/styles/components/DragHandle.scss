@@ -3,7 +3,7 @@
 	$handle_height: 50px;
 
 	position: relative;
-	background-color: $gray-light;
+	background-color: darken($gray-light, 2%);
 	cursor: col-resize;
 
 	&:after {
@@ -23,7 +23,7 @@
 
 	&:hover,
 	&.item-dragging {
-		background-color: lighten($gray-light, ($lighten-factor / 2));
+		background-color: darken($gray-light, 4%);
 	}
 
 	&:hover:after,

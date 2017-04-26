@@ -2,8 +2,8 @@ header {
 	display: flex;
 	align-items: center;
 	border-bottom: 1px solid $gray-med;
-	padding: ($section-padding / 2) $section-padding;
-	background: linear-gradient(to bottom, lighten($gray-light, 2%) 0%, lighten($gray-light, 1%) 100%);
+	padding: $section-padding;
+	background-color: $gray-light;
 
 	.logo {
 		margin-right: 1em;

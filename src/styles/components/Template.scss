@@ -3,11 +3,15 @@
 	flex-direction: column;
 	overflow: hidden;
 	border-right: 1px solid $gray-med;
-	background-color: $bg-code;
+	background-color: lighten($bg-code, 8%);
 
 	.template-inner {
 		overflow: auto;
 		flex-grow: 1;
+	}
+
+	.droplet-active & {
+		background-color: $bg-code;
 	}
 
 	pre {
