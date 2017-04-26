@@ -31,10 +31,10 @@ const tourButtons = {
 export default function createDialogs(settings) {
 	return {
 		intro: {
-			title: 'Welcome to <span class="logo">&lt;<b>Tag</b>&gt;</span>!',
+			title: 'Welcome to <span class="logo">&lt;<b>tag</b>&gt;</span>!',
 			message: [
-				'Tag is an app designed to explain how web pages are constructed.',
-				'If you are new to tag, you can use the “Start tour” button.',
+				'<b>tag</b> is an app designed to show <b>how web pages are constructed</b>.',
+				'If you are <b>new to tag</b>, you can use the “Start tour” button.',
 				'Otherwise, just click “OK” and get building!'
 			],
 			buttons: [{
@@ -46,7 +46,7 @@ export default function createDialogs(settings) {
 			}]
 		},
 		resetState: {
-			title: 'Reset Tag',
+			title: 'Reset tag',
 			message: [
 				'Are you sure you want to go back to the beginning?',
 				'All of your current work will be cleared.'
@@ -86,9 +86,9 @@ export default function createDialogs(settings) {
 			]
 		},
 		tour: [{
-			title: 'Welcome to <span class="logo">&lt;<b>Tag</b>&gt;</span>!',
+			title: 'Welcome to <span class="logo">&lt;<b>tag</b>&gt;</span>!',
 			message: [
-				'Tag is an app designed to explain how web pages are constructed.',
+				'tag is an app designed to explain how web pages are constructed.',
 				'The idea is simple: Place <b>Droplets</b> onto the <b>Template</b>, and then use the ' +
 					'<span class="pseudo-button run"><svg class="icon" width="14" height="14"><use xlink:href="#media-play-sprite"></use></svg>Run</span> button to see how the page will look in the <b>View</b>.'
 				//'Some parts of the tour will let you try things out before moving on. If you want to, use the <span class="pseudo-button">Try it out</span> button when you see it, then use <span class="pseudo-button"><svg class="icon" width="14" height="14"><use xlink:href="#compass-sprite"></use></svg>Continue tour</span> to go back to the tour.'

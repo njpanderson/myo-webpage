@@ -2,14 +2,14 @@
 
 The toolbar can be customised by editing the `toolbar` property of the instantiation settings object.
 
-The `toolbar` property is an array of objects each defining a single button. The button can either trigger methods on the Tag App class, or run totally custom functions. An example toolbar button is as follows:
+The `toolbar` property is an array of objects each defining a single button. The button can either trigger methods on the tag App class, or run totally custom functions. An example toolbar button is as follows:
 
 ```
 {
 	... other settings...
 	toolbar: [{
 			label: 'Tour',
-			icon: Tag.GLYPHS.COMPASS,
+			icon: tag.GLYPHS.COMPASS,
 			method: 'startTour'
 		}
 		... other tools...
@@ -19,7 +19,7 @@ The `toolbar` property is an array of objects each defining a single button. The
 
 When rendered, the above button would be labeled "Tour" with a compass icon. When it is pressed, the App method `startTour` would be invoked with no arguments.
 
-If `method` is a function, it will be invoked with the `this` keyword bound to the Tag instance.
+If `method` is a function, it will be invoked with the `this` keyword bound to the tag instance.
 
 The possible key/value pairs for each button is:
 
@@ -34,7 +34,7 @@ Key              | Required | Default | Description
 
 ## Toolbar icons
 
-The Tag App class contains a static object which references the list of possible icons which can be used with toolbar buttons. When importing Tag's main class (`import App from '../Index';`), The icons can be referenced (for example) with `App.GLYPHS.[glyphname]`. The available icons which are sourced from the Iconic library are:
+The tag App class contains a static object which references the list of possible icons which can be used with toolbar buttons. When importing tag's main class (`import App from '../Index';`), The icons can be referenced (for example) with `App.GLYPHS.[glyphname]`. The available icons which are sourced from the Iconic library are:
 
 
 Glyph name       | Icon

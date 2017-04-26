@@ -39,7 +39,7 @@ class Canvas extends React.Component {
 					settings={this.props.settings}
 					onButtonClick={this.props.onButtonClick}
 					lib={this.props.lib}>
-					<h1 className="logo">&lt;<b>Tag</b>&gt;</h1>
+					<h1 className="logo">&lt;<b>tag</b>&gt;</h1>
 					<p>The webpage learning tool.</p>
 				</Header>
 

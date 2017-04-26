@@ -1,6 +1,6 @@
 # Events
 
-There’s currently only one event fired by Tag, which is detailed below:
+There’s currently only one event fired by tag, which is detailed below:
 
 Element | Event | Description
 --- | --- | ---
@@ -8,7 +8,7 @@ View container | `tag:update` | Fired after the view updates with new markup. Ca
 
 ## Example event use
 
-Any event Tag fires can be treated as a normal DOM Event. An example of attaching a listener to the `tag:update` event is as follows:
+Any event tag fires can be treated as a normal DOM Event. An example of attaching a listener to the `tag:update` event is as follows:
 
 ```
 // placed in your template HTML

@@ -14,7 +14,7 @@ jsdom('test/fixtures/index.html', (document) => {
 		global.canvas.innerHTML = '';
 	});
 
-	describe('Tag test suite', function() {
+	describe('tag test suite', function() {
 		// debugger pause and allow unlimited timings if node env is test-live
 		if (process.env.NODE_ENV === 'test-live') {
 			this.timeout(0);

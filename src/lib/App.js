@@ -84,7 +84,7 @@ App.prototype = {
 	},
 
 	/**
-	 * Load the template/palette data and activate Tag.
+	 * Load the template/palette data and activate tag.
 	 */
 	load: function(url, palette) {
 		return this._template.load(url)

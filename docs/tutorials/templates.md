@@ -1,6 +1,6 @@
 # Templates
 
-Creating HTML templates for Tag is relatively easy, so long as a few rules are followed.
+Creating HTML templates for tag is relatively easy, so long as a few rules are followed.
 
 ## What’s included
 
@@ -34,7 +34,7 @@ The view template, the location of which is defined by the App settings, is a si
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Tag - View</title>
+	<title>tag - View</title>
 	<meta charset="utf-8"/>
 	<link rel="stylesheet" href="includes/css/main.css" type="text/css"/>
 </head>

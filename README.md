@@ -2,22 +2,22 @@
 
 **WARNING: This project is currenty UNLICENSED and is pending an appropriate open source license. For now, please do not make copies or distribute this project, or use it in any public-facing projects.**
 
-# Tag
-Tag is a Single Page App created to guide users through the basics of creating web pages using a simple visual interface.
+# tag
+tag is a Single Page App created to guide users through the basics of creating web pages using a simple visual interface.
 
 ## Installing
 
 [installation instructions for es5 index/view files]
 
-## How Tag works
+## How tag works
 
 [explain the main app and View frames, Droplets, Drop Zones and how they work with View templates]
 
 ## Recommended setup
 
-Before you begin, take note that this is only recommended setup guidance in order to get you started with using Tag. If you wish to set things up in a different way, the only things must be considered:
+Before you begin, take note that this is only recommended setup guidance in order to get you started with using tag. If you wish to set things up in a different way, the only things must be considered:
 
- - Tag `require('njp-tag').default` must be instantiated from `App` on the main page of your app.
+ - tag `require('njp-tag').default` must be instantiated from `App` on the main page of your app.
  - View `require('njp-tag/view').default` must be instantiated from `View` on view page of your app, which is referenced by the settings passed to the `App` constructor, and is set to `"view.html"` by default.
 
 You can also import the app/view files with ES2015 imports:
@@ -27,7 +27,7 @@ import App from 'njp-tag';
 import View from 'njp-tag/view';
 ```
 
-An example for the bare minimum required for Tag to work is as follows:
+An example for the bare minimum required for tag to work is as follows:
 
 ```
 ├── ./
@@ -42,8 +42,8 @@ An example for the bare minimum required for Tag to work is as follows:
 │   │   ├── palette.json [7]
 ```
 
-[1] Main page for displaying Tag's interface.
-[2] View page for displaying Tag's view frame.
+[1] Main page for displaying tag's interface.
+[2] View page for displaying tag's view frame.
 [3] Your bootstrapping script for the main class.
 [4] Vour bootstrapping script for the view frame class.
 [5] Any css you wish to use for the view frame.
@@ -85,4 +85,4 @@ new View({
 });
 ```
 
-Everything else is pretty much optional. You don't *need* to define View frame CSS or any extra CSS on top of Tag itself, but obviously you'll want to make things look a bit nicer so it's recommended.
+Everything else is pretty much optional. You don't *need* to define View frame CSS or any extra CSS on top of tag itself, but obviously you'll want to make things look a bit nicer so it's recommended.

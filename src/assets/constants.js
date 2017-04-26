@@ -52,6 +52,6 @@ export const errorCodes = {
 export const setLabels = {
 	value: 'Value',
 	attrs: 'Attributes',
-	tagName: 'Tag name',
+	tagName: 'tag name',
 	innerHTML: 'HTML content'
 };
