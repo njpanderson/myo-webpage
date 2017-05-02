@@ -43,7 +43,7 @@
     "jsdom": "^9.11.0",
     "mocha": "^3.2.0",
     "mockery": "^2.0.0",
-    "node-sass": "^4.5.2",
+    "node-sass": "^4.5.0",
     "node-xml-lite": "0.0.7",
     "postcss": "^5.2.17",
     "react-test-renderer": "^15.5.4",
@@ -54,13 +54,11 @@
     "rollup-plugin-commonjs": "^8.0.2",
     "rollup-plugin-json": "^2.1.1",
     "rollup-plugin-node-resolve": "^3.0.0",
-    "rollup-plugin-postcss": "^0.4.1",
     "rollup-plugin-sass": "^0.5.1",
     "rollup-plugin-string": "^2.0.2"
   },
   "dependencies": {
     "interact.js": "^1.2.8",
-    "node-sass": "^4.5.0",
     "promise": "^7.1.1",
     "popper.js": "1.0.8",
     "prop-types": "^15.5.8",
