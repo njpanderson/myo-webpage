@@ -49,7 +49,7 @@ describe('PropTypes', function() {
 
 	describe('stringNotEmpty', function() {
 		it('Should return true when value is not empty', function() {
-			expect(PropTypes.stringNotEmpty('value')).to.be.true
+			expect(PropTypes.stringNotEmpty('value')).to.be.true;
 		});
 
 		it('Should throw when value is empty or undefined', function() {
