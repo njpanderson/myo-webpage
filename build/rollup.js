@@ -27,7 +27,7 @@ generateSpriteJSON('dist/svg-sprite.json')
 
 // builds an array of files with rollup
 function build(files, index) {
-	var options, path_dest, file, file_bundle, intro;
+	var options, path_dest, file, file_bundle;
 
 	if (index < files.length) {
 		file = files[index];

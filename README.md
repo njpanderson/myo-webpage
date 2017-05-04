@@ -1,9 +1,5 @@
-**Note: Do not use this module, it is currently pre-alpha and the README contents are a constant work in progress**
-
-**WARNING: This project is currenty UNLICENSED and is pending an appropriate open source license. For now, please do not make copies or distribute this project, or use it in any public-facing projects.**
-
 # tag
-tag is a Single Page App created to guide users through the basics of creating web pages using a simple visual interface.
+tag is a Single Page App intended to guide users through the basics of creating web pages using a simple visual interface.
 
 ## Installing
 

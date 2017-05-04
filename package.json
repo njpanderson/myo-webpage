@@ -1,6 +1,6 @@
 {
   "name": "njp-tag",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A small tutorial SPA to help people understand how webpages are made.",
   "main": "dist/index.js",
   "scripts": {
@@ -21,7 +21,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/njpanderson/tag/issues"
   },
