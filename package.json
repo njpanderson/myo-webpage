@@ -1,8 +1,8 @@
 {
   "name": "njp-tag",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A small tutorial SPA to help people understand how webpages are made.",
-  "main": "dist/index.js",
+  "main": "index.js",
   "scripts": {
     "rollup": "node build/rollup.js",
     "build": "NODE_ENV=production npm run rollup",
@@ -15,12 +15,9 @@
   "files": [
     "dist/"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/njpanderson/tag.git"
-  },
+  "repository": "git+https://github.com/njpanderson/tag.git",
   "keywords": [],
-  "author": "",
+  "author": "Neil Anderson <njp.anderson@icloud.com>",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/njpanderson/tag/issues"
@@ -59,8 +56,8 @@
   },
   "dependencies": {
     "interact.js": "^1.2.8",
-    "promise": "^7.1.1",
     "popper.js": "1.0.8",
+    "promise": "^7.1.1",
     "prop-types": "^15.5.8",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
