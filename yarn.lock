@@ -2392,6 +2392,10 @@ node-gyp@^3.3.1:
     sass-graph "^2.1.1"
     stdout-stream "^1.4.0"
 
+node-watch@^0.5.4:
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/node-watch/-/node-watch-0.5.4.tgz#bdad41b23d23444e895c797d73ad5d49e3833309"
+
 node-xml-lite@0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/node-xml-lite/-/node-xml-lite-0.0.7.tgz#eb1cc94aa576153bbf4011f7438b73b6f4768590"

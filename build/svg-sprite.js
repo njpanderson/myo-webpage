@@ -79,8 +79,6 @@ module.exports = function(dest) {
 		svg: ''
 	};
 
-	console.log('Building SVG Sprite...');
-
 	return new Promise(function(resolve, reject) {
 		// find svg files and fill in sprite
 		glob('src/img/**/*.svg', function(error, files) {
