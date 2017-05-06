@@ -14,9 +14,7 @@
   "files": [
     "dist/",
     "view.js",
-    "index.js",
-    "test/",
-    ".babelrc"
+    "index.js"
   ],
   "repository": "git+https://github.com/njpanderson/tag.git",
   "keywords": [],
