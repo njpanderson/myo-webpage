@@ -1,5 +1,9 @@
 {
 	"plugins": ["plugins/markdown"],
+	"source": {
+		"include": ["src/"],
+		"includePattern": ".+\\.jsx?$"
+	},
 	"opts": {
 		"destination": "./docs",
 		"package": "./package.json",
