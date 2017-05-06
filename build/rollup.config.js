@@ -12,7 +12,11 @@ module.exports = {
 	format: 'cjs',
 	sourceMap: true,
 	external: function(id) {
-		return /node_modules/.test(id) && !(/popper\.js/.test(id));
+		return (
+			!(/^(\.|\/|src)/.test(id)) && // include local includes
+			!(/popper\.js/.test(id)) && // include popper.js
+			!(/(babel|commonjs)Helpers/.test(id)) // include helpers
+		);
 	},
 	plugins: [
 		json({
@@ -36,8 +40,6 @@ module.exports = {
 			}
 		}),
 		resolve({
-			module: false,
-			// extensions: ['.js', '.jsx', '.json'],
 			// preferBuiltins: false
 		}),
 		commonjs(),
