@@ -38,7 +38,9 @@ describe('Tour', function() {
 	describe('#intro', function() {
 		it('Should show an intro', function() {
 			ui.__set_showDialog_resolver(function(resolve) {
-				resolve();
+				resolve({
+					action: 'cancel'
+				});
 			});
 
 			var tour = new Tour(ui);

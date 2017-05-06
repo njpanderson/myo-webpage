@@ -15,13 +15,13 @@ describe('App', function() {
 	useMockery(() => {
 		useMockery
 			.registerMultiple({
-				'./styles/main.scss': require('../mocks/styles/main'),
-				'./assets/defaults': require('../fixtures/defaults'),
-				'./lib/UI.jsx': require('../mocks/UI'),
-				'./lib/Template': require('../mocks/Template'),
-				'./lib/Droplet': Droplet,
-				'./lib/ajax': require('../mocks/node/ajax'),
-				'./components/views/Icon.jsx': require('../mocks/views/Icon')
+				'../styles/main.scss': require('../mocks/styles/main'),
+				'../assets/defaults': require('../fixtures/defaults'),
+				'./UI.jsx': require('../mocks/UI'),
+				'./Template': require('../mocks/Template'),
+				'./Droplet': Droplet,
+				'./ajax': require('../mocks/node/ajax'),
+				'../components/views/Icon.jsx': require('../mocks/views/Icon')
 			});
 	});
 
