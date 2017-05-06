@@ -1,11 +1,10 @@
 {
-  "plugins": ["external-helpers", "transform-object-rest-spread"],
+  "plugins": ["transform-object-rest-spread"],
   "presets": [
 		"react",
 		["env", {
-        "modules": false,
 			"targets": {
-				"browsers": ["last 2 versions"]
+				"node": "current"
 			}
 		}]
   ]

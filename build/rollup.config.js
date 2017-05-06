@@ -42,6 +42,17 @@ module.exports = {
 		}),
 		commonjs(),
 		babel({
+			babelrc: false,
+			plugins: ['external-helpers', 'transform-object-rest-spread'],
+			presets: [
+				'react',
+				['env', {
+					'modules': false,
+					'targets': {
+						'browsers': ['last 2 versions']
+					}
+				}],
+			],
 			exclude: [
 				'node_modules/**'
 			]
