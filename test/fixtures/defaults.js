@@ -30,6 +30,7 @@ export default {
 		}
 	},
 	selectors: {
+		app: '.app',
 		drop_zone: '.drop-zone .target',
 		droplet: '.droplet',
 		button_circle: '.circle'
