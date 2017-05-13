@@ -1,3 +1,7 @@
+/**
+ * @module assets/defaults
+ */
+
 import { GLYPHS } from '../components/views/Icon.jsx';
 import { dialogModes } from './constants';
 
@@ -6,6 +10,7 @@ import { dialogModes } from './constants';
  * @typedef AppDefaults
  * @property {object} classes - Class definitions.
  * @property {object} selectors - CSS Selector definitions.
+ * @property {object} selectors.app='.app' - App selector.
  * @property {object} template - Template options.
  * @property {number} template.initial_flex_basis=50 - The initial flex basis (width) of
  * the template container.
@@ -74,6 +79,7 @@ export default {
 		}
 	},
 	selectors: {
+		app: '.app',
 		drop_zone: '.drop-zone .target',
 		droplet: '.droplet',
 		button_circle: '.circle'

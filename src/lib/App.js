@@ -67,7 +67,7 @@ App.prototype = {
 	_init: function() {
 		this._refs = {
 			ui: {
-				app: document.querySelector('.app')
+				app: document.querySelector(this.settings.selectors.app)
 			},
 			mounted: {},
 			components: {}
