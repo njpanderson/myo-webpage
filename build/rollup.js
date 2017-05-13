@@ -7,6 +7,7 @@ const rollup = require('rollup'),
 	chalk = require('chalk'),
 	ENVIRONMENT = (process.env.NODE_ENV === 'production') ? 'production' : 'development',
 	watch_dir = 'src/',
+	dist_dir = 'dist/',
 	formats = {
 		cjs: require('./rollup.config'),
 		iife: require('./rollup.config.iife')
@@ -45,11 +46,16 @@ function init(options = {}) {
 	});
 	prepend = prepend.replace(/\{\{ ENVIRONMENT \}\}/g, ENVIRONMENT);
 
+	// ensure dist/ path exists
+	if (!fs.existsSync(dist_dir)){
+		fs.mkdirSync(dist_dir);
+	}
+
 	if (!options.ignoreSVGs) {
 		console.log(chalk.blue('Building'), 'SVG Sprite...');
 
 		// (re)generate the SVG sprite sheet
-		generateSpriteJSON('dist/svg-sprite.json')
+		generateSpriteJSON(dist_dir + 'svg-sprite.json')
 			.then(function() {
 				startBuild();
 			});
@@ -86,7 +92,6 @@ function build(files) {
 
 function build_file(format, file) {
 	var config = formats[format],
-		path_dest = 'dist/',
 		file_bundle;
 
 	file_bundle = path.basename(file);
@@ -100,7 +105,7 @@ function build_file(format, file) {
 		.then(function(bundle) {
 			var opts = {
 				intro: prepend,
-				dest: path_dest + (file_bundle + '.' + format + '.js').toLowerCase(),
+				dest: dist_dir + (file_bundle + '.' + format + '.js').toLowerCase(),
 			};
 
 			cache[file] = bundle;
