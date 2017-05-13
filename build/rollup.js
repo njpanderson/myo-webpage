@@ -1,14 +1,16 @@
-const rollup = require('rollup');
-const path = require('path');
-const fs = require('fs');
-const glob = require('glob');
-const config = require('./rollup.config');
-const generateSpriteJSON = require('./svg-sprite');
-const watch = require('node-watch');
-const chalk = require('chalk');
-
-const ENVIRONMENT = (process.env.NODE_ENV === 'production') ? 'production' : 'development',
-	watch_dir = 'src/';
+const rollup = require('rollup'),
+	path = require('path'),
+	fs = require('fs'),
+	glob = require('glob'),
+	generateSpriteJSON = require('./svg-sprite'),
+	watch = require('node-watch'),
+	chalk = require('chalk'),
+	ENVIRONMENT = (process.env.NODE_ENV === 'production') ? 'production' : 'development',
+	watch_dir = 'src/',
+	formats = {
+		cjs: require('./rollup.config'),
+		iife: require('./rollup.config.iife')
+	};
 
 var cache = {}, prepend;
 
@@ -60,45 +62,63 @@ function startBuild() {
 	// get js files within src root and build
 	glob('src/*.js', function(error, files) {
 		if (error) throw error;
-		build(files, 0);
+		build(files);
 	});
 }
 
 // builds an array of files with rollup
-function build(files, index) {
-	var options, path_dest, file, file_bundle;
+function build(files) {
+	var tasks = [],
+		key;
 
-	if (index < files.length) {
-		file = files[index];
-		file_bundle = (path.basename(file)).toLowerCase();
-		path_dest = 'dist/';
+	files.forEach(function(file) {
+		for (key in formats) {
+			console.log(chalk.blue('Rolling up'), file + ' (' + key + ')...');
+			tasks.push(build_file(key, file));
+		}
+	});
 
-		console.log(chalk.blue('Rolling up'), file + '...');
-
-		options = Object.assign({}, config, {
-			dest: path_dest + file_bundle,
+	Promise.all(tasks)
+		.then(function() {
+			console.log(chalk.green('Rollup complete.'));
 		});
+}
 
-		rollup.rollup({
-			entry: file,
-			cache: cache[file],
-			plugins: options.plugins,
-			external: options.external
-		}).then(function(bundle) {
+function build_file(format, file) {
+	var config = formats[format],
+		path_dest = 'dist/',
+		file_bundle;
+
+	file_bundle = path.basename(file);
+	file_bundle = file_bundle.substr(0, file_bundle.lastIndexOf('.'));
+
+	return rollup.rollup(Object.assign({}, config.rollup, {
+		entry: file,
+		cache: cache[file],
+		plugins: config.plugins
+	}))
+		.then(function(bundle) {
+			var opts = {
+				intro: prepend,
+				dest: path_dest + (file_bundle + '.' + format + '.js').toLowerCase(),
+			};
+
 			cache[file] = bundle;
 
-			bundle.write({
-				format: options.format,
-				intro: prepend,
-				dest: path_dest + file_bundle,
-				sourceMap: options.sourceMap ? 'inline' : false
-			});
+			if (config.write.format === 'iife') {
+				if (file_bundle === 'Index') {
+					config.write.moduleName = 'window.Tag';
+				} else {
+					config.write.moduleName = 'window.Tag.' + file_bundle;
+				}
+			}
 
-			build(files, index + 1);
+			bundle.write(Object.assign({}, config.write, opts));
+		})
+		.catch(function(error) {
+			console.error(error);
+			process.exit(1);
 		});
-	} else {
-		console.log(chalk.green('Rollup complete.'));
-	}
 }
 
 init();

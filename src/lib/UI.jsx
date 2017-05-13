@@ -7,7 +7,7 @@
  * to use the default "OK" button.
  */
 import React from 'react';
-import { render } from 'react-dom';
+import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import Popper from 'popper.js';
 
@@ -126,7 +126,7 @@ UI.prototype = {
 	 * @private
 	 */
 	render: function() {
-		this._canvas = render(
+		this._canvas = ReactDOM.render(
 			<Provider store={this._store}>
 				<CanvasContainer
 					data={this._data}

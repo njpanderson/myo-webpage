@@ -8,37 +8,44 @@ const postcss = require('postcss');
 const cssnano = require('cssnano');
 const autoprefixer = require('autoprefixer');
 
+const plugins_base = [
+	json({
+		exclude: 'node_modules'
+	}),
+	string({
+		include: '**/*.svg'
+	}),
+	sass({
+		insert: true,
+		processor: css => postcss([
+			autoprefixer,
+			cssnano
+		])
+			.process(css)
+			.then(result => result.css),
+		options: {
+			sourceMap: true,
+			sourceMapContents: true,
+			sourceMapEmbed: true
+		}
+	})
+];
+
 module.exports = {
-	format: 'cjs',
-	sourceMap: true,
-	external: function(id) {
-		return (
-			!(/^(\.|\/|src)/.test(id)) && // include local includes
-			!(/popper\.js/.test(id)) && // include popper.js
-			!(/(babel|commonjs)Helpers/.test(id)) // include helpers
-		);
+	rollup: {
+		external: function(id) {
+			return (
+				!(/^(\.|\/|src)/.test(id)) && // include local includes
+				!(/popper\.js/.test(id)) && // include popper.js
+				!(/(babel|commonjs)Helpers/.test(id)) // include helpers
+			);
+		}
 	},
-	plugins: [
-		json({
-			exclude: 'node_modules'
-		}),
-		string({
-			include: '**/*.svg'
-		}),
-		sass({
-			insert: true,
-			processor: css => postcss([
-				autoprefixer,
-				cssnano
-			])
-				.process(css)
-				.then(result => result.css),
-			options: {
-				sourceMap: true,
-				sourceMapContents: true,
-				sourceMapEmbed: true
-			}
-		}),
+	write: {
+		format: 'cjs',
+		sourceMap: true,
+	},
+	plugins: plugins_base.concat([
 		resolve({
 			// preferBuiltins: false
 		}),
@@ -51,7 +58,7 @@ module.exports = {
 				['env', {
 					'modules': false,
 					'targets': {
-						'browsers': ['last 2 versions']
+						'node': 4
 					}
 				}],
 			],
@@ -59,5 +66,6 @@ module.exports = {
 				'node_modules/**'
 			]
 		})
-	]
+	]),
+	plugins_base: plugins_base
 };
