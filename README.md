@@ -1,13 +1,84 @@
 # tag
 tag is a Single Page App intended to guide users through the basics of creating web pages using a simple visual interface.
 
+Demo here:
+http://neilinscotland.net/tag/
+
 ## Installing
 
-[installation instructions for es5 index/view files]
+### Via Node JS (Version 6+)
+
+`npm install njp-tag --save-dev`
+
+Or if you're a Yarn user:
+
+`yarn add njp-tag`
+
+Once the package is installed, you'll need to create two main entry JS files for your implementation. One will import the tag base export, and another will import the view class:
+
+```
+// tag.js
+const App = require('njp-tag');
+
+app = new App();
+
+app.load(
+	'templates/default.html',
+	'templates/pallet.json'
+).catch(function(error) {
+	console.error(error);
+});
+```
+
+```
+// view.js
+const View = require('njp-tag/view');
+
+window.view = new View({
+	container: document.querySelector('.view')
+});
+```
+
+Once these two files have been created, you can then transpile them using your favourite tool. (Although I recommend Webpack). Once that's done, create two HTML files for the app and view which should source your app and view bootstraps respectively:
+
+```
+<!-- index.html -->
+<!DOCTYPE html>
+	<html>
+	<head>
+		<title>My Tag App</title>
+		<meta charset="utf-8"/>
+	</head>
+	<body>
+		<main class="app"></main>
+		<script src="dist/js/main.min.js"></script>
+	</body>
+</html>
+```
+
+```
+<!-- view.html -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Tag - View</title>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" href="dist/css/view.min.css" type="text/css"/>
+	</head>
+	<body>
+		<div class="view"></div>
+		<script src="dist/js/view.min.js"></script>
+	</body>
+</html>
+```
+
+### In browsers
+
+[coming soon]
 
 ## How tag works
 
-[explain the main app and View frames, Droplets, Drop Zones and how they work with View templates]
+[coming soon]
 
 ## Recommended setup
 
