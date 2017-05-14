@@ -74,7 +74,26 @@ Once these two files have been created, you can then transpile them using your f
 
 ### In browsers
 
-[coming soon]
+I'd recommend the above method for the most efficient file sizes, but if you want to use Tag straight away within a browser then the two files can be downloaded here:
+
+http://neilinscotland.net/files/get/tag/master/index.iife.js
+http://neilinscotland.net/files/get/tag/master/view.iife.js
+
+Attaching these using normal `<script>` tags will work, with one caveat: You must already have the React environment loaded within your app index (although it is not required within the view frame). For example:
+
+```
+// index.html
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react-dom.min.js"></script>
+<script src="index.iife.js"></script>
+<script src="your_tag_initialisation.js"></script>
+```
+
+```
+// view.html
+<script src="dist/js/lib/view.iife.js" id="view"></script>
+<script src="your_view_initialisation.js" id="view"></script>
+```
 
 ## How tag works
 
