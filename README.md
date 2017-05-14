@@ -1,4 +1,8 @@
+[![Build Status](https://travis-ci.org/njpanderson/tag.svg?branch=master)](https://travis-ci.org/njpanderson/tag)
+
 # tag
+![tag main window](https://raw.githubusercontent.com/njpanderson/tag/master/docs/tag-main.png)
+
 tag is a Single Page App intended to guide users through the basics of creating web pages using a simple visual interface.
 
 You can see a demo here:
