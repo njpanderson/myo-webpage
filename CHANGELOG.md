@@ -1,5 +1,9 @@
 v0.0.5 (2017-05-14)
 
+ - Just some documentation and IDE updates.
+
+v0.0.5 (2017-05-14)
+
  - Adding a selector for the main app frame to the default settings.
  - Documentation work.
 
