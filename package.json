@@ -6,7 +6,7 @@
   "scripts": {
     "test": "NODE_ENV=test mocha",
     "prepublish": "yarn run build",
-    "postpublish": "yarn run package",
+    "postpublish": "yarn run package && yarn run docs",
     "rollup": "node build/rollup.js",
     "rollup:watch": "node build/rollup.js --watch",
     "build": "NODE_ENV=production yarn run rollup",
