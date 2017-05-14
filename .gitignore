@@ -1,3 +1,4 @@
 /node_modules
 /docs/njp-tag
 dist
+/.rsync.json

@@ -4,12 +4,14 @@
   "description": "A small tutorial SPA to help people understand how webpages are made.",
   "main": "index.js",
   "scripts": {
+    "test": "NODE_ENV=test mocha",
+    "prepublish": "yarn run build",
+    "postpublish": "yarn run package",
     "rollup": "node build/rollup.js",
     "rollup:watch": "node build/rollup.js --watch",
-    "build": "NODE_ENV=production npm run rollup",
-    "dev": "NODE_ENV=development npm run rollup:watch",
-    "prepublish": "npm run build",
-    "test": "NODE_ENV=test mocha",
+    "build": "NODE_ENV=production yarn run rollup",
+    "dev": "NODE_ENV=development yarn run rollup:watch",
+    "package": "node build/package.js",
     "test-live": "NODE_ENV=test-live mocha --inspect --debug-brk"
   },
   "files": [
@@ -56,7 +58,8 @@
     "rollup-plugin-node-globals": "^1.1.0",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-sass": "^0.5.1",
-    "rollup-plugin-string": "^2.0.2"
+    "rollup-plugin-string": "^2.0.2",
+    "rsync": "^0.6.1"
   },
   "dependencies": {
     "interact.js": "^1.2.8",
