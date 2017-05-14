@@ -1,8 +1,11 @@
 # tag
 tag is a Single Page App intended to guide users through the basics of creating web pages using a simple visual interface.
 
-Demo here:
+You can see a demo here:
 http://neilinscotland.net/tag/
+
+And the source code for this demo is here:
+https://github.com/njpanderson/tag-lightshow
 
 ## Installing
 
