@@ -15,9 +15,9 @@ https://github.com/njpanderson/tag-lightshow
 
 Or if you're a Yarn user:
 
-`yarn add njp-tag`
+`yarn add njp-tag --dev`
 
-Once the package is installed, you'll need to create two main entry JS files for your implementation. One will import the tag base export, and another will import the view class:
+Once the package is installed, you'll need to create two entry JS files for your implementation. One will import the tag base `App` class, and another will import the `View` class:
 
 ```
 // tag.js
