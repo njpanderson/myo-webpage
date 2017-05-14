@@ -11,8 +11,9 @@
     "rollup:watch": "node build/rollup.js --watch",
     "build": "NODE_ENV=production yarn run rollup",
     "dev": "NODE_ENV=development yarn run rollup:watch",
-    "package": "node build/package.js",
-    "test-live": "NODE_ENV=test-live mocha --inspect --debug-brk"
+    "package": "node .ide/package-iife.js",
+    "test-live": "NODE_ENV=test-live mocha --inspect --debug-brk",
+    "docs": "jsdoc -c .ide/jsdoc.json && node .ide/package-docs.js"
   },
   "files": [
     "dist/",
