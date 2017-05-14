@@ -52,7 +52,11 @@ module.exports = {
 		commonjs(),
 		babel({
 			babelrc: false,
-			plugins: ['external-helpers', 'transform-object-rest-spread'],
+			plugins: [
+				'external-helpers',
+				'transform-object-rest-spread',
+				'transform-es2015-shorthand-properties'
+			],
 			presets: [
 				'react',
 				['env', {
