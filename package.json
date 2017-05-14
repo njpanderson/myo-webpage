@@ -59,7 +59,8 @@
     "rollup-plugin-node-globals": "^1.1.0",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-sass": "^0.5.1",
-    "rollup-plugin-string": "^2.0.2"
+    "rollup-plugin-string": "^2.0.2",
+    "rsync": "^0.6.1"
   },
   "dependencies": {
     "interact.js": "^1.2.8",
