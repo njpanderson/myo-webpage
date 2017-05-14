@@ -62,7 +62,7 @@ module.exports = {
 				['env', {
 					'modules': false,
 					'targets': {
-						'node': 6
+						'node': 4
 					}
 				}],
 			],
