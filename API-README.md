@@ -1,0 +1,1 @@
+This is the API documentation for tag. Please note that full documentation and examples of use are available in the [Wiki](https://github.com/njpanderson/tag/wiki)
