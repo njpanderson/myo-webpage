@@ -83,8 +83,11 @@ Once these two files have been created, you can then transpile them using your f
 
 I'd recommend the above method for the most efficient file sizes, but if you want to use Tag straight away within a browser then the two files can be downloaded here:
 
- - Tag: [neilinscotland.net/files/get/njp-tag/master/index.iife.js](http://neilinscotland.net/files/get/njp-tag/master/index.iife.js)
- - View: [neilinscotland.net/files/get/njp-tag/master/view.iife.js](http://neilinscotland.net/files/get/njp-tag/master/view.iife.js)
+
+| **Tag** | **View** |
+| ---     | ---      |
+| [Unminified](http://neilinscotland.net/files/get/njp-tag/master/index.iife.js) | [Unminified](http://neilinscotland.net/files/get/njp-tag/master/view.iife.js) |
+| [Minified](http://neilinscotland.net/files/get/njp-tag/master/index.iife.min.js) | [Minified](http://neilinscotland.net/files/get/njp-tag/master/view.iife.min.js) |
 
 Attaching these using normal `<script>` tags will work, with one caveat: You must already have the React environment loaded within your app index (although it is not required within the view frame). For example:
 
