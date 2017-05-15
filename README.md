@@ -13,13 +13,13 @@ https://github.com/njpanderson/tag-lightshow
 
 ## Installing
 
-### Via Node JS (Version 6+)
+### Via NPM
 
-`npm install njp-tag --save-dev`
+`npm install njp-tag --save`
 
 Or if you're a Yarn user:
 
-`yarn add njp-tag --dev`
+`yarn add njp-tag`
 
 Once the package is installed, you'll need to create two entry JS files for your implementation. One will import the tag base `App` class, and another will import the `View` class:
 
