@@ -1,8 +1,33 @@
-const config = require('./rollup.config');
-const resolve = require('rollup-plugin-node-resolve');
-const commonjs = require('rollup-plugin-commonjs');
-const globals = require('rollup-plugin-node-globals');
-const babel = require('rollup-plugin-babel');
+const config = require('./rollup.config'),
+	resolve = require('rollup-plugin-node-resolve'),
+	commonjs = require('rollup-plugin-commonjs'),
+	globals = require('rollup-plugin-node-globals'),
+	babel = require('rollup-plugin-babel');
+
+var plugins = config.plugins_base.concat([
+	resolve({
+		browser: true
+	}),
+	commonjs(),
+	globals(),
+	babel({
+		babelrc: false,
+		plugins: ['external-helpers', 'transform-object-rest-spread'],
+		presets: [
+			'react',
+			['env', {
+				'modules': false,
+				'targets': {
+					'browsers': ['last 2 versions']
+				}
+			}],
+		],
+		exclude: [
+			'node_modules/**'
+		]
+	})
+]);
+
 
 module.exports = {
 	rollup: {
@@ -19,27 +44,5 @@ module.exports = {
 			'react-dom': 'ReactDOM',
 		}
 	},
-	plugins: config.plugins_base.concat([
-		resolve({
-			browser: true
-		}),
-		commonjs(),
-		globals(),
-		babel({
-			babelrc: false,
-			plugins: ['external-helpers', 'transform-object-rest-spread'],
-			presets: [
-				'react',
-				['env', {
-					'modules': false,
-					'targets': {
-						'browsers': ['last 2 versions']
-					}
-				}],
-			],
-			exclude: [
-				'node_modules/**'
-			]
-		})
-	])
+	plugins: plugins
 };

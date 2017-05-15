@@ -5,7 +5,7 @@ const rollup = require('rollup'),
 	generateSpriteJSON = require('./svg-sprite'),
 	watch = require('node-watch'),
 	chalk = require('chalk'),
-	ENVIRONMENT = (process.env.NODE_ENV === 'production') ? 'production' : 'development',
+	babili = require('rollup-plugin-babili'),
 	watch_dir = 'src/',
 	dist_dir = 'dist/',
 	formats = {
@@ -44,7 +44,6 @@ function init(options = {}) {
 	prepend = fs.readFileSync(path.resolve('build/build-prepend.js'), {
 		encoding: 'UTF-8'
 	});
-	prepend = prepend.replace(/\{\{ ENVIRONMENT \}\}/g, ENVIRONMENT);
 
 	// ensure dist/ path exists
 	if (!fs.existsSync(dist_dir)){
@@ -79,8 +78,16 @@ function build(files) {
 
 	files.forEach(function(file) {
 		for (key in formats) {
-			console.log(chalk.blue('Rolling up'), file + ' (' + key + ')...');
-			tasks.push(build_file(key, file));
+			if (key === 'iife') {
+				// produce minified as well as standard output
+				tasks.push(build_file(key, file));
+
+				if (process.env.NODE_ENV === 'production') {
+					tasks.push(build_file(key, file, true));
+				}
+			} else {
+				tasks.push(build_file(key, file));
+			}
 		}
 	});
 
@@ -90,22 +97,40 @@ function build(files) {
 		});
 }
 
-function build_file(format, file) {
+function build_file(format, file, minified = false) {
 	var config = formats[format],
-		file_bundle;
+		plugins = config.plugins.slice(),
+		file_bundle, dest_path;
+
+	console.log(
+		chalk.blue('Rolling up'),
+		file + ' (' + format + (minified ? ', minified' : '') + ')...'
+	);
 
 	file_bundle = path.basename(file);
 	file_bundle = file_bundle.substr(0, file_bundle.lastIndexOf('.'));
 
+	if (minified) {
+		plugins.push(
+			babili({
+				comments: false
+			})
+		);
+
+		dest_path = dist_dir + (file_bundle + '.' + format + '.min.js').toLowerCase();
+	} else {
+		dest_path = dist_dir + (file_bundle + '.' + format + '.js').toLowerCase();
+	}
+
 	return rollup.rollup(Object.assign({}, config.rollup, {
 		entry: file,
 		cache: cache[file],
-		plugins: config.plugins
+		plugins: plugins
 	}))
 		.then(function(bundle) {
 			var opts = {
 				intro: prepend,
-				dest: dist_dir + (file_bundle + '.' + format + '.js').toLowerCase(),
+				dest: dest_path,
 			};
 
 			cache[file] = bundle;

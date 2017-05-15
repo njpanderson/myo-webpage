@@ -1,14 +1,19 @@
-const resolve = require('rollup-plugin-node-resolve');
-const commonjs = require('rollup-plugin-commonjs');
-const babel = require('rollup-plugin-babel');
-const string = require('rollup-plugin-string');
-const json = require('rollup-plugin-json');
-const sass = require('rollup-plugin-sass');
-const postcss = require('postcss');
-const cssnano = require('cssnano');
-const autoprefixer = require('autoprefixer');
+const replace = require('rollup-plugin-replace'),
+	resolve = require('rollup-plugin-node-resolve'),
+	commonjs = require('rollup-plugin-commonjs'),
+	babel = require('rollup-plugin-babel'),
+	string = require('rollup-plugin-string'),
+	json = require('rollup-plugin-json'),
+	sass = require('rollup-plugin-sass'),
+	postcss = require('postcss'),
+	cssnano = require('cssnano'),
+	autoprefixer = require('autoprefixer');
 
 const plugins_base = [
+	replace({
+		ENVIRONMENT: JSON.stringify(process.env.NODE_ENV),
+		'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+	}),
 	json({
 		exclude: 'node_modules'
 	}),

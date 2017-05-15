@@ -1,4 +1,8 @@
-v0.0.7 (2017-05-14)
+v0.0.9 (2017-05-15)
+
+ - Added minified versions of compiled IIFE distributables.
+
+v0.0.7 - v0.0.8 (2017-05-14)
 
  - Changed CommonJS compile target to Node 4 (so things like UglifyJS in webpack work)
  - Added babel plugin `transform-es2015-shorthand-properties`
@@ -16,7 +20,7 @@ v0.0.5 (2017-05-14)
  - Adding a selector for the main app frame to the default settings.
  - Documentation work.
 
-v0.0.2-v0.0.4 (2017-05-06)
+v0.0.2 - v0.0.4 (2017-05-06)
 
  - Mainly fixing NPM/Rollup issues - nothing else really!
 

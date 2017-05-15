@@ -1,5 +1,3 @@
-var ENVIRONMENT = '{{ ENVIRONMENT }}';
-
 // sanity check for window/document
 if (typeof window === 'undefined' ||
 	typeof window.document === 'undefined' ||
