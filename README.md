@@ -85,8 +85,8 @@ I'd recommend the above method for the most efficient file sizes, but if you wan
 
 |          | **Unminified** | **Minified** |
 | ---      | ---     | ---      |
-| **Tag**  | [JS](http://neilinscotland.net/files/get/njp-tag/master/index.iife.js) [Map](http://neilinscotland.net/files/get/njp-tag/master/index.iife.js.map) | [JS](http://neilinscotland.net/files/get/njp-tag/master/view.iife.js) [Map](http://neilinscotland.net/files/get/njp-tag/master/view.iife.js.map) |
-| **View** | [JS](http://neilinscotland.net/files/get/njp-tag/master/index.iife.min.js) [Map](http://neilinscotland.net/files/get/njp-tag/master/index.iife.min.js.map) | [JS](http://neilinscotland.net/files/get/njp-tag/master/view.iife.min.js) [Map](http://neilinscotland.net/files/get/njp-tag/master/view.iife.min.js.map) |
+| **Tag**  | [JS](http://neilinscotland.net/files/get/njp-tag/master/index.iife.js) / [Map](http://neilinscotland.net/files/get/njp-tag/master/index.iife.js.map) | [JS](http://neilinscotland.net/files/get/njp-tag/master/view.iife.js) / [Map](http://neilinscotland.net/files/get/njp-tag/master/view.iife.js.map) |
+| **View** | [JS](http://neilinscotland.net/files/get/njp-tag/master/index.iife.min.js) / [Map](http://neilinscotland.net/files/get/njp-tag/master/index.iife.min.js.map) | [JS](http://neilinscotland.net/files/get/njp-tag/master/view.iife.min.js) / [Map](http://neilinscotland.net/files/get/njp-tag/master/view.iife.min.js.map) |
 
 Attaching these using normal `<script>` tags will work, with one caveat: You must already have the React environment loaded within your app index (although it is not required within the view frame). For example:
 
