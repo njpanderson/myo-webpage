@@ -110,6 +110,8 @@ function build_file(format, file, minified = false) {
 	file_bundle = path.basename(file);
 	file_bundle = file_bundle.substr(0, file_bundle.lastIndexOf('.'));
 
+	cache[format] = cache[format] || {};
+
 	if (minified) {
 		plugins.push(
 			babili({
@@ -124,7 +126,7 @@ function build_file(format, file, minified = false) {
 
 	return rollup.rollup(Object.assign({}, config.rollup, {
 		entry: file,
-		cache: cache[file],
+		cache: cache[format][file],
 		plugins: plugins
 	}))
 		.then(function(bundle) {
