@@ -7,16 +7,17 @@ const rollup = require('rollup'),
 	chalk = require('chalk'),
 	babili = require('rollup-plugin-babili'),
 	watch_dir = 'src/',
-	dist_dir = 'dist/',
-	formats = {
-		cjs: require('./rollup.config'),
-		iife: require('./rollup.config.iife')
-	};
+	dist_dir = 'dist/';
 
-var cache = {}, prepend;
+var cache = {},
+	prepend, formats;
 
 if (process.argv.indexOf('--watch') !== -1) {
 	console.log(chalk.yellow('Watching files in', chalk.white(watch_dir)));
+
+	formats = {
+		cjs: require('./rollup.config')
+	};
 
 	watch(watch_dir, { recursive: true }, function(event, name) {
 		console.log('');
@@ -31,7 +32,11 @@ if (process.argv.indexOf('--watch') !== -1) {
 			init();
 		}
 	});
-
+} else {
+	formats = {
+		cjs: require('./rollup.config'),
+		iife: require('./rollup.config.iife')
+	};
 }
 
 function init(options = {}) {
