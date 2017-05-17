@@ -26,7 +26,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Icon } from './Icon.jsx';
+import Button from './Button.jsx';
 
 class Toolbar extends React.Component {
 	constructor(props) {
@@ -72,15 +72,7 @@ class Toolbar extends React.Component {
 			this.props.buttons.forEach((button, index) => {
 				var key = 'button-' + index,
 					classes = [],
-					icon, label;
-
-				if (button.icon) {
-					icon = (
-						<Icon glyph={button.icon}
-							width={14}
-							height={14}/>
-					);
-				}
+					label;
 
 				if (button.className) {
 					classes.push(button.className);
@@ -106,16 +98,14 @@ class Toolbar extends React.Component {
 				buttons.push(
 					<li key={key}
 						className={classes.join(' ')}>
-						<button
+						<Button
+							type='button'
 							className={this.props.settings.classes.button}
-							ref={this.registerButtonRef(key)}
-							onClick={this.registerButtonClick(button, key)}>
-							<span>
-								{icon}
-								{label}
-								<span className="circle"></span>
-							</span>
-						</button>
+							lib={this.props.lib}
+							label={label}
+							icon={button.icon}
+							onClick={this.registerButtonClick(button, key)}
+							refCollector={this.registerButtonRef(key)}/>
 					</li>
 				);
 			});
