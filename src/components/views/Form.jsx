@@ -98,7 +98,7 @@ class Form extends React.Component {
 		return nodes;
 	}
 
-	fieldSets() {
+	getFieldSets() {
 		var output = [];
 
 		this.props.fieldSets.forEach((set, index) => {
@@ -335,7 +335,7 @@ class Form extends React.Component {
 		return (
 			<form action="" onSubmit={this.componentOnSubmit.bind(this)}>
 				<div className="fields">
-					{this.fieldSets()}
+					{this.getFieldSets()}
 				</div>
 				<fieldset className="buttons">
 					{this.getButtons()}
