@@ -3,6 +3,7 @@ import { createRenderer } from 'react-test-renderer/shallow';
 import { expect } from 'chai';
 
 import useMockery from '../../helpers/mockery';
+import defaults from '../../fixtures/defaults';
 
 describe('Form', function() {
 	var Form;
@@ -32,8 +33,9 @@ describe('Form', function() {
 	it('Should render to page', function() {
 		renderer.render(
 			<Form
-				onButtonClick={noop}
-				fieldSets={fieldSets}/>
+				fieldSets={fieldSets}
+				settings={defaults}
+				lib={{}}/>
 		);
 
 		expect(renderer.getRenderOutput().type).to.equal('form');
@@ -46,7 +48,6 @@ describe('Form', function() {
 
 		renderer.render(
 			<Form
-				onButtonClick={noop}
 				fields={fields}/>
 		);
 

@@ -209,7 +209,6 @@ class DialogEditDroplet extends React.Component {
 					fieldSets={fieldsets}
 					buttons={buttons}
 					settings={this.props.settings}
-					onButtonClick={this.props.onButtonClick}
 					onSubmit={this.onDialogComplete}
 					onCancel={this.props.onDialogCancel}/>
 				<span className="arrow"/>

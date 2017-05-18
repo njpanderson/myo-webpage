@@ -35,7 +35,6 @@ class DialogGeneral extends React.Component {
 				<Form
 					settings={this.props.settings}
 					buttons={buttons}
-					onButtonClick={this.props.onButtonClick}
 					onSubmit={this.props.onDialogComplete}
 					onCancel={this.props.onDialogCancel}/>
 				<span className="arrow"/>

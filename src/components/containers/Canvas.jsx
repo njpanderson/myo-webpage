@@ -37,7 +37,6 @@ class Canvas extends React.Component {
 				>
 				<Header
 					settings={this.props.settings}
-					onButtonClick={this.props.onButtonClick}
 					lib={this.props.lib}>
 					<h1 className="logo">&lt;<b>tag</b>&gt;</h1>
 					<p>The webpage learning tool.</p>
@@ -79,8 +78,7 @@ class Canvas extends React.Component {
 				<div className="overlay"></div>
 				<Dialog
 					settings={this.props.settings}
-					lib={this.props.lib}
-					onButtonClick={this.props.onButtonClick}/>
+					lib={this.props.lib}/>
 				<Tooltip
 					settings={this.props.settings}
 					attacher={this.props.lib.setUIPopperAttachment}/>
@@ -102,7 +100,6 @@ Canvas.propTypes = {
 	onDropletEvent: PropTypes.func.isRequired,
 	onDropZoneEvent: PropTypes.func.isRequired,
 	onDragHandleEvent: PropTypes.func.isRequired,
-	onButtonClick: PropTypes.func.isRequired,
 	refCollector: PropTypes.func.isRequired,
 	settings: PropTypes.object.isRequired,
 	lib: PropTypes.object.isRequired

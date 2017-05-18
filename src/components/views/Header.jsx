@@ -18,7 +18,6 @@ class Header extends React.Component {
 					tour_stage={this.props.tour_stage}
 					dialog_mode={this.props.dialog_mode}
 					settings={this.props.settings}
-					onButtonClick={this.props.onButtonClick}
 					lib={this.props.lib}/>
 			</header>
 		);
@@ -33,7 +32,6 @@ Header.propTypes = {
 	// from Canvas
 	children: PropTypes.node,
 	settings: PropTypes.object.isRequired,
-	onButtonClick: PropTypes.func,
 	lib: PropTypes.object.isRequired
 };
 

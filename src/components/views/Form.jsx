@@ -299,13 +299,8 @@ class Form extends React.Component {
 				var key = 'button-' + index,
 					click_function;
 
-				click_function = ((component, key) => {
-					return function(event) {
-						if (component.ui.refs.buttons && component.ui.refs.buttons[key]) {
-							component.ui.refs.buttons[key].blur();
-							component.props.onButtonClick(component.ui.refs.buttons[key], event);
-						}
-
+				click_function = ((component) => {
+					return function() {
 						if (button.type === 'cancel') {
 							// cancel button
 							component.props.onCancel();
@@ -314,7 +309,7 @@ class Form extends React.Component {
 							component.onSubmit(null, button.type, button.data);
 						}
 					};
-				})(this, key, button.onClick);
+				})(this, button.onClick);
 
 				buttons.push(
 					<Button
@@ -323,7 +318,8 @@ class Form extends React.Component {
 						type={button.type}
 						label={button.label}
 						className={button.className}
-						onClick={click_function}/>
+						onClick={click_function}
+						settings={this.props.settings}/>
 				);
 			});
 		}
@@ -352,7 +348,6 @@ class Form extends React.Component {
  */
 Form.propTypes = {
 	settings: PropTypes.object.isRequired,
-	onButtonClick: PropTypes.func.isRequired,
 	onCancel: PropTypes.func,
 	onSubmit: PropTypes.func,
 	fieldSets: PropTypes.arrayOf(PropTypes.shape({

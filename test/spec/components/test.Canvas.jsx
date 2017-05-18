@@ -37,8 +37,7 @@ describe('Canvas', function() {
 			onAttachmentClick: noop,
 			onDropletEvent: noop,
 			onDropZoneEvent: noop,
-			onDragHandlePress: noop,
-			onButtonClick: noop,
+			onDragHandleEvent: noop,
 			lib: {}
 		};
 

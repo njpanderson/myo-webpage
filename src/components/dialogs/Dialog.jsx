@@ -70,7 +70,6 @@ class Dialog extends React.Component {
 						refCollector={this.collectRef.bind(this)}
 						onDialogComplete={this.props.onDialogComplete}
 						onDialogCancel={this.props.onDialogCancel}
-						onButtonClick={this.props.onButtonClick}
 						lib={this.props.lib}/>
 				</div>
 			);
@@ -87,7 +86,6 @@ Dialog.propTypes = {
 	mode: PropTypes.string,
 	data: PropTypes.object,
 	onDialogCancel: PropTypes.func,
-	onButtonClick: PropTypes.func,
 	id: PropTypes.string.isRequired,
 
 	// from Canvas

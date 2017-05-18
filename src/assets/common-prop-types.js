@@ -21,6 +21,5 @@ export const dialog = {
 	refCollector: PropTypes.func,
 	onDialogCancel: PropTypes.func,
 	onDialogComplete: PropTypes.func,
-	onButtonClick: PropTypes.func,
 	lib: PropTypes.object
 };

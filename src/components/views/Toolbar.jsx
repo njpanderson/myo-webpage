@@ -35,16 +35,11 @@ class Toolbar extends React.Component {
 		this.buttonRefs = {};
 	}
 
-	registerButtonClick(button, key) {
+	registerButtonClick(button) {
 		return function(event) {
 			var args = button.arguments || [];
 
 			event.preventDefault();
-
-			if (this.buttonRefs && this.buttonRefs[key]) {
-				this.buttonRefs[key].blur();
-				this.props.onButtonClick(this.buttonRefs[key], event);
-			}
 
 			if (typeof button.method === 'string' &&
 				this.props.lib.tools[button.method]) {
@@ -101,10 +96,10 @@ class Toolbar extends React.Component {
 						<Button
 							type='button'
 							className={this.props.settings.classes.button}
-							lib={this.props.lib}
+							settings={this.props.settings}
 							label={label}
 							icon={button.icon}
-							onClick={this.registerButtonClick(button, key)}
+							onClick={this.registerButtonClick(button)}
 							refCollector={this.registerButtonRef(key)}/>
 					</li>
 				);
@@ -132,7 +127,6 @@ Toolbar.propTypes = {
 	tour_stage: PropTypes.any,
 	dialog_mode: PropTypes.string,
 	settings: PropTypes.object.isRequired,
-	onButtonClick: PropTypes.func,
 	lib: PropTypes.object.isRequired
 };
 

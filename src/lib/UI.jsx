@@ -137,7 +137,6 @@ UI.prototype = {
 					onDropletEvent={this._handleDropletEvent.bind(this)}
 					onDropZoneEvent={this._handleDropZoneEvent.bind(this)}
 					onDragHandleEvent={this._handleDragHandleEvent.bind(this)}
-					onButtonClick={this._handleButtonClick.bind(this)}
 					lib={this.libraryMethods}/>
 			</Provider>,
 			this._refs.ui.app
@@ -551,34 +550,6 @@ UI.prototype = {
 
 		// reset dragHandlePosition because the metrics have changed
 		this._data.UI.dragHandlePosition = 0;
-	},
-
-	/**
-	 * Generically handles the click of any button within the UI.
-	 * @param {HTMLElement} button - The button being clicked.
-	 * @param {ReactEvent} event - The event object.
-	 */
-	_handleButtonClick: function(button, event) {
-		var offset = {},
-			rect, circle;
-
-		if (button && event && event.pageX && event.pageY &&
-			(circle = button.querySelector(this.settings.selectors.button_circle))) {
-			// get metrics and offset by scroll
-			rect = button.getBoundingClientRect();
-			rect.leftScrolled = rect.left + window.pageXOffset;
-			rect.topScrolled = rect.top + window.pageYOffset;
-
-			// calculate cursor offset on the button
-			offset.left = event.pageX - (rect.left + window.pageXOffset);
-			offset.top = event.pageY - (rect.top + window.pageYOffset);
-
-			// position the circle based on the pointer position on the button
-			circle.classList.remove(this.settings.classes.button_animate);
-			circle.style.left = offset.left - (circle.offsetWidth / 2) + 'px';
-			circle.style.top = offset.top - (circle.offsetHeight / 2) + 'px';
-			circle.classList.add(this.settings.classes.button_animate);
-		}
 	},
 
 	/**
