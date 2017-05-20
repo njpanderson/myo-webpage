@@ -1,16 +1,26 @@
 import { expect } from 'chai';
 
 import useMockery from '../helpers/mockery';
+import genericMockedModule from '../helpers/genericMockedModule';
 import MockIndex from '../mocks/Index';
 
 describe('UI', function() {
 	let UI, index;
 
 	useMockery(() => {
+		var Communicator, DragDrop;
+
+		Communicator = genericMockedModule({
+			registerGuestAddress: null,
+			send: null
+		});
+
+		DragDrop = genericMockedModule();
+
 		useMockery
 			.registerMultiple({
-				'./DragDrop': require('../mocks/DragDrop'),
-				'./Communicator': require('../mocks/Communicator'),
+				'./DragDrop': DragDrop,
+				'./Communicator': Communicator,
 				'../components/containers/CanvasContainer': require('../mocks/views/GenericComponent'),
 				'../components/views/Icon.jsx': require('../mocks/views/Icon')
 			});

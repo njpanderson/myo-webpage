@@ -1,6 +1,6 @@
 var Communicator = function(id, origin, callbacks = {}) {
 	if (typeof id !== 'string') {
-		throw new Error('Please choose a string-based ID for the guest.');
+		throw new Error('Please choose a string-based ID for the host.');
 	}
 
 	if (typeof origin !== 'string') {
@@ -77,7 +77,7 @@ Communicator.prototype = {
 		}
 
 		if (typeof id !== 'string') {
-			throw new Error('Please choose a string-based ID for the guest.');
+			throw new TypeError('Please choose a string-based ID for the guest.');
 		}
 
 		// register local address for guest
@@ -120,6 +120,10 @@ Communicator.prototype = {
 	 */
 	send: function(to, message, id = null) {
 		var guest = this._getGuestById(to);
+
+		if (guest === null) {
+			throw new Error('Invalid guest id "' + to + '" or guest has not been registered.');
+		}
 
 		id = (id || this._generateSendId(to));
 
@@ -231,7 +235,7 @@ Communicator.prototype = {
 			message = event.data,
 			guest;
 
-		if (origin !== location.origin)
+		if (origin !== window.location.origin)
 			return;
 
 		if ((message.ping || message.pong) && this._getGuestByNode(source)) {

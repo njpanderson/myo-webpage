@@ -26,16 +26,30 @@ function genericMockedModule(methods) {
 	module = function() {};
 
 	for (method in methods) {
+		// add defined methods as prototypes of the module
 		module.prototype[method] = createMethod(method, methods[method]);
 	}
 
-	module.prototype.__getInvocations = (method) => {
+	/**
+	 * Gets the number of invocations for a specific method.
+	 */
+	module.__getInvocations = (method) => {
 		return (invocations[method] ? invocations[method].length : 0);
 	};
 
-	module.prototype.__getInvocation = (method, index) => {
+	/**
+	 * Gets the arguments for a specific method invocation index.
+	 */
+	module.__getInvocation = (method, index) => {
 		return (invocations[method] && (invocations[method].length > index) ?
 			invocations[method][index] : null);
+	};
+
+	/**
+	 * Clears the invocation data
+	 */
+	module.__clearInvocations = () => {
+		invocations = {};
 	};
 
 	return module;

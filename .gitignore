@@ -1,4 +1,5 @@
 /node_modules
 /docs/njp-tag
+/coverage
 dist
 /.rsync.json

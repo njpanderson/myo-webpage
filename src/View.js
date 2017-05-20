@@ -94,7 +94,7 @@ View.prototype = {
 	},
 
 	_fire: function(element, event) {
-		if (element instanceof HTMLElement && this._events[event]) {
+		if (element instanceof window.HTMLElement && this._events[event]) {
 			element.dispatchEvent(this._events[event]);
 		}
 	},
