@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/assets/dialogs.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">src/assets</a> dialogs.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">75% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>3/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">50% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">75% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>3/4</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line medium'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const tourDialogModifiers = {
+	arrow: {
+		element: '.arrow'
+	}
+};
+&nbsp;
+const tourButtons = {
+	proceed: [{
+		type: 'cancel',
+		label: 'Close'
+	}, {
+		type: 'submit',
+		label: 'Continue'
+	}],
+	try_it: [{
+		type: 'cancel',
+		label: 'Close'
+	}, {
+		type: 'pause',
+		label: 'Try it out'
+	}, {
+		type: 'submit',
+		label: 'Continue'
+	}],
+	end: [{
+		type: 'submit',
+		label: 'Finish tour'
+	}]
+};
+&nbsp;
+export default function createDialogs(settings) {
+	return {
+		intro: {
+			title: 'Welcome to &lt;span class="logo"&gt;&amp;lt;&lt;b&gt;tag&lt;/b&gt;&amp;gt;&lt;/span&gt;!',
+			message: [
+				'&lt;b&gt;tag&lt;/b&gt; is an app designed to show &lt;b&gt;how web pages are constructed&lt;/b&gt;.',
+				'If you are &lt;b&gt;new to tag&lt;/b&gt;, you can use the “Start tour” button.',
+				'Otherwise, just click “OK” and get building!'
+			],
+			buttons: [{
+				type: 'tour',
+				label: 'Start tour'
+			}, {
+				type: 'submit',
+				label: 'OK'
+			}]
+		},
+		resetState: {
+			title: 'Reset tag',
+			message: [
+				'Are you sure you want to go back to the beginning?',
+				'All of your current work will be cleared.'
+			],
+			buttons: [{
+				type: 'cancel',
+				label: 'Cancel'
+			}, {
+				type: 'submit',
+				className: 'danger',
+				label: 'Clear my work'
+			}]
+		},
+		dropletBadPlacement: {
+			title: 'Oops!',
+			message: [
+				'Almost there, but the Droplet you’ve chosen doesn’t go here.',
+				'Try again and see if you can find the correct place.',
+				'Remember, the target will be &lt;span class="drop-zone accept"&gt;&lt;span class="target"&gt;&lt;b&gt;green&lt;/b&gt;&lt;/span&gt;&lt;/span&gt; when you can place the Droplet.'
+			]
+		},
+		firstDropletDrop: <span class="fstat-no" title="function not covered" >function(</span>droplet_output) {
+<span class="cstat-no" title="statement not covered" >			return {</span>
+				title: 'Well done!',
+				message: [
+					'&lt;code&gt;' + droplet_output + '&lt;/code&gt;',
+					'You’ve placed your &lt;b&gt;very first&lt;/b&gt; Droplet onto the Template.',
+					'Press the &lt;span class="pseudo-button run"&gt;&lt;svg class="icon" width="14" height="14"&gt;&lt;use xlink:href="#media-play-sprite"&gt;&lt;/use&gt;&lt;/svg&gt;Run&lt;/span&gt; button to see how it looks.'
+				]
+			};
+		},
+		lastDropletDrop: {
+			title: 'Well done!',
+			message: [
+				'You’ve placed at &lt;b&gt;least one Droplet&lt;/b&gt; on every target in the Template.',
+				'Why not try the &lt;span class="pseudo-button run"&gt;&lt;svg class="icon" width="14" height="14"&gt;&lt;use xlink:href="#media-play-sprite"&gt;&lt;/use&gt;&lt;/svg&gt;Run&lt;/span&gt; button to see how it looks?'
+			]
+		},
+		tour: [{
+			title: 'Welcome to &lt;span class="logo"&gt;&amp;lt;&lt;b&gt;tag&lt;/b&gt;&amp;gt;&lt;/span&gt;!',
+			message: [
+				'tag is an app designed to explain how web pages are constructed.',
+				'The idea is simple: Place &lt;b&gt;Droplets&lt;/b&gt; onto the &lt;b&gt;Template&lt;/b&gt;, and then use the ' +
+					'&lt;span class="pseudo-button run"&gt;&lt;svg class="icon" width="14" height="14"&gt;&lt;use xlink:href="#media-play-sprite"&gt;&lt;/use&gt;&lt;/svg&gt;Run&lt;/span&gt; button to see how the page will look in the &lt;b&gt;View&lt;/b&gt;.'
+				//'Some parts of the tour will let you try things out before moving on. If you want to, use the &lt;span class="pseudo-button"&gt;Try it out&lt;/span&gt; button when you see it, then use &lt;span class="pseudo-button"&gt;&lt;svg class="icon" width="14" height="14"&gt;&lt;use xlink:href="#compass-sprite"&gt;&lt;/use&gt;&lt;/svg&gt;Continue tour&lt;/span&gt; to go back to the tour.'
+			],
+			buttons: tourButtons.proceed
+		}, {
+			title: 'The Template',
+			message: [
+				'This is the Template. It contains the code for your web page, and is where you’ll add snippets of code.',
+				'Add Droplets to the &lt;span class="drop-zone"&gt;&lt;span class="target"&gt;&lt;b&gt;' +
+					settings.dropZone.label +
+					'&lt;/b&gt;&lt;/span&gt;&lt;/span&gt; targets to construct the page.'
+			],
+			overlay: false,
+			attachment: {
+				selector: '.main &gt; .template',
+				options: {
+					placement: 'right',
+					modifiers: tourDialogModifiers
+				}
+			},
+			buttons: tourButtons.proceed
+		}, {
+			title: 'The Palette',
+			message: [
+				'This is the Palette. It contains Droplets, which can be added to the Template above.'
+			],
+			overlay: false,
+			attachment: {
+				selector: 'section.palette',
+				options: {
+					placement: 'top',
+					modifiers: tourDialogModifiers
+				}
+			},
+			buttons: tourButtons.proceed
+		}, {
+			title: 'Droplet',
+			message: [
+				'This is a Droplet. It can be added to the Template above.',
+				'Certain &lt;span class="drop-zone"&gt;&lt;span class="target"&gt;&lt;b&gt;' +
+					settings.dropZone.label +
+					'&lt;/b&gt;&lt;/span&gt;&lt;/span&gt; targets only allow certain Droplets to be added to them.',
+				'When a target goes green &lt;span class="drop-zone accept"&gt;&lt;span class="target"&gt;&lt;b&gt;' +
+					settings.dropZone.label +
+					'&lt;/b&gt;&lt;/span&gt;&lt;/span&gt;, it means it can accept the Droplet you have chosen, or &lt;span class="drop-zone decline"&gt;&lt;span class="target"&gt;&lt;b&gt;' +
+						settings.dropZone.label +
+						'&lt;/b&gt;&lt;/span&gt;&lt;/span&gt; if the Droplet can’t be placed there.',
+				'You can click on a Droplet and then click on one of the &lt;span class="drop-zone"&gt;&lt;span class="target"&gt;&lt;b&gt;' +
+					settings.dropZone.label +
+					'&lt;/b&gt;&lt;/span&gt;&lt;/span&gt; targets in the Template to attach it.'
+			],
+			overlay: false,
+			attachment: {
+				selector: 'section.palette .droplet:first-child',
+				options: {
+					placement: 'top',
+					modifiers: tourDialogModifiers
+				}
+			},
+			buttons: tourButtons.proceed
+		}, {
+			title: 'The View',
+			message: [
+				'This is the View. It will show you how the page looks after running the code.',
+				'Use the &lt;span class="pseudo-button run"&gt;&lt;svg class="icon" width="14" height="14"&gt;&lt;use xlink:href="#media-play-sprite"&gt;&lt;/use&gt;&lt;/svg&gt;Run&lt;/span&gt; button to update the View'
+			],
+			overlay: false,
+			attachment: {
+				selector: 'section.view',
+				options: {
+					placement: 'left',
+					modifiers: tourDialogModifiers
+				}
+			},
+			buttons: tourButtons.proceed
+		}/*, {
+			title: 'All done!',
+			message: [
+				'Once you’ve used the &lt;span class="pseudo-button run"&gt;&lt;svg class="icon" width="14" height="14"&gt;&lt;use xlink:href="#media-play-sprite"&gt;&lt;/use&gt;&lt;/svg&gt;Run&lt;/span&gt; button, the View has updated and your last change should now be showing here.'
+			],
+			overlay: false,
+			attachment: {
+				selector: 'section.view',
+				options: {
+					placement: 'left',
+					modifiers: tourDialogModifiers
+				}
+			},
+			buttons: tourButtons.finish
+		}*/, {
+			title: 'End of tour',
+			message: [
+				'That’s everything. Now have a go yourself and see what you can build. Don’t forget to press the &lt;span class="pseudo-button run"&gt;&lt;svg class="icon" width="14" height="14"&gt;&lt;use xlink:href="#media-play-sprite"&gt;&lt;/use&gt;&lt;/svg&gt;Run&lt;/span&gt; button to check how things look.',
+				'Now get creating!'
+			],
+			overlay: false,
+			buttons: tourButtons.finish
+		}]
+	};
+}</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat May 20 2017 08:58:04 GMT+0100 (BST)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

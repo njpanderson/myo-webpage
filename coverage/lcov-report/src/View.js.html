@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/View.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">All files</a> / <a href="index.html">src</a> View.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">41.18% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>14/34</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">22.22% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>4/18</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">22.22% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>2/9</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">41.18% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>14/34</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * Copyright 2017 Neil Anderson
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+&nbsp;
+ * 	https://github.com/njpanderson/tag/blob/master/LICENSE
+&nbsp;
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+import Communicator from './lib/Communicator';
+import { messageCommands } from './assets/constants';
+&nbsp;
+/**
+ * Handles the view frame communication with the App class.
+ * @class
+ */
+var View = function(settings = {}) {
+	this.settings = settings;
+	this._comms = new Communicator('view', window.location.origin, {
+		message: this._handleAppMessage.bind(this)
+	});
+&nbsp;
+	this._comms.registerGuestAddress('app', window.top);
+&nbsp;
+	this._scripts = [];
+	this._callbacks = {};
+&nbsp;
+	this._createInternalEvents();
+};
+&nbsp;
+View.prototype = {
+	/**
+	 * Produces a dialog using the App class. Uses a callback workflow to avoid reliance
+	 * on Promise polyfills or ES2015.
+	 * @param {string} title - See {@link App#dialog}
+	 * @param {mixes} message - See {@link App#dialog}
+	 * @param {array} [buttons] - See {@link App#dialog}
+	 * @param {function} [after] - Callback function to invoke once the dialog has been completed.
+	 */
+	dialog: <span class="fstat-no" title="function not covered" >f</span></span>unction(</span>title, message, buttons = <span class="branch-0 cbranch-no" title="branch not covered" >[], after = <span class="branch-0 cbranch-no" title="branch not covered" >null) {
+		var id;
+&nbsp;
+		// send a dialog command to the App class
+<span class="cstat-no" title="statement not covered" >		id = this._comms.send('app', {</span>
+			cmd: messageCommands.DIALOG,
+			data: {
+				title,
+				message,
+				buttons
+			}
+		});
+&nbsp;
+		// store the callback for later invocation, based on the generated message ID
+<span class="cstat-no" title="statement not covered" >		this._callbacks[id] = after;</span>
+	},
+&nbsp;
+	/**
+	 * Handles messages sent via the Communicator class (mainly from the UI class).
+	 * @param {object} message - Data, as sent by the originator
+	 * @param {string} id - Message ID.
+	 */
+	_handleAppMessage: <span class="fstat-no" title="function not covered" >function(</span>message, id) {
+<span class="cstat-no" title="statement not covered" >		switch (message.cmd) {</span>
+		case messageCommands.RELOAD:
+			// reload request
+<span class="cstat-no" title="statement not covered" >			this.settings.container.innerHTML = message.data.markup;</span>
+<span class="cstat-no" title="statement not covered" >			this._warnScripts();</span>
+<span class="cstat-no" title="statement not covered" >			this._fire(this.settings.container, 'update');</span>
+<span class="cstat-no" title="statement not covered" >			break;</span>
+&nbsp;
+		case messageCommands.RESET:
+<span class="cstat-no" title="statement not covered" >			this._reset();</span>
+<span class="cstat-no" title="statement not covered" >			break;</span>
+&nbsp;
+		case messageCommands.DIALOG_CALLBACK:
+			// message from a dialog triggered with View#dialog
+<span class="cstat-no" title="statement not covered" >			if (this._callbacks[id]) {</span>
+				// id exists within callack object, fire and delete
+<span class="cstat-no" title="statement not covered" >				this._callbacks[id].apply(this, [</span>
+					message.data,
+					message.action,
+					message.action_data
+				]);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >				this._callbacks[id] = null;</span>
+			}
+		}
+	},
+&nbsp;
+	_fire: <span class="fstat-no" title="function not covered" >function(</span>element, event) {
+<span class="cstat-no" title="statement not covered" >		if (element instanceof HTMLElement &amp;&amp; this._events[event]) {</span>
+<span class="cstat-no" title="statement not covered" >			element.dispatchEvent(this._events[event]);</span>
+		}
+	},
+&nbsp;
+	/**
+	 * Gather any scripts within view and warn in order
+	 */
+	_warnScripts: <span class="fstat-no" title="function not covered" >function() </span>{
+<span class="cstat-no" title="statement not covered" >		Array.prototype.slice.apply(this.settings.container.querySelectorAll('script'))</span>
+			.forEach(<span class="fstat-no" title="function not covered" >(s</span>cript, index) =&gt; {
+<span class="cstat-no" title="statement not covered" >				console.warn(</span>
+					'JS Script (' + (index + 1) + ') at "' + script.src + '"' +
+					' should not be part of the template as it cannot be removed from memory on reload.' +
+					' Please consider moving this script into your base View HTML.'
+				);
+			});
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		this._loadScript(0);</span>
+	},
+&nbsp;
+	_loadScript: <span class="fstat-no" title="function not covered" >function(</span>index) {
+<span class="cstat-no" title="statement not covered" >		if (this._scripts[index]) {</span>
+<span class="cstat-no" title="statement not covered" >			this._scripts[index].old.parentNode.replaceChild(</span>
+				this._scripts[index].new,
+				this._scripts[index].old
+			);
+		}
+	},
+&nbsp;
+	_reset: <span class="fstat-no" title="function not covered" >function() </span>{
+<span class="cstat-no" title="statement not covered" >		this.settings.container.innerHTML = '';</span>
+	},
+&nbsp;
+	_createInternalEvents: function() {
+		this._events = {};
+&nbsp;
+		<span class="missing-if-branch" title="else path not taken" >E</span>if (window.document &amp;&amp;  'createEvent' in window.document) {
+			/**
+			 * Fires after the view container has been updated with new markup.
+			 * @event tag:update
+			 */
+			this._events.update = window.document.createEvent('Event');
+			this._events.update.initEvent('tag:update', true, true);
+		}
+	}
+};
+&nbsp;
+export default View;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat May 20 2017 08:58:04 GMT+0100 (BST)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

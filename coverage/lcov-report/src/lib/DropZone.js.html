@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/lib/DropZone.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">src/lib</a> DropZone.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">30.43% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>14/46</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">2.33% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>1/43</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">20% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/5</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">30.43% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>14/46</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import Droplet from './Droplet';
+import { errorCodes } from '../assets/constants';
+&nbsp;
+var DropZone, drop_zone_id = 0;
+&nbsp;
+/**
+ * @class
+ */
+DropZone = f</span>unction(data = <span class="branch-0 cbranch-no" title="branch not covered" >{}, tag) {
+	this.tag = tag;
+	this.id = 'drop_zone_' + ++drop_zone_id;
+	this.attachmentId = data.attachmentId;
+	this.maxAttachments = (t</span>ypeof data.maxAttachments !== 'undefined' ? <span class="branch-0 cbranch-no" title="branch not covered" >data.maxAttachments : 1);
+};
+&nbsp;
+DropZone.prototype = {
+	/**
+	 * Test if the DropZone instance will accept a new droplet. The test looks at the
+	 * maximum number of attachments and attachment eligibility based on attachmentId
+	 */
+	willAccept: <span class="fstat-no" title="function not covered" >function(</span>droplet, store) {
+		v</span>ar current_attachments = <span class="cstat-no" title="statement not covered" >0,
+			state;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		if (!(droplet instanceof Droplet)) {</span>
+<span class="cstat-no" title="statement not covered" >			throw new Error(errorCodes.NOT_A_DROPLET);</span>
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		if (store) {</span>
+			// store exists - get state (and current number of attachments)
+<span class="cstat-no" title="statement not covered" >			state = store.getState();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >			if (state.zones[this.id] &amp;&amp; state.zones[this.id].attachments) {</span>
+<span class="cstat-no" title="statement not covered" >				current_attachments = state.zones[this.id].attachments.length;</span>
+			}
+		}
+&nbsp;
+		// test attachment count
+<span class="cstat-no" title="statement not covered" >		if (this.maxAttachments !== 0 &amp;&amp; current_attachments === this.maxAttachments) {</span>
+<span class="cstat-no" title="statement not covered" >			return false;</span>
+		}
+&nbsp;
+		// test attachmentId eligibility
+<span class="cstat-no" title="statement not covered" >		if (this.attachmentId !== '*' &amp;&amp;</span>
+			droplet.attachmentIds.indexOf(this.attachmentId) === -1) {
+<span class="cstat-no" title="statement not covered" >			return false;</span>
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		return true;</span>
+	}
+};
+&nbsp;
+/**
+ * Matches a drop zone within the supplied markup.
+ * Can be used more than once on the same markup, and will internally increment through the data.
+ */
+DropZone.fetchZone = <span class="fstat-no" title="function not covered" >function(</span>markup) {
+	var match, zone;
+&nbsp;
+	// keep looking for a valid drop zone - report on the bad ones
+<span class="cstat-no" title="statement not covered" >	while ((match = DropZone._re_zones.exec(markup)) !== null) {</span>
+<span class="cstat-no" title="statement not covered" >		if (match !== null &amp;&amp; (zone = DropZone.checkSyntax(match[0]))) {</span>
+			// return it
+<span class="cstat-no" title="statement not covered" >			return new DropZone({</span>
+				attachmentId: zone.attachmentId,
+				maxAttachments: zone.maxAttachments
+			}, match[0]);
+		}
+	}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >	return null;</span>
+};
+&nbsp;
+/**
+ * Checks and reports on syntax errors within a supplied tag.
+ */
+DropZone.checkSyntax = <span class="fstat-no" title="function not covered" >function(</span>tag) {
+	var d;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >	if ((d = tag.match(DropZone.syntax_re.re_structure)) !== null &amp;&amp; d[1] !== null) {</span>
+		// check id portion
+<span class="cstat-no" title="statement not covered" >		if (!d[2] || !DropZone.syntax_re.re_id.test(d[2])) {</span>
+<span class="cstat-no" title="statement not covered" >			return DropZone.snytaxFault(</span>
+				d[1],
+				'Invalid syntax. ID must either start with a letter and only contain' +
+				' letters, numbers, and the undescore (_) character, or be an asterisk (*) ' +
+				'to specify any attachment ID.',
+				d[2]
+			);
+		}
+&nbsp;
+		// check quantity portion
+<span class="cstat-no" title="statement not covered" >		if (</span>
+			d[4] &amp;&amp;
+			(
+				!DropZone.syntax_re.re_qty.test(d[4]) ||
+				(d[4] &lt; 1 || d[4] &gt; 100)
+			)
+		) {
+<span class="cstat-no" title="statement not covered" >			return DropZone.snytaxFault(</span>
+				d[1],
+				'Invalid syntax. Quantity must be a valid number and between 1 and 100, ' +
+					'or the asterisk (*) character to specify unlimited up to the internal maximum.',
+				d[4]
+			);
+		}
+	} else {
+<span class="cstat-no" title="statement not covered" >		return DropZone.snytaxFault(tag, 'Invalid syntax.');</span>
+	}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >	return {</span>
+		attachmentId: d[2],
+		maxAttachments: (d[4] === '*' ? 0 : (parseFloat(d[4]) || 1))
+	};
+};
+&nbsp;
+DropZone.snytaxFault = <span class="fstat-no" title="function not covered" >function(</span>str, message, char) {
+	var error;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >	if (char) {</span>
+		// escape % symbols
+<span class="cstat-no" title="statement not covered" >		str = str.replace('%', '%%');</span>
+<span class="cstat-no" title="statement not covered" >		char = char.replace('%', '%%');</span>
+&nbsp;
+		// add colouring
+<span class="cstat-no" title="statement not covered" >		str = str.replace(char, '%c$&amp;%c');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		error = 'Error with syntax in tag "' + str + '": ' + message;</span>
+<span class="cstat-no" title="statement not covered" >		console.warn(error, 'color: red;', 'color: inherit;');</span>
+	} else {
+		// basic error with no colouring
+<span class="cstat-no" title="statement not covered" >		error = 'Error with syntax in tag "' + str + '": ' + message;</span>
+<span class="cstat-no" title="statement not covered" >		console.warn(error);</span>
+	}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >	return false;</span>
+};
+&nbsp;
+/**
+ * Discriminating regex collection for testing drop zones with explicit syntax.
+ */
+DropZone.syntax_re = {
+	re_structure: /^\{\{\s?(([^|\s]+)(\|([^|\s]*))?)\s?\}\}$/,
+	re_id: /^[a-z*][a-z0-9_]*$/i,
+	re_qty: /^[0-9*]+$/
+};
+&nbsp;
+/**
+ * Inclusive regex for capturing individual zones with basic syntax
+ */
+DropZone._re_zones = /\{\{\s?(.+?)(\|(.*?))?\s?\}\}/gi;
+&nbsp;
+export default DropZone;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat May 20 2017 08:58:04 GMT+0100 (BST)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

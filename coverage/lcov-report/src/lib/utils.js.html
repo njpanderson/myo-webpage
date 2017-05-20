@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/lib/utils.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">src/lib</a> utils.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">32.61% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>15/46</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">3.57% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>1/28</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">30% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>3/10</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">32.61% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>15/46</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export const <span class="fstat-no" title="function not covered" >registerGeneralEvent = f</span>unction(component, id, info) {
+	v</span>ar args = <span class="cstat-no" title="statement not covered" >arguments;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >	return <span class="fstat-no" title="function not covered" >function(</span>event) {</span>
+<span class="cstat-no" title="statement not covered" >		event.preventDefault();</span>
+<span class="cstat-no" title="statement not covered" >		if (typeof component.props.onEvent === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >			component.props.onEvent.apply(component, [event, info, id].concat(</span>
+				Array.prototype.slice.call(args, 3)
+			));
+		}
+	}.bind(this);
+};
+&nbsp;
+export const collectRef = function(props, collection, key) {
+	return function(ref) {
+		<span class="missing-if-branch" title="else path not taken" >E</span>if (typeof props.refCollector === 'function') {
+			props.refCollector(collection, ref, key);
+		} else {
+<span class="cstat-no" title="statement not covered" >			throw new Error(</span>
+				'ref collection used but no collector has been set up for ' +
+				collection + (key ? '/' + key : '')
+			);
+		}
+	};
+};
+&nbsp;
+/**
+ * Returns a function for validating specific keys within an object property.
+ */
+export const <span class="fstat-no" title="function not covered" >validatePropKeys = f</span>unction(require) {
+<span class="cstat-no" title="statement not covered" >	return <span class="fstat-no" title="function not covered" >function(</span>props, key, component) {</span>
+		var a;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >		for (a = 0; a &lt; require.length; a += 1) {</span>
+<span class="cstat-no" title="statement not covered" >			if (!props[key].hasOwnProperty(require[a]) &amp;&amp;</span>
+				props[key][require[a]] !== undefined) {
+<span class="cstat-no" title="statement not covered" >				return new Error(</span>
+					'Prop	`' + key + '` does not contain definition `' + require[a] +
+						'` in ' + component + ' component.'
+				);
+			}
+		}
+	};
+};
+&nbsp;
+/**
+ * Escapes a string for use as a match within a regex
+ * @see http://stackoverflow.com/questions/3446170/escape-string-for-use-in-javascript-regex/6969486#6969486
+ */
+export const <span class="fstat-no" title="function not covered" >escapeRegExp = f</span>unction(str) {
+<span class="cstat-no" title="statement not covered" >	return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\$&amp;');</span>
+};
+&nbsp;
+export const <span class="fstat-no" title="function not covered" >rawMarkup = f</span>unction(html) {
+<span class="cstat-no" title="statement not covered" >	return { __html: html };</span>
+};
+&nbsp;
+&nbsp;
+/**
+ * from https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API.
+ * Checks if localStorage works.
+ * (localStorage can be disabled using security policies or private browsing modes)
+ */
+export const checkStorage = function(type) {
+	try {
+		var storage = window[type],
+			x = '__tag_storage_test__';
+		storage.setItem(x, x);
+<span class="cstat-no" title="statement not covered" >		storage.removeItem(x);</span>
+<span class="cstat-no" title="statement not covered" >		return true;</span>
+	} catch(e) {
+		return false;
+	}
+};
+&nbsp;
+/**
+ * @description
+ * Provides loose comparison of the keys of two objects.
+ * If the value of a key is an array, the test object's key is also confirmed to be the same type.
+ * If the alue of a key is an object, it is tested recursively.
+ * @param {object} test - Test object
+ * @param {object} expected - Expected result
+ */
+export const <span class="fstat-no" title="function not covered" >structCompare = f</span>unction(test, expected) {
+	v</span>ar result = <span class="cstat-no" title="statement not covered" >true,
+		key;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >	if (typeof test !== 'object' || typeof expected !== 'object') {</span>
+<span class="cstat-no" title="statement not covered" >		return false;</span>
+	}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >	for (key in expected) {</span>
+<span class="cstat-no" title="statement not covered" >		if (expected.hasOwnProperty(key)) {</span>
+<span class="cstat-no" title="statement not covered" >			if (typeof expected[key] === 'object') {</span>
+<span class="cstat-no" title="statement not covered" >				if (Array.isArray(expected[key])) {</span>
+					// expected value is an array
+<span class="cstat-no" title="statement not covered" >					if (!Array.isArray(test[key])) {</span>
+<span class="cstat-no" title="statement not covered" >						result = false;</span>
+					}
+				} else {
+					// expect value is an object
+<span class="cstat-no" title="statement not covered" >					if ((key in test)) {</span>
+						// key exists in test
+<span class="cstat-no" title="statement not covered" >						result = structCompare(test[key], expected[key]);</span>
+					} else {
+<span class="cstat-no" title="statement not covered" >						result = false;</span>
+					}
+				}
+			} else {
+				// value is (probably) scalar
+<span class="cstat-no" title="statement not covered" >				if (!(key in test)) {</span>
+<span class="cstat-no" title="statement not covered" >					result = false;</span>
+				}
+			}
+		}
+&nbsp;
+		// if the result is false at any point, just break here
+<span class="cstat-no" title="statement not covered" >		if (result === false) {</span>
+<span class="cstat-no" title="statement not covered" >			break;</span>
+		}
+	}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >	return result;</span>
+};</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat May 20 2017 08:58:04 GMT+0100 (BST)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

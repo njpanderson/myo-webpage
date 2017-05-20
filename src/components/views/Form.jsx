@@ -101,22 +101,24 @@ class Form extends React.Component {
 	getFieldSets() {
 		var output = [];
 
-		this.props.fieldSets.forEach((set, index) => {
-			const key = 'fieldset-' + set.key;
+		if (this.props.fieldSets) {
+			this.props.fieldSets.forEach((set, index) => {
+				const key = 'fieldset-' + set.key;
 
-			output.push(
-				<Fieldset
-					key={key}
-					settings={this.props.settings}
-					refCollector={this.collectFieldRef.bind(this)}
-					set={set.key}
-					fields={set.fields}
-					errors={this.findErrorsForFieldsetIndex(index)}
-					legend={set.legend}
-					onFieldUpdate={this.elementChange}
-					/>
-			);
-		});
+				output.push(
+					<Fieldset
+						key={key}
+						settings={this.props.settings}
+						refCollector={this.collectFieldRef.bind(this)}
+						set={set.key}
+						fields={set.fields}
+						errors={this.findErrorsForFieldsetIndex(index)}
+						legend={set.legend}
+						onFieldUpdate={this.elementChange}
+						/>
+				);
+			});
+		}
 
 		return output;
 	}
@@ -274,7 +276,7 @@ class Form extends React.Component {
 					}
 				}
 			}
-		} else {
+		} else if (this.props.buttons && this.props.buttons.length) {
 			// highlight first collected button
 			this.props.buttons.forEach((button, index) => {
 				var key = 'button-' + index;
