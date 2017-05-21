@@ -1,3 +1,8 @@
+v0.0.9 (2017-21-15)
+
+ - Improve and centralise <Button> component handling.
+ - Add more unit tests for components.
+
 v0.0.9 (2017-05-15)
 
  - Added minified versions of compiled IIFE distributables.
