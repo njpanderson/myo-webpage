@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import GLYPHS from '../../img/svg-sprite.js';
+import GLYPHS from '../../img/svg-sprite';
 
 export function Icon(props) {
 	var className = props.glyph.replace(/^#/, '');
