@@ -41,7 +41,7 @@ import appDefaults from '../assets/defaults';
 import defaultState from '../assets/default-state';
 import createDialogs from '../assets/dialogs';
 import { dialogModes, uiStates, actionTypes, messageCommands } from '../assets/constants';
-import '../img/svg-sprite';
+import { attachSVG } from '../img/svg-sprite';
 
 /**
  * Main application wrapper.
@@ -53,6 +53,9 @@ var App = function(settings = {}) {
 	this._init();
 	this.dialogs = createDialogs(this.settings);
 	this.storage = new Storage('tag_app');
+
+	// attach the SVG sprite to the document
+	attachSVG();
 
 	// set Template.onElementRender to settings, if defined
 	if (settings.onElementRender) {
