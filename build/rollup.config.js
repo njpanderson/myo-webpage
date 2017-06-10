@@ -2,7 +2,6 @@ const replace = require('rollup-plugin-replace'),
 	resolve = require('rollup-plugin-node-resolve'),
 	commonjs = require('rollup-plugin-commonjs'),
 	babel = require('rollup-plugin-babel'),
-	string = require('rollup-plugin-string'),
 	json = require('rollup-plugin-json'),
 	sass = require('rollup-plugin-sass'),
 	postcss = require('postcss'),
@@ -16,9 +15,6 @@ const plugins_base = [
 	}),
 	json({
 		exclude: 'node_modules'
-	}),
-	string({
-		include: '**/*.svg'
 	}),
 	sass({
 		insert: true,
